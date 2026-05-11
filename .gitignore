@@ -7,5 +7,10 @@ dist-ssr
 .env
 .env.*
 !.env.example
+!backend/.env.example
 __pycache__
 *.pyc
+*.egg-info
+.pytest_cache
+.coverage
+htmlcov
