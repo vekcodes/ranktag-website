@@ -7,6 +7,7 @@ import BacklinkChecker from './pages/BacklinkChecker.jsx';
 import KeywordDensity from './pages/KeywordDensity.jsx';
 import PageSpeed from './pages/PageSpeed.jsx';
 import DensityDashboard from './pages/DensityDashboard.jsx';
+import CompetitorAnalysis from './pages/CompetitorAnalysis.jsx';
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/backlink-checker" element={<BacklinkChecker />} />
         <Route path="/keyword-density" element={<KeywordDensity />} />
         <Route path="/density" element={<DensityDashboard />} />
+        <Route path="/competitor" element={<CompetitorAnalysis />} />
         <Route path="/page-speed" element={<PageSpeed />} />
       </Routes>
     </>

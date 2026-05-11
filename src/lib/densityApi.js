@@ -120,6 +120,19 @@ export function seoScore(text, opts = {}) {
   });
 }
 
+// ── Step 9: Competitor analysis ──
+export function competitorAnalyze(primaryUrl, competitorUrls, opts = {}) {
+  return request('/competitor/analyze', {
+    method: 'POST',
+    body: JSON.stringify({
+      primary_url: primaryUrl,
+      competitor_urls: competitorUrls,
+      min_frequency: opts.minFrequency ?? 2,
+      top_n: opts.topN ?? 30,
+    }),
+  });
+}
+
 export function healthCheck() {
   return request('/health');
 }

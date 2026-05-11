@@ -15,11 +15,12 @@ from app.routes.analyze_advanced import router as analyze_advanced_router
 from app.routes.session import router as session_router
 from app.routes.score import router as score_router
 from app.routes.export import router as export_router
+from app.routes.competitor import router as competitor_router
 
 app = FastAPI(
     title="RankedTag Keyword Density Analyzer",
-    version="6.0.0",
-    description="Professional SEO keyword density analysis engine with scoring, export, and reporting.",
+    version="7.0.0",
+    description="Professional SEO keyword density analysis engine with competitor analysis.",
 )
 
 # Permissive CORS for local dev; tighten in production.
@@ -36,6 +37,7 @@ app.include_router(analyze_advanced_router)
 app.include_router(session_router)
 app.include_router(score_router)
 app.include_router(export_router)
+app.include_router(competitor_router)
 
 
 @app.get("/health")
@@ -45,7 +47,7 @@ def health() -> dict:
 
     return {
         "status": "ok",
-        "engine": "rankedtag-keyword-density-v6",
+        "engine": "rankedtag-keyword-density-v7",
         "capabilities": [
             "text-analysis",
             "url-crawling",
