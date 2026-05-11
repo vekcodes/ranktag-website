@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>SaaS SEO ROI Calculator · RankedTag</title>
+<meta name="description" content="Plug in your traffic, conversion, ACV, and churn. Get a 12-month forecast with break-even, projected MRR, and the cost of doing nothing." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand.css">
+<style>
+
+/* — TOOL HERO ————————————————————————————————— */
+.tool-hero{
+  padding:140px 0 40px;
+  position:relative;
+  overflow:hidden;
+}
+.tool-hero-bg{
+  position:absolute;inset:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,0,0,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,.04) 1px, transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 60% 50% at center top, black 0%, transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse 60% 50% at center top, black 0%, transparent 80%);
+}
+.tool-hero-inner{
+  position:relative;
+  z-index:1;
+  text-align:center;
+}
+.tool-hero h1{
+  font-size:clamp(40px, 6.5vw, 88px);
+  font-weight:800;
+  line-height:.95;
+  letter-spacing:-.04em;
+  margin-bottom:22px;
+  max-width:1000px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.tool-hero h1 .accent{color:var(--red)}
+.tool-hero h1 .ser{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400}
+.tool-hero p{
+  font-size:clamp(16px, 1.5vw, 19px);
+  color:var(--ink-2);
+  max-width:680px;
+  margin:0 auto 0;
+  line-height:1.55;
+}
+
+/* — CALC LAYOUT ———————————————————————————————— */
+.calc-section{padding:40px 0 80px}
+.calc-grid{
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:24px;
+  align-items:start;
+}
+@media (max-width:1024px){
+  .calc-grid{grid-template-columns:1fr}
+}
+
+/* — INPUT PANEL ———————————————————————————————— */
+.calc-inputs{
+  background:#fff;
+  border:1px solid var(--paper-3);
+  border-radius:var(--r-xl);
+  padding:36px;
+  position:sticky;
+  top:88px;
+}
+@media (max-width:1024px){
+  .calc-inputs{position:static}
+}
+.calc-inputs h2{
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:-.01em;
+  margin-bottom:6px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.calc-inputs h2::before{
+  content:"";
+  width:8px;height:8px;
+  background:var(--red);
+  border-radius:50%;
+}
+.calc-inputs .head-sub{
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:30px;
+  padding-bottom:24px;
+  border-bottom:1px solid var(--paper-3);
+}
+
+.input-group{margin-bottom:26px}
+.input-group:last-child{margin-bottom:0}
+.input-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+.input-row label{
+  font-size:13px;
+  font-weight:600;
+  color:var(--ink);
+  letter-spacing:-.005em;
+}
+.input-row .help{
+  display:inline-block;
+  width:16px;height:16px;
+  background:var(--paper-2);
+  border-radius:50%;
+  text-align:center;
+  font-size:10px;
+  font-weight:700;
+  color:var(--muted);
+  line-height:16px;
+  margin-left:6px;
+  cursor:help;
+  position:relative;
+}
+.input-row .help:hover::after{
+  content:attr(data-tip);
+  position:absolute;
+  bottom:calc(100% + 6px);
+  right:50%;
+  transform:translateX(50%);
+  background:var(--ink);
+  color:var(--paper);
+  padding:8px 12px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:400;
+  width:200px;
+  z-index:10;
+  line-height:1.4;
+  text-align:left;
+  font-family:inherit;
+  letter-spacing:0;
+}
+.input-row .val{
+  font-family:'JetBrains Mono', monospace;
+  font-size:15px;
+  font-weight:700;
+  color:var(--ink);
+  background:var(--paper-2);
+  padding:5px 12px;
+  border-radius:var(--r-pill);
+  letter-spacing:-.01em;
+  min-width:80px;
+  text-align:right;
+}
+
+.preset-row{
+  display:flex;
+  gap:6px;
+  margin-bottom:24px;
+  padding:6px;
+  background:var(--paper-2);
+  border-radius:var(--r-pill);
+}
+.preset-btn{
+  flex:1;
+  padding:8px 10px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  border-radius:var(--r-pill);
+  transition:all var(--t-fast) var(--ease);
+  color:var(--muted);
+  cursor:pointer;
+}
+.preset-btn.active{
+  background:var(--ink);
+  color:var(--paper);
+}
+.preset-btn:hover:not(.active){background:#fff;color:var(--ink)}
+
+/* — OUTPUT PANEL ——————————————————————————————— */
+.calc-output{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+.headline-stat{
+  background:var(--ink);
+  color:var(--paper);
+  border-radius:var(--r-xl);
+  padding:36px;
+  position:relative;
+  overflow:hidden;
+}
+.headline-stat::before{
+  content:"";
+  position:absolute;
+  top:-100px;right:-100px;
+  width:300px;height:300px;
+  background:radial-gradient(circle, rgba(255,59,20,.18) 0%, transparent 70%);
+  pointer-events:none;
+}
+.headline-stat-inner{position:relative;z-index:1}
+.headline-stat .lbl{
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--periwinkle);
+  margin-bottom:12px;
+}
+.headline-stat .num{
+  font-size:clamp(48px, 7vw, 88px);
+  font-weight:800;
+  letter-spacing:-.035em;
+  line-height:.95;
+  margin-bottom:10px;
+  color:var(--red);
+}
+.headline-stat .sub{
+  font-size:14.5px;
+  color:rgba(244,239,231,.7);
+  line-height:1.45;
+}
+.headline-stat .sub strong{color:var(--paper)}
+
+.metric-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:12px;
+}
+.metric{
+  background:#fff;
+  border:1px solid var(--paper-3);
+  border-radius:var(--r-lg);
+  padding:22px 20px;
+}
+.metric .lbl{
+  font-family:'JetBrains Mono', monospace;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:10px;
+}
+.metric .num{
+  font-size:clamp(22px, 2.4vw, 30px);
+  font-weight:800;
+  letter-spacing:-.025em;
+  line-height:1;
+  margin-bottom:4px;
+}
+.metric .delta{
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  font-weight:600;
+  color:var(--success);
+}
+.metric .delta.warn{color:var(--warn)}
+.metric .delta.bad{color:var(--red-deep)}
+@media (max-width:560px){
+  .metric-grid{grid-template-columns:1fr}
+}
+
+/* — CHART CARD ————————————————————————————————— */
+.chart-card{
+  background:#fff;
+  border:1px solid var(--paper-3);
+  border-radius:var(--r-xl);
+  padding:32px;
+  overflow:hidden;
+}
+.chart-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-bottom:24px;
+}
+.chart-head .h{
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:-.015em;
+  margin-bottom:6px;
+}
+.chart-head .s{
+  font-size:13px;
+  color:var(--muted);
+}
+.chart-legend{
+  display:flex;
+  gap:14px;
+  font-size:11px;
+  font-family:'JetBrains Mono', monospace;
+  color:var(--ink-2);
+  flex-wrap:wrap;
+  letter-spacing:.04em;
+}
+.chart-legend span{display:flex;align-items:center;gap:7px}
+.chart-legend .dot{width:10px;height:10px;border-radius:50%}
+.chart-legend .dot-line{
+  width:14px;height:3px;
+  border-radius:2px;
+}
+
+.chart-wrap{
+  position:relative;
+  margin-bottom:14px;
+}
+.chart-svg{
+  width:100%;
+  height:280px;
+  display:block;
+}
+.chart-tooltip{
+  position:absolute;
+  background:var(--ink);
+  color:var(--paper);
+  padding:10px 14px;
+  border-radius:8px;
+  font-size:12px;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity var(--t-fast);
+  z-index:10;
+  white-space:nowrap;
+  box-shadow:var(--shadow-md);
+}
+.chart-tooltip.visible{opacity:1}
+.chart-tooltip .tt-month{
+  font-family:'JetBrains Mono', monospace;
+  font-size:10px;
+  color:var(--periwinkle);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  margin-bottom:6px;
+  display:block;
+}
+.chart-tooltip .tt-row{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:2px;
+}
+.chart-tooltip .tt-row strong{font-weight:700}
+
+.chart-x-axis{
+  display:flex;
+  justify-content:space-between;
+  font-family:'JetBrains Mono', monospace;
+  font-size:10px;
+  color:var(--muted);
+  margin-top:2px;
+  letter-spacing:.05em;
+}
+
+/* — BREAKEVEN CARD —————————————————————————— */
+.breakeven{
+  background:linear-gradient(135deg, var(--periwinkle) 0%, #8a96e8 100%);
+  color:var(--ink);
+  border-radius:var(--r-xl);
+  padding:28px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:24px;
+}
+.breakeven .be-icon{
+  width:56px;height:56px;
+  background:var(--ink);
+  color:var(--paper);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Instrument Serif', serif;
+  font-style:italic;
+  font-size:28px;
+  font-weight:400;
+}
+.breakeven .be-content h3{
+  font-size:13px;
+  font-family:'JetBrains Mono', monospace;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:6px;
+  opacity:.7;
+}
+.breakeven .be-content .be-text{
+  font-size:18px;
+  font-weight:700;
+  line-height:1.3;
+  letter-spacing:-.015em;
+}
+.breakeven .be-content .be-text strong{
+  font-size:24px;
+  display:inline-block;
+  margin-right:4px;
+}
+.breakeven .be-cta{
+  background:var(--ink);
+  color:var(--paper);
+  padding:12px 18px;
+  border-radius:var(--r-pill);
+  font-size:13px;
+  font-weight:600;
+  white-space:nowrap;
+}
+@media (max-width:680px){
+  .breakeven{grid-template-columns:1fr;text-align:center;justify-items:center}
+}
+
+/* — COST OF DOING NOTHING ——————————————————— */
+.cost-of-nothing{
+  background:#fff;
+  border:1px solid var(--paper-3);
+  border-radius:var(--r-xl);
+  padding:36px;
+  position:relative;
+  overflow:hidden;
+}
+.cost-of-nothing::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;
+  width:6px;height:100%;
+  background:var(--red);
+}
+.cost-of-nothing-head{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:18px;
+}
+.cost-of-nothing-head .ic{
+  width:40px;height:40px;
+  background:rgba(255,59,20,.1);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--red);
+  font-size:20px;
+  flex-shrink:0;
+}
+.cost-of-nothing h3{
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:-.015em;
+}
+.cost-of-nothing p{
+  font-size:14.5px;
+  line-height:1.55;
+  color:var(--ink-2);
+  margin-bottom:16px;
+}
+.cost-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.cost-cell{
+  padding:18px;
+  background:var(--paper);
+  border-radius:var(--r-md);
+  border:1px solid var(--paper-3);
+}
+.cost-cell.bad{
+  background:rgba(255,59,20,.05);
+  border-color:rgba(255,59,20,.18);
+}
+.cost-cell .lbl{
+  font-family:'JetBrains Mono', monospace;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+.cost-cell .num{
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:-.025em;
+  line-height:1;
+}
+.cost-cell.bad .num{color:var(--red)}
+
+/* — CTA SECTION ———————————————————————————— */
+.cta-section{
+  background:var(--ink);
+  color:var(--paper);
+  padding:80px 0;
+  position:relative;
+  overflow:hidden;
+  margin-top:40px;
+  border-radius:var(--r-xl);
+}
+.cta-section::before{
+  content:"";
+  position:absolute;
+  top:-50%;left:-30%;
+  width:80%;height:200%;
+  background:radial-gradient(circle, rgba(255,59,20,.12) 0%, transparent 50%);
+  pointer-events:none;
+}
+.cta-section-inner{
+  position:relative;
+  z-index:1;
+  text-align:center;
+  max-width:780px;
+  margin:0 auto;
+  padding:0 32px;
+}
+.cta-section h2{
+  font-size:clamp(32px, 4.5vw, 56px);
+  font-weight:800;
+  line-height:1;
+  letter-spacing:-.03em;
+  margin-bottom:18px;
+}
+.cta-section h2 .ser{font-family:'Instrument Serif', serif;font-style:italic;font-weight:400;color:var(--periwinkle)}
+.cta-section h2 .accent{color:var(--red)}
+.cta-section p{
+  font-size:16px;
+  color:rgba(244,239,231,.75);
+  margin-bottom:32px;
+  line-height:1.55;
+}
+.cta-section .ctas{
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+/* — FORMULA EXPLAINER ——————————————————————— */
+.formula-section{
+  padding:80px 0;
+  background:var(--paper-2);
+}
+.formula-card{
+  max-width:880px;
+  margin:0 auto;
+  background:#fff;
+  border:1px solid var(--paper-3);
+  border-radius:var(--r-xl);
+  padding:48px;
+}
+.formula-card h2{
+  font-size:32px;
+  font-weight:700;
+  letter-spacing:-.025em;
+  margin-bottom:14px;
+}
+.formula-card .sub{
+  color:var(--muted);
+  font-size:15px;
+  margin-bottom:32px;
+}
+.formula-eq{
+  background:var(--ink);
+  color:var(--paper);
+  padding:32px;
+  border-radius:var(--r-lg);
+  text-align:center;
+  font-family:'JetBrains Mono', monospace;
+  font-size:14px;
+  margin-bottom:32px;
+  line-height:1.7;
+  overflow-x:auto;
+}
+.formula-eq .red{color:var(--red);font-weight:700}
+.formula-eq .peri{color:var(--periwinkle)}
+.formula-eq .div-line{
+  display:inline-block;
+  border-bottom:1.5px solid rgba(255,255,255,.3);
+  padding:0 24px 6px;
+  margin-bottom:6px;
+}
+.formula-vars{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.formula-var{
+  padding:18px;
+  background:var(--paper);
+  border-radius:var(--r-md);
+}
+.formula-var h4{
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:6px;
+}
+.formula-var p{
+  font-size:13px;
+  color:var(--ink-2);
+  line-height:1.5;
+}
+@media (max-width:680px){
+  .formula-card{padding:28px}
+  .formula-vars{grid-template-columns:1fr}
+}
+
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══════════════════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect class="lg-r1" x="30" y="20" width="50" height="50"/>
+      <rect class="lg-r3" x="20" y="50" width="30" height="30"/>
+      <rect class="lg-r2" x="40" y="45" width="25" height="20"/>
+    </svg>
+    RankedTag
+  </a>
+  <div class="nav-links">
+    <a href="index.html#mechanism" class="nav-link">How it works</a>
+    <a href="index.html#case" class="nav-link">Proof</a>
+    <a href="audit.html" class="nav-link">Free Strategy</a>
+    <a href="roi-calculator.html" class="nav-link" style="background:var(--paper-2);color:var(--ink)">ROI Calc</a>
+    <a href="index.html#offer" class="nav-link">Pricing</a>
+  </div>
+  <a href="index.html#offer" class="nav-cta">Book Strategy Call <span>→</span></a>
+</nav>
+
+<!-- ═══ HERO ══════════════════════════════════════════════════════════ -->
+<section class="tool-hero">
+  <div class="tool-hero-bg"></div>
+  <div class="container tool-hero-inner">
+    <div class="eyebrow no-line" style="justify-content:center;margin-bottom:24px">★ FREE TOOL · NO EMAIL · LIVE CALCULATIONS</div>
+    <h1>
+      What's the actual <span class="accent">ROI</span><br>
+      of doing SEO right? <span class="ser">Find out in 60 seconds.</span>
+    </h1>
+    <p>
+      Plug in your traffic, conversion rate, contract value, and churn. We'll project your 12-month organic revenue, your break-even point, and the cost of putting this off another quarter.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ CALCULATOR ════════════════════════════════════════════════════ -->
+<section class="calc-section">
+  <div class="container">
+    <div class="calc-grid">
+
+      <!-- INPUTS -->
+      <div class="calc-inputs">
+        <h2>Your business inputs</h2>
+        <p class="head-sub">Drag the sliders. The 12-month forecast updates live. Industry-grade defaults pre-loaded.</p>
+
+        <!-- Preset rows -->
+        <div class="preset-row">
+          <button class="preset-btn active" data-preset="seed">SEED</button>
+          <button class="preset-btn" data-preset="growth">SERIES A</button>
+          <button class="preset-btn" data-preset="scale">GROWTH</button>
+        </div>
+
+        <!-- Monthly searches -->
+        <div class="input-group">
+          <div class="input-row">
+            <label>
+              Monthly searches (target keywords)
+              <span class="help" data-tip="Total monthly search volume across keywords you'd realistically rank for. Industry tools like Ahrefs & Semrush give you this.">?</span>
+            </label>
+            <span class="val"><span id="searchesVal">25,000</span></span>
+          </div>
+          <input type="range" class="slider" id="searches" min="2000" max="500000" step="1000" value="25000">
+        </div>
+
+        <!-- Click-through rate -->
+        <div class="input-group">
+          <div class="input-row">
+            <label>
+              Avg CTR (top-3 ranking)
+              <span class="help" data-tip="Click-through rate when ranking in top 3. SaaS B2B avg is 18-25% for top 3, much higher than #4-10.">?</span>
+            </label>
+            <span class="val"><span id="ctrVal">22</span>%</span>
+          </div>
+          <input type="range" class="slider" id="ctr" min="5" max="40" step="1" value="22">
+        </div>
+
+        <!-- Visitor → Signup conversion -->
+        <div class="input-group">
+          <div class="input-row">
+            <label>
+              Visitor → signup rate
+              <span class="help" data-tip="What % of organic visitors sign up for trial/demo. SaaS median is 2-4%, top quartile is 5-7%.">?</span>
+            </label>
+            <span class="val"><span id="convVal">3.2</span>%</span>
+          </div>
+          <input type="range" class="slider" id="conv" min="0.5" max="10" step="0.1" value="3.2">
+        </div>
+
+        <!-- Trial → Paid -->
+        <div class="input-group">
+          <div class="input-row">
+            <label>
+              Trial → paid conversion
+              <span class="help" data-tip="Of people who sign up, what % become paying. SaaS median is 15-25% for free trial, 30-50% for paid trial.">?</span>
+            </label>
+            <span class="val"><span id="t2pVal">22</span>%</span>
+          </div>
+          <input type="range" class="slider" id="t2p" min="5" max="60" step="1" value="22">
+        </div>
+
+        <!-- Average Contract Value -->
+        <div class="input-group">
+          <div class="input-row">
+            <label>
+              Average Contract Value (annual)
+              <span class="help" data-tip="ACV per customer per year. Enter realistic, not list price.">?</span>
+            </label>
+            <span class="val">$<span id="acvVal">8,400</span></span>
+          </div>
+          <input type="range" class="slider" id="acv" min="500" max="100000" step="100" value="8400">
+        </div>
+
+        <!-- Customer LTV multiplier (years) -->
+        <div class="input-group">
+          <div class="input-row">
+            <label>
+              Avg customer lifespan
+              <span class="help" data-tip="How long an avg customer stays. 1/churn = lifespan. 5%/mo churn = 1.7yr lifespan.">?</span>
+            </label>
+            <span class="val"><span id="ltvVal">2.5</span> yrs</span>
+          </div>
+          <input type="range" class="slider" id="ltv" min="0.5" max="6" step="0.1" value="2.5">
+        </div>
+
+        <!-- Monthly investment -->
+        <div class="input-group">
+          <div class="input-row">
+            <label>
+              Monthly SEO investment
+              <span class="help" data-tip="Total monthly spend: agency, content, tools, internal time. Be realistic.">?</span>
+            </label>
+            <span class="val">$<span id="investVal">14,800</span></span>
+          </div>
+          <input type="range" class="slider" id="invest" min="1000" max="60000" step="100" value="14800">
+        </div>
+
+        <p class="fineprint" style="margin-top:14px;text-align:center">// Sliders update the right panel in real-time. Built on the standard SaaS SEO ROI formula.</p>
+      </div>
+
+      <!-- OUTPUTS -->
+      <div class="calc-output">
+
+        <!-- HEADLINE STAT -->
+        <div class="headline-stat">
+          <div class="headline-stat-inner">
+            <div class="lbl">12-month projected new revenue · organic only</div>
+            <div class="num">$<span id="annualRevenue">1,243,000</span></div>
+            <div class="sub">
+              That's a <strong id="roiPct">600%</strong> ROI on your $<span id="annualSpend">177,600</span> annual SEO investment. Net profit: <strong>$<span id="netProfit">1,065,400</span></strong>.
+            </div>
+          </div>
+        </div>
+
+        <!-- METRIC GRID -->
+        <div class="metric-grid">
+          <div class="metric">
+            <div class="lbl">Monthly organic visits (mo 12)</div>
+            <div class="num"><span id="monthlyVisits">5,500</span></div>
+            <div class="delta">▲ from rankings</div>
+          </div>
+          <div class="metric">
+            <div class="lbl">Monthly new signups (mo 12)</div>
+            <div class="num"><span id="monthlySignups">176</span></div>
+            <div class="delta">▲ inbound only</div>
+          </div>
+          <div class="metric">
+            <div class="lbl">Monthly new MRR (mo 12)</div>
+            <div class="num">$<span id="monthlyMRR">27,100</span></div>
+            <div class="delta">▲ recurring</div>
+          </div>
+        </div>
+
+        <!-- CHART -->
+        <div class="chart-card">
+          <div class="chart-head">
+            <div>
+              <div class="h">12-month projection</div>
+              <div class="s">Cumulative organic revenue vs your SEO investment.</div>
+            </div>
+            <div class="chart-legend">
+              <span><span class="dot-line" style="background:var(--red)"></span>Cumulative revenue</span>
+              <span><span class="dot-line" style="background:var(--ink-3)"></span>Cumulative cost</span>
+              <span><span class="dot" style="background:var(--success)"></span>Break-even</span>
+            </div>
+          </div>
+
+          <div class="chart-wrap">
+            <svg class="chart-svg" id="chart" viewBox="0 0 720 280" preserveAspectRatio="none">
+              <!-- Grid lines -->
+              <g stroke="rgba(0,0,0,.06)" stroke-dasharray="2,4" id="gridLines"></g>
+
+              <!-- Axis labels (Y) -->
+              <g id="yLabels" font-family="JetBrains Mono, monospace" font-size="9" fill="#6E6E76"></g>
+
+              <!-- Cost area (gray) -->
+              <defs>
+                <linearGradient id="costGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#22232A" stop-opacity=".18"/>
+                  <stop offset="100%" stop-color="#22232A" stop-opacity="0"/>
+                </linearGradient>
+                <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#FF3B14" stop-opacity=".28"/>
+                  <stop offset="100%" stop-color="#FF3B14" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+
+              <path id="costArea" fill="url(#costGrad)" d=""/>
+              <path id="costLine" fill="none" stroke="#22232A" stroke-width="2" stroke-linejoin="round" d=""/>
+
+              <path id="revArea" fill="url(#revGrad)" d=""/>
+              <path id="revLine" fill="none" stroke="#FF3B14" stroke-width="2.5" stroke-linejoin="round" d=""/>
+
+              <!-- Break-even marker -->
+              <g id="breakevenMarker"></g>
+
+              <!-- Hover line -->
+              <line id="hoverLine" stroke="rgba(0,0,0,.2)" stroke-dasharray="3,3" y1="0" y2="280" style="display:none"/>
+              <circle id="hoverDotRev" r="5" fill="#FF3B14" stroke="#fff" stroke-width="2" style="display:none"/>
+              <circle id="hoverDotCost" r="4" fill="#22232A" stroke="#fff" stroke-width="2" style="display:none"/>
+
+              <!-- Hover capture area -->
+              <rect id="hoverArea" x="0" y="0" width="720" height="280" fill="transparent" style="cursor:crosshair"/>
+            </svg>
+
+            <div class="chart-tooltip" id="chartTooltip">
+              <span class="tt-month">MONTH 0</span>
+              <div class="tt-row"><span>Revenue</span><strong>$0</strong></div>
+              <div class="tt-row"><span>Cost</span><strong>$0</strong></div>
+              <div class="tt-row" style="border-top:1px solid rgba(255,255,255,.15);padding-top:4px;margin-top:4px"><span>Net</span><strong style="color:#FF3B14">$0</strong></div>
+            </div>
+          </div>
+
+          <div class="chart-x-axis" id="xAxis"></div>
+        </div>
+
+        <!-- BREAK-EVEN -->
+        <div class="breakeven">
+          <div class="be-icon">τ</div>
+          <div class="be-content">
+            <h3>Break-even point</h3>
+            <div class="be-text"><strong>Month <span id="breakEvenMonth">7</span></strong> · then it compounds. <span style="opacity:.7">Industry avg: 7.7 months.</span></div>
+          </div>
+          <a href="index.html#offer" class="be-cta">Lock my slot →</a>
+        </div>
+
+        <!-- COST OF DOING NOTHING -->
+        <div class="cost-of-nothing">
+          <div class="cost-of-nothing-head">
+            <div class="ic">⚠</div>
+            <h3>The cost of waiting one more quarter</h3>
+          </div>
+          <p>Every 90 days you delay, your competitors are filling the SERPs and earning the LLM citations. You're not standing still — you're falling behind, and recovery requires earning ground back, not just keeping pace.</p>
+          <div class="cost-row">
+            <div class="cost-cell">
+              <div class="lbl">Revenue if you start NOW</div>
+              <div class="num">$<span id="startNow">1,243,000</span></div>
+            </div>
+            <div class="cost-cell bad">
+              <div class="lbl">Revenue forfeited by waiting 1 quarter</div>
+              <div class="num">−$<span id="costOfWaiting">312,000</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FORMULA EXPLAINER ═════════════════════════════════════════════ -->
+<section class="formula-section">
+  <div class="container">
+    <div class="formula-card">
+      <div class="eyebrow" style="margin-bottom:14px">UNDER THE HOOD · the math we use</div>
+      <h2>The formula nobody hides anymore.</h2>
+      <p class="sub">This is the standard SaaS SEO ROI formula used across the industry. We didn't invent it — we just made it usable.</p>
+
+      <div class="formula-eq">
+        <div>ROI =</div>
+        <div style="margin:8px 0">
+          <span class="div-line">
+            (<span class="red">Searches × CTR × Conv × Trial→Paid × ACV × Lifespan</span>) − <span class="peri">Annual Cost</span>
+          </span>
+        </div>
+        <div><span class="peri">Annual Cost</span></div>
+      </div>
+
+      <div class="formula-vars">
+        <div class="formula-var">
+          <h4>Searches × CTR</h4>
+          <p>How much organic traffic actually lands on your site each month, given top-3 rankings on your target keywords.</p>
+        </div>
+        <div class="formula-var">
+          <h4>Visitor Conv × Trial→Paid</h4>
+          <p>Two-stage conversion: visitor signs up, then becomes paying. Both stages compound the funnel impact.</p>
+        </div>
+        <div class="formula-var">
+          <h4>ACV × Lifespan</h4>
+          <p>Lifetime value per customer. Annual contract × average years retained. SaaS retention is the secret sauce of ROI.</p>
+        </div>
+        <div class="formula-var">
+          <h4>Annual Cost</h4>
+          <p>Total spend: agency fees, content, tools, dev work, internal time. Honest accounting required for honest ROI.</p>
+        </div>
+      </div>
+
+      <p class="fineprint" style="margin-top:24px;text-align:center">
+        // For B2B SaaS, industry benchmarks show avg ROI of 702% with breakeven around month 7. This calculator reflects those benchmarks.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══════════════════════════════════════════════════════════ -->
+<div class="container">
+  <section class="cta-section">
+    <div class="cta-section-inner">
+      <h2>Numbers look good?<br><span class="ser">Now</span> let's <span class="accent">make them real.</span></h2>
+      <p>The Inbound Engine ships everything you need to hit these projections — pipeline, content, automation, lead routing, citation tracking. 90 days. Flat fee. Triple-stacked guarantee.</p>
+      <div class="ctas">
+        <a href="index.html#offer" class="btn btn-red btn-lg">See the offer <span class="ar">↗</span></a>
+        <a href="audit.html" class="btn btn-outline btn-lg" style="color:var(--paper);border-color:rgba(255,255,255,.4)">Get free strategy first <span class="ar">↗</span></a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════════ -->
+<footer class="footer" style="margin-top:80px">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="nav-logo" style="color:var(--paper)">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect class="lg-r1" x="30" y="20" width="50" height="50"/>
+            <rect class="lg-r3" x="20" y="50" width="30" height="30" style="fill:var(--paper)"/>
+            <rect class="lg-r2" x="40" y="45" width="25" height="20"/>
+          </svg>
+          RankedTag
+        </a>
+        <p class="footer-blurb">The Inbound Engine for SaaS founders who'd rather build product than babysit an agency.</p>
+      </div>
+      <div class="footer-col">
+        <h4>The product</h4>
+        <a href="index.html#mechanism">Mechanism</a>
+        <a href="index.html#case">Case study</a>
+        <a href="index.html#offer">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <h4>Free tools</h4>
+        <a href="audit.html">Custom strategy</a>
+        <a href="roi-calculator.html">ROI calculator</a>
+        <a href="technical-audit.html">Technical audit</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="mailto:hello@rankedtag.com">hello@rankedtag.com</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 RANKEDTAG · BUILT FOR FOUNDERS, NOT MARKETERS</span>
+      <span>v3.0 · pipeline online</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* — Nav scroll state — */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 8) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+}, { passive: true });
+
+/* ═══ ROI CALCULATOR ═══════════════════════════════════════════════ */
+
+// ----- Helpers -----
+const fmt = (n) => Math.round(n).toLocaleString('en-US');
+const fmtMoney = (n) => '$' + fmt(n);
+const $ = id => document.getElementById(id);
+
+// ----- Presets -----
+const PRESETS = {
+  seed:   { searches:25000,  ctr:22, conv:3.2, t2p:22, acv:8400,  ltv:2.5, invest:14800 },
+  growth: { searches:80000,  ctr:25, conv:3.8, t2p:28, acv:18000, ltv:3.0, invest:24000 },
+  scale:  { searches:240000, ctr:28, conv:4.5, t2p:32, acv:36000, ltv:3.5, invest:42000 },
+};
+
+// ----- Inputs -----
+const inputs = ['searches','ctr','conv','t2p','acv','ltv','invest'];
+
+function readInputs(){
+  return {
+    searches: +$('searches').value,
+    ctr:      +$('ctr').value,
+    conv:     +$('conv').value,
+    t2p:      +$('t2p').value,
+    acv:      +$('acv').value,
+    ltv:      +$('ltv').value,
+    invest:   +$('invest').value,
+  };
+}
+
+function paintInputLabels(d){
+  $('searchesVal').textContent = fmt(d.searches);
+  $('ctrVal').textContent      = d.ctr;
+  $('convVal').textContent     = d.conv.toFixed(1);
+  $('t2pVal').textContent      = d.t2p;
+  $('acvVal').textContent      = fmt(d.acv);
+  $('ltvVal').textContent      = d.ltv.toFixed(1);
+  $('investVal').textContent   = fmt(d.invest);
+}
+
+// ----- ROI math -----
+// Build a 12-month projection with realistic ramp curve.
+// Months 1-3 are low (foundation building), 4-6 ramp up, 7-12 steady-state compounding.
+function project(d){
+  const monthlyVisitsAtSteady = d.searches * (d.ctr/100); // top-3 ranking visits/mo at steady state
+  const ramp = [0.05, 0.12, 0.22, 0.36, 0.52, 0.68, 0.80, 0.88, 0.93, 0.96, 0.98, 1.00]; // ramp curve
+
+  let cumRev = 0, cumCost = 0;
+  const points = [];
+  let breakEvenMonth = null;
+
+  for (let m=1; m<=12; m++){
+    const visits = monthlyVisitsAtSteady * ramp[m-1];
+    const signups = visits * (d.conv/100);
+    const customers = signups * (d.t2p/100);
+    // For monthly revenue contribution, customer pays ACV/12 each month they're a customer
+    // But for simplicity & to match SaaS ROI conventions, recognize ACV*lifespan over time.
+    // We'll use: month-of-acquisition revenue = customers_acq * (ACV * ltv) recognized smoothly across remaining months.
+    // Simpler: monthly new revenue = customers_acq * ACV (1 year of recognized revenue) + lifespan multiplier on cumulative.
+    // For chart clarity: month rev = customers_acq * ACV (annual contract = 1 year of revenue booked at acquisition).
+
+    // Use a more realistic SaaS approach: each new customer brings ACV * lifespan in cumulative LTV
+    const monthRev = customers * d.acv * d.ltv;
+    const monthCost = d.invest;
+
+    cumRev += monthRev;
+    cumCost += monthCost;
+
+    if (breakEvenMonth === null && cumRev >= cumCost){
+      breakEvenMonth = m;
+    }
+
+    points.push({
+      month: m,
+      visits,
+      signups,
+      customers,
+      monthRev,
+      cumRev,
+      monthCost,
+      cumCost,
+    });
+  }
+
+  // Summary stats
+  const last = points[11];
+  const annualRevenue = last.cumRev;
+  const annualSpend = last.cumCost;
+  const netProfit = annualRevenue - annualSpend;
+  const roiPct = annualSpend > 0 ? Math.round((netProfit / annualSpend) * 100) : 0;
+  const monthlyVisits = last.visits;
+  const monthlySignups = last.signups;
+  const monthlyMRR = last.customers * d.acv / 12; // recurring monthly value of those customers
+
+  return {
+    points,
+    annualRevenue,
+    annualSpend,
+    netProfit,
+    roiPct,
+    monthlyVisits,
+    monthlySignups,
+    monthlyMRR,
+    breakEvenMonth,
+  };
+}
+
+// ----- Chart rendering -----
+const CHART_W = 720, CHART_H = 280;
+const CHART_PAD = { top: 20, right: 20, bottom: 20, left: 50 };
+
+function paintChart(proj){
+  const points = proj.points;
+  // Find max value for scale
+  const maxVal = Math.max(...points.map(p => Math.max(p.cumRev, p.cumCost))) * 1.1;
+
+  const innerW = CHART_W - CHART_PAD.left - CHART_PAD.right;
+  const innerH = CHART_H - CHART_PAD.top - CHART_PAD.bottom;
+  const xStep = innerW / 12;
+
+  function xy(month, val){
+    const x = CHART_PAD.left + (month) * xStep;
+    const y = CHART_PAD.top + innerH - (val / maxVal) * innerH;
+    return [x, y];
+  }
+
+  // Y-axis labels (5 gridlines)
+  const yLabels = $('yLabels');
+  yLabels.innerHTML = '';
+  const gridLines = $('gridLines');
+  gridLines.innerHTML = '';
+  for (let i=0; i<=4; i++){
+    const v = (maxVal * i / 4);
+    const [_, y] = xy(0, v);
+    yLabels.innerHTML += `<text x="40" y="${y+3}" text-anchor="end">${formatY(v)}</text>`;
+    gridLines.innerHTML += `<line x1="${CHART_PAD.left}" y1="${y}" x2="${CHART_W - CHART_PAD.right}" y2="${y}"/>`;
+  }
+
+  // Build path strings
+  const start = xy(0, 0);
+  let revPath = `M ${start[0]} ${start[1]}`;
+  let revArea = `M ${start[0]} ${start[1]}`;
+  let costPath = `M ${start[0]} ${start[1]}`;
+  let costArea = `M ${start[0]} ${start[1]}`;
+
+  points.forEach(p => {
+    const [rx, ry] = xy(p.month, p.cumRev);
+    const [cx, cy] = xy(p.month, p.cumCost);
+    revPath += ` L ${rx} ${ry}`;
+    revArea += ` L ${rx} ${ry}`;
+    costPath += ` L ${cx} ${cy}`;
+    costArea += ` L ${cx} ${cy}`;
+  });
+
+  const [endX] = xy(12, 0);
+  const baseY = CHART_PAD.top + innerH;
+  revArea += ` L ${endX} ${baseY} L ${start[0]} ${baseY} Z`;
+  costArea += ` L ${endX} ${baseY} L ${start[0]} ${baseY} Z`;
+
+  $('revLine').setAttribute('d', revPath);
+  $('revArea').setAttribute('d', revArea);
+  $('costLine').setAttribute('d', costPath);
+  $('costArea').setAttribute('d', costArea);
+
+  // Break-even marker
+  const beMarker = $('breakevenMarker');
+  beMarker.innerHTML = '';
+  if (proj.breakEvenMonth){
+    const p = points[proj.breakEvenMonth - 1];
+    const [bx, by] = xy(p.month, p.cumRev);
+    beMarker.innerHTML = `
+      <line x1="${bx}" y1="${CHART_PAD.top}" x2="${bx}" y2="${baseY}" stroke="#2D8A5C" stroke-dasharray="4,4" stroke-width="1.5"/>
+      <circle cx="${bx}" cy="${by}" r="7" fill="#2D8A5C"/>
+      <circle cx="${bx}" cy="${by}" r="13" fill="#2D8A5C" opacity=".25"/>
+      <text x="${bx + 10}" y="${CHART_PAD.top + 14}" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#2D8A5C">BREAK-EVEN · M${proj.breakEvenMonth}</text>
+    `;
+  }
+
+  // X-axis labels
+  const xAxis = $('xAxis');
+  xAxis.innerHTML = '';
+  for (let m=0; m<=12; m+=2){
+    const lbl = m === 0 ? 'NOW' : `M${m}`;
+    xAxis.innerHTML += `<span>${lbl}</span>`;
+  }
+
+  // Hover handlers
+  setupHover(points, xy, maxVal);
+}
+
+function formatY(v){
+  if (v >= 1e6) return '$' + (v/1e6).toFixed(1) + 'M';
+  if (v >= 1e3) return '$' + Math.round(v/1e3) + 'K';
+  return '$' + Math.round(v);
+}
+
+function setupHover(points, xy, maxVal){
+  const hoverArea = $('hoverArea');
+  const hoverLine = $('hoverLine');
+  const hoverDotRev = $('hoverDotRev');
+  const hoverDotCost = $('hoverDotCost');
+  const tooltip = $('chartTooltip');
+
+  hoverArea.onmousemove = function(e){
+    const rect = hoverArea.getBoundingClientRect();
+    const xPct = (e.clientX - rect.left) / rect.width;
+    const monthIdx = Math.min(Math.max(Math.round(xPct * 12), 1), 12);
+    const p = points[monthIdx - 1];
+
+    const [rx, ry] = xy(p.month, p.cumRev);
+    const [cx, cy] = xy(p.month, p.cumCost);
+
+    hoverLine.style.display = '';
+    hoverLine.setAttribute('x1', rx);
+    hoverLine.setAttribute('x2', rx);
+
+    hoverDotRev.style.display = '';
+    hoverDotRev.setAttribute('cx', rx);
+    hoverDotRev.setAttribute('cy', ry);
+
+    hoverDotCost.style.display = '';
+    hoverDotCost.setAttribute('cx', cx);
+    hoverDotCost.setAttribute('cy', cy);
+
+    tooltip.classList.add('visible');
+    // Position tooltip near hover (in viewport pixels)
+    const chartRect = hoverArea.closest('.chart-wrap').getBoundingClientRect();
+    const svgRect = hoverArea.getBoundingClientRect();
+    const tipLeft = (rx / 720) * svgRect.width;
+    tooltip.style.left = `${Math.min(Math.max(tipLeft, 80), chartRect.width - 160)}px`;
+    tooltip.style.top = `${Math.max((ry / 280) * svgRect.height - 80, 0)}px`;
+    tooltip.innerHTML = `
+      <span class="tt-month">MONTH ${p.month}</span>
+      <div class="tt-row"><span>Revenue</span><strong>${fmtMoney(p.cumRev)}</strong></div>
+      <div class="tt-row"><span>Cost</span><strong>${fmtMoney(p.cumCost)}</strong></div>
+      <div class="tt-row" style="border-top:1px solid rgba(255,255,255,.15);padding-top:4px;margin-top:4px"><span>Net</span><strong style="color:${p.cumRev >= p.cumCost ? '#FF3B14' : '#FFAFA0'}">${fmtMoney(p.cumRev - p.cumCost)}</strong></div>
+    `;
+  };
+  hoverArea.onmouseleave = function(){
+    hoverLine.style.display = 'none';
+    hoverDotRev.style.display = 'none';
+    hoverDotCost.style.display = 'none';
+    tooltip.classList.remove('visible');
+  };
+}
+
+// ----- Update everything -----
+function update(){
+  const d = readInputs();
+  paintInputLabels(d);
+  const p = project(d);
+
+  $('annualRevenue').textContent = fmt(p.annualRevenue);
+  $('annualSpend').textContent   = fmt(p.annualSpend);
+  $('netProfit').textContent     = fmt(p.netProfit);
+  $('roiPct').textContent        = p.roiPct + '%';
+  $('monthlyVisits').textContent = fmt(p.monthlyVisits);
+  $('monthlySignups').textContent= fmt(p.monthlySignups);
+  $('monthlyMRR').textContent    = fmt(p.monthlyMRR);
+  $('breakEvenMonth').textContent= p.breakEvenMonth || '—';
+  $('startNow').textContent      = fmt(p.annualRevenue);
+  // Cost of waiting one quarter (3 months) — equivalent to losing first 3 months of compounding revenue
+  const waitedRev = p.points.slice(0, Math.min(3, p.points.length)).reduce((sum, x) => sum + x.monthRev, 0);
+  // Interpretation: shifting the curve right by 3 months means losing 3 months of late-stage revenue
+  const lateRev = (p.points[11].monthRev + p.points[10].monthRev + p.points[9].monthRev);
+  $('costOfWaiting').textContent = fmt(lateRev);
+
+  paintChart(p);
+}
+
+// ----- Wire up sliders -----
+inputs.forEach(name => {
+  $(name).addEventListener('input', update);
+});
+
+// ----- Wire up presets -----
+document.querySelectorAll('.preset-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const preset = PRESETS[btn.dataset.preset];
+    Object.keys(preset).forEach(k => { $(k).value = preset[k]; });
+    update();
+  });
+});
+
+// ----- Initial paint -----
+update();
+window.addEventListener('resize', () => paintChart(project(readInputs())));
+
+</script>
+
+</body>
+</html>

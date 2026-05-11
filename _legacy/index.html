@@ -1,0 +1,2033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>RankedTag — The Inbound Engine for SaaS. Rank on Google + Get Quoted by ChatGPT.</title>
+<meta name="description" content="We engineer compounding inbound pipelines for SaaS. Senior strategists × Claude × N8N. 12 LLM-cited articles, qualified leads to your Slack, ranked in 90 days — or you don't pay." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand.css">
+<style>
+
+/* =====================================================================
+   HOMEPAGE-SPECIFIC
+   ===================================================================== */
+
+/* — HERO ————————————————————————————————————————— */
+.hero{
+  min-height:100vh;
+  padding:120px 0 100px;
+  display:flex;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,0,0,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,.04) 1px, transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 70% 60% at center, black 0%, transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at center, black 0%, transparent 80%);
+}
+.hero-bg-blob{
+  position:absolute;
+  top:-300px;right:-200px;
+  width:800px;height:800px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,59,20,.10) 0%, transparent 60%);
+  pointer-events:none;
+  filter:blur(40px);
+}
+.hero-bg-blob-2{
+  position:absolute;
+  bottom:-200px;left:-150px;
+  width:500px;height:500px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(166,176,240,.18) 0%, transparent 60%);
+  pointer-events:none;
+  filter:blur(30px);
+}
+.hero-inner{position:relative;z-index:1;max-width:1240px}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  padding:8px 16px 8px 8px;
+  background:rgba(255,255,255,.55);
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:var(--r-pill);
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:36px;
+  backdrop-filter:blur(10px);
+}
+.hero-eyebrow .pill-num{
+  background:var(--ink);color:var(--paper);
+  padding:4px 10px;border-radius:var(--r-pill);
+  font-size:10px;
+}
+.hero-eyebrow .live-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--success);
+  box-shadow:0 0 0 0 var(--success);
+  animation:pulse 1.8s infinite;
+}
+
+h1.hero-title{
+  font-size:clamp(48px, 9vw, 132px);
+  font-weight:800;
+  line-height:.92;
+  letter-spacing:-.045em;
+  margin-bottom:36px;
+  max-width:1100px;
+}
+.hero-title .accent{color:var(--red)}
+.hero-title .strike{
+  position:relative;
+  display:inline-block;
+  color:var(--muted);
+  font-weight:600;
+}
+.hero-title .strike::after{
+  content:"";
+  position:absolute;
+  left:-3%;right:-3%;top:54%;
+  height:8px;
+  background:var(--ink);
+  transform:rotate(-2.5deg);
+  border-radius:4px;
+}
+
+.hero-sub{
+  font-size:clamp(17px, 1.65vw, 22px);
+  line-height:1.45;
+  max-width:680px;
+  margin-bottom:44px;
+  color:var(--ink-2);
+}
+
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:60px}
+
+.hero-trust{
+  display:grid;
+  grid-template-columns:repeat(4, auto);
+  gap:48px;
+  padding-top:48px;
+  border-top:1px solid rgba(0,0,0,.08);
+}
+.trust-stat{display:flex;flex-direction:column;gap:4px}
+.trust-stat .num{
+  font-size:32px;
+  font-weight:800;
+  letter-spacing:-.025em;
+  line-height:1;
+}
+.trust-stat .num .accent{color:var(--red)}
+.trust-stat .lbl{
+  font-family:'JetBrains Mono', monospace;
+  font-size:10px;
+  color:var(--muted);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+@media (max-width:760px){
+  .hero-trust{grid-template-columns:repeat(2, 1fr);gap:24px}
+  .trust-stat .num{font-size:24px}
+}
+
+/* — LOGO MARQUEE ————————————————————————————————— */
+.logos-strip{
+  padding:36px 0;
+  border-top:1px solid rgba(0,0,0,.06);
+  border-bottom:1px solid rgba(0,0,0,.06);
+  background:var(--paper);
+  overflow:hidden;
+  position:relative;
+}
+.logos-strip-label{
+  text-align:center;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:24px;
+}
+.logos-marquee{
+  display:flex;
+  gap:64px;
+  animation:scrollLogos 40s linear infinite;
+  width:max-content;
+  align-items:center;
+}
+@keyframes scrollLogos{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+.logo-item{
+  font-family:'JetBrains Mono', monospace;
+  font-size:13px;
+  font-weight:600;
+  color:var(--ink);
+  opacity:.55;
+  white-space:nowrap;
+  display:flex;align-items:center;gap:10px;
+  flex-shrink:0;
+  letter-spacing:.02em;
+}
+.logo-item .ic{
+  width:8px;height:8px;
+  background:var(--red);
+  border-radius:50%;
+}
+
+/* — PROBLEM BLOCK ———————————————————————————————— */
+.problem{
+  background:var(--ink);
+  color:var(--paper);
+  position:relative;
+  overflow:hidden;
+}
+.problem::before{
+  content:"";
+  position:absolute;
+  top:-50%;right:-20%;
+  width:80%;height:200%;
+  background:radial-gradient(circle, rgba(255,59,20,.12) 0%, transparent 50%);
+  pointer-events:none;
+}
+.problem-quote{
+  font-family:'Instrument Serif', serif;
+  font-style:italic;
+  font-size:clamp(28px, 4vw, 56px);
+  line-height:1.15;
+  letter-spacing:-.02em;
+  max-width:1000px;
+  margin-bottom:48px;
+  color:var(--paper);
+}
+.problem-quote em{
+  color:var(--red);
+  font-style:italic;
+}
+.problem-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:1px;
+  background:var(--ink-line);
+  border:1px solid var(--ink-line);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  margin-top:64px;
+}
+.problem-cell{
+  background:var(--ink);
+  padding:36px;
+}
+.problem-cell .num{
+  font-family:'Instrument Serif', serif;
+  font-size:64px;
+  font-style:italic;
+  font-weight:400;
+  color:var(--red);
+  line-height:1;
+  margin-bottom:18px;
+}
+.problem-cell h3{
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:-.015em;
+  margin-bottom:12px;
+}
+.problem-cell p{
+  font-size:14.5px;
+  line-height:1.5;
+  color:rgba(244,239,231,.65);
+}
+@media (max-width:880px){
+  .problem-grid{grid-template-columns:1fr}
+}
+
+/* — TRINITY MECHANISM ——————————————————————————— */
+.trinity{position:relative;overflow:hidden}
+.trinity-vis{
+  position:relative;
+  margin:80px auto 0;
+  max-width:980px;
+  aspect-ratio:1.6/1;
+}
+.trinity-circle{
+  position:absolute;
+  width:42%;
+  aspect-ratio:1;
+  border-radius:50%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:8%;
+  font-weight:600;
+  transition:transform var(--t-base) var(--ease);
+}
+.trinity-circle:hover{transform:scale(1.03)}
+.trinity-circle .label{
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  margin-bottom:10px;
+  opacity:.7;
+}
+.trinity-circle .h{
+  font-size:clamp(20px, 2.4vw, 30px);
+  font-weight:800;
+  letter-spacing:-.02em;
+  line-height:1.05;
+  margin-bottom:14px;
+}
+.trinity-circle .desc{
+  font-size:13px;
+  line-height:1.4;
+  opacity:.85;
+  font-weight:500;
+}
+.trinity-c1{
+  top:0;left:5%;
+  background:var(--ink);color:var(--paper);
+  z-index:3;
+}
+.trinity-c2{
+  top:0;right:5%;
+  background:var(--periwinkle);color:var(--ink);
+  z-index:2;
+}
+.trinity-c3{
+  bottom:0;left:50%;
+  transform:translateX(-50%);
+  background:var(--red);color:#fff;
+  z-index:4;
+}
+.trinity-center{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  background:var(--paper);
+  color:var(--ink);
+  width:24%;
+  aspect-ratio:1;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-family:'Instrument Serif', serif;
+  font-style:italic;
+  font-size:clamp(16px, 1.8vw, 22px);
+  font-weight:400;
+  line-height:1.1;
+  z-index:5;
+  box-shadow:var(--shadow-lg);
+  border:2px solid var(--paper-3);
+  padding:10%;
+}
+
+@media (max-width:760px){
+  .trinity-vis{
+    aspect-ratio:auto;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    align-items:center;
+  }
+  .trinity-circle{
+    position:relative;
+    top:auto;left:auto;right:auto;bottom:auto;
+    transform:none;
+    width:100%;
+    aspect-ratio:auto;
+    padding:32px;
+    border-radius:var(--r-lg);
+  }
+  .trinity-c3{transform:none}
+  .trinity-center{
+    position:relative;
+    top:auto;left:auto;
+    transform:none;
+    width:auto;
+    aspect-ratio:auto;
+    border-radius:var(--r-lg);
+    padding:28px;
+    box-shadow:none;
+  }
+}
+
+.trinity-equation{
+  text-align:center;
+  margin-top:80px;
+  font-size:clamp(20px, 2.4vw, 32px);
+  font-weight:600;
+  letter-spacing:-.02em;
+  color:var(--ink-2);
+}
+.trinity-equation .op{color:var(--red);font-family:'Instrument Serif', serif;font-style:italic;margin:0 12px;font-size:1.4em;line-height:0;vertical-align:-.15em}
+.trinity-equation .res{
+  display:block;
+  margin-top:20px;
+  font-family:'Instrument Serif', serif;
+  font-style:italic;
+  font-weight:400;
+  color:var(--red);
+  font-size:1.4em;
+  letter-spacing:-.025em;
+}
+
+/* — PIPELINE (ambiguous) ———————————————————————— */
+.pipeline-section{
+  background:var(--ink);
+  color:var(--paper);
+  position:relative;
+  overflow:hidden;
+}
+.pipeline-section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;
+}
+.pipeline-stage{
+  margin-top:72px;
+  padding:36px;
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--ink-line);
+  border-radius:var(--r-xl);
+  position:relative;
+  backdrop-filter:blur(10px);
+}
+.pipeline-toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-bottom:24px;
+  border-bottom:1px solid var(--ink-line);
+  margin-bottom:32px;
+}
+.pipeline-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.pipeline-tab{
+  padding:8px 14px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  border-radius:var(--r-pill);
+  background:transparent;
+  color:rgba(244,239,231,.5);
+  border:1px solid var(--ink-line);
+  cursor:pointer;
+  transition:all var(--t-fast) var(--ease);
+}
+.pipeline-tab.active{
+  background:var(--red);
+  color:#fff;
+  border-color:var(--red);
+}
+.pipeline-tab:hover:not(.active){color:var(--paper);border-color:rgba(255,255,255,.2)}
+
+.pipeline-meta{
+  display:flex;
+  gap:16px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  color:rgba(244,239,231,.5);
+  align-items:center;
+}
+.pipeline-meta .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--success);
+  animation:pulse 1.8s infinite;
+}
+
+.pipeline-canvas{
+  display:grid;
+  grid-template-columns:repeat(12, 1fr);
+  gap:14px;
+  position:relative;
+  min-height:400px;
+}
+
+.node{
+  background:var(--ink-3);
+  border:1px solid var(--ink-line);
+  border-radius:var(--r-md);
+  padding:18px 18px;
+  position:relative;
+  transition:all var(--t-base) var(--ease);
+}
+.node:hover{
+  border-color:var(--red);
+  background:var(--ink-2);
+}
+.node-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+.node-icon{
+  width:28px;height:28px;
+  border-radius:8px;
+  background:var(--red);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:13px;
+  font-family:'JetBrains Mono', monospace;
+}
+.node-icon.peri{background:var(--periwinkle);color:var(--ink)}
+.node-icon.ink{background:var(--paper);color:var(--ink)}
+.node-id{
+  font-family:'JetBrains Mono', monospace;
+  font-size:9px;
+  color:rgba(244,239,231,.4);
+  letter-spacing:.08em;
+}
+.node-title{
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:-.01em;
+  margin-bottom:4px;
+}
+.node-desc{
+  font-family:'JetBrains Mono', monospace;
+  font-size:10px;
+  color:rgba(244,239,231,.5);
+  line-height:1.4;
+}
+.node.locked::after{
+  content:"🔒";
+  position:absolute;
+  top:8px;right:10px;
+  font-size:11px;
+  opacity:.4;
+}
+
+/* node positions */
+.np-1{grid-column:1 / span 3;grid-row:1}
+.np-2{grid-column:5 / span 4;grid-row:1}
+.np-3{grid-column:10 / span 3;grid-row:1}
+.np-4{grid-column:1 / span 3;grid-row:2}
+.np-5{grid-column:5 / span 4;grid-row:2}
+.np-6{grid-column:10 / span 3;grid-row:2}
+.np-7{grid-column:3 / span 3;grid-row:3}
+.np-8{grid-column:7 / span 4;grid-row:3}
+
+.node.featured{
+  background:linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%);
+  border-color:var(--red);
+}
+.node.featured .node-icon{background:#fff;color:var(--red)}
+.node.featured .node-id,.node.featured .node-desc{color:rgba(255,255,255,.75)}
+
+@media (max-width:760px){
+  .pipeline-canvas{grid-template-columns:1fr;gap:10px}
+  .np-1,.np-2,.np-3,.np-4,.np-5,.np-6,.np-7,.np-8{grid-column:1;grid-row:auto}
+}
+
+.pipeline-disclaimer{
+  margin-top:24px;
+  padding:16px 20px;
+  background:rgba(255,59,20,.08);
+  border:1px dashed rgba(255,59,20,.3);
+  border-radius:var(--r-md);
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  line-height:1.5;
+  color:rgba(255,255,255,.65);
+}
+.pipeline-disclaimer strong{color:var(--red)}
+
+/* — CASE STUDY ————————————————————————————————— */
+.case{
+  background:var(--paper);
+  position:relative;
+  overflow:hidden;
+}
+.case-bg-num{
+  position:absolute;
+  top:-40px;right:-30px;
+  font-family:'Instrument Serif', serif;
+  font-style:italic;
+  font-size:clamp(200px, 30vw, 500px);
+  font-weight:400;
+  color:rgba(255,59,20,.05);
+  line-height:.85;
+  pointer-events:none;
+  z-index:0;
+}
+.case-inner{position:relative;z-index:1}
+.case-grid{
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  gap:60px;
+  align-items:start;
+  margin-top:60px;
+}
+.case-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:24px;
+}
+.case-h{
+  font-size:clamp(36px, 5vw, 72px);
+  font-weight:800;
+  line-height:.95;
+  letter-spacing:-.035em;
+  margin-bottom:24px;
+}
+.case-h .accent{color:var(--red)}
+.case-quote{
+  font-family:'Instrument Serif', serif;
+  font-style:italic;
+  font-size:clamp(20px, 2.2vw, 28px);
+  line-height:1.32;
+  color:var(--ink-2);
+  margin:32px 0;
+  padding-left:28px;
+  border-left:3px solid var(--red);
+}
+.case-author{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:32px;
+}
+.case-author-avatar{
+  width:48px;height:48px;
+  background:linear-gradient(135deg, var(--red), var(--periwinkle));
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-weight:800;
+  font-size:16px;
+}
+.case-author-info{
+  font-size:13px;
+  line-height:1.3;
+}
+.case-author-info strong{display:block;font-weight:700;font-size:14px}
+.case-author-info span{color:var(--muted)}
+
+.case-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.case-stat{
+  background:#fff;
+  border:1px solid var(--paper-3);
+  border-radius:var(--r-lg);
+  padding:28px 24px;
+  position:relative;
+  overflow:hidden;
+}
+.case-stat.featured{
+  background:var(--ink);
+  color:var(--paper);
+  border-color:var(--ink);
+  grid-column:span 2;
+  padding:36px 32px;
+}
+.case-stat .stat-lbl{
+  font-family:'JetBrains Mono', monospace;
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:14px;
+}
+.case-stat.featured .stat-lbl{color:rgba(244,239,231,.6)}
+.case-stat .stat-num{
+  font-size:clamp(36px, 4vw, 56px);
+  font-weight:800;
+  letter-spacing:-.03em;
+  line-height:1;
+  margin-bottom:6px;
+}
+.case-stat.featured .stat-num{color:var(--red)}
+.case-stat .stat-delta{
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  color:var(--success);
+  font-weight:600;
+}
+.case-stat.featured .stat-delta{color:var(--periwinkle)}
+
+.case-chart{
+  margin-top:24px;
+  background:#fff;
+  border:1px solid var(--paper-3);
+  border-radius:var(--r-lg);
+  padding:24px;
+}
+.chart-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:16px;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.chart-title{
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.chart-legend{
+  display:flex;
+  gap:14px;
+  font-size:11px;
+  color:var(--muted);
+}
+.chart-legend span{display:flex;align-items:center;gap:6px}
+.chart-legend .dot{width:8px;height:8px;border-radius:50%}
+
+@media (max-width:880px){
+  .case-grid{grid-template-columns:1fr;gap:40px}
+  .case-stat.featured{grid-column:span 2}
+}
+@media (max-width:520px){
+  .case-stats{grid-template-columns:1fr}
+  .case-stat.featured{grid-column:1}
+}
+
+/* — TOOLS GRID ———————————————————————————————— */
+.tools{
+  background:var(--paper-2);
+  position:relative;
+}
+.tools-grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;
+  grid-template-rows:auto auto;
+  gap:18px;
+  margin-top:56px;
+}
+.tool-card{
+  background:#fff;
+  border:1px solid var(--paper-3);
+  border-radius:var(--r-xl);
+  padding:36px;
+  position:relative;
+  overflow:hidden;
+  transition:transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+}
+.tool-card:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-md);
+  border-color:var(--ink);
+}
+.tool-card.feature{
+  background:var(--ink);
+  color:var(--paper);
+  border-color:var(--ink);
+  grid-row:span 2;
+}
+.tool-card.feature:hover{border-color:var(--red)}
+
+.tool-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:20px;
+}
+.tool-card.feature .tool-tag{color:var(--periwinkle)}
+
+.tool-h{
+  font-size:clamp(22px, 2.4vw, 32px);
+  font-weight:700;
+  letter-spacing:-.025em;
+  line-height:1.05;
+  margin-bottom:14px;
+}
+.tool-card.feature .tool-h{font-size:clamp(28px, 3.2vw, 44px)}
+.tool-desc{
+  font-size:14.5px;
+  line-height:1.5;
+  color:var(--muted);
+  margin-bottom:24px;
+  flex:1;
+}
+.tool-card.feature .tool-desc{
+  color:rgba(244,239,231,.7);
+  font-size:16px;
+}
+.tool-cta{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-weight:600;
+  font-size:14px;
+  color:var(--ink);
+  padding-top:14px;
+  border-top:1px solid var(--paper-3);
+}
+.tool-card.feature .tool-cta{color:var(--paper);border-top-color:var(--ink-line)}
+.tool-cta .ar{
+  width:24px;height:24px;
+  background:var(--ink);
+  color:var(--paper);
+  border-radius:50%;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  transition:transform var(--t-fast) var(--ease);
+}
+.tool-card.feature .tool-cta .ar{background:var(--red);color:#fff}
+.tool-card:hover .tool-cta .ar{transform:translateX(4px)}
+
+.tool-visual{
+  margin-top:24px;
+  margin-bottom:auto;
+}
+
+@media (max-width:880px){
+  .tools-grid{grid-template-columns:1fr;grid-template-rows:auto}
+  .tool-card.feature{grid-row:auto}
+}
+
+/* — DELIVERABLES (what you get) ——————————————————— */
+.deliv-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:0;
+  border:1px solid var(--paper-3);
+  border-radius:var(--r-xl);
+  overflow:hidden;
+  background:var(--paper-3);
+  margin-top:56px;
+}
+.deliv-cell{
+  background:#fff;
+  padding:36px;
+  display:flex;
+  gap:20px;
+  align-items:flex-start;
+  position:relative;
+}
+.deliv-cell:nth-child(odd){border-right:1px solid var(--paper-3)}
+.deliv-cell:not(:nth-last-child(-n+2)){border-bottom:1px solid var(--paper-3)}
+.deliv-num{
+  flex-shrink:0;
+  font-family:'Instrument Serif', serif;
+  font-style:italic;
+  font-size:48px;
+  font-weight:400;
+  color:var(--red);
+  line-height:.85;
+  width:60px;
+}
+.deliv-content h3{
+  font-size:19px;
+  font-weight:700;
+  letter-spacing:-.015em;
+  margin-bottom:8px;
+}
+.deliv-content p{
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.5;
+}
+.deliv-content .deliv-value{
+  display:inline-block;
+  margin-top:12px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  background:var(--paper-2);
+  color:var(--ink);
+  padding:4px 10px;
+  border-radius:var(--r-pill);
+  font-weight:600;
+}
+@media (max-width:680px){
+  .deliv-grid{grid-template-columns:1fr}
+  .deliv-cell:nth-child(odd){border-right:none}
+  .deliv-cell:not(:last-child){border-bottom:1px solid var(--paper-3)}
+}
+
+/* — OFFER (Grand Slam) ——————————————————————————— */
+.offer{
+  background:var(--ink);
+  color:var(--paper);
+  position:relative;
+  overflow:hidden;
+}
+.offer::before{
+  content:"";
+  position:absolute;
+  top:-50%;left:50%;
+  transform:translateX(-50%);
+  width:140%;height:160%;
+  background:radial-gradient(circle, rgba(255,59,20,.10) 0%, transparent 50%);
+  pointer-events:none;
+}
+
+.offer-card{
+  margin-top:64px;
+  background:linear-gradient(180deg, rgba(255,255,255,.04) 0%, rgba(255,255,255,.01) 100%);
+  border:1px solid var(--ink-line);
+  border-radius:var(--r-xl);
+  padding:64px;
+  max-width:1080px;
+  margin-left:auto;
+  margin-right:auto;
+  position:relative;
+  overflow:hidden;
+}
+.offer-card::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg, var(--red) 0%, var(--periwinkle) 50%, var(--red) 100%);
+}
+.offer-tag-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:28px;
+}
+.offer-h{
+  font-size:clamp(40px, 5.5vw, 72px);
+  font-weight:800;
+  line-height:.95;
+  letter-spacing:-.035em;
+  margin-bottom:20px;
+}
+.offer-h .accent{color:var(--red)}
+.offer-h .ser{font-family:'Instrument Serif', serif;font-style:italic;font-weight:400;color:var(--periwinkle)}
+.offer-sub{
+  font-size:18px;
+  line-height:1.5;
+  color:rgba(244,239,231,.75);
+  max-width:720px;
+  margin-bottom:48px;
+}
+
+.offer-stack{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  margin-bottom:40px;
+  border:1px solid var(--ink-line);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+}
+.offer-stack-row{
+  display:contents;
+}
+.offer-stack-cell{
+  padding:18px 22px;
+  border-bottom:1px solid var(--ink-line);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.offer-stack-cell:nth-child(2n-1){
+  background:rgba(255,255,255,.015);
+  border-right:1px solid var(--ink-line);
+}
+.offer-stack-cell:last-child,
+.offer-stack-cell:nth-last-child(2){border-bottom:none}
+.offer-stack-cell.head{
+  background:var(--ink-3);
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--periwinkle);
+}
+.offer-stack-cell .check{
+  flex-shrink:0;
+  width:20px;height:20px;
+  background:var(--red);
+  color:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  font-weight:800;
+}
+.offer-stack-cell .item{
+  flex:1;
+  font-size:14.5px;
+  line-height:1.35;
+}
+.offer-stack-cell .val{
+  font-family:'JetBrains Mono', monospace;
+  font-size:13px;
+  color:var(--periwinkle);
+  font-weight:600;
+}
+
+.offer-total{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  padding:24px 0;
+  border-top:1px solid var(--ink-line);
+  margin-bottom:32px;
+  flex-wrap:wrap;
+  gap:16px;
+}
+.offer-total-line{
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(244,239,231,.5);
+}
+.offer-total-num{
+  font-size:32px;
+  font-weight:800;
+  letter-spacing:-.025em;
+}
+.offer-total-num.struck{
+  color:var(--muted);
+  text-decoration:line-through;
+  text-decoration-thickness:2px;
+}
+.offer-total-num.real{
+  color:var(--red);
+  font-size:48px;
+}
+
+.offer-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px}
+
+.guarantees{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:16px;
+  padding-top:32px;
+  border-top:1px solid var(--ink-line);
+}
+.guarantee{
+  padding:24px;
+  background:rgba(255,255,255,.025);
+  border:1px solid var(--ink-line);
+  border-radius:var(--r-md);
+}
+.guarantee-stamp{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+.guarantee-stamp .stamp-icon{
+  width:32px;height:32px;
+  background:var(--red);
+  color:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'JetBrains Mono', monospace;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:0;
+  text-align:center;
+  line-height:1;
+}
+.guarantee h4{
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:-.01em;
+}
+.guarantee p{
+  font-size:13px;
+  line-height:1.5;
+  color:rgba(244,239,231,.65);
+}
+
+.scarcity{
+  margin-top:32px;
+  padding:20px 24px;
+  background:rgba(255,59,20,.08);
+  border:1px solid rgba(255,59,20,.25);
+  border-radius:var(--r-md);
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.scarcity-icon{
+  flex-shrink:0;
+  width:40px;height:40px;
+  background:var(--red);
+  color:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  animation:pulse 1.8s infinite;
+}
+.scarcity-text{flex:1;font-size:14.5px;line-height:1.4}
+.scarcity-text strong{color:var(--red);font-weight:700}
+.scarcity-counter{
+  font-family:'JetBrains Mono', monospace;
+  font-size:13px;
+  color:var(--paper);
+  font-weight:600;
+}
+
+@media (max-width:760px){
+  .offer-card{padding:36px 24px}
+  .offer-stack{grid-template-columns:1fr}
+  .offer-stack-cell:nth-child(2n-1){border-right:none}
+  .guarantees{grid-template-columns:1fr}
+}
+
+/* — FAQ ——————————————————————————————————————— */
+.faq-wrap{
+  margin-top:56px;
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:60px;
+  align-items:start;
+}
+.faq-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.faq-item{
+  background:#fff;
+  border:1px solid var(--paper-3);
+  border-radius:var(--r-md);
+  overflow:hidden;
+  transition:all var(--t-fast) var(--ease);
+}
+.faq-item.open{
+  border-color:var(--ink);
+  box-shadow:var(--shadow-sm);
+}
+.faq-q{
+  display:flex;
+  width:100%;
+  padding:22px 26px;
+  align-items:center;
+  justify-content:space-between;
+  text-align:left;
+  font-size:16px;
+  font-weight:600;
+  letter-spacing:-.01em;
+  background:transparent;
+  cursor:pointer;
+}
+.faq-q .faq-ic{
+  width:28px;height:28px;
+  background:var(--paper-2);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  font-weight:600;
+  transition:all var(--t-fast) var(--ease);
+  flex-shrink:0;
+}
+.faq-item.open .faq-ic{background:var(--red);color:#fff;transform:rotate(45deg)}
+.faq-a{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height var(--t-base) var(--ease);
+}
+.faq-item.open .faq-a{max-height:300px}
+.faq-a-inner{
+  padding:0 26px 24px;
+  font-size:14.5px;
+  line-height:1.6;
+  color:var(--muted);
+}
+
+.faq-side{
+  position:sticky;
+  top:100px;
+  background:var(--ink);
+  color:var(--paper);
+  border-radius:var(--r-xl);
+  padding:36px;
+}
+.faq-side h3{
+  font-size:24px;
+  font-weight:700;
+  letter-spacing:-.02em;
+  margin-bottom:14px;
+}
+.faq-side p{
+  font-size:14px;
+  color:rgba(244,239,231,.7);
+  line-height:1.55;
+  margin-bottom:24px;
+}
+@media (max-width:880px){
+  .faq-wrap{grid-template-columns:1fr}
+  .faq-side{position:relative;top:0}
+}
+
+/* — FINAL CTA ————————————————————————————————— */
+.final-cta{
+  background:var(--red);
+  color:#fff;
+  padding:120px 0;
+  position:relative;
+  overflow:hidden;
+}
+.final-cta::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    repeating-linear-gradient(45deg, transparent 0, transparent 20px, rgba(0,0,0,.04) 20px, rgba(0,0,0,.04) 21px);
+  pointer-events:none;
+}
+.final-cta-inner{
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
+.final-h{
+  font-size:clamp(48px, 8vw, 120px);
+  font-weight:800;
+  line-height:.95;
+  letter-spacing:-.04em;
+  margin-bottom:24px;
+}
+.final-h .ser{
+  font-family:'Instrument Serif', serif;
+  font-style:italic;
+  font-weight:400;
+}
+.final-sub{
+  font-size:clamp(17px, 1.6vw, 22px);
+  margin-bottom:40px;
+  opacity:.9;
+  max-width:640px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.final-cta .btn-primary{
+  background:var(--ink);
+  border-color:var(--ink);
+  color:var(--paper);
+}
+.final-cta .btn-primary:hover{
+  background:#fff;
+  color:var(--red);
+  border-color:#fff;
+}
+.final-cta .btn-outline{
+  color:#fff;
+  border-color:rgba(255,255,255,.4);
+}
+.final-cta .btn-outline:hover{
+  background:#fff;
+  color:var(--red);
+  border-color:#fff;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══════════════════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect class="lg-r1" x="30" y="20" width="50" height="50"/>
+      <rect class="lg-r3" x="20" y="50" width="30" height="30"/>
+      <rect class="lg-r2" x="40" y="45" width="25" height="20"/>
+    </svg>
+    RankedTag
+  </a>
+  <div class="nav-links">
+    <a href="#mechanism" class="nav-link">How it works</a>
+    <a href="#case" class="nav-link">Proof</a>
+    <a href="audit.html" class="nav-link has-badge">Free Strategy<span class="badge">FREE</span></a>
+    <a href="roi-calculator.html" class="nav-link">ROI Calc</a>
+    <a href="#offer" class="nav-link">Pricing</a>
+  </div>
+  <a href="#offer" class="nav-cta">Book Strategy Call <span>→</span></a>
+  <button class="nav-toggle" aria-label="Menu"><span></span></button>
+</nav>
+
+<!-- ═══ HERO ══════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-bg-blob"></div>
+  <div class="hero-bg-blob-2"></div>
+
+  <div class="container hero-inner">
+    <div class="hero-eyebrow fade-up">
+      <span class="pill-num">v3.0</span>
+      <span>The Inbound Engine — for SaaS</span>
+      <span class="live-dot"></span>
+      <span style="opacity:.6">3 SLOTS LEFT · MAY</span>
+    </div>
+
+    <h1 class="hero-title fade-up delay-1">
+      Get ranked on Google.<br>
+      Get <span class="accent">quoted</span> by ChatGPT.<br>
+      <span class="strike">Hire an SEO agency.</span>
+    </h1>
+
+    <p class="hero-sub fade-up delay-2">
+      We engineer compounding inbound pipelines for SaaS. <span class="highlight">Senior strategists × Claude × N8N</span> — a system that finds the keywords, writes the pages, ships the schema, and delivers qualified leads to your Slack. Ranked in 90 days, or you don't pay.
+    </p>
+
+    <div class="hero-ctas fade-up delay-3">
+      <a href="#offer" class="btn btn-red btn-lg">
+        See the offer <span class="ar">↗</span>
+      </a>
+      <a href="audit.html" class="btn btn-outline btn-lg">
+        Get a free custom strategy <span class="ar">↗</span>
+      </a>
+    </div>
+
+    <div class="hero-trust fade-up delay-4">
+      <div class="trust-stat">
+        <div class="num"><span class="accent">1.2M+</span></div>
+        <div class="lbl">Organic impressions</div>
+      </div>
+      <div class="trust-stat">
+        <div class="num">50+</div>
+        <div class="lbl">Inbound signups (1 client)</div>
+      </div>
+      <div class="trust-stat">
+        <div class="num">90 <span style="font-size:.6em;color:var(--muted)">days</span></div>
+        <div class="lbl">To first ranked page</div>
+      </div>
+      <div class="trust-stat">
+        <div class="num">$0</div>
+        <div class="lbl">Spent on paid ads</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LOGO STRIP ════════════════════════════════════════════════════ -->
+<div class="logos-strip">
+  <div class="logos-strip-label">Operating system trusted by founders shipping inbound on autopilot</div>
+  <div class="logos-marquee">
+    <div class="logo-item"><span class="ic"></span>SENDR.AI</div>
+    <div class="logo-item"><span class="ic"></span>STAGE/0 LABS</div>
+    <div class="logo-item"><span class="ic"></span>NORTHWIND</div>
+    <div class="logo-item"><span class="ic"></span>FORMA STUDIO</div>
+    <div class="logo-item"><span class="ic"></span>VANTAGE OS</div>
+    <div class="logo-item"><span class="ic"></span>MERIDIAN AI</div>
+    <div class="logo-item"><span class="ic"></span>POSTPILOT</div>
+    <div class="logo-item"><span class="ic"></span>HELIO HQ</div>
+    <div class="logo-item"><span class="ic"></span>DEEPCRAWL</div>
+    <div class="logo-item"><span class="ic"></span>OBSIDIAN</div>
+    <!-- Duplicate for seamless loop -->
+    <div class="logo-item"><span class="ic"></span>SENDR.AI</div>
+    <div class="logo-item"><span class="ic"></span>STAGE/0 LABS</div>
+    <div class="logo-item"><span class="ic"></span>NORTHWIND</div>
+    <div class="logo-item"><span class="ic"></span>FORMA STUDIO</div>
+    <div class="logo-item"><span class="ic"></span>VANTAGE OS</div>
+    <div class="logo-item"><span class="ic"></span>MERIDIAN AI</div>
+    <div class="logo-item"><span class="ic"></span>POSTPILOT</div>
+    <div class="logo-item"><span class="ic"></span>HELIO HQ</div>
+    <div class="logo-item"><span class="ic"></span>DEEPCRAWL</div>
+    <div class="logo-item"><span class="ic"></span>OBSIDIAN</div>
+  </div>
+</div>
+
+<!-- ═══ PROBLEM ═══════════════════════════════════════════════════════ -->
+<section class="problem" data-reveal>
+  <div class="container">
+    <div class="eyebrow dark mb-6" style="color:var(--red)">PROBLEM · the bet most founders quietly lose</div>
+    <p class="problem-quote">
+      You spent six months on a content team that wrote 14 articles. <em>Two of them ranked.</em> None of them got cited by ChatGPT. Your inbound is a Google Sheet emailed to you on Fridays.
+    </p>
+
+    <div class="problem-grid">
+      <div class="problem-cell">
+        <div class="num">01</div>
+        <h3>The agency tax</h3>
+        <p>$8K–$15K/mo retainers for a content writer, a "strategist," and a quarterly report that says "keep going." You're paying for headcount, not outcomes.</p>
+      </div>
+      <div class="problem-cell">
+        <div class="num">02</div>
+        <h3>The 2019 playbook</h3>
+        <p>The pages they ship are optimized for Google's old algorithm. They're invisible to ChatGPT, Claude, Perplexity, and Gemini — where 40% of buyer research now starts.</p>
+      </div>
+      <div class="problem-cell">
+        <div class="num">03</div>
+        <h3>The handoff is broken</h3>
+        <p>Even when you rank, a form fill goes to a Sheet — not your CRM, not Slack, not enriched, not scored. Half your leads cool off before you see them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TRINITY MECHANISM ═════════════════════════════════════════════ -->
+<section class="trinity" id="mechanism" data-reveal>
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">THE MECHANISM · why this works when their stuff didn't</div>
+      <h2 class="h-1">The unfair advantage isn't AI.<br>It's the <span style="color:var(--red)">Trinity Stack.</span></h2>
+      <p class="lead">Nobody wins with an LLM alone. Nobody wins with humans alone. Nobody wins with N8N alone. The compounding effect lives in the join — three systems, one pipeline, every output graded by all three.</p>
+    </div>
+
+    <div class="trinity-vis">
+      <div class="trinity-circle trinity-c1">
+        <div class="label">01 / Strategy</div>
+        <div class="h">Senior Humans</div>
+        <div class="desc">10+ year SEO veterans direct ICP, intent, positioning, and editorial taste. Nothing ships unreviewed.</div>
+      </div>
+      <div class="trinity-circle trinity-c2">
+        <div class="label">02 / Intelligence</div>
+        <div class="h">Claude</div>
+        <div class="desc">Custom-tuned prompts grade keywords, draft briefs, model GEO citations, and stress-test angles at scale.</div>
+      </div>
+      <div class="trinity-circle trinity-c3">
+        <div class="label">03 / Velocity</div>
+        <div class="h">N8N Pipelines</div>
+        <div class="desc">Workflows wire it all together — trigger, enrich, route, publish, alert. 24/7. Without you in the loop.</div>
+      </div>
+      <div class="trinity-center">
+        compounding<br>inbound<br>at SaaS speed
+      </div>
+    </div>
+
+    <div class="trinity-equation">
+      Strategy <span class="op">×</span> Intelligence <span class="op">×</span> Velocity
+      <span class="res">= an inbound engine that doesn't sleep</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PIPELINE (ambiguous N8N) ══════════════════════════════════════ -->
+<section class="pipeline-section" data-reveal>
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow" style="color:var(--periwinkle)">UNDER THE HOOD · a peek at one workflow</div>
+      <h2 class="h-1" style="color:var(--paper)">Built like infrastructure.<br>Runs like clockwork.</h2>
+      <p class="lead" style="color:rgba(244,239,231,.72)">A simplified view of the keyword-to-lead workflow we deploy on your N8N instance. The full system has 40+ nodes, 6 sub-workflows, and proprietary Claude prompts we don't show in public — that's the moat.</p>
+    </div>
+
+    <div class="pipeline-stage">
+      <div class="pipeline-toolbar">
+        <div class="pipeline-tabs">
+          <button class="pipeline-tab active">Discovery → Lead</button>
+          <button class="pipeline-tab">Content Engine</button>
+          <button class="pipeline-tab">GEO Distribution</button>
+          <button class="pipeline-tab">Reporting</button>
+        </div>
+        <div class="pipeline-meta">
+          <span class="dot"></span>
+          <span>workflow #03 · runs every 6h · 14 nodes (8 shown)</span>
+        </div>
+      </div>
+
+      <div class="pipeline-canvas">
+        <div class="node np-1">
+          <div class="node-head">
+            <div class="node-icon">K</div>
+            <div class="node-id">N01</div>
+          </div>
+          <div class="node-title">Trigger: Keyword Probe</div>
+          <div class="node-desc">multi-source pull · SERP + community + LLM logs</div>
+        </div>
+        <div class="node np-2 featured">
+          <div class="node-head">
+            <div class="node-icon">C</div>
+            <div class="node-id">N02</div>
+          </div>
+          <div class="node-title">Claude: Intent + GEO Score</div>
+          <div class="node-desc">strategist-graded brief · format selection · citation modeling</div>
+        </div>
+        <div class="node np-3 locked">
+          <div class="node-head">
+            <div class="node-icon peri">⏣</div>
+            <div class="node-id">N03</div>
+          </div>
+          <div class="node-title">Proprietary Logic</div>
+          <div class="node-desc">private node · client-specific config</div>
+        </div>
+        <div class="node np-4">
+          <div class="node-head">
+            <div class="node-icon ink">H</div>
+            <div class="node-id">N04</div>
+          </div>
+          <div class="node-title">Human Editorial</div>
+          <div class="node-desc">senior strategist review · brand voice · positioning</div>
+        </div>
+        <div class="node np-5">
+          <div class="node-head">
+            <div class="node-icon">P</div>
+            <div class="node-id">N05</div>
+          </div>
+          <div class="node-title">Publish + Schema Stack</div>
+          <div class="node-desc">JSON-LD triple · llms.txt · OG · internal links</div>
+        </div>
+        <div class="node np-6 locked">
+          <div class="node-head">
+            <div class="node-icon peri">⏣</div>
+            <div class="node-id">N06</div>
+          </div>
+          <div class="node-title">Citation Probes</div>
+          <div class="node-desc">private node · 4-LLM tracking</div>
+        </div>
+        <div class="node np-7">
+          <div class="node-head">
+            <div class="node-icon">L</div>
+            <div class="node-id">N07</div>
+          </div>
+          <div class="node-title">Inbound Router</div>
+          <div class="node-desc">enrich · score · route · &lt;90s SLA</div>
+        </div>
+        <div class="node np-8 featured">
+          <div class="node-head">
+            <div class="node-icon">S</div>
+            <div class="node-id">N08</div>
+          </div>
+          <div class="node-title">Slack: Hot Lead Alert</div>
+          <div class="node-desc">tier-1 fit · founder DM · auto-CRM</div>
+        </div>
+      </div>
+
+      <div class="pipeline-disclaimer">
+        <strong>// note —</strong> This is one slice of one workflow. The full Inbound Engine includes 6 connected workflows: Keyword Discovery, Content Engine, GEO Distribution, Inbound Router, Citation Tracker, and Reporting. Locked nodes are proprietary logic developed across 40+ deployments — we license those to you for the life of the engagement.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CASE STUDY ════════════════════════════════════════════════════ -->
+<section class="case" id="case" data-reveal>
+  <div class="case-bg-num">01</div>
+  <div class="container case-inner">
+    <div class="section-head">
+      <div class="eyebrow">PROOF · not promises</div>
+      <h2 class="h-1">How <span class="serif" style="color:var(--red)">sendr.ai</span> went from a fresh domain<br>to <span style="color:var(--red)">1M+ impressions</span> in 5 months.</h2>
+      <p class="lead">Brand new domain. Zero ad spend. Built around our pipeline starting March 2025. We're showing the receipts because most "case studies" in this industry are vibes.</p>
+    </div>
+
+    <div class="case-grid">
+      <div>
+        <div class="case-meta">
+          <span class="tag tag-red">SEED-STAGE B2B SAAS</span>
+          <span class="tag tag-outline">COLD OUTREACH CATEGORY</span>
+          <span class="tag tag-live">Active engagement</span>
+        </div>
+
+        <h3 class="h-3 mb-4">The setup</h3>
+        <p style="color:var(--muted);font-size:15px;line-height:1.6;margin-bottom:18px">
+          When sendr.ai came to us in March 2025, they had a domain age of 3 weeks, no backlinks, and a positioning problem — competing in a category dominated by 6 incumbents with 8-figure marketing budgets. They had product-market fit but zero distribution.
+        </p>
+
+        <p class="case-quote">
+          We went from invisible to "the team ChatGPT mentions when someone asks about cold outreach." That's not a slide — that's actual prompts our prospects screenshot and send us. The pipeline runs while we ship product.
+        </p>
+
+        <div class="case-author">
+          <div class="case-author-avatar">SA</div>
+          <div class="case-author-info">
+            <strong>Founder, sendr.ai</strong>
+            <span>Engagement: March 2025 — present</span>
+          </div>
+        </div>
+
+        <a href="#offer" class="btn btn-primary">Get this engine for your SaaS <span class="ar">↗</span></a>
+      </div>
+
+      <div>
+        <div class="case-stats">
+          <div class="case-stat featured">
+            <div class="stat-lbl">Total organic impressions · 5 mo</div>
+            <div class="stat-num">1,247,000+</div>
+            <div class="stat-delta">▲ from 0 · across Google + 4 LLMs</div>
+          </div>
+          <div class="case-stat">
+            <div class="stat-lbl">Inbound signups</div>
+            <div class="stat-num">52</div>
+            <div class="stat-delta">▲ 100% organic</div>
+          </div>
+          <div class="case-stat">
+            <div class="stat-lbl">LLM citations</div>
+            <div class="stat-num">127</div>
+            <div class="stat-delta">▲ across ChatGPT/Claude/Perplexity/Gemini</div>
+          </div>
+          <div class="case-stat">
+            <div class="stat-lbl">Top-3 keywords</div>
+            <div class="stat-num">23</div>
+            <div class="stat-delta">▲ in target SERPs</div>
+          </div>
+          <div class="case-stat">
+            <div class="stat-lbl">Avg time-to-rank</div>
+            <div class="stat-num">68 <span style="font-size:.5em;color:var(--muted)">days</span></div>
+            <div class="stat-delta">▲ vs industry avg of 7 mo</div>
+          </div>
+        </div>
+
+        <div class="case-chart">
+          <div class="chart-head">
+            <div class="chart-title">⟶ Monthly impressions · Mar–Aug 2025</div>
+            <div class="chart-legend">
+              <span><span class="dot" style="background:var(--red)"></span>Google</span>
+              <span><span class="dot" style="background:var(--periwinkle)"></span>LLM citations</span>
+            </div>
+          </div>
+          <svg viewBox="0 0 600 220" style="width:100%;height:220px" preserveAspectRatio="none">
+            <!-- Grid lines -->
+            <line x1="0" y1="55" x2="600" y2="55" stroke="rgba(0,0,0,.06)" stroke-dasharray="2,4"/>
+            <line x1="0" y1="110" x2="600" y2="110" stroke="rgba(0,0,0,.06)" stroke-dasharray="2,4"/>
+            <line x1="0" y1="165" x2="600" y2="165" stroke="rgba(0,0,0,.06)" stroke-dasharray="2,4"/>
+
+            <!-- Google area + line -->
+            <defs>
+              <linearGradient id="redGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#FF3B14" stop-opacity=".25"/>
+                <stop offset="100%" stop-color="#FF3B14" stop-opacity="0"/>
+              </linearGradient>
+              <linearGradient id="blueGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#A6B0F0" stop-opacity=".4"/>
+                <stop offset="100%" stop-color="#A6B0F0" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M 0 215 L 100 208 L 200 180 L 300 140 L 400 80 L 500 35 L 600 12 L 600 220 L 0 220 Z" fill="url(#redGrad)"/>
+            <path d="M 0 215 L 100 208 L 200 180 L 300 140 L 400 80 L 500 35 L 600 12" fill="none" stroke="#FF3B14" stroke-width="2.5" stroke-linejoin="round"/>
+            <!-- LLM area + line -->
+            <path d="M 0 217 L 100 213 L 200 200 L 300 178 L 400 142 L 500 100 L 600 62 L 600 220 L 0 220 Z" fill="url(#blueGrad)"/>
+            <path d="M 0 217 L 100 213 L 200 200 L 300 178 L 400 142 L 500 100 L 600 62" fill="none" stroke="#A6B0F0" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="5,4"/>
+
+            <!-- Endpoint dots -->
+            <circle cx="600" cy="12" r="6" fill="#FF3B14"/>
+            <circle cx="600" cy="12" r="11" fill="#FF3B14" opacity=".25"/>
+            <circle cx="600" cy="62" r="5" fill="#A6B0F0"/>
+          </svg>
+          <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono', monospace;font-size:10px;color:var(--muted);margin-top:10px">
+            <span>MAR</span><span>APR</span><span>MAY</span><span>JUN</span><span>JUL</span><span>AUG</span><span>NOW</span>
+          </div>
+        </div>
+
+        <p class="fineprint mt-4" style="text-align:center">// Numbers from sendr.ai's GA4 + Search Console + our internal LLM citation tracker.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TOOLS ═════════════════════════════════════════════════════════ -->
+<section class="tools" data-reveal>
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">FREE TOOLS · we'd rather earn the call than buy it</div>
+      <h2 class="h-1">Three tools you'd usually pay $2K+ for.<br>Ours are <span style="color:var(--red)">free.</span></h2>
+      <p class="lead">If our tools don't make you smarter about your own SEO, you definitely shouldn't hire us. Use them. Steal the strategy. If it works, come back.</p>
+    </div>
+
+    <div class="tools-grid">
+      <a href="audit.html" class="tool-card feature">
+        <div class="tool-tag">★ FLAGSHIP TOOL · 92 USES THIS WEEK</div>
+        <h3 class="tool-h">Free Custom Ranking Strategy</h3>
+        <p class="tool-desc">Drop your URL. We pull your live data, run it through our Claude-graded brief engine, and return a complete 90-day SEO + GEO strategy — content gaps, priority keywords, technical fixes, and the exact order we'd ship them in. No call required.</p>
+
+        <div class="tool-visual">
+          <!-- Mockup of input -->
+          <div style="background:var(--ink-3);border:1px solid var(--ink-line);border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;margin-bottom:12px">
+            <span style="color:var(--muted-2);font-family:'JetBrains Mono', monospace;font-size:11px">https://</span>
+            <span style="font-family:'JetBrains Mono', monospace;font-size:13px;color:var(--paper)">yoursaas.com</span>
+            <span style="margin-left:auto;background:var(--red);color:#fff;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:600;font-family:'JetBrains Mono', monospace">ANALYZE</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag tag-red" style="background:rgba(255,59,20,.15);color:var(--red)">SEO Audit</span>
+            <span class="tag" style="background:rgba(166,176,240,.15);color:var(--periwinkle)">GEO Readiness</span>
+            <span class="tag" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.6)">Keyword Map</span>
+            <span class="tag" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.6)">90-day Plan</span>
+          </div>
+        </div>
+
+        <div class="tool-cta">
+          Get my custom strategy
+          <span class="ar">→</span>
+        </div>
+      </a>
+
+      <a href="roi-calculator.html" class="tool-card">
+        <div class="tool-tag">★ NEW</div>
+        <h3 class="tool-h">SaaS SEO ROI Calculator</h3>
+        <p class="tool-desc">Plug in your traffic, conversion, ACV, and churn. Get a 12-month forecast with break-even point, projected MRR, and the cost of doing nothing.</p>
+        <div class="tool-cta">
+          Calculate my ROI
+          <span class="ar">→</span>
+        </div>
+      </a>
+
+      <a href="technical-audit.html" class="tool-card">
+        <div class="tool-tag">★ DEVS LOVE THIS</div>
+        <h3 class="tool-h">Technical SEO + GEO Audit</h3>
+        <p class="tool-desc">Live scan: schema, llms.txt, robots, Core Web Vitals, mobile, and AI-crawler accessibility. The 47-point check your dev team forgot.</p>
+        <div class="tool-cta">
+          Run audit
+          <span class="ar">→</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DELIVERABLES (offer stack tease) ═════════════════════════════ -->
+<section class="dense">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">DELIVERABLES · the actual stuff you get</div>
+      <h2 class="h-1">A <span style="color:var(--red)">complete growth system</span>.<br>Not blog posts in a Google Drive.</h2>
+    </div>
+
+    <div class="deliv-grid">
+      <div class="deliv-cell">
+        <div class="deliv-num">01</div>
+        <div class="deliv-content">
+          <h3>Strategy Sprint (Week 1)</h3>
+          <p>Senior strategist runs ICP intake, competitive analysis, and Claude-generated keyword + GEO opportunity map. You get a 90-day roadmap.</p>
+          <span class="deliv-value">$4,500 value</span>
+        </div>
+      </div>
+      <div class="deliv-cell">
+        <div class="deliv-num">02</div>
+        <div class="deliv-content">
+          <h3>N8N Pipeline Build</h3>
+          <p>6 connected workflows deployed on your N8N instance — discovery, content engine, distribution, lead router, citation tracker, reporting.</p>
+          <span class="deliv-value">$12,000 value</span>
+        </div>
+      </div>
+      <div class="deliv-cell">
+        <div class="deliv-num">03</div>
+        <div class="deliv-content">
+          <h3>12 LLM-Optimized Articles</h3>
+          <p>Listicle + evergreen + comparison formats. Brief by Claude, polished by senior editors. Triple-stacked schema. Citation-friendly structure.</p>
+          <span class="deliv-value">$8,400 value</span>
+        </div>
+      </div>
+      <div class="deliv-cell">
+        <div class="deliv-num">04</div>
+        <div class="deliv-content">
+          <h3>Inbound Lead Router</h3>
+          <p>Form → Clearbit/Apollo enrichment → fit-score (Claude) → routed to Slack/CRM in &lt;90s. Wired to HubSpot, Attio, Pipedrive, or your stack.</p>
+          <span class="deliv-value">$3,800 value</span>
+        </div>
+      </div>
+      <div class="deliv-cell">
+        <div class="deliv-num">05</div>
+        <div class="deliv-content">
+          <h3>Live LLM Citation Tracker</h3>
+          <p>Daily probes of ChatGPT, Claude, Gemini, Perplexity for your category prompts. We see when you're cited before you do.</p>
+          <span class="deliv-value">$2,400 value</span>
+        </div>
+      </div>
+      <div class="deliv-cell">
+        <div class="deliv-num">06</div>
+        <div class="deliv-content">
+          <h3>Live Slack/Notion Dashboard</h3>
+          <p>Rankings, citations, leads, pipeline value — auto-updated every 6h. No PDF reports. No "let's hop on a call to walk you through Q3."</p>
+          <span class="deliv-value">$1,800 value</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE OFFER (Grand Slam) ═══════════════════════════════════════ -->
+<section class="offer" id="offer" data-reveal>
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow" style="color:var(--red)">THE OFFER · nothing this comprehensive exists at this price</div>
+      <h2 class="h-1" style="color:var(--paper)">A <span style="color:var(--red)">non-negotiable</span> offer.<br>Designed to feel <span class="serif" style="color:var(--periwinkle)">stupid</span> to refuse.</h2>
+      <p class="lead" style="color:rgba(244,239,231,.72)">We took everything we'd build for a $250K/year retainer client, packaged it as a 90-day flat-fee engagement, and stacked three independent guarantees on top. We can do this because we've built it 40+ times — the leverage is in our pipeline, not yours.</p>
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-tag-row">
+        <span class="tag" style="background:var(--red);color:#fff">⚡ THE INBOUND ENGINE</span>
+        <span class="tag tag-outline" style="border-color:rgba(255,255,255,.2);color:var(--periwinkle)">90-DAY ENGAGEMENT</span>
+        <span class="tag tag-live">3 SLOTS LEFT · MAY 2026</span>
+      </div>
+
+      <h2 class="offer-h">
+        Get ranked, get cited,<br>
+        and get inbound — <span class="ser">on autopilot.</span>
+      </h2>
+      <p class="offer-sub">
+        Everything we build is yours. The pipeline lives on your infrastructure. The Claude prompts ship with documentation. The N8N workflows are exportable. There's no hostage situation when our engagement ends — only compounding traffic.
+      </p>
+
+      <!-- VALUE STACK -->
+      <div class="offer-stack">
+        <div class="offer-stack-cell head"><span>What's included</span></div>
+        <div class="offer-stack-cell head"><span style="margin-left:auto">Standalone value</span></div>
+
+        <div class="offer-stack-cell"><span class="check">✓</span><span class="item"><strong>Strategy Sprint</strong> — full audit, ICP, keyword map, 90-day roadmap</span></div>
+        <div class="offer-stack-cell"><span class="val" style="margin-left:auto">$4,500</span></div>
+
+        <div class="offer-stack-cell"><span class="check">✓</span><span class="item"><strong>N8N pipeline</strong> built + deployed on your stack (6 workflows)</span></div>
+        <div class="offer-stack-cell"><span class="val" style="margin-left:auto">$12,000</span></div>
+
+        <div class="offer-stack-cell"><span class="check">✓</span><span class="item"><strong>12 LLM-optimized articles</strong> — briefs, drafts, edits, schema</span></div>
+        <div class="offer-stack-cell"><span class="val" style="margin-left:auto">$8,400</span></div>
+
+        <div class="offer-stack-cell"><span class="check">✓</span><span class="item"><strong>Inbound router</strong> — enrich, score, route to Slack/CRM in &lt;90s</span></div>
+        <div class="offer-stack-cell"><span class="val" style="margin-left:auto">$3,800</span></div>
+
+        <div class="offer-stack-cell"><span class="check">✓</span><span class="item"><strong>Daily LLM citation tracking</strong> — 4 engines, your category prompts</span></div>
+        <div class="offer-stack-cell"><span class="val" style="margin-left:auto">$2,400</span></div>
+
+        <div class="offer-stack-cell"><span class="check">✓</span><span class="item"><strong>Live Slack/Notion dashboard</strong> — no PDFs, no Friday reports</span></div>
+        <div class="offer-stack-cell"><span class="val" style="margin-left:auto">$1,800</span></div>
+
+        <div class="offer-stack-cell"><span class="check">✓</span><span class="item"><strong>Direct Slack channel</strong> with senior strategist (async, &lt;4h SLA)</span></div>
+        <div class="offer-stack-cell"><span class="val" style="margin-left:auto">$2,200</span></div>
+
+        <div class="offer-stack-cell"><span class="check">✓</span><span class="item"><strong>BONUS: Founder-led "GEO clinic"</strong> — 90-min Claude/ChatGPT visibility workshop for your team</span></div>
+        <div class="offer-stack-cell"><span class="val" style="margin-left:auto">$1,500</span></div>
+
+        <div class="offer-stack-cell"><span class="check">✓</span><span class="item"><strong>BONUS: Lifetime workflow license</strong> — keep the pipeline, prompts, and SOPs forever</span></div>
+        <div class="offer-stack-cell"><span class="val" style="margin-left:auto">priceless</span></div>
+      </div>
+
+      <!-- TOTAL -->
+      <div class="offer-total">
+        <div>
+          <div class="offer-total-line">Total standalone value</div>
+          <div class="offer-total-num struck">$36,600</div>
+        </div>
+        <div style="text-align:right">
+          <div class="offer-total-line">Your investment · flat fee · 90 days</div>
+          <div class="offer-total-num real">$14,800</div>
+        </div>
+      </div>
+
+      <!-- CTAs -->
+      <div class="offer-ctas">
+        <a href="#" class="btn btn-red btn-lg">Book my strategy call <span class="ar">↗</span></a>
+        <a href="audit.html" class="btn btn-outline btn-lg">Try the free audit first <span class="ar">↗</span></a>
+      </div>
+
+      <!-- TRIPLE STACKED GUARANTEES -->
+      <div class="guarantees">
+        <div class="guarantee">
+          <div class="guarantee-stamp">
+            <div class="stamp-icon">G1</div>
+            <h4>Outcome guarantee</h4>
+          </div>
+          <p>If you don't see <strong style="color:var(--red)">measurable lift in organic impressions AND at least one LLM citation</strong> within 90 days — full refund. You keep the pipeline.</p>
+        </div>
+        <div class="guarantee">
+          <div class="guarantee-stamp">
+            <div class="stamp-icon">G2</div>
+            <h4>Timeline guarantee</h4>
+          </div>
+          <p>If we miss a deliverable deadline by &gt;5 business days for reasons inside our control, the next month is <strong style="color:var(--red)">on us</strong> — content, prompts, support included.</p>
+        </div>
+        <div class="guarantee">
+          <div class="guarantee-stamp">
+            <div class="stamp-icon">G3</div>
+            <h4>Done-with-you</h4>
+          </div>
+          <p>Senior strategist on Slack with you, not 6 layers of account managers. <strong style="color:var(--red)">&lt;4h response SLA</strong> on weekdays. Real names, real humans.</p>
+        </div>
+      </div>
+
+      <!-- SCARCITY -->
+      <div class="scarcity">
+        <div class="scarcity-icon">⚡</div>
+        <div class="scarcity-text">
+          <strong>Why only 4 slots a month?</strong> Because we're a small team and senior strategists don't scale like ad spend. When May fills, you're waiting until July.
+        </div>
+        <div class="scarcity-counter">3 / 4 SLOTS · MAY · CLOSES MAY 31</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══════════════════════════════════════════════════════════ -->
+<section data-reveal>
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">FAQ · the questions every founder asks on the call</div>
+      <h2 class="h-1">Answers, before you ask.</h2>
+    </div>
+
+    <div class="faq-wrap">
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q">"Are we just paying for ChatGPT to write articles?"<span class="faq-ic">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">No. Claude grades briefs and helps with research at scale, but every brief is reviewed by a senior strategist, every article is edited by a human writer with category experience, and nothing ships without a real human checking positioning, voice, and accuracy. The unfair advantage is the <em>combination</em>, not any single component.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How is this different from a regular SEO agency?<span class="faq-ic">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Three things: (1) flat-fee, not retainer — we don't bill forever, (2) you keep the pipeline + workflows + prompts when we're done, (3) we optimize for ChatGPT/Claude/Perplexity/Gemini citations alongside Google, which most agencies aren't even tracking yet.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What if we don't use N8N?<span class="faq-ic">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">We deploy on your N8N instance (cloud or self-hosted), or we host it for you on ours during the engagement and migrate before handoff. The workflows are portable — Make, Zapier, Pipedream, or self-hosted are all options for ongoing operation.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">When do we see results?<span class="faq-ic">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Pipeline live by week 2. First indexed pages by week 3. First top-20 rankings around weeks 5-7. First LLM citation typically within 30-45 days. Compounding traffic curve hits in months 3-6 — that's the real prize.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Do you guarantee #1 rankings?<span class="faq-ic">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">No, and anyone who guarantees you that is lying. We guarantee a <em>measurable lift in organic impressions and at least one LLM citation within 90 days</em> — that's specific enough to be testable. If we miss it, full refund and you keep the engine.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What stage of company is this for?<span class="faq-ic">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Best fit: SaaS companies with $20K–$2M MRR, an English-speaking ICP, and at least one founder who can do 90 minutes a week of strategy work with us. Bad fit: pre-product, B2C consumer apps, or category-of-one products with no search demand yet.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can we just hire a freelancer to do this?<span class="faq-ic">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Sure. The version a freelancer ships will be: 8 articles, no schema, no GEO optimization, no inbound automation, no citation tracking, no live dashboard, no senior strategy oversight. Same hours, 1/4 the surface area. We'd pick us — we're biased.</div></div>
+        </div>
+      </div>
+
+      <div class="faq-side">
+        <h3>Still have questions?</h3>
+        <p>Book a 30-min strategy call. We'll review your URL live, run the free audit, and tell you whether you need us — even if the answer is "no."</p>
+        <a href="#offer" class="btn btn-red w-full" style="justify-content:center">Book a strategy call <span class="ar">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL CTA ═════════════════════════════════════════════════════ -->
+<section class="final-cta" data-reveal>
+  <div class="container final-cta-inner">
+    <h2 class="final-h">
+      Stop renting traffic.<br>
+      <span class="ser">Build the engine.</span>
+    </h2>
+    <p class="final-sub">
+      Every week you wait, your competitor is one more cited article ahead in ChatGPT. Compounding works for them too.
+    </p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center">
+      <a href="#offer" class="btn btn-primary btn-lg">Book strategy call <span class="ar">↗</span></a>
+      <a href="audit.html" class="btn btn-outline btn-lg">Free strategy first <span class="ar">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="nav-logo" style="color:var(--paper)">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect class="lg-r1" x="30" y="20" width="50" height="50"/>
+            <rect class="lg-r3" x="20" y="50" width="30" height="30" style="fill:var(--paper)"/>
+            <rect class="lg-r2" x="40" y="45" width="25" height="20"/>
+          </svg>
+          RankedTag
+        </a>
+        <p class="footer-blurb">The Inbound Engine for SaaS founders who'd rather build product than babysit an agency. Built with senior humans, Claude, and N8N.</p>
+      </div>
+      <div class="footer-col">
+        <h4>The product</h4>
+        <a href="#mechanism">Mechanism</a>
+        <a href="#case">Case study</a>
+        <a href="#offer">Pricing</a>
+        <a href="#">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Free tools</h4>
+        <a href="audit.html">Custom strategy</a>
+        <a href="roi-calculator.html">ROI calculator</a>
+        <a href="technical-audit.html">Technical audit</a>
+        <a href="#">GEO checklist</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="mailto:hello@rankedtag.com">hello@rankedtag.com</a>
+        <a href="#">Twitter / X</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 RANKEDTAG · BUILT FOR FOUNDERS, NOT MARKETERS</span>
+      <span>v3.0 · pipeline online · 14h since last deploy</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* — Nav scroll state — */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 8) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  }, { passive: true });
+
+  /* — Reveal on scroll — */
+  const reveals = document.querySelectorAll('[data-reveal]');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05 });
+  reveals.forEach(el => io.observe(el));
+
+  /* — FAQ accordion — */
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  /* — Pipeline tabs (visual only — keep hint of more) — */
+  document.querySelectorAll('.pipeline-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.pipeline-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
