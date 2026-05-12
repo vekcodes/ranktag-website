@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Nav from '../components/Nav.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
+import usePageMeta from '../hooks/usePageMeta.js';
 import { api } from '../lib/api.js';
 import './ToolPage.css';
 
@@ -36,6 +37,12 @@ function scoreLabel(score) {
 
 export default function PageSpeed() {
   useScrollReveal();
+  usePageMeta({
+    title: 'Free Page Speed Checker · No PSI Key · RankedTag',
+    description:
+      'Free page speed checker. We fetch your URL server-side, time the response, parse the HTML and score it on five real signals: speed, weight, render-blocking, image hygiene, transport quality. Runs in under 5 seconds. No Google PSI key required.',
+    canonical: 'https://rankedtag.com/page-speed',
+  });
   const [searchParams] = useSearchParams();
   const [url, setUrl] = useState('');
   const [strategy, setStrategy] = useState('mobile');

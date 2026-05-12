@@ -43,6 +43,12 @@ export const api = {
       body: JSON.stringify({ text, target: target || null }),
     }),
 
+  densityUrl: (url) =>
+    request('/api/density-url', {
+      method: 'POST',
+      body: JSON.stringify({ url }),
+    }),
+
   // Backward-compatible: `backlinks` and `authority` hit the same endpoint.
   authority: (domain) =>
     request(`/api/authority?domain=${encodeURIComponent(domain)}`),

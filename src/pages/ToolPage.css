@@ -1,6 +1,7 @@
 /* Shared styles for free-tool pages.
-   Reuses .tool-hero, .apply-form, .thank-* defined in Audit.css */
-@import './Audit.css';
+   Reuses .tool-hero, .apply-form, .thank-* defined in _toolShared.css.
+   (Filename kept for back-compat with prior imports.) */
+@import './_toolShared.css';
 
 /* Keyword density page specifics */
 .kwd-wrap{

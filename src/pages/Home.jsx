@@ -1,19 +1,43 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Nav from '../components/Nav.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
+import usePageMeta from '../hooks/usePageMeta.js';
 import './Home.css';
+
+function normalizeUrl(raw) {
+  const v = (raw || '').trim();
+  if (!v) return '';
+  if (/^https?:\/\//i.test(v)) return v;
+  return `https://${v}`;
+}
 
 export default function Home() {
   useScrollReveal();
+  usePageMeta({
+    title: 'RankedTag · The Inbound Engine for SaaS Founders',
+    description:
+      "0 to 1.05M organic impressions and 7.43k clicks in 6 months. Sendr.ai ranks #2 on Google's AI Overview for 'best GTM tool', six places above ZoomInfo. The same inbound engine, applied to your B2B SaaS.",
+    canonical: 'https://rankedtag.com/',
+  });
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [heroUrl, setHeroUrl] = useState('');
+  const [applyUrl, setApplyUrl] = useState('');
+
+  // If the hero (or another tool) sent us back with ?url=, pre-fill the apply form.
+  useEffect(() => {
+    const incoming = searchParams.get('url');
+    if (incoming) setApplyUrl(normalizeUrl(incoming));
+  }, [searchParams]);
 
   const onHeroSubmit = (e) => {
     e.preventDefault();
     const v = heroUrl.trim();
     const q = v ? `?url=${encodeURIComponent(v)}` : '';
-    navigate(`/audit${q}`);
+    // Founder Review IS the site audit — scroll to the apply section instead
+    // of routing to a separate page.
+    navigate(`/${q}#apply`);
   };
 
   // FAQ accordion (delegated)
@@ -268,10 +292,10 @@ export default function Home() {
           </div>
 
           <div className="tools-grid">
-            <a href="/technical-audit" className="tool-card feature">
-              <div className="tool-tag">★ FREE · TECHNICAL + NON-TECH</div>
-              <h3 className="tool-h">Site Audit (Technical + Non-technical)</h3>
-              <p className="tool-desc">52 checks across 7 categories. Crawlability, schema, Core Web Vitals, mobile, security, GEO + LLM readiness, and the non-technical layer most agencies skip: content depth, ICP clarity, conversion path, and copy quality. Built for SaaS founders who want one report, not seven.</p>
+            <a href="#apply" className="tool-card feature">
+              <div className="tool-tag">★ FREE · FOUNDER-REVIEWED · NOT AUTO-GENERATED</div>
+              <h3 className="tool-h">Site Audit · Founder Review</h3>
+              <p className="tool-desc">The Site Audit is the Founder Review. Drop your URL and the founder personally runs a 52-check audit across crawlability, schema, Core Web Vitals, mobile, security, GEO + LLM readiness, plus the non-technical layer most agencies skip: content depth, ICP clarity, conversion path, copy quality. You get a real reply on LinkedIn inside 48 hours — even if it is a no.</p>
 
               <div className="tool-visual">
                 <div style={{background: 'var(--ink-3)', border: '1px solid var(--ink-line)', borderRadius: '12px', padding: '16px', display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px'}}>
@@ -288,7 +312,7 @@ export default function Home() {
               </div>
 
               <div className="tool-cta">
-                Run my audit
+                Apply for the audit
                 <span className="ar">→</span>
               </div>
             </a>
@@ -304,9 +328,9 @@ export default function Home() {
             </a>
 
             <a href="/keyword-density" className="tool-card">
-              <div className="tool-tag">★ FREE · INSTANT · NO TRACKING</div>
+              <div className="tool-tag">★ FREE · REAL-TIME · NO TRACKING</div>
               <h3 className="tool-h">Keyword Density Checker</h3>
-              <p className="tool-desc">Paste your page copy. Real word frequency, two-word and three-word phrase density, and an honest verdict on your target keyword. Computed in your browser, your text never leaves your device. Same algorithm exposed at <code>/api/keyword-density</code>.</p>
+              <p className="tool-desc">Paste your copy or drop in a URL. Live 1-, 2- and 3-word density as you type, SEO score with readability and stuffing warnings, visual charts, and CSV export. Text analysis runs in your browser. URL fetches go through our own server-side scraper. No login, no key.</p>
               <div className="tool-cta">
                 Analyse my copy
                 <span className="ar">→</span>
@@ -356,7 +380,13 @@ export default function Home() {
               <div className="apply-row">
                 <label className="apply-field">
                   <span className="apply-label">SaaS website</span>
-                  <input type="text" required placeholder="https://yoursaas.com" />
+                  <input
+                    type="text"
+                    required
+                    placeholder="https://yoursaas.com"
+                    value={applyUrl}
+                    onChange={(e) => setApplyUrl(e.target.value)}
+                  />
                 </label>
                 <label className="apply-field">
                   <span className="apply-label">LinkedIn (so we can DM you)</span>
@@ -466,7 +496,7 @@ export default function Home() {
           </p>
           <div style={{display: 'flex', gap: '14px', flexWrap: 'wrap', justifyContent: 'center'}}>
             <a href="#apply" className="btn btn-primary btn-lg">Apply for the engine <span className="ar">↗</span></a>
-            <a href="/audit" className="btn btn-outline btn-lg">Free audit first <span className="ar">↗</span></a>
+            <a href="#apply" className="btn btn-outline btn-lg">Free audit first <span className="ar">↗</span></a>
           </div>
         </div>
       </section>
@@ -494,10 +524,10 @@ export default function Home() {
             </div>
             <div className="footer-col">
               <h4>Free tools</h4>
-              <a href="/technical-audit">Technical + Non-tech Audit</a>
-              <a href="/backlink-checker">Backlink Checker</a>
-              <a href="/keyword-density">Keyword Density</a>
-              <a href="/page-speed">Page Speed</a>
+              <a href="/keyword-density">Keyword Density Checker</a>
+              <a href="/backlink-checker">Domain Authority Checker</a>
+              <a href="/page-speed">Page Speed Checker</a>
+              <a href="#apply">Site Audit (Founder Review)</a>
             </div>
             <div className="footer-col">
               <h4>Company</h4>

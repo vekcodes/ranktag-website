@@ -1,12 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const ACTIVE_STYLE = { background: 'var(--paper-2)', color: 'var(--ink)' };
 
+const FREE_TOOLS = [
+  {
+    to: '/keyword-density',
+    label: 'Keyword Density Checker',
+    desc: 'Live 1-, 2-, 3-word density · CSV export',
+  },
+  {
+    to: '/backlink-checker',
+    label: 'Domain Authority Checker',
+    desc: 'Tranco rank · Wayback age · on-page signals',
+  },
+  {
+    to: '/page-speed',
+    label: 'Page Speed Checker',
+    desc: 'TTFB, transport, render-blocking · no PSI key',
+  },
+];
+
 export default function Nav({ variant = 'home' }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [toolsOpen, setToolsOpen] = useState(false);
   const location = useLocation();
+  const toolsRef = useRef(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -15,20 +35,27 @@ export default function Nav({ variant = 'home' }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close menu on route or hash change
-  useEffect(() => { setOpen(false); }, [location.pathname, location.hash]);
+  useEffect(() => { setOpen(false); setToolsOpen(false); }, [location.pathname, location.hash]);
 
-  // Lock body scroll when menu open
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
+  useEffect(() => {
+    if (!toolsOpen) return;
+    const handler = (e) => {
+      if (toolsRef.current && !toolsRef.current.contains(e.target)) setToolsOpen(false);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [toolsOpen]);
+
   const isAudit = variant === 'audit';
   const isTech = variant === 'tech';
   const isHome = variant === 'home';
 
-  const close = () => setOpen(false);
+  const close = () => { setOpen(false); setToolsOpen(false); };
 
   return (
     <nav
@@ -47,7 +74,7 @@ export default function Nav({ variant = 'home' }) {
         <Link to="/#mechanism" className="nav-link" onClick={close}>How it works</Link>
         <Link to="/#proof" className="nav-link" onClick={close}>Sendr.ai story</Link>
         <Link
-          to="/audit"
+          to="/#apply"
           className={`nav-link${isHome ? ' has-badge' : ''}`}
           style={isAudit ? ACTIVE_STYLE : undefined}
           onClick={close}
@@ -55,14 +82,47 @@ export default function Nav({ variant = 'home' }) {
           Founder Review
           {isHome && <span className="badge">FREE</span>}
         </Link>
-        <Link
-          to="/#tools"
-          className="nav-link"
-          style={isTech ? ACTIVE_STYLE : undefined}
-          onClick={close}
+
+        <div
+          className={`nav-dropdown${toolsOpen ? ' open' : ''}`}
+          ref={toolsRef}
         >
-          Free Tools
-        </Link>
+          <button
+            type="button"
+            className="nav-link nav-dropdown-toggle"
+            style={isTech ? ACTIVE_STYLE : undefined}
+            aria-expanded={toolsOpen}
+            aria-haspopup="menu"
+            onClick={() => setToolsOpen((v) => !v)}
+          >
+            Free Tools
+            <span className="nav-dropdown-caret" aria-hidden="true">▾</span>
+          </button>
+          <div className="nav-dropdown-menu" role="menu">
+            {FREE_TOOLS.map((t) => (
+              <Link
+                key={t.to}
+                to={t.to}
+                role="menuitem"
+                className="nav-dropdown-item"
+                onClick={close}
+              >
+                <span className="nav-dropdown-item-label">{t.label}</span>
+                <span className="nav-dropdown-item-desc">{t.desc}</span>
+              </Link>
+            ))}
+            <div className="nav-dropdown-divider" />
+            <Link
+              to="/#tools"
+              role="menuitem"
+              className="nav-dropdown-item nav-dropdown-item-meta"
+              onClick={close}
+            >
+              See all free tools →
+            </Link>
+          </div>
+        </div>
+
         <Link to="/#apply" className="nav-link nav-link-cta-mobile" onClick={close}>
           Apply for the engine →
         </Link>

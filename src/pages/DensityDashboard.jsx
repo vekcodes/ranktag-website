@@ -1,18 +1,16 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import Nav from '../components/Nav';
 import ProcessingBar from '../components/density/ProcessingBar';
 import StatsCards from '../components/density/StatsCards';
 import KeywordTable from '../components/density/KeywordTable';
 import SettingsPanel from '../components/density/SettingsPanel';
 import UrlAnalyzer from '../components/density/UrlAnalyzer';
-import InsightsPanel from '../components/density/InsightsPanel';
 import VisualizationPanel from '../components/charts/VisualizationPanel';
-import SeoScorePanel from '../components/scoring/SeoScorePanel';
 import ExportPanel from '../components/export/ExportPanel';
-import { useSession } from '../hooks/useSession';
 import { useDebounce } from '../hooks/useDebounce';
+import { analyzeDensity } from '../utils/densityAnalyzer';
+import usePageMeta from '../hooks/usePageMeta';
 import '../components/charts/charts.css';
-import '../components/scoring/scoring.css';
 import '../components/export/export.css';
 import './DensityDashboard.css';
 
@@ -24,19 +22,42 @@ const DEFAULT_OPTIONS = {
 };
 
 export default function DensityDashboard() {
+  usePageMeta({
+    title: 'Free Keyword Density Checker · 1-, 2- and 3-Word Analysis · RankedTag',
+    description:
+      'Free keyword density checker for SEO. Paste content or a URL and get live 1-, 2- and 3-word density with frequency tables, visual charts, and CSV export. Runs in your browser — your text never leaves your device.',
+    canonical: 'https://rankedtag.com/keyword-density',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'WebApplication',
+      name: 'RankedTag Keyword Density Checker',
+      url: 'https://rankedtag.com/keyword-density',
+      applicationCategory: 'SEOApplication',
+      operatingSystem: 'Any (browser-based)',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      description:
+        'Free, browser-based keyword density checker. Live 1-, 2- and 3-word density, frequency tables, visual charts and CSV export. Text analysis runs locally; URL fetches go through our own server-side scraper.',
+      featureList: [
+        '1-word, 2-word and 3-word density',
+        'Real-time analysis as you type',
+        'URL scraping with server-side fetch',
+        'Visual charts (bar, donut, stuffing meter, heatmap, cloud)',
+        'CSV export',
+        'No login, no API key, no tracking',
+      ],
+    },
+  });
+
   const [content, setContent] = useState('');
   const [options, setOptions] = useState(DEFAULT_OPTIONS);
   const [mode, setMode] = useState('text'); // 'text' | 'url'
 
-  const { sessionId, result, error, loading, analyze, reset } = useSession();
-  const debouncedContent = useDebounce(content, 500);
+  const debouncedContent = useDebounce(content, 250);
 
-  // Fire analysis when debounced content or options change
-  useEffect(() => {
-    if (debouncedContent.trim().length > 2) {
-      analyze(debouncedContent, options);
-    }
-  }, [debouncedContent, options, analyze]);
+  const result = useMemo(() => {
+    if (!debouncedContent.trim() || debouncedContent.trim().length < 3) return null;
+    return analyzeDensity(debouncedContent, options);
+  }, [debouncedContent, options]);
 
   const handleContentExtracted = useCallback((extractedText) => {
     setContent(extractedText);
@@ -45,8 +66,7 @@ export default function DensityDashboard() {
 
   const handleClear = useCallback(() => {
     setContent('');
-    reset();
-  }, [reset]);
+  }, []);
 
   const wordCount = content.trim() ? content.trim().split(/\s+/).length : 0;
 
@@ -56,33 +76,30 @@ export default function DensityDashboard() {
 
       <main className="ds-main">
         <ProcessingBar
-          sessionId={sessionId}
-          loading={loading}
+          sessionId="local"
+          loading={false}
           result={result}
-          error={error}
+          error={null}
         />
 
-        {/* ── Hero header ── */}
         <section className="ds-hero">
           <div className="container">
             <span className="eyebrow">Keyword Density Checker</span>
-            <h1 className="h-2" style={{ marginTop: 16, maxWidth: 700 }}>
-              Analyze keyword density like the pros
+            <h1 className="h-2" style={{ marginTop: 16, maxWidth: 760 }}>
+              Free keyword density checker. Live 1-, 2- and 3-word analysis.
             </h1>
             <p className="lead" style={{ marginTop: 12 }}>
-              Paste your content or enter a URL. Get real-time keyword density analysis with
-              professional-grade NLP processing.
+              Paste your content or drop in a URL. Get word frequency, two- and three-word
+              phrase density, and a clean breakdown table. Text analysis runs in your browser.
+              URL fetches go through our own server-side scraper — no key, no login.
             </p>
           </div>
         </section>
 
-        {/* ── Dashboard body ── */}
         <section className="ds-body">
           <div className="container-wide">
             <div className="ds-grid">
-              {/* ── Left column: Editor + URL ── */}
               <div className="ds-left">
-                {/* Mode tabs */}
                 <div className="ds-mode-tabs">
                   <button
                     className={`ds-mode-tab ${mode === 'text' ? 'active' : ''}`}
@@ -118,42 +135,32 @@ export default function DensityDashboard() {
                     </div>
                   </div>
                 ) : (
-                  <UrlAnalyzer
-                    onContentExtracted={handleContentExtracted}
-                    options={options}
-                  />
+                  <UrlAnalyzer onContentExtracted={handleContentExtracted} />
                 )}
 
                 <SettingsPanel options={options} onChange={setOptions} />
               </div>
 
-              {/* ── Right column: Results ── */}
               <div className="ds-right">
                 {result && (
                   <div className="ds-right-toolbar">
                     <ExportPanel
                       keywords={result?.keywords}
-                      content={content}
                       totalWords={result?.statistics?.total_words || 0}
                     />
                   </div>
                 )}
-                {!result && !loading && content.trim().length < 3 ? (
+                {!result && content.trim().length < 3 ? (
                   <div className="ds-empty-state">
                     <div className="ds-empty-icon">K</div>
                     <div className="ds-empty-title">Ready to Analyze</div>
                     <p className="ds-empty-text">
-                      Start typing or paste content on the left. Keywords will appear here
-                      instantly as you type.
+                      Start typing or paste content on the left. Keyword density tables and
+                      charts will appear here instantly as you type.
                     </p>
                   </div>
                 ) : (
                   <>
-                    <SeoScorePanel
-                      keywords={result?.keywords}
-                      content={content}
-                      totalWords={result?.statistics?.total_words || 0}
-                    />
                     <StatsCards
                       stats={result?.statistics}
                       processing={result?.processing}
@@ -165,10 +172,6 @@ export default function DensityDashboard() {
                     <VisualizationPanel
                       keywords={result?.keywords}
                       content={content}
-                      totalWords={result?.statistics?.total_words || 0}
-                    />
-                    <InsightsPanel
-                      keywords={result?.keywords}
                       totalWords={result?.statistics?.total_words || 0}
                     />
                   </>

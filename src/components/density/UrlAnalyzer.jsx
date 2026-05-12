@@ -1,17 +1,20 @@
 import { useState } from 'react';
-import { analyzeUrl } from '../../lib/densityApi';
+import { api } from '../../lib/api';
 
 /**
- * URL analysis panel — fetches a webpage and displays metadata + content.
+ * URL analysis panel — fetches a webpage server-side and hands the extracted
+ * text up to the dashboard. Uses the Vercel /api/density-url endpoint
+ * (browsers cannot scrape cross-origin pages, so the fetch has to happen
+ * on the server).
  */
-export default function UrlAnalyzer({ onContentExtracted, options }) {
+export default function UrlAnalyzer({ onContentExtracted }) {
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [meta, setMeta] = useState(null);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     if (!url.trim()) return;
 
     setLoading(true);
@@ -19,7 +22,7 @@ export default function UrlAnalyzer({ onContentExtracted, options }) {
     setMeta(null);
 
     try {
-      const res = await analyzeUrl(url.trim(), options);
+      const res = await api.densityUrl(url.trim());
       setMeta({
         title: res.title,
         metaDescription: res.meta_description,
@@ -31,7 +34,6 @@ export default function UrlAnalyzer({ onContentExtracted, options }) {
         statusCode: res.status_code,
         finalUrl: res.final_url,
       });
-      // Pass extracted content to parent so it appears in the editor
       if (res.content && onContentExtracted) {
         onContentExtracted(res.content);
       }
@@ -65,7 +67,7 @@ export default function UrlAnalyzer({ onContentExtracted, options }) {
       {error && (
         <div className="ds-url-error">
           <strong>Error:</strong> {error}
-          <button className="ds-url-retry" onClick={handleSubmit}>Retry</button>
+          <button className="ds-url-retry" onClick={() => handleSubmit()}>Retry</button>
         </div>
       )}
 

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Tools are intentionally indexable — they are the inbound surface.
+Disallow: /api/
+
+Sitemap: https://rankedtag.com/sitemap.xml

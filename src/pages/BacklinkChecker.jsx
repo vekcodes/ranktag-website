@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Nav from '../components/Nav.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
+import usePageMeta from '../hooks/usePageMeta.js';
 import { api } from '../lib/api.js';
 import './ToolPage.css';
 
@@ -39,6 +40,12 @@ const COMPONENT_DESCRIPTIONS = {
 
 export default function BacklinkChecker() {
   useScrollReveal();
+  usePageMeta({
+    title: 'Free Domain Authority Checker · No Ahrefs Key · RankedTag',
+    description:
+      'Free domain authority checker that does not need an Ahrefs or Moz key. Composite score from Tranco traffic rank, Wayback domain age, on-page schema, and HTTP transport quality. Cross-checkable against the public sources we hit.',
+    canonical: 'https://rankedtag.com/backlink-checker',
+  });
   const [searchParams] = useSearchParams();
   const [domain, setDomain] = useState('');
   const [loading, setLoading] = useState(false);

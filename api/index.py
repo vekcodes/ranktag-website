@@ -138,9 +138,20 @@ class _Collector(HTMLParser):
         self.h2_count = 0
         self.h3_count = 0
 
+        # Heading text + html lang (used by density-url endpoint)
+        self.language: Optional[str] = None
+        self.h1_tags: list[str] = []
+        self.h2_tags: list[str] = []
+        self._heading_tag: Optional[str] = None
+        self._heading_buf: list[str] = []
+
     # --- handle_starttag ----------------------------------------------------
     def handle_starttag(self, tag: str, attrs):  # type: ignore[override]
         a = dict(attrs)
+        if tag == "html":
+            lang = a.get("lang") or a.get("xml:lang")
+            if lang:
+                self.language = lang.strip()
         if tag == "head":
             self._in_head = True
         elif tag == "title":
@@ -227,8 +238,12 @@ class _Collector(HTMLParser):
                     pass
         elif tag == "h1":
             self.h1_count += 1
+            self._heading_tag = "h1"
+            self._heading_buf = []
         elif tag == "h2":
             self.h2_count += 1
+            self._heading_tag = "h2"
+            self._heading_buf = []
         elif tag == "h3":
             self.h3_count += 1
 
@@ -248,6 +263,15 @@ class _Collector(HTMLParser):
                     self.json_ld_types.append(m.group(1))
                 self._in_json_ld = False
                 self._json_ld_buf = []
+        elif tag in ("h1", "h2") and self._heading_tag == tag:
+            text = " ".join("".join(self._heading_buf).split()).strip()
+            if text:
+                if tag == "h1" and len(self.h1_tags) < 10:
+                    self.h1_tags.append(text)
+                elif tag == "h2" and len(self.h2_tags) < 20:
+                    self.h2_tags.append(text)
+            self._heading_tag = None
+            self._heading_buf = []
 
     # --- handle_data --------------------------------------------------------
     def handle_data(self, data: str):  # type: ignore[override]
@@ -255,10 +279,13 @@ class _Collector(HTMLParser):
             self._title_buf.append(data)
         elif self._in_json_ld:
             self._json_ld_buf.append(data)
-        elif self._capture_text:
-            stripped = data.strip()
-            if stripped:
-                self._text_buf.append(stripped)
+        else:
+            if self._heading_tag is not None:
+                self._heading_buf.append(data)
+            if self._capture_text:
+                stripped = data.strip()
+                if stripped:
+                    self._text_buf.append(stripped)
 
     # --- derived ------------------------------------------------------------
     def text_content(self) -> str:
@@ -622,6 +649,77 @@ def keyword_density(payload: KeywordDensityRequest):
 
 
 # ──────────────────────────────────────────────────────────────────────────
+# /api/density-url  (server-side URL scraper for the keyword density tool)
+# ──────────────────────────────────────────────────────────────────────────
+class DensityUrlRequest(BaseModel):
+    url: str = Field(..., min_length=3)
+
+
+_BLOCKED_HOSTS = {"localhost", "127.0.0.1", "0.0.0.0", "::1"}
+
+
+def _guard_url(raw: str) -> str:
+    target = _normalize_url(raw)
+    parsed = urlparse(target)
+    host = (parsed.hostname or "").lower()
+    if host in _BLOCKED_HOSTS or host.startswith("169.254.") or host.startswith("10.") or host.endswith(".local"):
+        raise HTTPException(status_code=400, detail="URL not allowed")
+    return target
+
+
+@app.post("/api/density-url")
+async def density_url(payload: DensityUrlRequest):
+    """
+    Fetch a URL server-side and return clean text + page metadata for the
+    keyword density tool. Browsers cannot scrape cross-origin pages because
+    of CORS, so this endpoint exists to do the fetch on the server.
+
+    Returns: { content, word_count, title, meta_description, canonical,
+               language, h1_tags, h2_tags, status_code, final_url }
+    """
+    target = _guard_url(payload.url)
+    headers = {
+        "User-Agent": USER_AGENT,
+        "Accept": "text/html,application/xhtml+xml",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
+
+    async with httpx.AsyncClient(headers=headers, http2=True, follow_redirects=True) as client:
+        try:
+            resp = await client.get(target, timeout=15.0)
+        except httpx.HTTPError as e:
+            raise HTTPException(status_code=502, detail=f"Could not fetch {target}: {e}")
+
+    body = resp.content
+    parser = _Collector(str(resp.url))
+    try:
+        parser.feed(body.decode(errors="replace"))
+    except Exception:
+        pass
+
+    text = parser.text_content()
+    if not text or len(text.split()) < 5:
+        raise HTTPException(
+            status_code=422,
+            detail="Could not extract meaningful content from the page.",
+        )
+
+    return {
+        "url": payload.url,
+        "final_url": str(resp.url),
+        "status_code": resp.status_code,
+        "title": parser.title,
+        "meta_description": parser.meta_description,
+        "canonical": parser.canonical,
+        "language": parser.language,
+        "h1_tags": parser.h1_tags,
+        "h2_tags": parser.h2_tags,
+        "content": text,
+        "content_word_count": len(text.split()),
+    }
+
+
+# ──────────────────────────────────────────────────────────────────────────
 # /api/authority + /api/backlinks (alias)
 # ──────────────────────────────────────────────────────────────────────────
 async def _tranco_rank(client: httpx.AsyncClient, domain: str) -> Optional[dict]:
@@ -924,6 +1022,7 @@ def health():
             "pageSpeed": "rankedtag-self-hosted",
             "authority": "rankedtag-authority-v1",
             "keywordDensity": "client + server parity",
+            "densityUrl": "server-side fetch + html extract",
         },
     }
 
