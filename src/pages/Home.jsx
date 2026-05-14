@@ -369,6 +369,16 @@ export default function Home() {
                 <span className="ar">→</span>
               </div>
             </a>
+
+            <a href="/competitor" className="tool-card">
+              <div className="tool-tag">★ FREE · OUR OWN ENGINE · UP TO 5 COMPETITORS</div>
+              <h3 className="tool-h">Competitor Analysis</h3>
+              <p className="tool-desc">Drop your page plus up to 5 competitor URLs. We score every page on keyword optimisation, structure, readability, prominence, semantic coverage and distribution — then surface the keywords competitors rank for that you do not. Side-by-side comparison, radar chart, gap table and ranked recommendations.</p>
+              <div className="tool-cta">
+                Compare against competitors
+                <span className="ar">→</span>
+              </div>
+            </a>
           </div>
         </div>
       </section>
@@ -558,6 +568,7 @@ export default function Home() {
               <a href="/keyword-density">Keyword Density Checker</a>
               <a href="/backlink-checker">Domain Authority Checker</a>
               <a href="/page-speed">Page Speed Checker</a>
+              <a href="/competitor">Competitor Analysis</a>
               <a href="#apply">Site Audit (Founder Review)</a>
             </div>
             <div className="footer-col">

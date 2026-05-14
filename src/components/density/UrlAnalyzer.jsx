@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { api } from '../../lib/api';
 import { trackToolUse } from '../../lib/track';
+import { submitToolUsage } from '../../lib/hubspot';
 
 /**
  * URL analysis panel — fetches a webpage server-side and hands the extracted
@@ -10,6 +11,7 @@ import { trackToolUse } from '../../lib/track';
  */
 export default function UrlAnalyzer({ onContentExtracted }) {
   const [url, setUrl] = useState('');
+  const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [meta, setMeta] = useState(null);
@@ -24,6 +26,14 @@ export default function UrlAnalyzer({ onContentExtracted }) {
 
     try {
       const target = url.trim();
+      const optedInEmail = email.trim();
+      if (optedInEmail) {
+        submitToolUsage(import.meta.env.VITE_HUBSPOT_DENSITY_FORM_ID, {
+          email: optedInEmail,
+          website: target,
+          message: 'Source: Keyword Density Checker (URL mode)',
+        }).catch(() => {});
+      }
       const res = await api.densityUrl(target);
       trackToolUse('keyword-density-url', { url: target });
       setMeta({
@@ -66,6 +76,18 @@ export default function UrlAnalyzer({ onContentExtracted }) {
           )}
         </button>
       </form>
+
+      <div className="tool-email-row" style={{ marginTop: 10 }}>
+        <input
+          type="email"
+          className="tool-email-input"
+          placeholder="your@email.com — optional, get the full report DM'd to you"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
+          disabled={loading}
+        />
+      </div>
 
       {error && (
         <div className="ds-url-error">

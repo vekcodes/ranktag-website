@@ -19,6 +19,11 @@ const FREE_TOOLS = [
     label: 'Page Speed Checker',
     desc: 'TTFB, transport, render-blocking · no PSI key',
   },
+  {
+    to: '/competitor',
+    label: 'Competitor Analysis',
+    desc: 'Side-by-side scoring · keyword gaps · insights',
+  },
 ];
 
 export default function Nav({ variant = 'home' }) {

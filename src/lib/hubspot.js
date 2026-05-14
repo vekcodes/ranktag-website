@@ -75,3 +75,23 @@ export async function submitApplyForm({ name, email, website, linkedin, message 
     message,
   });
 }
+
+/**
+ * Submit a per-tool HubSpot form when the user opted in via the optional
+ * email field on a tool page. `formId` comes from the caller so each tool
+ * routes to its own form. No-op when formId is empty (env var unset).
+ *
+ * @param {string} formId  The HubSpot form GUID for this specific tool.
+ * @param {object} payload
+ * @param {string} payload.email    Required — HubSpot rejects without it.
+ * @param {string} [payload.website]  URL the user tested.
+ * @param {string} [payload.message]  Free-text context (strategy, competitor count, etc).
+ */
+export async function submitToolUsage(formId, { email, website, message } = {}) {
+  if (!formId) {
+    console.warn('[hubspot] tool form ID missing — skipping submission');
+    return { ok: false, mock: true };
+  }
+  if (!email) return { ok: false, skipped: 'no email' };
+  return postForm(formId, { email, website, message });
+}
