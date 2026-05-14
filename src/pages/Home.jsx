@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import Nav from '../components/Nav.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
+import { submitApplyForm } from '../lib/hubspot.js';
 import './Home.css';
 
 function normalizeUrl(raw) {
@@ -24,6 +25,7 @@ export default function Home() {
   const [searchParams] = useSearchParams();
   const [heroUrl, setHeroUrl] = useState('');
   const [applyUrl, setApplyUrl] = useState('');
+  const [applyState, setApplyState] = useState({ status: 'idle', error: '' });
 
   // If the hero (or another tool) sent us back with ?url=, pre-fill the apply form.
   useEffect(() => {
@@ -38,6 +40,27 @@ export default function Home() {
     // Founder Review IS the site audit — scroll to the apply section instead
     // of routing to a separate page.
     navigate(`/${q}#apply`);
+  };
+
+  const onApplySubmit = async (e) => {
+    e.preventDefault();
+    if (applyState.status === 'submitting') return;
+    const fd = new FormData(e.currentTarget);
+    setApplyState({ status: 'submitting', error: '' });
+    try {
+      await submitApplyForm({
+        name: fd.get('name'),
+        email: fd.get('email'),
+        website: fd.get('website'),
+        linkedin: fd.get('linkedin'),
+        message: fd.get('message'),
+      });
+      setApplyState({ status: 'success', error: '' });
+      const card = document.querySelector('.apply-card');
+      if (card) card.classList.add('submitted');
+    } catch (err) {
+      setApplyState({ status: 'error', error: err.message || 'Submission failed' });
+    }
   };
 
   // FAQ accordion (delegated)
@@ -362,19 +385,15 @@ export default function Home() {
           </div>
 
           <div className="apply-card">
-            <form className="apply-form" onSubmit={(e) => {
-              e.preventDefault();
-              const card = document.querySelector('.apply-card');
-              if (card) card.classList.add('submitted');
-            }}>
+            <form className="apply-form" onSubmit={onApplySubmit} noValidate>
               <div className="apply-row">
                 <label className="apply-field">
                   <span className="apply-label">Your name</span>
-                  <input type="text" required placeholder="Alex Singh" />
+                  <input type="text" name="name" required placeholder="Alex Singh" />
                 </label>
                 <label className="apply-field">
                   <span className="apply-label">Work email</span>
-                  <input type="email" required placeholder="alex@yoursaas.com" />
+                  <input type="email" name="email" required placeholder="alex@yoursaas.com" />
                 </label>
               </div>
               <div className="apply-row">
@@ -382,6 +401,7 @@ export default function Home() {
                   <span className="apply-label">SaaS website</span>
                   <input
                     type="text"
+                    name="website"
                     required
                     placeholder="https://yoursaas.com"
                     value={applyUrl}
@@ -390,15 +410,26 @@ export default function Home() {
                 </label>
                 <label className="apply-field">
                   <span className="apply-label">LinkedIn (so we can DM you)</span>
-                  <input type="text" required placeholder="linkedin.com/in/yourname" />
+                  <input type="text" name="linkedin" required placeholder="linkedin.com/in/yourname" />
                 </label>
               </div>
               <label className="apply-field">
                 <span className="apply-label">What stage is your SaaS at? Who is it for?</span>
-                <textarea rows={3} placeholder="e.g. Seed-stage. We sell cold-outreach software to RevOps leaders at 50-200 person SaaS companies."></textarea>
+                <textarea name="message" rows={3} placeholder="e.g. Seed-stage. We sell cold-outreach software to RevOps leaders at 50-200 person SaaS companies."></textarea>
               </label>
+              {applyState.status === 'error' && (
+                <div className="apply-error" role="alert">
+                  {applyState.error}
+                </div>
+              )}
               <div className="apply-foot">
-                <button type="submit" className="btn btn-red btn-lg">Send application <span className="ar">↗</span></button>
+                <button
+                  type="submit"
+                  className="btn btn-red btn-lg"
+                  disabled={applyState.status === 'submitting'}
+                >
+                  {applyState.status === 'submitting' ? 'Sending…' : <>Send application <span className="ar">↗</span></>}
+                </button>
                 <p className="fineprint" style={{color:'rgba(244,239,231,.55)'}}>
                   Reviewed by the founder. Reply on LinkedIn within 48 hours. We never sell, share, or spam your info.
                 </p>

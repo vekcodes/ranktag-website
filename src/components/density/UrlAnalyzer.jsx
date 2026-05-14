@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { api } from '../../lib/api';
+import { trackToolUse } from '../../lib/track';
 
 /**
  * URL analysis panel — fetches a webpage server-side and hands the extracted
@@ -22,7 +23,9 @@ export default function UrlAnalyzer({ onContentExtracted }) {
     setMeta(null);
 
     try {
-      const res = await api.densityUrl(url.trim());
+      const target = url.trim();
+      const res = await api.densityUrl(target);
+      trackToolUse('keyword-density-url', { url: target });
       setMeta({
         title: res.title,
         metaDescription: res.meta_description,

@@ -4,6 +4,7 @@ import Nav from '../components/Nav.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
 import { api } from '../lib/api.js';
+import { trackToolUse } from '../lib/track.js';
 import './ToolPage.css';
 
 const COMPONENT_LABELS = {
@@ -62,8 +63,10 @@ export default function PageSpeed() {
     setError(null);
     setData(null);
     try {
-      const res = await api.pageSpeed(url.trim(), strategy);
+      const target = url.trim();
+      const res = await api.pageSpeed(target, strategy);
       setData(res);
+      trackToolUse('page-speed', { url: target, strategy });
     } catch (err) {
       setError(err.message || 'Something broke. Try again in a moment.');
     } finally {

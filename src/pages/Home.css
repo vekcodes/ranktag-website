@@ -1809,3 +1809,21 @@ h1.hero-title .line{display:block}
   .case-rank{ margin-top:56px; padding-top:48px; }
   .case-proof-cap{ font-size:10px; padding:10px 14px; }
 }
+
+/* ── Apply form error state ─────────────────────────────────────────── */
+.apply-error{
+  background:rgba(255,59,20,.12);
+  border:1px solid rgba(255,59,20,.35);
+  color:#ffb5a0;
+  padding:12px 16px;
+  border-radius:10px;
+  font-size:13.5px;
+  line-height:1.4;
+  margin:8px 0 -4px;
+}
+.apply-form button[type=submit]:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+  transform:none !important;
+  box-shadow:none !important;
+}

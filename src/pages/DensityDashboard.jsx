@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Nav from '../components/Nav';
 import ProcessingBar from '../components/density/ProcessingBar';
 import StatsCards from '../components/density/StatsCards';
@@ -9,6 +9,7 @@ import VisualizationPanel from '../components/charts/VisualizationPanel';
 import ExportPanel from '../components/export/ExportPanel';
 import { useDebounce } from '../hooks/useDebounce';
 import { analyzeDensity } from '../utils/densityAnalyzer';
+import { trackToolUse } from '../lib/track';
 import usePageMeta from '../hooks/usePageMeta';
 import '../components/charts/charts.css';
 import '../components/export/export.css';
@@ -58,6 +59,18 @@ export default function DensityDashboard() {
     if (!debouncedContent.trim() || debouncedContent.trim().length < 3) return null;
     return analyzeDensity(debouncedContent, options);
   }, [debouncedContent, options]);
+
+  // Fire one synthetic pageview the first time a paste-mode analysis renders
+  // for this session. Skip URL mode — UrlAnalyzer tracks itself on submit.
+  const trackedPaste = useRef(false);
+  useEffect(() => {
+    if (mode === 'text' && result && !trackedPaste.current) {
+      trackedPaste.current = true;
+      trackToolUse('keyword-density-paste', {
+        words: result?.statistics?.total_words || 0,
+      });
+    }
+  }, [mode, result]);
 
   const handleContentExtracted = useCallback((extractedText) => {
     setContent(extractedText);

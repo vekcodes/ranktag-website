@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import ScrollToHash from './components/ScrollToHash.jsx';
+import useHubSpotTracking from './hooks/useHubSpotTracking.js';
 import Home from './pages/Home.jsx';
 
 const BacklinkChecker = lazy(() => import('./pages/BacklinkChecker.jsx'));
@@ -14,6 +15,7 @@ function ApplyRedirect() {
 }
 
 export default function App() {
+  useHubSpotTracking();
   return (
     <>
       <ScrollToHash />

@@ -4,6 +4,7 @@ import Nav from '../components/Nav.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
 import { api } from '../lib/api.js';
+import { trackToolUse } from '../lib/track.js';
 import './ToolPage.css';
 
 function scoreColor(score) {
@@ -64,8 +65,10 @@ export default function BacklinkChecker() {
     setError(null);
     setData(null);
     try {
-      const res = await api.authority(domain.trim());
+      const target = domain.trim();
+      const res = await api.authority(target);
       setData(res);
+      trackToolUse('authority-check', { domain: target });
     } catch (err) {
       setError(err.message || 'Something broke. Try again in a moment.');
     } finally {

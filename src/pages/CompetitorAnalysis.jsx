@@ -6,6 +6,7 @@ import KeywordGapTable from '../components/competitor/KeywordGapTable';
 import CompetitorRadar from '../components/competitor/CompetitorRadar';
 import CompetitorInsights from '../components/competitor/CompetitorInsights';
 import { competitorAnalyze } from '../lib/densityApi';
+import { trackToolUse } from '../lib/track';
 import './CompetitorAnalysis.css';
 
 export default function CompetitorAnalysis() {
@@ -20,6 +21,10 @@ export default function CompetitorAnalysis() {
     try {
       const res = await competitorAnalyze(primaryUrl, competitorUrls);
       setResult(res);
+      trackToolUse('competitor-analyze', {
+        url: primaryUrl,
+        competitors: competitorUrls.length,
+      });
     } catch (e) {
       setError(e.message || 'Analysis failed');
     } finally {
