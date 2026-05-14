@@ -7,7 +7,8 @@
   "trailingSlash": false,
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/index.py" },
-    { "source": "/api", "destination": "/api/index.py" }
+    { "source": "/api", "destination": "/api/index.py" },
+    { "source": "/((?!assets/|.*\\.(?:js|css|png|jpe?g|gif|webp|svg|ico|woff2?|ttf|otf|eot|map|txt|xml|json)).*)", "destination": "/index.html" }
   ],
   "functions": {
     "api/index.py": {
