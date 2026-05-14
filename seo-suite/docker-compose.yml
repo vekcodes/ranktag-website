@@ -1,0 +1,197 @@
+# ─────────────────────────────────────────────────────────────
+#  SEO Suite — Local development stack
+#
+#  Services:
+#    api          FastAPI (uvicorn, reload)
+#    worker       Celery workers (all queues)
+#    beat         Celery Beat (periodic tasks)
+#    postgres     Primary OLTP + aggregates
+#    redis        Cache + queue broker + rate limit
+#    clickhouse   Link facts / time series (optional in dev)
+#    frontend     Next.js dev server
+#    nginx        Reverse proxy (dev profile mirrors prod routing)
+# ─────────────────────────────────────────────────────────────
+name: seo-suite
+
+x-backend-env: &backend-env
+  env_file:
+    - ./backend/.env
+
+networks:
+  internal:
+    driver: bridge
+  public:
+    driver: bridge
+
+volumes:
+  pg_data:
+  redis_data:
+  ch_data:
+  ch_logs:
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-seosuite}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-seosuite_dev_pw}
+      POSTGRES_DB: ${POSTGRES_DB:-seosuite}
+    command:
+      - "postgres"
+      - "-c"
+      - "config_file=/etc/postgresql/postgresql.conf"
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ./docker/postgres/postgresql.conf:/etc/postgresql/postgresql.conf:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-seosuite}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    shm_size: 256mb
+    networks: [internal]
+
+  pgbouncer:
+    image: edoburu/pgbouncer:1.23
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      LISTEN_PORT: "6432"
+      AUTH_TYPE: scram-sha-256
+    ports:
+      - "6432:6432"
+    volumes:
+      - ./docker/pgbouncer/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini:ro
+      - ./docker/pgbouncer/userlist.txt:/etc/pgbouncer/userlist.txt:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -p 6432 -U seosuite_app -d seosuite || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    networks: [internal]
+
+  pg-backup:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PGHOST: postgres
+      PGPORT: "5432"
+      PGUSER: ${POSTGRES_USER:-seosuite}
+      PGPASSWORD: ${POSTGRES_PASSWORD:-seosuite_dev_pw}
+      PGDATABASE: ${POSTGRES_DB:-seosuite}
+      BACKUP_RETENTION_DAYS: "14"
+      BACKUP_CRON: "0 3 * * *"
+    volumes:
+      - ./backups/postgres:/backups
+      - ./docker/postgres/backup.sh:/usr/local/bin/backup.sh:ro
+    entrypoint: ["/bin/sh", "-c"]
+    command: ["echo \"$$BACKUP_CRON /usr/local/bin/backup.sh\" | crontab - && crond -f -L /dev/stdout"]
+    networks: [internal]
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+      - ./docker/redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [internal]
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:24.10-alpine
+    restart: unless-stopped
+    ulimits:
+      nofile: { soft: 262144, hard: 262144 }
+    environment:
+      CLICKHOUSE_DB: ${CLICKHOUSE_DB:-seosuite}
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    volumes:
+      - ch_data:/var/lib/clickhouse
+      - ch_logs:/var/log/clickhouse-server
+    networks: [internal]
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    <<: *backend-env
+    depends_on:
+      postgres: { condition: service_healthy }
+      redis: { condition: service_healthy }
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    networks: [internal, public]
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.worker
+    <<: *backend-env
+    depends_on:
+      redis: { condition: service_healthy }
+      postgres: { condition: service_healthy }
+    volumes:
+      - ./backend:/app
+    networks: [internal]
+
+  beat:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    <<: *backend-env
+    command: ["./scripts/start-beat.sh"]
+    depends_on:
+      redis: { condition: service_healthy }
+    volumes:
+      - ./backend:/app
+    networks: [internal]
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+      INTERNAL_API_URL: http://api:8000
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    networks: [internal, public]
+
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    depends_on:
+      - api
+      - frontend
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    networks: [public]

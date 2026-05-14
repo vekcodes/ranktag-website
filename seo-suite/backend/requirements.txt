@@ -1,0 +1,57 @@
+# Runtime dependencies — mirrors pyproject.toml [project.dependencies].
+# Pinned upper bounds intentionally omitted; use pip-tools/uv lockfile in CI.
+
+# web
+fastapi>=0.115
+uvicorn[standard]>=0.32
+gunicorn>=23.0
+starlette>=0.41
+python-multipart>=0.0.12
+
+# validation / settings
+pydantic>=2.9
+pydantic-settings>=2.6
+email-validator>=2.2
+
+# database
+sqlalchemy[asyncio]>=2.0.36
+asyncpg>=0.30
+psycopg2-binary>=2.9
+alembic>=1.13
+clickhouse-connect>=0.8
+
+# cache + queue
+redis>=5.2
+celery[redis]>=5.4
+
+# crawling / SEO
+aiohttp>=3.11
+beautifulsoup4>=4.12
+lxml>=5.3
+scrapy>=2.11
+playwright>=1.49
+tldextract>=5.1
+python-whois>=0.9
+httpx>=0.28
+yarl>=1.18
+url-normalize>=1.4
+robotexclusionrulesparser>=1.7
+fake-useragent>=1.5
+
+# auth / security
+python-jose[cryptography]>=3.3
+passlib[bcrypt]>=1.7
+itsdangerous>=2.2
+
+# observability
+structlog>=24.4
+sentry-sdk[fastapi,celery]>=2.18
+prometheus-client>=0.21
+opentelemetry-api>=1.28
+opentelemetry-sdk>=1.28
+opentelemetry-instrumentation-fastapi>=0.49b0
+
+# storage / exports
+boto3>=1.35
+orjson>=3.10
+tenacity>=9.0

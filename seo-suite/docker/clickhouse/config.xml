@@ -1,0 +1,10 @@
+<!--
+  Minimal ClickHouse override. Production config will tune memory limits,
+  merge tree settings, and add a dedicated zookeeper/keeper cluster.
+-->
+<clickhouse>
+    <listen_host>0.0.0.0</listen_host>
+    <logger>
+        <level>information</level>
+    </logger>
+</clickhouse>

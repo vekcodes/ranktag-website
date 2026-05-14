@@ -1,0 +1,244 @@
+# ─────────────────────────────────────────────────────────────────────
+#  PostgreSQL — Kubernetes StatefulSet (development / pre-prod sample)
+#
+#  For real production HA we prefer:
+#    • RDS / Aurora Postgres (managed); OR
+#    • CloudNativePG operator; OR
+#    • Zalando postgres-operator (Patroni-based)
+#  Hand-rolled StatefulSets without an operator can't do automated
+#  failover safely — use this manifest for staging / dev clusters only,
+#  and the operator chart for prod (referenced in Step 10 §11).
+# ─────────────────────────────────────────────────────────────────────
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: rt-data
+data:
+  postgresql.conf: |
+    # See seo-suite/docker/postgres/postgresql.conf for the canonical
+    # config; the operator chart's values.yaml should mirror these knobs.
+  init.sql: |
+    -- See seo-suite/docker/postgres/init.sql for canonical bootstrap.
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: rt-data
+  labels:
+    app: postgres
+spec:
+  clusterIP: None
+  selector:
+    app: postgres
+  ports:
+    - port: 5432
+      name: postgres
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+  namespace: rt-data
+spec:
+  serviceName: postgres
+  replicas: 3                                     # 1 primary + 2 replicas (managed by operator in prod)
+  selector:
+    matchLabels:
+      app: postgres
+  podManagementPolicy: Parallel
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      terminationGracePeriodSeconds: 60
+      securityContext:
+        runAsUser: 999
+        runAsGroup: 999
+        fsGroup: 999
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - { key: app, operator: In, values: [postgres] }
+              topologyKey: topology.kubernetes.io/zone
+      containers:
+        - name: postgres
+          image: postgres:16-alpine
+          args:
+            - "postgres"
+            - "-c"
+            - "config_file=/etc/postgresql/postgresql.conf"
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef: { name: postgres-credentials, key: superuser }
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef: { name: postgres-credentials, key: superuser-password }
+            - name: POSTGRES_DB
+              value: "seosuite"
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          ports:
+            - containerPort: 5432
+              name: postgres
+          resources:
+            requests: { cpu: "1000m", memory: 4Gi }
+            limits:   { cpu: "4000m", memory: 8Gi }
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+            - name: config
+              mountPath: /etc/postgresql/postgresql.conf
+              subPath: postgresql.conf
+            - name: init
+              mountPath: /docker-entrypoint-initdb.d/init.sql
+              subPath: init.sql
+            - name: shm
+              mountPath: /dev/shm
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", "$(POSTGRES_USER)"]
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            exec:
+              command: ["pg_isready", "-U", "$(POSTGRES_USER)"]
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 5
+          lifecycle:
+            preStop:
+              exec:
+                command: ["pg_ctl", "-D", "/var/lib/postgresql/data/pgdata", "-w", "stop", "-m", "fast"]
+      volumes:
+        - name: config
+          configMap: { name: postgres-config }
+        - name: init
+          configMap: { name: postgres-config }
+        - name: shm
+          emptyDir: { medium: Memory, sizeLimit: 256Mi }
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: gp3-encrypted
+        resources:
+          requests:
+            storage: 200Gi
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-credentials
+  namespace: rt-data
+type: Opaque
+stringData:
+  # In production these are sourced via External Secrets Operator → Vault.
+  # Never commit real values. The placeholders below trip the secrets-baseline.
+  superuser: seosuite
+  superuser-password: REPLACE_VIA_EXTERNAL_SECRETS
+  app-password: REPLACE_VIA_EXTERNAL_SECRETS
+  ro-password: REPLACE_VIA_EXTERNAL_SECRETS
+  migrator-password: REPLACE_VIA_EXTERNAL_SECRETS
+  replicator-password: REPLACE_VIA_EXTERNAL_SECRETS
+---
+# ─────────────────────────────────────────────────────────────────────
+#  PgBouncer — fronts the PG StatefulSet
+# ─────────────────────────────────────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgbouncer
+  namespace: rt-data
+spec:
+  replicas: 3
+  selector: { matchLabels: { app: pgbouncer } }
+  template:
+    metadata:
+      labels: { app: pgbouncer }
+    spec:
+      containers:
+        - name: pgbouncer
+          image: edoburu/pgbouncer:1.23
+          ports:
+            - { containerPort: 6432, name: pgbouncer }
+          resources:
+            requests: { cpu: "200m", memory: 256Mi }
+            limits:   { cpu: "1000m", memory: 512Mi }
+          volumeMounts:
+            - { name: cfg,    mountPath: /etc/pgbouncer/pgbouncer.ini, subPath: pgbouncer.ini }
+            - { name: users,  mountPath: /etc/pgbouncer/userlist.txt,  subPath: userlist.txt }
+          readinessProbe:
+            tcpSocket: { port: 6432 }
+            periodSeconds: 5
+          livenessProbe:
+            tcpSocket: { port: 6432 }
+            periodSeconds: 15
+      volumes:
+        - name: cfg
+          configMap: { name: pgbouncer-config }
+        - name: users
+          secret: { secretName: pgbouncer-userlist }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgbouncer
+  namespace: rt-data
+spec:
+  selector: { app: pgbouncer }
+  ports:
+    - { port: 6432, targetPort: 6432, name: pgbouncer }
+---
+# ─────────────────────────────────────────────────────────────────────
+#  Backup — CronJob (logical pg_dump to S3 via aws-cli sidecar pattern;
+#  for PITR use pgbackrest / WAL-G in a dedicated DaemonSet/Deployment.)
+# ─────────────────────────────────────────────────────────────────────
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgres-backup
+  namespace: rt-data
+spec:
+  schedule: "0 3 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 7
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: pgdump
+              image: postgres:16-alpine
+              env:
+                - { name: PGHOST,     value: pgbouncer }
+                - { name: PGPORT,     value: "6432" }
+                - { name: PGDATABASE, value: seosuite }
+                - { name: PGUSER,     value: seosuite_migrator }
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef: { name: postgres-credentials, key: migrator-password }
+                - { name: BACKUP_RETENTION_DAYS, value: "14" }
+              command: ["/bin/sh","-c"]
+              args:
+                - |
+                  set -eu
+                  ts=$(date -u +%Y%m%dT%H%M%SZ)
+                  out=/tmp/${ts}_${PGDATABASE}.dump
+                  pg_dump --format=custom --compress=6 --no-owner --no-privileges \
+                          --file=${out}
+                  pg_restore --list ${out} > /dev/null
+                  aws s3 cp ${out} s3://rt-backups-prod/postgres/${ts}_${PGDATABASE}.dump --sse aws:kms
+                  echo "uploaded ${out}"
+              resources:
+                requests: { cpu: "200m", memory: 512Mi }
+                limits:   { cpu: "1000m", memory: 1Gi }

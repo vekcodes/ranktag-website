@@ -1,0 +1,46 @@
+# ─────────────────────────────────────────────────────────────
+#  base.txt — runtime dependencies shared by API + workers
+#  All other requirement files include this one.
+# ─────────────────────────────────────────────────────────────
+
+# web
+fastapi>=0.115
+uvicorn[standard]>=0.32
+gunicorn>=23.0
+starlette>=0.41
+python-multipart>=0.0.12
+
+# validation / settings
+pydantic>=2.9
+pydantic-settings>=2.6
+email-validator>=2.2
+
+# database
+sqlalchemy[asyncio]>=2.0.36
+asyncpg>=0.30
+psycopg2-binary>=2.9
+alembic>=1.13
+clickhouse-connect>=0.8
+
+# cache + queue
+redis>=5.2
+celery[redis]>=5.4
+
+# auth / security
+python-jose[cryptography]>=3.3
+passlib[bcrypt]>=1.7
+itsdangerous>=2.2
+
+# observability
+structlog>=24.4
+sentry-sdk[fastapi,celery]>=2.18
+prometheus-client>=0.21
+opentelemetry-api>=1.28
+opentelemetry-sdk>=1.28
+opentelemetry-instrumentation-fastapi>=0.49b0
+
+# storage / serialization / utility
+boto3>=1.35
+orjson>=3.10
+tenacity>=9.0
+httpx>=0.28

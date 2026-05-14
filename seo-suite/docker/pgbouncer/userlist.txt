@@ -1,0 +1,11 @@
+; PgBouncer auth file. Format:  "user" "scram-hash-or-md5-or-plain"
+;
+; Dev defaults — plain text passwords (auth_type=scram-sha-256 above means
+; PgBouncer will scram-hash these on first use and verify against PG).
+;
+; In production this file is rendered by External Secrets / Vault Agent
+; from secret material; the container reloads on file change.
+
+"seosuite_app"       "seosuite_app_dev_pw"
+"seosuite_ro"        "seosuite_ro_dev_pw"
+"seosuite_migrator"  "seosuite_migrator_dev_pw"

@@ -1,0 +1,183 @@
+name: seo-suite backend
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - "seo-suite/backend/**"
+      - ".github/workflows/seo-suite-backend.yml"
+      - "seo-suite/.pre-commit-config.yaml"
+  pull_request:
+    branches: [main, master]
+    paths:
+      - "seo-suite/backend/**"
+      - ".github/workflows/seo-suite-backend.yml"
+      - "seo-suite/.pre-commit-config.yaml"
+
+defaults:
+  run:
+    working-directory: seo-suite/backend
+
+concurrency:
+  group: seo-suite-backend-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ────────────────────────────────────────────────────────────
+  #  Lint + type-check — fast feedback, no services required
+  # ────────────────────────────────────────────────────────────
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: seo-suite/backend/requirements*.txt
+
+      - name: Install lint deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff==0.8.4 mypy==1.13.0 \
+                      pydantic==2.9.2 pydantic-settings==2.6.1 \
+                      types-redis types-requests
+
+      - name: Ruff check
+        run: ruff check app tests
+
+      - name: Ruff format check
+        run: ruff format --check app tests
+
+      - name: Mypy
+        run: mypy app
+
+  # ────────────────────────────────────────────────────────────
+  #  Tests — Postgres + Redis services, async pytest
+  # ────────────────────────────────────────────────────────────
+  test:
+    runs-on: ubuntu-latest
+    needs: lint
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: seosuite
+          POSTGRES_PASSWORD: seosuite_dev_pw
+          POSTGRES_DB: seosuite
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U seosuite -d seosuite"
+          --health-interval 10s --health-timeout 5s --health-retries 5
+      redis:
+        image: redis:7-alpine
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping" --health-interval 10s
+          --health-timeout 5s --health-retries 5
+
+    env:
+      APP_ENV: development
+      DATABASE_URL: postgresql+asyncpg://seosuite:seosuite_dev_pw@localhost:5432/seosuite
+      DATABASE_URL_SYNC: postgresql+psycopg2://seosuite:seosuite_dev_pw@localhost:5432/seosuite
+      REDIS_URL: redis://localhost:6379/0
+      CELERY_BROKER_URL: redis://localhost:6379/0
+      CELERY_RESULT_BACKEND: redis://localhost:6379/4
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: seo-suite/backend/requirements*.txt
+
+      - name: System deps for lxml / asyncpg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libpq-dev libxml2-dev libxslt1-dev
+
+      - name: Install runtime + test deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+
+      - name: Migrate (noop until models land)
+        run: alembic -c alembic.ini upgrade head || true
+
+      - name: Pytest (unit + integration)
+        run: pytest tests/ -v --tb=short --maxfail=10 --durations=10
+
+  # ────────────────────────────────────────────────────────────
+  #  Docker build — caches layers; pushes only on main
+  # ────────────────────────────────────────────────────────────
+  docker:
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Login to GHCR
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build API image
+        uses: docker/build-push-action@v6
+        with:
+          context: seo-suite/backend
+          file: seo-suite/backend/Dockerfile
+          push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/seo-suite-api:${{ github.sha }}
+            ghcr.io/${{ github.repository_owner }}/seo-suite-api:latest
+          cache-from: type=gha,scope=api
+          cache-to: type=gha,scope=api,mode=max
+
+      - name: Build worker image
+        uses: docker/build-push-action@v6
+        with:
+          context: seo-suite/backend
+          file: seo-suite/backend/Dockerfile.worker
+          push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/seo-suite-worker:${{ github.sha }}
+            ghcr.io/${{ github.repository_owner }}/seo-suite-worker:latest
+          cache-from: type=gha,scope=worker
+          cache-to: type=gha,scope=worker,mode=max
+
+  # ────────────────────────────────────────────────────────────
+  #  Deploy hooks (placeholders — wire your platform here)
+  # ────────────────────────────────────────────────────────────
+  deploy-staging:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: docker
+    environment: staging
+    steps:
+      - run: |
+          echo "Triggering staging deploy for sha ${{ github.sha }}"
+          # Replace with: argocd app set seo-suite-staging --helm-set image.tag=...
+          # or:           kubectl set image deploy/seo-suite-api api=ghcr.io/...:${{ github.sha }} -n rt-api
+
+  deploy-production:
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    needs: docker
+    environment: production
+    steps:
+      - run: |
+          echo "Triggering production deploy for tag ${{ github.ref_name }}"
+          # Replace with your production deploy command.

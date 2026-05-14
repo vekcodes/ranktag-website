@@ -1,0 +1,17 @@
+# ─────────────────────────────────────────────────────────────
+#  crawler.txt — crawl/render/parse deps
+#  Installed on worker images, NOT on the slim API image.
+# ─────────────────────────────────────────────────────────────
+-r base.txt
+
+aiohttp>=3.11
+beautifulsoup4>=4.12
+lxml>=5.3
+scrapy>=2.11
+playwright>=1.49
+tldextract>=5.1
+python-whois>=0.9
+yarl>=1.18
+url-normalize>=1.4
+robotexclusionrulesparser>=1.7
+fake-useragent>=1.5
