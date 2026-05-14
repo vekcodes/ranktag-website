@@ -346,7 +346,7 @@ def _score_size(bytes_: int) -> tuple[float, str]:
 @app.get("/api/page-speed")
 async def page_speed(
     url: str = Query(..., min_length=3),
-    strategy: str = Query("mobile", regex="^(mobile|desktop)$"),
+    strategy: str = Query("mobile", pattern="^(mobile|desktop)$"),
 ):
     """
     Our own page speed audit.
