@@ -1,9 +1,8 @@
-// API client for the keyword density analysis backend (Steps 1-4).
-//
-// In local dev the backend runs on port 8000. Set VITE_DENSITY_API_URL
-// in .env to override. In production this can point at the deployed API.
+// API client for keyword-density extensions. Same-origin /api/* in prod
+// (Vercel routes each endpoint to its own serverless function). Override
+// with VITE_DENSITY_API_URL for local development against an external API.
 
-const BASE = (import.meta.env.VITE_DENSITY_API_URL || 'http://localhost:8000').replace(/\/+$/, '');
+const BASE = (import.meta.env.VITE_DENSITY_API_URL || '').replace(/\/+$/, '');
 
 async function request(path, init) {
   const res = await fetch(`${BASE}${path}`, {
@@ -120,9 +119,10 @@ export function seoScore(text, opts = {}) {
   });
 }
 
-// ── Step 9: Competitor analysis ──
+// ── Competitor analysis ──
+// Calls the JS serverless function at /api/competitor-analyze.
 export function competitorAnalyze(primaryUrl, competitorUrls, opts = {}) {
-  return request('/competitor/analyze', {
+  return request('/api/competitor-analyze', {
     method: 'POST',
     body: JSON.stringify({
       primary_url: primaryUrl,

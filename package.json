@@ -8,11 +8,12 @@
   },
   "scripts": {
     "dev": "vite",
-    "dev:api": "cd api && python index.py",
+    "dev:api": "vercel dev",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "cheerio": "^1.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
