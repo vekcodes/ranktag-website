@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { api } from '../../lib/api';
 import { trackToolUse } from '../../lib/track';
+import { submitToolUsage, syntheticEmail } from '../../lib/hubspot';
 
 /**
  * URL analysis panel — fetches a webpage server-side and hands the extracted
@@ -24,6 +25,11 @@ export default function UrlAnalyzer({ onContentExtracted }) {
 
     try {
       const target = url.trim();
+      submitToolUsage(import.meta.env.VITE_HUBSPOT_DENSITY_FORM_ID, {
+        email: syntheticEmail(target),
+        website: target,
+        message: 'Source: Keyword Density Checker (URL mode)',
+      }).catch(() => {});
       const res = await api.densityUrl(target);
       trackToolUse('keyword-density-url', { url: target });
       setMeta({

@@ -7,6 +7,7 @@ import CompetitorRadar from '../components/competitor/CompetitorRadar';
 import CompetitorInsights from '../components/competitor/CompetitorInsights';
 import { competitorAnalyze } from '../lib/densityApi';
 import { trackToolUse } from '../lib/track';
+import { submitToolUsage, syntheticEmail } from '../lib/hubspot.js';
 import './CompetitorAnalysis.css';
 
 export default function CompetitorAnalysis() {
@@ -19,6 +20,18 @@ export default function CompetitorAnalysis() {
     setError(null);
     setResult(null);
     try {
+      const competitorList = competitorUrls.map((u) => `  • ${u}`).join('\n');
+      const message = [
+        'Source: Competitor Analysis',
+        `Your site: ${primaryUrl}`,
+        'Competitors checked:',
+        competitorList,
+      ].join('\n');
+      submitToolUsage(import.meta.env.VITE_HUBSPOT_COMPETITOR_FORM_ID, {
+        email: syntheticEmail(primaryUrl),
+        website: primaryUrl,
+        message,
+      }).catch(() => {});
       const res = await competitorAnalyze(primaryUrl, competitorUrls);
       setResult(res);
       trackToolUse('competitor-analyze', {

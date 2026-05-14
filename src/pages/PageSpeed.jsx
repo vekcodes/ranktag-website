@@ -5,6 +5,7 @@ import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
 import { api } from '../lib/api.js';
 import { trackToolUse } from '../lib/track.js';
+import { submitToolUsage, syntheticEmail } from '../lib/hubspot.js';
 import './ToolPage.css';
 
 const COMPONENT_LABELS = {
@@ -64,6 +65,11 @@ export default function PageSpeed() {
     setData(null);
     try {
       const target = url.trim();
+      submitToolUsage(import.meta.env.VITE_HUBSPOT_PAGESPEED_FORM_ID, {
+        email: syntheticEmail(target),
+        website: target,
+        message: `Source: Page Speed Checker · strategy=${strategy}`,
+      }).catch(() => {});
       const res = await api.pageSpeed(target, strategy);
       setData(res);
       trackToolUse('page-speed', { url: target, strategy });

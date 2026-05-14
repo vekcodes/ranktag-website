@@ -77,15 +77,11 @@ export async function submitApplyForm({ name, email, website, linkedin, message 
 }
 
 /**
- * Submit a per-tool HubSpot form when the user opted in via the optional
- * email field on a tool page. `formId` comes from the caller so each tool
- * routes to its own form. No-op when formId is empty (env var unset).
+ * Submit a per-tool HubSpot form. `formId` comes from the caller so each
+ * tool routes to its own form. No-op when formId is empty (env var unset).
  *
- * @param {string} formId  The HubSpot form GUID for this specific tool.
- * @param {object} payload
- * @param {string} payload.email    Required — HubSpot rejects without it.
- * @param {string} [payload.website]  URL the user tested.
- * @param {string} [payload.message]  Free-text context (strategy, competitor count, etc).
+ * HubSpot Forms API REQUIRES a contact identifier (email is the only one
+ * we have here), so the caller must pass an email — see `syntheticEmail()`.
  */
 export async function submitToolUsage(formId, { email, website, message } = {}) {
   if (!formId) {
@@ -94,4 +90,25 @@ export async function submitToolUsage(formId, { email, website, message } = {}) 
   }
   if (!email) return { ok: false, skipped: 'no email' };
   return postForm(formId, { email, website, message });
+}
+
+/**
+ * Build a synthetic `anonymous@<domain>` email from whatever URL the user
+ * typed into a tool. HubSpot dedupes contacts by email, so re-running the
+ * same tool on the same domain updates the existing contact instead of
+ * creating a new one.
+ *
+ * Falls back to a timestamp-based local address if no domain can be parsed.
+ */
+export function syntheticEmail(url) {
+  try {
+    const raw = (url || '').trim();
+    if (!raw) throw new Error('empty');
+    const withScheme = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+    const host = new URL(withScheme).hostname.replace(/^www\./i, '').toLowerCase();
+    if (!host || !host.includes('.')) throw new Error('invalid host');
+    return `anonymous@${host}`;
+  } catch {
+    return `anonymous+${Date.now()}@rankedtag-tools.local`;
+  }
 }

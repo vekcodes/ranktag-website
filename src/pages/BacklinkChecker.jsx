@@ -5,6 +5,7 @@ import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
 import { api } from '../lib/api.js';
 import { trackToolUse } from '../lib/track.js';
+import { submitToolUsage, syntheticEmail } from '../lib/hubspot.js';
 import './ToolPage.css';
 
 function scoreColor(score) {
@@ -66,6 +67,14 @@ export default function BacklinkChecker() {
     setData(null);
     try {
       const target = domain.trim();
+      // Fire-and-forget HubSpot form submission, scoped to the Authority form.
+      // Email is auto-derived from the submitted domain so HubSpot accepts it
+      // and dedupes by domain across multiple runs.
+      submitToolUsage(import.meta.env.VITE_HUBSPOT_AUTHORITY_FORM_ID, {
+        email: syntheticEmail(target),
+        website: target,
+        message: 'Source: Domain Authority Checker',
+      }).catch(() => {});
       const res = await api.authority(target);
       setData(res);
       trackToolUse('authority-check', { domain: target });
