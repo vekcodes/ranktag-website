@@ -5,7 +5,6 @@ import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
 import { api } from '../lib/api.js';
 import { trackToolUse } from '../lib/track.js';
-import { submitToolUsage } from '../lib/hubspot.js';
 import './ToolPage.css';
 
 const COMPONENT_LABELS = {
@@ -47,7 +46,6 @@ export default function PageSpeed() {
   });
   const [searchParams] = useSearchParams();
   const [url, setUrl] = useState('');
-  const [email, setEmail] = useState('');
   const [strategy, setStrategy] = useState('mobile');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -66,14 +64,6 @@ export default function PageSpeed() {
     setData(null);
     try {
       const target = url.trim();
-      const optedInEmail = email.trim();
-      if (optedInEmail) {
-        submitToolUsage(import.meta.env.VITE_HUBSPOT_PAGESPEED_FORM_ID, {
-          email: optedInEmail,
-          website: target,
-          message: `Source: Page Speed Checker · strategy=${strategy}`,
-        }).catch(() => {});
-      }
       const res = await api.pageSpeed(target, strategy);
       setData(res);
       trackToolUse('page-speed', { url: target, strategy });
@@ -117,17 +107,6 @@ export default function PageSpeed() {
               {loading ? 'Scanning…' : 'Run scan'} <span>→</span>
             </button>
           </form>
-
-          <div className="tool-email-row" style={{maxWidth:'660px', margin:'12px auto 0'}}>
-            <input
-              type="email"
-              className="tool-email-input"
-              placeholder="your@email.com — optional, get the full report DM'd to you"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete="email"
-            />
-          </div>
 
           <div className="ps-strategy">
             <button

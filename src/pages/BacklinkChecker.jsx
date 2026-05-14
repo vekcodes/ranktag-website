@@ -5,7 +5,6 @@ import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
 import { api } from '../lib/api.js';
 import { trackToolUse } from '../lib/track.js';
-import { submitToolUsage } from '../lib/hubspot.js';
 import './ToolPage.css';
 
 function scoreColor(score) {
@@ -50,7 +49,6 @@ export default function BacklinkChecker() {
   });
   const [searchParams] = useSearchParams();
   const [domain, setDomain] = useState('');
-  const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
@@ -68,17 +66,6 @@ export default function BacklinkChecker() {
     setData(null);
     try {
       const target = domain.trim();
-      const optedInEmail = email.trim();
-      // Fire the HubSpot capture in parallel with the actual analysis so the
-      // user doesn't wait on it. Swallow errors — we never want a failed
-      // capture to block the result.
-      if (optedInEmail) {
-        submitToolUsage(import.meta.env.VITE_HUBSPOT_AUTHORITY_FORM_ID, {
-          email: optedInEmail,
-          website: target,
-          message: 'Source: Domain Authority Checker',
-        }).catch(() => {});
-      }
       const res = await api.authority(target);
       setData(res);
       trackToolUse('authority-check', { domain: target });
@@ -122,17 +109,6 @@ export default function BacklinkChecker() {
               {loading ? 'Scanning…' : 'Run authority check'} <span>→</span>
             </button>
           </form>
-
-          <div className="tool-email-row" style={{maxWidth:'620px', margin:'12px auto 0'}}>
-            <input
-              type="email"
-              className="tool-email-input"
-              placeholder="your@email.com — optional, get the full report DM'd to you"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete="email"
-            />
-          </div>
 
           <p className="fineprint" style={{marginTop:'18px'}}>
             // Same engine that powers our internal SaaS audits. Sources: tranco-list.eu, web.archive.org, your own homepage.

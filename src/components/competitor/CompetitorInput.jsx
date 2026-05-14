@@ -7,7 +7,6 @@ import { useState } from 'react';
 export default function CompetitorInput({ onAnalyze, loading }) {
   const [primaryUrl, setPrimaryUrl] = useState('');
   const [compUrls, setCompUrls] = useState(['']);
-  const [email, setEmail] = useState('');
 
   const addUrl = () => { if (compUrls.length < 5) setCompUrls([...compUrls, '']); };
   const removeUrl = (i) => setCompUrls(compUrls.filter((_, idx) => idx !== i));
@@ -22,7 +21,7 @@ export default function CompetitorInput({ onAnalyze, loading }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (canSubmit) onAnalyze(primaryUrl.trim(), validComps.map((u) => u.trim()), email.trim());
+    if (canSubmit) onAnalyze(primaryUrl.trim(), validComps.map((u) => u.trim()));
   };
 
   return (
@@ -61,18 +60,6 @@ export default function CompetitorInput({ onAnalyze, loading }) {
             )}
           </div>
         ))}
-      </div>
-
-      <div className="tool-email-row" style={{ marginTop: 4, marginBottom: 4 }}>
-        <input
-          type="email"
-          className="tool-email-input"
-          placeholder="your@email.com — optional, get the full report DM'd to you"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          autoComplete="email"
-          disabled={loading}
-        />
       </div>
 
       <button type="submit" className="cp-input-submit" disabled={!canSubmit}>
