@@ -8,6 +8,9 @@ const BacklinkChecker = lazy(() => import('./pages/BacklinkChecker.jsx'));
 const PageSpeed = lazy(() => import('./pages/PageSpeed.jsx'));
 const DensityDashboard = lazy(() => import('./pages/DensityDashboard.jsx'));
 const CompetitorAnalysis = lazy(() => import('./pages/CompetitorAnalysis.jsx'));
+const AdminApp = lazy(() => import('./pages/admin/AdminApp.jsx'));
+const Blog = lazy(() => import('./pages/Blog.jsx'));
+const BlogPost = lazy(() => import('./pages/BlogPost.jsx'));
 
 function ApplyRedirect() {
   const { search } = useLocation();
@@ -29,6 +32,10 @@ export default function App() {
           <Route path="/density" element={<Navigate to="/keyword-density" replace />} />
           <Route path="/competitor" element={<CompetitorAnalysis />} />
           <Route path="/page-speed" element={<PageSpeed />} />
+          <Route path="/admin" element={<AdminApp />} />
+          <Route path="/admin/*" element={<AdminApp />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
         </Routes>
       </Suspense>
     </>

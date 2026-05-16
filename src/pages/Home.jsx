@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Nav from '../components/Nav.jsx';
+import BlogLatest from '../components/BlogLatest.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
 import { submitApplyForm } from '../lib/hubspot.js';
@@ -524,6 +525,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ═══ LATEST FROM THE BLOG ══════════════════════════════════════════ */}
+      <BlogLatest />
 
       {/* ═══ FINAL CTA ═════════════════════════════════════════════════════ */}
       <section className="final-cta" data-reveal>

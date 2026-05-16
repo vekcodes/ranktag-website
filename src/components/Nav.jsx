@@ -78,6 +78,8 @@ export default function Nav({ variant = 'home' }) {
       <div className="nav-links">
         <Link to="/#mechanism" className="nav-link" onClick={close}>How it works</Link>
         <Link to="/#proof" className="nav-link" onClick={close}>Sendr.ai story</Link>
+        {/* /blog is server-rendered for SEO — real navigation, not client routing */}
+        <a href="/blog" className="nav-link" onClick={close}>Blog</a>
         <Link
           to="/#apply"
           className={`nav-link${isHome ? ' has-badge' : ''}`}
