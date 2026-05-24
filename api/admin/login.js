@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 
     if (req.method !== 'POST') throw httpError(405, 'Method not allowed');
     if (!adminConfigured()) {
-      throw httpError(503, 'Admin not configured. Set BLOG_ADMIN_PASSWORD and BLOG_AUTH_SECRET.');
+      throw httpError(503, 'Admin not configured. Set BLOG_ADMIN_PASSWORD in your Vercel project env vars.');
     }
 
     const { password } = readBody(req);

@@ -1,8 +1,12 @@
 // Single-admin auth: password -> signed JWT in an httpOnly cookie.
 import { SignJWT, jwtVerify } from 'jose';
 
-const SECRET = process.env.BLOG_AUTH_SECRET || '';
+// Simple setup: you only have to set BLOG_ADMIN_PASSWORD. If you don't set a
+// separate BLOG_AUTH_SECRET, we sign sessions with the password itself — one
+// less env var to configure or forget. Set BLOG_AUTH_SECRET only if you want
+// the signing key decoupled from the password.
 const PASSWORD = process.env.BLOG_ADMIN_PASSWORD || '';
+const SECRET = process.env.BLOG_AUTH_SECRET || PASSWORD || '';
 const COOKIE = 'rt_admin';
 const MAX_AGE = 60 * 60 * 12; // 12h
 
