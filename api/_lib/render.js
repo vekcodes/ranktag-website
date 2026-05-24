@@ -89,8 +89,8 @@ function nav() {
   return `<nav><div class="nav-in">
 <a class="logo" href="/">${LOGO_SVG}${SITE_NAME}</a>
 <div class="nav-links">
-<a href="/#mechanism">How it works</a>
-<a href="/#proof">Sendr.ai story</a>
+<a href="/#how-it-works">How it works</a>
+<a href="/#case-study">Sendr.ai story</a>
 <a href="/blog">Blog</a>
 <a class="cta" href="/#apply">Apply →</a>
 </div></div></nav>`;

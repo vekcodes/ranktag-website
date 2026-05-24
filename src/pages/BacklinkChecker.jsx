@@ -46,7 +46,7 @@ export default function BacklinkChecker() {
     title: 'Free Domain Authority Checker · No Ahrefs Key · RankedTag',
     description:
       'Free domain authority checker that does not need an Ahrefs or Moz key. Composite score from Tranco traffic rank, Wayback domain age, on-page schema, and HTTP transport quality. Cross-checkable against the public sources we hit.',
-    canonical: 'https://rankedtag.com/backlink-checker',
+    canonical: 'https://rankedtag.com/domain-authority-checker',
   });
   const [searchParams] = useSearchParams();
   const [domain, setDomain] = useState('');
@@ -228,7 +228,7 @@ export default function BacklinkChecker() {
               </p>
               <div style={{display:'flex', gap:'12px', justifyContent:'center', flexWrap:'wrap'}}>
                 <a href="/audit" className="btn btn-primary btn-lg">Get a founder review <span className="ar">↗</span></a>
-                <a href="/page-speed" className="btn btn-outline btn-lg">Try the page speed checker <span className="ar">↗</span></a>
+                <a href="/page-speed-checker" className="btn btn-outline btn-lg">Try the page speed checker <span className="ar">↗</span></a>
               </div>
             </div>
           </>
@@ -257,17 +257,17 @@ export default function BacklinkChecker() {
             </div>
             <div className="footer-col">
               <h4>The product</h4>
-              <a href="/#mechanism">How it works</a>
-              <a href="/#proof">Sendr.ai story</a>
+              <a href="/#how-it-works">How it works</a>
+              <a href="/#case-study">Sendr.ai story</a>
               <a href="/#apply">Apply</a>
             </div>
             <div className="footer-col">
               <h4>Free tools</h4>
               <a href="/technical-audit">Technical + Non-tech Audit</a>
-              <a href="/backlink-checker">Domain Authority</a>
-              <a href="/keyword-density">Keyword Density</a>
-              <a href="/page-speed">Page Speed</a>
-              <a href="/competitor">Competitor Analysis</a>
+              <a href="/domain-authority-checker">Domain Authority</a>
+              <a href="/keyword-density-checker">Keyword Density</a>
+              <a href="/page-speed-checker">Page Speed</a>
+              <a href="/competitor-analysis">Competitor Analysis</a>
             </div>
             <div className="footer-col">
               <h4>Company</h4>

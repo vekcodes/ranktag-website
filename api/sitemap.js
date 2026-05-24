@@ -1,14 +1,20 @@
-// Dynamic sitemap.xml — static pages + every published post.
+// Dynamic sitemap.xml — regenerated on every request (cached 1h at the edge).
+//
+// Blog posts: added AUTOMATICALLY from the database below — publish a post and
+// it appears in the sitemap on the next crawl. No edits needed here.
+//
+// Static/marketing pages: add ONE line to the STATIC array below whenever you
+// add a new public route in src/App.jsx. That's the only manual step.
 import { db, dbConfigured } from './_lib/db.js';
 import { SITE_URL } from './_lib/blog.js';
 
 const STATIC = [
   { loc: '/', priority: '1.0', freq: 'weekly' },
   { loc: '/blog', priority: '0.9', freq: 'daily' },
-  { loc: '/keyword-density', priority: '0.7', freq: 'monthly' },
-  { loc: '/backlink-checker', priority: '0.7', freq: 'monthly' },
-  { loc: '/page-speed', priority: '0.7', freq: 'monthly' },
-  { loc: '/competitor', priority: '0.7', freq: 'monthly' },
+  { loc: '/keyword-density-checker', priority: '0.7', freq: 'monthly' },
+  { loc: '/domain-authority-checker', priority: '0.7', freq: 'monthly' },
+  { loc: '/page-speed-checker', priority: '0.7', freq: 'monthly' },
+  { loc: '/competitor-analysis', priority: '0.7', freq: 'monthly' },
 ];
 
 export default async function handler(req, res) {

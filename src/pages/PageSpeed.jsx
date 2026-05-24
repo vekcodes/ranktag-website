@@ -43,7 +43,7 @@ export default function PageSpeed() {
     title: 'Free Page Speed Checker · No PSI Key · RankedTag',
     description:
       'Free page speed checker. We fetch your URL server-side, time the response, parse the HTML and score it on five real signals: speed, weight, render-blocking, image hygiene, transport quality. Runs in under 5 seconds. No Google PSI key required.',
-    canonical: 'https://rankedtag.com/page-speed',
+    canonical: 'https://rankedtag.com/page-speed-checker',
   });
   const [searchParams] = useSearchParams();
   const [url, setUrl] = useState('');
@@ -247,7 +247,7 @@ export default function PageSpeed() {
             <div style={{marginTop:'48px', textAlign:'center'}}>
               <div style={{display:'flex', gap:'12px', justifyContent:'center', flexWrap:'wrap'}}>
                 <a href="/audit" className="btn btn-primary btn-lg">Get a founder review <span className="ar">↗</span></a>
-                <a href="/backlink-checker" className="btn btn-outline btn-lg">Try the domain authority checker <span className="ar">↗</span></a>
+                <a href="/domain-authority-checker" className="btn btn-outline btn-lg">Try the domain authority checker <span className="ar">↗</span></a>
               </div>
             </div>
           </>
@@ -276,17 +276,17 @@ export default function PageSpeed() {
             </div>
             <div className="footer-col">
               <h4>The product</h4>
-              <a href="/#mechanism">How it works</a>
-              <a href="/#proof">Sendr.ai story</a>
+              <a href="/#how-it-works">How it works</a>
+              <a href="/#case-study">Sendr.ai story</a>
               <a href="/#apply">Apply</a>
             </div>
             <div className="footer-col">
               <h4>Free tools</h4>
               <a href="/technical-audit">Technical + Non-tech Audit</a>
-              <a href="/backlink-checker">Domain Authority</a>
-              <a href="/keyword-density">Keyword Density</a>
-              <a href="/page-speed">Page Speed</a>
-              <a href="/competitor">Competitor Analysis</a>
+              <a href="/domain-authority-checker">Domain Authority</a>
+              <a href="/keyword-density-checker">Keyword Density</a>
+              <a href="/page-speed-checker">Page Speed</a>
+              <a href="/competitor-analysis">Competitor Analysis</a>
             </div>
             <div className="footer-col">
               <h4>Company</h4>

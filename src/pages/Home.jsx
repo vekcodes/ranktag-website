@@ -166,7 +166,7 @@ export default function Home() {
       </section>
 
       {/* ═══ MECHANISM (honest about humans + AI) ═════════════════════════ */}
-      <section className="trinity" id="mechanism" data-reveal>
+      <section className="trinity" id="how-it-works" data-reveal>
         <div className="container">
           <div className="section-head">
             <div className="eyebrow">HOW WE OUT-CONTENT THE BIG PLAYERS</div>
@@ -207,7 +207,7 @@ export default function Home() {
       </section>
 
       {/* ═══ PROOF · sendr.ai case study ═════════════════════════════════ */}
-      <section className="case" id="proof" data-reveal>
+      <section className="case" id="case-study" data-reveal>
         <div className="case-bg-num">01</div>
         <div className="container case-inner">
           <div className="section-head">
@@ -307,7 +307,7 @@ export default function Home() {
       </section>
 
       {/* ═══ TOOLS ═════════════════════════════════════════════════════════ */}
-      <section className="tools" id="tools" data-reveal>
+      <section className="tools" id="free-seo-tools" data-reveal>
         <div className="container">
           <div className="section-head">
             <div className="eyebrow">FREE TOOLS · we would rather earn the call</div>
@@ -341,7 +341,7 @@ export default function Home() {
               </div>
             </a>
 
-            <a href="/backlink-checker" className="tool-card">
+            <a href="/domain-authority-checker" className="tool-card">
               <div className="tool-tag">★ FREE · OUR OWN ENGINE</div>
               <h3 className="tool-h">Domain Authority Checker</h3>
               <p className="tool-desc">We do not sell you Ahrefs data. We built our own. Tranco traffic rank, Wayback Machine domain age, on-page schema and link structure, real HTTP transport quality. Composite RankedTag Authority Score with a transparent breakdown you can verify against our public source links.</p>
@@ -351,7 +351,7 @@ export default function Home() {
               </div>
             </a>
 
-            <a href="/keyword-density" className="tool-card">
+            <a href="/keyword-density-checker" className="tool-card">
               <div className="tool-tag">★ FREE · REAL-TIME · NO TRACKING</div>
               <h3 className="tool-h">Keyword Density Checker</h3>
               <p className="tool-desc">Paste your copy or drop in a URL. Live 1-, 2- and 3-word density as you type, SEO score with readability and stuffing warnings, visual charts, and CSV export. Text analysis runs in your browser. URL fetches go through our own server-side scraper. No login, no key.</p>
@@ -361,7 +361,7 @@ export default function Home() {
               </div>
             </a>
 
-            <a href="/page-speed" className="tool-card">
+            <a href="/page-speed-checker" className="tool-card">
               <div className="tool-tag">★ FREE · OUR OWN ENGINE · NO PSI KEY</div>
               <h3 className="tool-h">Page Speed Checker</h3>
               <p className="tool-desc">We fetch your URL server-side, time the response, parse the HTML, and score it on five real signals: speed, weight, render-blocking, image hygiene, transport quality. Runs in under 5 seconds. Cross-check at pagespeed.web.dev for full Lighthouse.</p>
@@ -371,7 +371,7 @@ export default function Home() {
               </div>
             </a>
 
-            <a href="/competitor" className="tool-card">
+            <a href="/competitor-analysis" className="tool-card">
               <div className="tool-tag">★ FREE · OUR OWN ENGINE · UP TO 5 COMPETITORS</div>
               <h3 className="tool-h">Competitor Analysis</h3>
               <p className="tool-desc">Drop your page plus up to 5 competitor URLs. We score every page on keyword optimisation, structure, readability, prominence, semantic coverage and distribution — then surface the keywords competitors rank for that you do not. Side-by-side comparison, radar chart, gap table and ranked recommendations.</p>
@@ -563,16 +563,16 @@ export default function Home() {
             </div>
             <div className="footer-col">
               <h4>The product</h4>
-              <a href="#mechanism">How it works</a>
-              <a href="#proof">Sendr.ai story</a>
+              <a href="#how-it-works">How it works</a>
+              <a href="#case-study">Sendr.ai story</a>
               <a href="#apply">Apply</a>
             </div>
             <div className="footer-col">
               <h4>Free tools</h4>
-              <a href="/keyword-density">Keyword Density Checker</a>
-              <a href="/backlink-checker">Domain Authority Checker</a>
-              <a href="/page-speed">Page Speed Checker</a>
-              <a href="/competitor">Competitor Analysis</a>
+              <a href="/keyword-density-checker">Keyword Density Checker</a>
+              <a href="/domain-authority-checker">Domain Authority Checker</a>
+              <a href="/page-speed-checker">Page Speed Checker</a>
+              <a href="/competitor-analysis">Competitor Analysis</a>
               <a href="#apply">Site Audit (Founder Review)</a>
             </div>
             <div className="footer-col">

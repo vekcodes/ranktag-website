@@ -27,12 +27,12 @@ export default function DensityDashboard() {
     title: 'Free Keyword Density Checker · 1-, 2- and 3-Word Analysis · RankedTag',
     description:
       'Free keyword density checker for SEO. Paste content or a URL and get live 1-, 2- and 3-word density with frequency tables, visual charts, and CSV export. Runs in your browser — your text never leaves your device.',
-    canonical: 'https://rankedtag.com/keyword-density',
+    canonical: 'https://rankedtag.com/keyword-density-checker',
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'WebApplication',
       name: 'RankedTag Keyword Density Checker',
-      url: 'https://rankedtag.com/keyword-density',
+      url: 'https://rankedtag.com/keyword-density-checker',
       applicationCategory: 'SEOApplication',
       operatingSystem: 'Any (browser-based)',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },

@@ -5,22 +5,22 @@ const ACTIVE_STYLE = { background: 'var(--paper-2)', color: 'var(--ink)' };
 
 const FREE_TOOLS = [
   {
-    to: '/keyword-density',
+    to: '/keyword-density-checker',
     label: 'Keyword Density Checker',
     desc: 'Live 1-, 2-, 3-word density · CSV export',
   },
   {
-    to: '/backlink-checker',
+    to: '/domain-authority-checker',
     label: 'Domain Authority Checker',
     desc: 'Tranco rank · Wayback age · on-page signals',
   },
   {
-    to: '/page-speed',
+    to: '/page-speed-checker',
     label: 'Page Speed Checker',
     desc: 'TTFB, transport, render-blocking · no PSI key',
   },
   {
-    to: '/competitor',
+    to: '/competitor-analysis',
     label: 'Competitor Analysis',
     desc: 'Side-by-side scoring · keyword gaps · insights',
   },
@@ -76,8 +76,8 @@ export default function Nav({ variant = 'home' }) {
         RankedTag
       </Link>
       <div className="nav-links">
-        <Link to="/#mechanism" className="nav-link" onClick={close}>How it works</Link>
-        <Link to="/#proof" className="nav-link" onClick={close}>Sendr.ai story</Link>
+        <Link to="/#how-it-works" className="nav-link" onClick={close}>How it works</Link>
+        <Link to="/#case-study" className="nav-link" onClick={close}>Sendr.ai story</Link>
         {/* /blog is server-rendered for SEO — real navigation, not client routing */}
         <a href="/blog" className="nav-link" onClick={close}>Blog</a>
         <Link
@@ -120,7 +120,7 @@ export default function Nav({ variant = 'home' }) {
             ))}
             <div className="nav-dropdown-divider" />
             <Link
-              to="/#tools"
+              to="/#free-seo-tools"
               role="menuitem"
               className="nav-dropdown-item nav-dropdown-item-meta"
               onClick={close}

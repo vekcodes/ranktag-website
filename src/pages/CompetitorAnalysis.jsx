@@ -8,9 +8,16 @@ import CompetitorInsights from '../components/competitor/CompetitorInsights';
 import { competitorAnalyze } from '../lib/densityApi';
 import { trackToolUse } from '../lib/track';
 import { submitToolUsage, syntheticEmail } from '../lib/hubspot.js';
+import usePageMeta from '../hooks/usePageMeta';
 import './CompetitorAnalysis.css';
 
 export default function CompetitorAnalysis() {
+  usePageMeta({
+    title: 'Free SEO Competitor Analysis Tool · Side-by-Side Scoring · RankedTag',
+    description:
+      'Free SEO competitor analysis tool. Compare your site against competitors with side-by-side scoring, keyword gap analysis, and actionable insights — no login required.',
+    canonical: 'https://rankedtag.com/competitor-analysis',
+  });
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
