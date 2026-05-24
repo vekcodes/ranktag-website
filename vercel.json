@@ -16,6 +16,7 @@
     { "source": "/blog/:slug", "destination": "/api/blog-page" },
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
     { "source": "/rss.xml", "destination": "/api/rss" },
+    { "source": "/api/backlinks", "destination": "/api/authority" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "functions": {

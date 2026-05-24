@@ -5,7 +5,6 @@
 //
 // Run: node scripts/smoke-api.mjs
 
-import health from '../api/health.js';
 import keywordDensity from '../api/keyword-density.js';
 import densityUrl from '../api/density-url.js';
 import pageSpeed from '../api/page-speed.js';
@@ -44,7 +43,6 @@ async function run(name, handler, req) {
 }
 
 console.log('— smoke tests —');
-await run('health', health, mockReq());
 await run('keyword-density (ok)', keywordDensity, mockReq({
   method: 'POST',
   body: { text: 'The quick brown fox jumps over the lazy dog. The quick brown fox jumps again over the dog.', target: 'fox' },

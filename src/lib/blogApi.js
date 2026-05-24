@@ -60,15 +60,15 @@ export const blogApi = {
 
   // ── Admin CRUD ──
   adminList: () => request('/api/admin/posts'),
-  get: (id) => request(`/api/admin/post?id=${id}`),
+  get: (id) => request(`/api/admin/posts?id=${id}`),
   create: (data) =>
     request('/api/admin/posts', { method: 'POST', body: JSON.stringify(data) }),
   update: (id, data) =>
-    request(`/api/admin/post?id=${id}`, {
+    request(`/api/admin/posts?id=${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
     }),
-  remove: (id) => request(`/api/admin/post?id=${id}`, { method: 'DELETE' }),
+  remove: (id) => request(`/api/admin/posts?id=${id}`, { method: 'DELETE' }),
 
   upload: ({ filename, alt, dataBase64, type, width, height }) =>
     request('/api/admin/upload', {

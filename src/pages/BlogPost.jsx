@@ -15,7 +15,7 @@ export default function BlogPost() {
   useEffect(() => {
     let alive = true;
     setState({ status: 'loading', post: null });
-    fetch(`/api/blog/post?slug=${encodeURIComponent(slug)}`, {
+    fetch(`/api/blog/posts?slug=${encodeURIComponent(slug)}`, {
       credentials: 'same-origin',
     })
       .then(async (res) => {

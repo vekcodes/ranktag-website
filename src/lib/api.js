@@ -49,12 +49,11 @@ export const api = {
       body: JSON.stringify({ url }),
     }),
 
-  // Backward-compatible: `backlinks` and `authority` hit the same endpoint.
+  // `authority` is the domain-authority endpoint. The legacy `/api/backlinks`
+  // path is kept alive by a rewrite in vercel.json (no extra function).
   authority: (domain) =>
     request(`/api/authority?domain=${encodeURIComponent(domain)}`),
 
   backlinks: (domain) =>
     request(`/api/backlinks?domain=${encodeURIComponent(domain)}`),
-
-  health: () => request('/api/health'),
 };
