@@ -1,4 +1,4 @@
-// Dynamic sitemap.xml — regenerated on every request (cached 1h at the edge).
+// Dynamic sitemap.xml — regenerated on every request (cached ~5 min at the edge).
 //
 // Blog posts: added AUTOMATICALLY from the database below — publish a post and
 // it appears in the sitemap on the next crawl. No edits needed here.
@@ -46,7 +46,7 @@ export default async function handler(req, res) {
 
   res.status(200);
   res.setHeader('Content-Type', 'application/xml; charset=utf-8');
-  res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate=86400');
+  res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=86400');
   res.send(
     `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}</urlset>`
   );
