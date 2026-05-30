@@ -9,7 +9,8 @@ import { competitorAnalyze } from '../lib/densityApi';
 import { trackToolUse } from '../lib/track';
 import { submitToolUsage, syntheticEmail } from '../lib/hubspot.js';
 import usePageMeta from '../hooks/usePageMeta';
-import { softwareTool, breadcrumb, SITE } from '../lib/schema.js';
+import { softwareTool, breadcrumb, faqPage, SITE } from '../lib/schema.js';
+import CompetitorGuide, { CA_FAQ } from '../components/seo/CompetitorGuide';
 import './CompetitorAnalysis.css';
 
 const COMP_URL = `${SITE}/competitor-analysis`;
@@ -31,13 +32,14 @@ const COMP_JSONLD = [
     { name: 'Home', item: `${SITE}/` },
     { name: 'Competitor Analysis', item: COMP_URL },
   ]),
+  faqPage(CA_FAQ),
 ];
 
 export default function CompetitorAnalysis() {
   usePageMeta({
-    title: 'Free SEO Competitor Analysis Tool · Side-by-Side Scoring · RankedTag',
+    title: 'Free Competitor Analysis Tool — SEO Side-by-Side | RankedTag',
     description:
-      'Free SEO competitor analysis tool. Compare your site against competitors with side-by-side scoring, keyword gap analysis, and actionable insights — no login required.',
+      "Free competitor analysis tool. Compare your page against competitors side by side, find keyword gaps, and see who's winning in Google and AI search — no login.",
     canonical: 'https://rankedtag.com/competitor-analysis',
     jsonLd: COMP_JSONLD,
   });
@@ -85,12 +87,13 @@ export default function CompetitorAnalysis() {
         <section className="cp-hero">
           <div className="container">
             <span className="eyebrow">Competitor Analysis</span>
-            <h1 className="h-2" style={{ marginTop: 16, maxWidth: 700 }}>
-              Compare your content against the competition
+            <h1 className="h-2" style={{ marginTop: 16, maxWidth: 720 }}>
+              Free competitor analysis tool — compare your content side by side
             </h1>
             <p className="lead" style={{ marginTop: 12 }}>
               Enter your page and up to 5 competitor URLs. Get keyword gaps,
-              SEO score comparison, and actionable optimization insights.
+              side-by-side SEO scoring, and actionable optimization insights —
+              free, no login.
             </p>
           </div>
         </section>
@@ -196,6 +199,8 @@ export default function CompetitorAnalysis() {
             )}
           </div>
         </section>
+
+        <CompetitorGuide />
       </main>
     </>
   );
