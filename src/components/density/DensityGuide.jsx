@@ -1,5 +1,6 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import ToolFaq from '../seo/ToolFaq';
+import '../seo/toolGuide.css';
 
 // Long-form SEO content rendered beneath the Keyword Density Checker tool.
 // Written to win the tool-first query plus its informational tail (formula,
@@ -29,32 +30,6 @@ export const DENSITY_FAQ = [
     "Keyword stuffing is overloading a page with a keyword in an unnatural way to manipulate rankings, such as repeating it far more than the content warrants, listing it out of context, or hiding it. It violates Google's guidelines and can lower rankings.",
   ],
 ];
-
-function Faq() {
-  const [open, setOpen] = useState(0);
-  return (
-    <div className="dg-faq">
-      {DENSITY_FAQ.map(([q, a], i) => {
-        const isOpen = open === i;
-        return (
-          <div className={`dg-faq-item ${isOpen ? 'open' : ''}`} key={q}>
-            <button
-              className="dg-faq-q"
-              aria-expanded={isOpen}
-              onClick={() => setOpen(isOpen ? -1 : i)}
-            >
-              <span>{q}</span>
-              <span className="dg-faq-ic" aria-hidden="true">{isOpen ? '–' : '+'}</span>
-            </button>
-            <div className="dg-faq-a" hidden={!isOpen}>
-              <p>{a}</p>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
 
 const RELATED = [
   {
@@ -264,7 +239,7 @@ export default function DensityGuide() {
           </p>
 
           <h2 id="faq">Frequently asked questions</h2>
-          <Faq />
+          <ToolFaq items={DENSITY_FAQ} />
 
           <h2 id="related-tools">Related free SEO tools</h2>
           <div className="dg-related">

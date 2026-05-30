@@ -3,7 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import Nav from '../components/Nav.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
-import { softwareTool, breadcrumb, SITE } from '../lib/schema.js';
+import { softwareTool, breadcrumb, faqPage, SITE } from '../lib/schema.js';
+import DomainAuthorityGuide, { DA_FAQ } from '../components/seo/DomainAuthorityGuide';
 import { api } from '../lib/api.js';
 import { trackToolUse } from '../lib/track.js';
 import { submitToolUsage, syntheticEmail } from '../lib/hubspot.js';
@@ -29,6 +30,7 @@ const DA_JSONLD = [
     { name: 'Home', item: `${SITE}/` },
     { name: 'Domain Authority Checker', item: DA_URL },
   ]),
+  faqPage(DA_FAQ),
 ];
 
 function scoreColor(score) {
@@ -66,9 +68,9 @@ const COMPONENT_DESCRIPTIONS = {
 export default function BacklinkChecker() {
   useScrollReveal();
   usePageMeta({
-    title: 'Free Domain Authority Checker · No Ahrefs Key · RankedTag',
+    title: 'Domain Authority Checker — Free, No Ahrefs Key | RankedTag',
     description:
-      'Free domain authority checker that does not need an Ahrefs or Moz key. Composite score from Tranco traffic rank, Wayback domain age, on-page schema, and HTTP transport quality. Cross-checkable against the public sources we hit.',
+      'Free domain authority checker. Get a composite DA score from traffic rank, domain age, on-page schema and HTTP transport — every input source-linked. No login, no Ahrefs key.',
     canonical: 'https://rankedtag.com/domain-authority-checker',
     jsonLd: DA_JSONLD,
   });
@@ -264,6 +266,8 @@ export default function BacklinkChecker() {
           </div>
         )}
       </div>
+
+      <DomainAuthorityGuide />
 
       <footer className="footer">
         <div className="container">
