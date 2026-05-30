@@ -186,14 +186,14 @@ export function articleJsonLd(post) {
     '@type': 'BlogPosting',
     headline: post.meta_title || post.title,
     description: post.meta_description || post.excerpt,
-    image: post.og_image_url || post.cover_image_url || `${SITE_URL}/Rankedtag%20(1).png`,
+    image: post.og_image_url || post.cover_image_url || `${SITE_URL}/rankedtag-logo.png`,
     datePublished: post.published_at,
     dateModified: post.updated_at || post.published_at,
     author: { '@type': 'Organization', name: post.author || SITE_NAME, url: SITE_URL },
     publisher: {
       '@type': 'Organization',
       name: SITE_NAME,
-      logo: { '@type': 'ImageObject', url: `${SITE_URL}/Rankedtag%20(1).png` },
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/rankedtag-logo.png` },
     },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
   };

@@ -15,7 +15,7 @@
 export const SITE = 'https://rankedtag.com';
 export const ORG_ID = `${SITE}/#org`;
 export const WEBSITE_ID = `${SITE}/#website`;
-const LOGO = `${SITE}/Rankedtag%20(1).png`;
+const LOGO = `${SITE}/rankedtag-logo.png`;
 
 const ctx = (node) => ({ '@context': 'https://schema.org', ...node });
 

@@ -275,9 +275,10 @@ export default function BacklinkChecker() {
             <div>
               <a href="/" className="nav-logo" style={{color: 'var(--paper)'}}>
                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <rect className="lg-r1" x="30" y="20" width="50" height="50"/>
-                  <rect className="lg-r3" x="20" y="50" width="30" height="30" style={{fill: 'var(--paper)'}}/>
-                  <rect className="lg-r2" x="40" y="45" width="25" height="20"/>
+                  <rect className="lg-r1" x="42" y="8" width="50" height="50"/>
+                  <rect className="lg-r3" x="10" y="44" width="30" height="30" style={{fill: 'var(--paper)'}}/>
+                  <rect className="lg-r2" x="42" y="44" width="30" height="30"/>
+                  <rect className="lg-r3" x="42" y="74" width="26" height="26" style={{fill: 'var(--paper)'}}/>
                 </svg>
                 RankedTag
               </a>

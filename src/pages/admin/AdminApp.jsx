@@ -16,10 +16,12 @@ function slugify(s) {
 }
 
 const LOGO = (
-  <svg viewBox="0 0 100 100" className="brand-mark" aria-hidden="true">
-    <rect fill="#0E0E10" x="30" y="20" width="50" height="50" />
-    <rect fill="#A6B0F0" x="20" y="50" width="30" height="30" />
-    <rect fill="#FF3B14" x="40" y="45" width="25" height="20" />
+  <svg viewBox="0 0 100 100" className="brand-mark" role="img" aria-label="RankedTag logo">
+    <title>RankedTag logo</title>
+    <rect fill="#FF3B14" x="42" y="8" width="50" height="50" />
+    <rect fill="#0E0E10" x="10" y="44" width="30" height="30" />
+    <rect fill="#A6B0F0" x="42" y="44" width="30" height="30" />
+    <rect fill="#0E0E10" x="42" y="74" width="26" height="26" />
   </svg>
 );
 

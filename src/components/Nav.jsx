@@ -67,11 +67,13 @@ export default function Nav({ variant = 'home' }) {
       className={`nav${scrolled ? ' scrolled' : ''}${open ? ' menu-open' : ''}`}
       id="nav"
     >
-      <Link to="/" className="nav-logo" onClick={close}>
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect className="lg-r1" x="30" y="20" width="50" height="50" />
-          <rect className="lg-r3" x="20" y="50" width="30" height="30" />
-          <rect className="lg-r2" x="40" y="45" width="25" height="20" />
+      <Link to="/" className="nav-logo" onClick={close} aria-label="RankedTag home">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RankedTag logo">
+          <title>RankedTag logo</title>
+          <rect className="lg-r1" x="42" y="8" width="50" height="50" />
+          <rect className="lg-r3" x="10" y="44" width="30" height="30" />
+          <rect className="lg-r2" x="42" y="44" width="30" height="30" />
+          <rect className="lg-r3" x="42" y="74" width="26" height="26" />
         </svg>
         RankedTag
       </Link>

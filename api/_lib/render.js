@@ -83,7 +83,7 @@ color:var(--muted);font-size:14px;text-align:center}
 footer a:hover{color:var(--red)}
 `;
 
-const LOGO_SVG = `<svg viewBox="0 0 100 100" aria-hidden="true"><rect fill="#0E0E10" x="30" y="20" width="50" height="50"/><rect fill="#A6B0F0" x="20" y="50" width="30" height="30"/><rect fill="#FF3B14" x="40" y="45" width="25" height="20"/></svg>`;
+const LOGO_SVG = `<svg viewBox="0 0 100 100" role="img" aria-label="RankedTag"><title>RankedTag</title><rect fill="#FF3B14" x="42" y="8" width="50" height="50"/><rect fill="#0E0E10" x="10" y="44" width="30" height="30"/><rect fill="#A6B0F0" x="42" y="44" width="30" height="30"/><rect fill="#0E0E10" x="42" y="74" width="26" height="26"/></svg>`;
 
 function nav() {
   return `<nav><div class="nav-in">
@@ -122,7 +122,7 @@ function shell({ title, description, canonical, ogImage, jsonLd, body, robots })
 <meta name="description" content="${escapeHtml(description)}"/>
 <link rel="canonical" href="${escapeHtml(canonical)}"/>
 <meta name="robots" content="${robots || 'index, follow, max-image-preview:large'}"/>
-<link rel="icon" type="image/png" href="/Rankedtag (1).png"/>
+<link rel="icon" type="image/svg+xml" href="/rankedtag-mark.svg"/><link rel="icon" type="image/png" href="/rankedtag-logo.png"/>
 <meta property="og:type" content="article"/>
 <meta property="og:site_name" content="${SITE_NAME}"/>
 <meta property="og:title" content="${escapeHtml(title)}"/>
@@ -189,7 +189,7 @@ ${posts.length ? `<div class="grid">${cards}</div>` : `<div class="empty">No pos
     description:
       'Field notes on SEO, generative engine optimization (GEO), and building inbound engines that generate qualified pipeline for B2B SaaS.',
     canonical: `${SITE_URL}/blog`,
-    ogImage: `${SITE_URL}/Rankedtag (1).png`,
+    ogImage: `${SITE_URL}/rankedtag-logo.png`,
     jsonLd,
     body,
   });
@@ -224,7 +224,7 @@ ${leadCta()}
     description: post.meta_description || post.excerpt,
     canonical: post.canonical_url || `${SITE_URL}/blog/${post.slug}`,
     ogImage:
-      post.og_image_url || post.cover_image_url || `${SITE_URL}/Rankedtag (1).png`,
+      post.og_image_url || post.cover_image_url || `${SITE_URL}/rankedtag-logo.png`,
     jsonLd,
     body,
   });
@@ -239,7 +239,7 @@ export function renderNotFound() {
     title: `Not found · ${SITE_NAME}`,
     description: 'Post not found.',
     canonical: `${SITE_URL}/blog`,
-    ogImage: `${SITE_URL}/Rankedtag (1).png`,
+    ogImage: `${SITE_URL}/rankedtag-logo.png`,
     jsonLd: [],
     body,
     robots: 'noindex, follow',
