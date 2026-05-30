@@ -72,17 +72,46 @@ export function softwareTool({
   });
 }
 
-/** The RankedTag service offering (homepage). */
-export function professionalService({ name, description, url = `${SITE}/` }) {
+/**
+ * The RankedTag service offering (homepage).
+ * `serviceType` (array) and `services` ([{ name, description }]) carry the
+ * target keyword clusters as structured data — strong SEO/AI signal without
+ * touching any visible page copy.
+ */
+export function professionalService({
+  name,
+  description,
+  url = `${SITE}/`,
+  serviceType,
+  services,
+}) {
   return ctx({
     '@type': 'ProfessionalService',
     '@id': `${SITE}/#service`,
     name,
     description,
     url,
+    image: LOGO,
     provider: { '@id': ORG_ID },
     areaServed: 'Worldwide',
-    serviceType: 'SEO & Generative Engine Optimization for B2B SaaS',
+    serviceType: serviceType || 'SEO & Generative Engine Optimization for B2B SaaS',
+    ...(services && services.length
+      ? {
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: 'SEO & AI Search services for B2B SaaS',
+            itemListElement: services.map((s) => ({
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: s.name,
+                description: s.description,
+                provider: { '@id': ORG_ID },
+              },
+            })),
+          },
+        }
+      : {}),
   });
 }
 

@@ -21,9 +21,24 @@ const HOME_FAQ = [
 
 const HOME_JSONLD = [
   professionalService({
-    name: 'RankedTag',
+    name: 'RankedTag — SEO, AI SEO, AEO & GEO Agency for B2B SaaS',
     description:
-      'Done-for-you inbound engine for B2B SaaS founders: SEO, generative engine optimization (GEO), and AI-citation strategy that turns into qualified pipeline inside 90 days.',
+      'Done-for-you B2B SaaS SEO, AI SEO, answer engine optimization (AEO) and generative engine optimization (GEO). We get you ranked on Google and cited by ChatGPT, Perplexity, Gemini and Claude — turning AI search visibility into qualified pipeline inside 90 days.',
+    serviceType: [
+      'Search Engine Optimization (SEO)',
+      'AI SEO',
+      'Answer Engine Optimization (AEO)',
+      'Generative Engine Optimization (GEO)',
+      'LLM SEO (LLMO)',
+      'B2B SaaS content marketing',
+    ],
+    services: [
+      { name: 'B2B SaaS SEO', description: 'Full-funnel search engine optimization for B2B SaaS: technical SEO, content, and link authority that compounds into qualified pipeline.' },
+      { name: 'AI SEO', description: 'AI-assisted SEO that ships in days, not months — keyword research, drafting and optimization with senior human review.' },
+      { name: 'Generative Engine Optimization (GEO)', description: 'Get your brand cited in ChatGPT, Perplexity, Gemini and Claude answers and Google AI Overviews.' },
+      { name: 'Answer Engine Optimization (AEO)', description: 'Structured data, entity and topical authority so answer engines surface and cite your brand.' },
+      { name: 'LLM SEO (LLMO)', description: 'Track and grow brand visibility and citations across large language models and AI search.' },
+    ],
   }),
   faqPage(HOME_FAQ),
 ];
@@ -38,9 +53,9 @@ function normalizeUrl(raw) {
 export default function Home() {
   useScrollReveal();
   usePageMeta({
-    title: 'RankedTag · The Inbound Engine for SaaS Founders',
+    title: 'SEO, AI SEO, AEO & GEO Agency for B2B SaaS | RankedTag',
     description:
-      "0 to 1.05M organic impressions and 7.43k clicks in 6 months. Sendr.ai ranks #2 on Google's AI Overview for 'best GTM tool', six places above ZoomInfo. The same inbound engine, applied to your B2B SaaS.",
+      "Full-stack SEO, AI SEO, AEO & GEO for B2B SaaS. We took sendr.ai 0→1.05M impressions in 6 months—#2 on Google's AI Overview, above ZoomInfo.",
     canonical: 'https://rankedtag.com/',
     jsonLd: HOME_JSONLD,
   });
