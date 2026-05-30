@@ -154,7 +154,7 @@ export default function PageSpeed() {
           </div>
 
           <p className="fineprint" style={{marginTop:'18px'}}>
-            // For a deeper full-Lighthouse report including Core Web Vitals from real-user data, also run your URL through <a href="https://pagespeed.web.dev/" target="_blank" rel="noreferrer" style={{textDecoration:'underline'}}>pagespeed.web.dev</a>.
+            Tests load time on mobile and desktop, scores the five signals behind your Core Web Vitals (LCP, INP, CLS), and ranks what to fix first — so your pages rank faster on Google and stay crawlable for AI search.
           </p>
         </div>
       </section>
@@ -266,7 +266,7 @@ export default function PageSpeed() {
 
             {data.opportunities?.length === 0 && (
               <div className="kwd-empty" style={{marginTop:'24px'}}>
-                No major issues flagged. The five signals all came back clean. Cross-check on pagespeed.web.dev for the full Lighthouse run if you want a second opinion.
+                No major issues flagged — all five signals came back clean. Your page is fast, lean, and well-structured for both Google and AI crawlers.
               </div>
             )}
 
@@ -281,7 +281,7 @@ export default function PageSpeed() {
 
         {!data && !loading && !error && (
           <div className="kwd-empty">
-            Drop a URL above. We will fetch it, parse the HTML, and render the score breakdown here. Cross-check on pagespeed.web.dev for the full Lighthouse run.
+            Drop a URL above. We'll fetch it, parse the HTML, and render your performance score, five-signal breakdown, and ranked fix-first list right here.
           </div>
         )}
       </div>
