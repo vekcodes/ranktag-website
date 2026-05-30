@@ -24,6 +24,7 @@ backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid var(--paper-3)
 max-width:1100px;margin:0 auto;padding:0 24px}
 .logo{display:flex;align-items:center;gap:9px;font-family:'Fraunces',serif;font-weight:700;font-size:20px}
 .logo svg{width:26px;height:26px}
+.logo img{height:28px;width:auto;display:block}
 .nav-links{display:flex;align-items:center;gap:26px;font-size:15px;font-weight:500}
 .nav-links a:hover{color:var(--red)}
 .cta{background:var(--red);color:#fff;padding:9px 18px;border-radius:999px;
@@ -83,11 +84,9 @@ color:var(--muted);font-size:14px;text-align:center}
 footer a:hover{color:var(--red)}
 `;
 
-const LOGO_SVG = `<svg viewBox="0 0 100 100" role="img" aria-label="RankedTag"><title>RankedTag</title><rect fill="#FF3B14" x="42" y="8" width="50" height="50"/><rect fill="#0E0E10" x="10" y="44" width="30" height="30"/><rect fill="#A6B0F0" x="42" y="44" width="30" height="30"/><rect fill="#0E0E10" x="42" y="74" width="26" height="26"/></svg>`;
-
 function nav() {
   return `<nav><div class="nav-in">
-<a class="logo" href="/">${LOGO_SVG}${SITE_NAME}</a>
+<a class="logo" href="/" aria-label="RankedTag home"><img src="/rankedtag-logo.svg" alt="RankedTag" width="106" height="28"/></a>
 <div class="nav-links">
 <a href="/#how-it-works">How it works</a>
 <a href="/#case-study">Sendr.ai story</a>

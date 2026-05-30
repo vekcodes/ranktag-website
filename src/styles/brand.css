@@ -265,6 +265,7 @@ section.tight{padding:48px 0}
   letter-spacing:-.02em;
 }
 .nav-logo svg{width:26px;height:26px}
+.nav-logo img{height:28px;width:auto;display:block}
 .nav-links{
   display:flex;
   gap:6px;

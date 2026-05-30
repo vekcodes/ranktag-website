@@ -16,13 +16,7 @@ function slugify(s) {
 }
 
 const LOGO = (
-  <svg viewBox="0 0 100 100" className="brand-mark" role="img" aria-label="RankedTag logo">
-    <title>RankedTag logo</title>
-    <rect fill="#FF3B14" x="42" y="8" width="50" height="50" />
-    <rect fill="#0E0E10" x="10" y="44" width="30" height="30" />
-    <rect fill="#A6B0F0" x="42" y="44" width="30" height="30" />
-    <rect fill="#0E0E10" x="42" y="74" width="26" height="26" />
-  </svg>
+  <img className="brand-mark" src="/rankedtag-mark.svg" alt="RankedTag" width="30" height="30" />
 );
 
 // Shown when /api/* isn't reachable (running `npm run dev` instead of `vercel dev`).
