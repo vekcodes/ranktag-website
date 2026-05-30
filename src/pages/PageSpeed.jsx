@@ -3,10 +3,32 @@ import { useSearchParams } from 'react-router-dom';
 import Nav from '../components/Nav.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
+import { softwareTool, breadcrumb, SITE } from '../lib/schema.js';
 import { api } from '../lib/api.js';
 import { trackToolUse } from '../lib/track.js';
 import { submitToolUsage, syntheticEmail } from '../lib/hubspot.js';
 import './ToolPage.css';
+
+const PS_URL = `${SITE}/page-speed-checker`;
+const PS_JSONLD = [
+  softwareTool({
+    name: 'RankedTag Page Speed Checker',
+    url: PS_URL,
+    description:
+      'Free page speed checker. We fetch your URL server-side, time the response, parse the HTML and score five real signals: speed, weight, render-blocking resources, image hygiene and transport quality. No Google PSI key required.',
+    featureList: [
+      'Server-side fetch and response timing',
+      'Five-signal scoring (speed, weight, render-blocking, image hygiene, transport)',
+      'Mobile and desktop strategies',
+      'Results in under 5 seconds',
+      'No Google PSI key required',
+    ],
+  }),
+  breadcrumb([
+    { name: 'Home', item: `${SITE}/` },
+    { name: 'Page Speed Checker', item: PS_URL },
+  ]),
+];
 
 const COMPONENT_LABELS = {
   speed: 'TTFB + download',
@@ -44,6 +66,7 @@ export default function PageSpeed() {
     description:
       'Free page speed checker. We fetch your URL server-side, time the response, parse the HTML and score it on five real signals: speed, weight, render-blocking, image hygiene, transport quality. Runs in under 5 seconds. No Google PSI key required.',
     canonical: 'https://rankedtag.com/page-speed-checker',
+    jsonLd: PS_JSONLD,
   });
   const [searchParams] = useSearchParams();
   const [url, setUrl] = useState('');

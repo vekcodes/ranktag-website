@@ -97,6 +97,44 @@ export function postUrl(slug) {
 }
 
 /**
+ * Validate & normalise author-supplied JSON-LD.
+ * Accepts a JSON string for a single object or an array of objects.
+ * Returns the trimmed source string; throws a 400 if it isn't valid JSON.
+ */
+export function validateCustomJsonLd(raw) {
+  const str = String(raw == null ? '' : raw).trim();
+  if (!str) return '';
+  let parsed;
+  try {
+    parsed = JSON.parse(str);
+  } catch {
+    const e = new Error('Custom JSON-LD is not valid JSON.');
+    e.status = 400;
+    throw e;
+  }
+  const nodes = Array.isArray(parsed) ? parsed : [parsed];
+  if (!nodes.every((n) => n && typeof n === 'object' && !Array.isArray(n))) {
+    const e = new Error('Custom JSON-LD must be an object or an array of objects.');
+    e.status = 400;
+    throw e;
+  }
+  return str;
+}
+
+/** Parse stored custom JSON-LD into an array of nodes (defensive, never throws). */
+export function parseCustomJsonLd(raw) {
+  const str = String(raw == null ? '' : raw).trim();
+  if (!str) return [];
+  try {
+    const parsed = JSON.parse(str);
+    const nodes = Array.isArray(parsed) ? parsed : [parsed];
+    return nodes.filter((n) => n && typeof n === 'object' && !Array.isArray(n));
+  } catch {
+    return [];
+  }
+}
+
+/**
  * Turn raw admin input into a normalised, SEO-complete post record.
  * Accepts markdown, raw HTML, or already-rich editor HTML.
  */
@@ -136,6 +174,7 @@ export function normalizePostInput(body = {}) {
     author: String(body.author || SITE_NAME).trim(),
     status: body.status === 'published' ? 'published' : 'draft',
     reading_minutes: readingMinutes(content_html),
+    custom_jsonld: validateCustomJsonLd(body.custom_jsonld),
   };
 }
 
@@ -167,5 +206,6 @@ export function articleJsonLd(post) {
       { '@type': 'ListItem', position: 3, name: post.title, item: url },
     ],
   };
-  return [blogPosting, breadcrumb];
+  // Auto schema first, then any author-supplied JSON-LD from the CMS.
+  return [blogPosting, breadcrumb, ...parseCustomJsonLd(post.custom_jsonld)];
 }

@@ -7,7 +7,7 @@ import './admin.css';
 const EMPTY = {
   title: '', slug: '', status: 'draft', excerpt: '', meta_title: '',
   meta_description: '', tags: '', cover_image_url: '', cover_image_alt: '',
-  og_image_url: '', canonical_url: '', content_html: '',
+  og_image_url: '', canonical_url: '', custom_jsonld: '', content_html: '',
 };
 
 function slugify(s) {
@@ -168,6 +168,7 @@ function PostForm({ id, onDone }) {
         cover_image_alt: p.cover_image_alt || '',
         og_image_url: p.og_image_url || '',
         canonical_url: p.canonical_url || '',
+        custom_jsonld: p.custom_jsonld || '',
         content_html: p.content_html || '',
       });
       setLoaded(true);
@@ -228,6 +229,22 @@ function PostForm({ id, onDone }) {
 
   const metaLen = (f.meta_description || f.excerpt).length;
 
+  // Live JSON validity for the optional custom JSON-LD block. Empty is fine;
+  // invalid JSON blocks saving so the server never rejects on submit.
+  const customLd = (f.custom_jsonld || '').trim();
+  const customLdError = (() => {
+    if (!customLd) return '';
+    try {
+      const v = JSON.parse(customLd);
+      const nodes = Array.isArray(v) ? v : [v];
+      if (!nodes.every((n) => n && typeof n === 'object' && !Array.isArray(n)))
+        return 'Must be a JSON object or an array of objects.';
+      return '';
+    } catch {
+      return 'Not valid JSON.';
+    }
+  })();
+
   return (
     <div className="admin-wrap editor-layout">
       <div className="editor-main">
@@ -250,13 +267,16 @@ function PostForm({ id, onDone }) {
           {err && <div className="err">{err}</div>}
           <div className="muted sm">Status: <strong>{f.status}</strong></div>
           <div className="btn-col">
-            <button className="btn" disabled={busy} onClick={() => save(false)}>
+            <button className="btn" disabled={busy || Boolean(customLdError)} onClick={() => save(false)}>
               {busy ? 'Saving…' : 'Save draft'}
             </button>
-            <button className="btn primary" disabled={busy} onClick={() => save(true)}>
+            <button className="btn primary" disabled={busy || Boolean(customLdError)} onClick={() => save(true)}>
               {f.status === 'published' ? 'Update (live)' : 'Publish'}
             </button>
           </div>
+          {customLdError && (
+            <div className="muted sm warn">Fix the custom JSON-LD before saving.</div>
+          )}
         </div>
 
         <div className="card">
@@ -294,6 +314,27 @@ function PostForm({ id, onDone }) {
             <input value={f.canonical_url} onChange={set('canonical_url')}
               placeholder="Leave blank for default" />
           </label>
+
+          <label>Custom JSON-LD schema (advanced)
+            <textarea
+              rows={6}
+              value={f.custom_jsonld}
+              onChange={set('custom_jsonld')}
+              spellCheck={false}
+              className={`code ${customLdError ? 'invalid' : ''}`}
+              placeholder={'Optional. A JSON object or array of schema.org\nobjects, e.g. an FAQPage or HowTo. Added on top\nof the automatic BlogPosting + Breadcrumb schema.'}
+            />
+          </label>
+          {customLdError ? (
+            <div className="muted sm warn">⚠ {customLdError}</div>
+          ) : customLd ? (
+            <div className="muted sm">✓ Valid JSON-LD — merged with the auto schema.</div>
+          ) : (
+            <div className="muted sm">
+              Auto schema (BlogPosting + Breadcrumb) is always added. Paste extra
+              schema.org JSON here to layer on FAQPage, HowTo, etc.
+            </div>
+          )}
         </div>
 
         <div className="card">

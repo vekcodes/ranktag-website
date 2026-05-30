@@ -11,6 +11,7 @@ import { useDebounce } from '../hooks/useDebounce';
 import { analyzeDensity } from '../utils/densityAnalyzer';
 import { trackToolUse } from '../lib/track';
 import usePageMeta from '../hooks/usePageMeta';
+import { softwareTool, breadcrumb, SITE } from '../lib/schema.js';
 import '../components/charts/charts.css';
 import '../components/export/export.css';
 import './DensityDashboard.css';
@@ -22,31 +23,35 @@ const DEFAULT_OPTIONS = {
   topN: 30,
 };
 
+const DENSITY_URL = `${SITE}/keyword-density-checker`;
+const DENSITY_JSONLD = [
+  softwareTool({
+    name: 'RankedTag Keyword Density Checker',
+    url: DENSITY_URL,
+    description:
+      'Free, browser-based keyword density checker. Live 1-, 2- and 3-word density, frequency tables, visual charts and CSV export. Text analysis runs locally; URL fetches go through our own server-side scraper.',
+    featureList: [
+      '1-word, 2-word and 3-word density',
+      'Real-time analysis as you type',
+      'URL scraping with server-side fetch',
+      'Visual charts (bar, donut, stuffing meter, heatmap, cloud)',
+      'CSV export',
+      'No login, no API key, no tracking',
+    ],
+  }),
+  breadcrumb([
+    { name: 'Home', item: `${SITE}/` },
+    { name: 'Keyword Density Checker', item: DENSITY_URL },
+  ]),
+];
+
 export default function DensityDashboard() {
   usePageMeta({
     title: 'Free Keyword Density Checker · 1-, 2- and 3-Word Analysis · RankedTag',
     description:
       'Free keyword density checker for SEO. Paste content or a URL and get live 1-, 2- and 3-word density with frequency tables, visual charts, and CSV export. Runs in your browser — your text never leaves your device.',
     canonical: 'https://rankedtag.com/keyword-density-checker',
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'WebApplication',
-      name: 'RankedTag Keyword Density Checker',
-      url: 'https://rankedtag.com/keyword-density-checker',
-      applicationCategory: 'SEOApplication',
-      operatingSystem: 'Any (browser-based)',
-      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-      description:
-        'Free, browser-based keyword density checker. Live 1-, 2- and 3-word density, frequency tables, visual charts and CSV export. Text analysis runs locally; URL fetches go through our own server-side scraper.',
-      featureList: [
-        '1-word, 2-word and 3-word density',
-        'Real-time analysis as you type',
-        'URL scraping with server-side fetch',
-        'Visual charts (bar, donut, stuffing meter, heatmap, cloud)',
-        'CSV export',
-        'No login, no API key, no tracking',
-      ],
-    },
+    jsonLd: DENSITY_JSONLD,
   });
 
   const [content, setContent] = useState('');

@@ -100,6 +100,9 @@ margin-top:12px}
 border:1px solid var(--paper-3);border-radius:8px;font-size:14px;font-weight:400;
 color:var(--ink)}
 .editor-side input:focus,.editor-side textarea:focus{outline:none;border-color:var(--red)}
+.editor-side textarea.code{font-family:'JetBrains Mono',monospace;font-size:12.5px;
+line-height:1.5;white-space:pre;overflow:auto}
+.editor-side textarea.code.invalid{border-color:var(--warn)}
 .btn-col{display:flex;flex-direction:column;gap:8px;margin-top:12px}
 .btn-col .btn{margin:0}
 .filebtn{display:inline-flex;justify-content:center;cursor:pointer;margin-top:10px}

@@ -2,8 +2,20 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Nav from '../components/Nav.jsx';
 import usePageMeta from '../hooks/usePageMeta.js';
+import { blogCollection, breadcrumb, SITE } from '../lib/schema.js';
 import { blogApi, ApiUnreachableError } from '../lib/blogApi.js';
 import './blog.css';
+
+const BLOG_JSONLD = [
+  blogCollection({
+    description:
+      'SEO, generative engine optimization, and inbound growth for B2B SaaS founders.',
+  }),
+  breadcrumb([
+    { name: 'Home', item: `${SITE}/` },
+    { name: 'Blog', item: `${SITE}/blog` },
+  ]),
+];
 
 // Client-side blog index. In production the SSR function at /api/blog-page
 // serves this route (better for SEO); this component is the resilient
@@ -14,6 +26,7 @@ export default function Blog() {
     description:
       'Field notes on SEO, generative engine optimization (GEO), and building inbound engines that generate qualified pipeline for B2B SaaS.',
     canonical: 'https://rankedtag.com/blog',
+    jsonLd: BLOG_JSONLD,
   });
 
   const [state, setState] = useState({ status: 'loading', posts: [] });

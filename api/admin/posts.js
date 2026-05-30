@@ -48,6 +48,7 @@ export default async function handler(req, res) {
             cover_image_alt = ${p.cover_image_alt},
             meta_title = ${p.meta_title}, meta_description = ${p.meta_description},
             og_image_url = ${p.og_image_url}, canonical_url = ${p.canonical_url},
+            custom_jsonld = ${p.custom_jsonld},
             tags = ${p.tags}, author = ${p.author}, status = ${p.status},
             reading_minutes = ${p.reading_minutes}, published_at = ${publishedAt},
             updated_at = now()
@@ -88,13 +89,13 @@ export default async function handler(req, res) {
         INSERT INTO posts (
           slug, title, excerpt, content_html, content_md, source_format,
           cover_image_url, cover_image_alt, meta_title, meta_description,
-          og_image_url, canonical_url, tags, author, status,
+          og_image_url, canonical_url, custom_jsonld, tags, author, status,
           reading_minutes, published_at
         ) VALUES (
           ${p.slug}, ${p.title}, ${p.excerpt}, ${p.content_html}, ${p.content_md},
           ${p.source_format}, ${p.cover_image_url}, ${p.cover_image_alt},
           ${p.meta_title}, ${p.meta_description}, ${p.og_image_url},
-          ${p.canonical_url}, ${p.tags}, ${p.author}, ${p.status},
+          ${p.canonical_url}, ${p.custom_jsonld}, ${p.tags}, ${p.author}, ${p.status},
           ${p.reading_minutes}, ${publishedAt}
         )
         RETURNING id, slug, status`;

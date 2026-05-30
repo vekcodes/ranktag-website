@@ -9,7 +9,29 @@ import { competitorAnalyze } from '../lib/densityApi';
 import { trackToolUse } from '../lib/track';
 import { submitToolUsage, syntheticEmail } from '../lib/hubspot.js';
 import usePageMeta from '../hooks/usePageMeta';
+import { softwareTool, breadcrumb, SITE } from '../lib/schema.js';
 import './CompetitorAnalysis.css';
+
+const COMP_URL = `${SITE}/competitor-analysis`;
+const COMP_JSONLD = [
+  softwareTool({
+    name: 'RankedTag SEO Competitor Analysis Tool',
+    url: COMP_URL,
+    description:
+      'Free SEO competitor analysis tool. Compare your site against competitors with side-by-side scoring, keyword-gap analysis and actionable insights — no login required.',
+    featureList: [
+      'Side-by-side competitor scoring',
+      'Keyword-gap analysis',
+      'Competitor radar visualisation',
+      'Actionable on-page insights',
+      'No login required',
+    ],
+  }),
+  breadcrumb([
+    { name: 'Home', item: `${SITE}/` },
+    { name: 'Competitor Analysis', item: COMP_URL },
+  ]),
+];
 
 export default function CompetitorAnalysis() {
   usePageMeta({
@@ -17,6 +39,7 @@ export default function CompetitorAnalysis() {
     description:
       'Free SEO competitor analysis tool. Compare your site against competitors with side-by-side scoring, keyword gap analysis, and actionable insights — no login required.',
     canonical: 'https://rankedtag.com/competitor-analysis',
+    jsonLd: COMP_JSONLD,
   });
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);

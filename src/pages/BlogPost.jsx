@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Nav from '../components/Nav.jsx';
 import usePageMeta from '../hooks/usePageMeta.js';
+import { articlePosting } from '../lib/schema.js';
 import { blogApi, ApiUnreachableError } from '../lib/blogApi.js';
 import './blog.css';
 
@@ -43,6 +44,11 @@ export default function BlogPost() {
 
   const { status, post } = state;
 
+  // BlogPosting + BreadcrumbList + any author custom JSON-LD, mirroring the
+  // SSR route's structured data. Memoised so the meta effect only re-runs
+  // when the post actually changes.
+  const jsonLd = useMemo(() => (post ? articlePosting(post) : undefined), [post]);
+
   usePageMeta({
     title: post
       ? `${post.meta_title || post.title} · RankedTag`
@@ -51,6 +57,7 @@ export default function BlogPost() {
     canonical: post
       ? post.canonical_url || `https://rankedtag.com/blog/${post.slug}`
       : undefined,
+    jsonLd,
   });
 
   return (

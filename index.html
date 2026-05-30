@@ -30,15 +30,43 @@
     <!-- Robots -->
     <meta name="robots" content="index, follow, max-image-preview:large" />
 
-    <!-- Org schema -->
+    <!-- Site-wide schema graph: Organization (#org) + WebSite (#website).
+         Page-level schema (injected per route) references these by @id.
+         TODO: add real social profile URLs to the Organization "sameAs". -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "RankedTag",
-        "url": "https://rankedtag.com/",
-        "logo": "https://rankedtag.com/Rankedtag (1).png",
-        "description": "RankedTag builds inbound engines for B2B SaaS founders. Senior strategists, Claude, and N8N. Ranked, cited, and feeding qualified leads inside 90 days."
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://rankedtag.com/#org",
+            "name": "RankedTag",
+            "url": "https://rankedtag.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://rankedtag.com/Rankedtag%20(1).png"
+            },
+            "image": "https://rankedtag.com/Rankedtag%20(1).png",
+            "description": "RankedTag builds inbound engines for B2B SaaS founders. Senior strategists, Claude, and N8N. Ranked, cited, and feeding qualified leads inside 90 days.",
+            "slogan": "The inbound engine for SaaS founders.",
+            "knowsAbout": [
+              "SaaS SEO",
+              "Generative Engine Optimization",
+              "Answer Engine Optimization",
+              "B2B SaaS inbound marketing",
+              "ChatGPT and Perplexity citations"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://rankedtag.com/#website",
+            "url": "https://rankedtag.com/",
+            "name": "RankedTag",
+            "description": "The inbound engine for B2B SaaS founders — SEO, GEO, and free SEO tools.",
+            "publisher": { "@id": "https://rankedtag.com/#org" },
+            "inLanguage": "en"
+          }
+        ]
       }
     </script>
 

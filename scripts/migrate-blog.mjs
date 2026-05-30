@@ -45,6 +45,7 @@ const STATEMENTS = [
      meta_description TEXT DEFAULT '',
      og_image_url  TEXT DEFAULT '',
      canonical_url TEXT DEFAULT '',
+     custom_jsonld TEXT DEFAULT '',
      tags          TEXT[] NOT NULL DEFAULT '{}',
      author        TEXT DEFAULT 'RankedTag',
      status        TEXT NOT NULL DEFAULT 'draft',
@@ -53,6 +54,10 @@ const STATEMENTS = [
      created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
      updated_at    TIMESTAMPTZ NOT NULL DEFAULT now()
    )`,
+  // Author-supplied JSON-LD (one object or an array), merged into the
+  // auto-generated BlogPosting + BreadcrumbList on render. Added after the
+  // initial schema, so guard with IF NOT EXISTS for existing databases.
+  `ALTER TABLE posts ADD COLUMN IF NOT EXISTS custom_jsonld TEXT DEFAULT ''`,
   `CREATE INDEX IF NOT EXISTS idx_posts_status_pub
      ON posts (status, published_at DESC)`,
   `CREATE INDEX IF NOT EXISTS idx_posts_slug ON posts (slug)`,

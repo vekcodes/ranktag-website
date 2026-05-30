@@ -3,10 +3,33 @@ import { useSearchParams } from 'react-router-dom';
 import Nav from '../components/Nav.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
+import { softwareTool, breadcrumb, SITE } from '../lib/schema.js';
 import { api } from '../lib/api.js';
 import { trackToolUse } from '../lib/track.js';
 import { submitToolUsage, syntheticEmail } from '../lib/hubspot.js';
 import './ToolPage.css';
+
+const DA_URL = `${SITE}/domain-authority-checker`;
+const DA_JSONLD = [
+  softwareTool({
+    name: 'RankedTag Domain Authority Checker',
+    url: DA_URL,
+    description:
+      'Free domain authority checker that needs no Ahrefs or Moz key. Composite score from Tranco traffic rank, Wayback domain age, on-page schema and HTTP transport quality — every input cross-checkable against its public source.',
+    featureList: [
+      'Composite domain authority score',
+      'Tranco traffic-rank signal',
+      'Wayback Machine domain age',
+      'On-page schema and Open Graph audit',
+      'HTTP transport-quality checks',
+      'No Ahrefs or Moz API key required',
+    ],
+  }),
+  breadcrumb([
+    { name: 'Home', item: `${SITE}/` },
+    { name: 'Domain Authority Checker', item: DA_URL },
+  ]),
+];
 
 function scoreColor(score) {
   if (score == null) return 'var(--muted)';
@@ -47,6 +70,7 @@ export default function BacklinkChecker() {
     description:
       'Free domain authority checker that does not need an Ahrefs or Moz key. Composite score from Tranco traffic rank, Wayback domain age, on-page schema, and HTTP transport quality. Cross-checkable against the public sources we hit.',
     canonical: 'https://rankedtag.com/domain-authority-checker',
+    jsonLd: DA_JSONLD,
   });
   const [searchParams] = useSearchParams();
   const [domain, setDomain] = useState('');
