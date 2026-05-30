@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="RankedTag">
+  <title>RankedTag</title>
+  <rect width="512" height="512" fill="#FFFFFF"/>
+  <g transform="translate(-240.28 -661.05) scale(1.79775)">
+    <rect x="246" y="421" width="119" height="118" fill="#F83000"/>
+    <rect x="187" y="480" width="59" height="59" fill="#181818"/>
+    <rect x="246" y="539" width="60" height="60" fill="#181818"/>
+    <rect x="246" y="480" width="59" height="59" fill="#98A8F8"/>
+  </g>
+</svg>

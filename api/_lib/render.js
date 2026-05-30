@@ -121,7 +121,7 @@ function shell({ title, description, canonical, ogImage, jsonLd, body, robots })
 <meta name="description" content="${escapeHtml(description)}"/>
 <link rel="canonical" href="${escapeHtml(canonical)}"/>
 <meta name="robots" content="${robots || 'index, follow, max-image-preview:large'}"/>
-<link rel="icon" type="image/svg+xml" href="/rankedtag-mark.svg"/><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/><link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/><link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png"/><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/><link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <meta property="og:type" content="article"/>
 <meta property="og:site_name" content="${SITE_NAME}"/>
 <meta property="og:title" content="${escapeHtml(title)}"/>
