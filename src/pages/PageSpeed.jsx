@@ -3,7 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import Nav from '../components/Nav.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
-import { softwareTool, breadcrumb, SITE } from '../lib/schema.js';
+import { softwareTool, breadcrumb, faqPage, SITE } from '../lib/schema.js';
+import PageSpeedGuide, { PS_FAQ } from '../components/seo/PageSpeedGuide';
 import { api } from '../lib/api.js';
 import { trackToolUse } from '../lib/track.js';
 import { submitToolUsage, syntheticEmail } from '../lib/hubspot.js';
@@ -19,6 +20,7 @@ const PS_JSONLD = [
     featureList: [
       'Server-side fetch and response timing',
       'Five-signal scoring (speed, weight, render-blocking, image hygiene, transport)',
+      'Ranked fix-first opportunities',
       'Mobile and desktop strategies',
       'Results in under 5 seconds',
       'No Google PSI key required',
@@ -28,6 +30,7 @@ const PS_JSONLD = [
     { name: 'Home', item: `${SITE}/` },
     { name: 'Page Speed Checker', item: PS_URL },
   ]),
+  faqPage(PS_FAQ),
 ];
 
 const COMPONENT_LABELS = {
@@ -62,9 +65,9 @@ function scoreLabel(score) {
 export default function PageSpeed() {
   useScrollReveal();
   usePageMeta({
-    title: 'Free Page Speed Checker · No PSI Key · RankedTag',
+    title: 'Page Speed Checker — Free Website Speed Test | RankedTag',
     description:
-      'Free page speed checker. We fetch your URL server-side, time the response, parse the HTML and score it on five real signals: speed, weight, render-blocking, image hygiene, transport quality. Runs in under 5 seconds. No Google PSI key required.',
+      'Free page speed checker. Test any URL on mobile and desktop, scored on five real signals with a ranked fix-first list in under 5 seconds — plus how to pass Core Web Vitals. No PSI key.',
     canonical: 'https://rankedtag.com/page-speed-checker',
     jsonLd: PS_JSONLD,
   });
@@ -282,6 +285,8 @@ export default function PageSpeed() {
           </div>
         )}
       </div>
+
+      <PageSpeedGuide />
 
       <footer className="footer">
         <div className="container">
