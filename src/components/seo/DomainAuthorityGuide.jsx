@@ -60,16 +60,16 @@ export default function DomainAuthorityGuide() {
         <article className="dg-article">
           <h2 id="what-is-domain-authority">What is domain authority?</h2>
           <p>
-            Domain authority is a general SEO concept that describes how "strong" or trustworthy a
-            website is in the eyes of search engines, mostly based on its backlink profile and overall
-            reputation. It's expressed as a score from 0 to 100, where higher means more authoritative.
+            Domain authority is a 0–100 score that estimates how much ranking power and trust a website
+            has built up — mostly through the size and quality of the backlink profile pointing at it.
+            A higher score means a site that tends to rank more easily and is harder to outrank.
           </p>
           <p>
-            One important clarification: "domain authority" as a concept is <strong>not</strong> an
-            official Google metric. The scores you see — Moz's DA, Ahrefs' DR, Semrush's Authority
-            Score, or RankedTag's composite — are each a third-party <em>estimate</em> of a site's
-            strength. They're useful for comparison and benchmarking, but no single one is "the"
-            authority Google uses.
+            Here's the part most checkers gloss over: domain authority is <strong>not</strong> a metric
+            Google publishes or uses. Every score you'll see — Moz's DA, Ahrefs' DR, Semrush's Authority
+            Score, or RankedTag's composite — is one company's <em>estimate</em>, built from its own data
+            and weighting. That's precisely why a single number can mislead you, and why this checker
+            shows the signals behind the score instead of asking you to trust a black box.
           </p>
 
           <h2 id="how-to-check-domain-authority">How to check domain authority (step-by-step)</h2>

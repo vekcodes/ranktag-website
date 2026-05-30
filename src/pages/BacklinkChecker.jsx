@@ -146,7 +146,7 @@ export default function BacklinkChecker() {
           </form>
 
           <p className="fineprint" style={{marginTop:'18px'}}>
-            // Same engine that powers our internal SaaS audits. Sources: tranco-list.eu, web.archive.org, your own homepage.
+            Every score is source-linked, so you can verify each input yourself — no API key, no login, no black box.
           </p>
         </div>
       </section>
