@@ -1,0 +1,13 @@
+{
+  "name": "RankedTag",
+  "short_name": "RankedTag",
+  "description": "SEO, AI SEO, AEO & GEO agency for B2B SaaS.",
+  "icons": [
+    { "src": "/favicon-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/favicon-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#0E0E10",
+  "background_color": "#F4EFE7",
+  "display": "standalone",
+  "start_url": "/"
+}
