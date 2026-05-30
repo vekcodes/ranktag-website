@@ -38,7 +38,7 @@ export default function ExportPanel({ keywords, totalWords }) {
             <span className="ex-option-icon">CSV</span>
             <div>
               <div className="ex-option-title">Download Keyword Density CSV</div>
-              <div className="ex-option-desc">All 1-, 2- and 3-word keywords with count and density.</div>
+              <div className="ex-option-desc">All 1-, 2-, 3- and 4-word keywords with count and density.</div>
             </div>
           </button>
         </div>

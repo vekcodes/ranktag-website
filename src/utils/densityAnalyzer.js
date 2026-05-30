@@ -6,7 +6,7 @@
 //
 // Shape:
 //   {
-//     keywords: { '1gram': [...], '2gram': [...], '3gram': [...] },
+//     keywords: { '1gram': [...], '2gram': [...], '3gram': [...], '4gram': [...] },
 //     statistics: { total_words, unique_words, filtered_words, block_count },
 //     processing: { total_processing_ms, is_full_reprocess, reprocessed_blocks, total_blocks }
 //   }
@@ -60,6 +60,7 @@ export function analyzeDensity(text, options = {}) {
   const unigramCounter = new Map();
   const bigramCounter = new Map();
   const trigramCounter = new Map();
+  const quadgramCounter = new Map();
 
   const isStop = (w) => filterStopwords && STOP_WORDS.has(w);
   const isNumber = (w) => removeNumbers && NUMERIC.test(w);
@@ -94,10 +95,23 @@ export function analyzeDensity(text, options = {}) {
     trigramCounter.set(key, (trigramCounter.get(key) || 0) + 1);
   }
 
+  for (let i = 0; i < tokens.length - 3; i++) {
+    const a = tokens[i], b = tokens[i + 1], c = tokens[i + 2], d = tokens[i + 3];
+    if (a.length < 2 || b.length < 2 || c.length < 2 || d.length < 2) continue;
+    if (isNumber(a) || isNumber(b) || isNumber(c) || isNumber(d)) continue;
+    // Allow stopwords inside the phrase, but require both ends to be
+    // content words so we keep meaningful 4-word phrases (e.g.
+    // "running shoes for men") and drop boilerplate ("of the day to").
+    if (isStop(a) || isStop(d)) continue;
+    const key = `${a} ${b} ${c} ${d}`;
+    quadgramCounter.set(key, (quadgramCounter.get(key) || 0) + 1);
+  }
+
   const keywords = {
     '1gram': rankCounter(unigramCounter, totalWords, { minFrequency, topN }),
     '2gram': rankCounter(bigramCounter, totalWords, { minFrequency, topN }),
     '3gram': rankCounter(trigramCounter, totalWords, { minFrequency, topN }),
+    '4gram': rankCounter(quadgramCounter, totalWords, { minFrequency, topN }),
   };
 
   const ms = performance.now() - t0;

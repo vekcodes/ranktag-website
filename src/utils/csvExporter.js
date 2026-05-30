@@ -33,7 +33,7 @@ function download(content, filename) {
  */
 export function exportKeywordsCsv(keywords, totalWords) {
   const lines = [row(['Rank', 'Keyword', 'Type', 'Count', 'Density (%)'])];
-  const types = { '1gram': '1-Word', '2gram': '2-Word', '3gram': '3-Word' };
+  const types = { '1gram': '1-Word', '2gram': '2-Word', '3gram': '3-Word', '4gram': '4-Word' };
 
   for (const [gram, label] of Object.entries(types)) {
     (keywords?.[gram] || []).forEach((kw, i) => {
@@ -104,7 +104,7 @@ export function exportFullReportCsv(keywords, totalWords, score) {
   // Keywords
   lines.push(row(['=== KEYWORDS ===']));
   lines.push(row(['Rank', 'Keyword', 'Type', 'Count', 'Density (%)']));
-  const types = { '1gram': '1-Word', '2gram': '2-Word', '3gram': '3-Word' };
+  const types = { '1gram': '1-Word', '2gram': '2-Word', '3gram': '3-Word', '4gram': '4-Word' };
   for (const [gram, label] of Object.entries(types)) {
     (keywords?.[gram] || []).forEach((kw, i) => {
       lines.push(row([i + 1, kw.keyword, label, kw.count, kw.density]));

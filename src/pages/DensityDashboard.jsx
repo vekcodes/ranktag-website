@@ -7,11 +7,12 @@ import SettingsPanel from '../components/density/SettingsPanel';
 import UrlAnalyzer from '../components/density/UrlAnalyzer';
 import VisualizationPanel from '../components/charts/VisualizationPanel';
 import ExportPanel from '../components/export/ExportPanel';
+import DensityGuide, { DENSITY_FAQ } from '../components/density/DensityGuide';
 import { useDebounce } from '../hooks/useDebounce';
 import { analyzeDensity } from '../utils/densityAnalyzer';
 import { trackToolUse } from '../lib/track';
 import usePageMeta from '../hooks/usePageMeta';
-import { softwareTool, breadcrumb, SITE } from '../lib/schema.js';
+import { softwareTool, breadcrumb, faqPage, SITE } from '../lib/schema.js';
 import '../components/charts/charts.css';
 import '../components/export/export.css';
 import './DensityDashboard.css';
@@ -29,11 +30,12 @@ const DENSITY_JSONLD = [
     name: 'RankedTag Keyword Density Checker',
     url: DENSITY_URL,
     description:
-      'Free, browser-based keyword density checker. Live 1-, 2- and 3-word density, frequency tables, visual charts and CSV export. Text analysis runs locally; URL fetches go through our own server-side scraper.',
+      'Free, browser-based keyword density checker. Live 1-, 2-, 3- and 4-word density, frequency tables, visual charts and CSV export. Text analysis runs locally; URL fetches go through our own server-side scraper.',
     featureList: [
-      '1-word, 2-word and 3-word density',
+      '1-, 2-, 3- and 4-word phrase density',
       'Real-time analysis as you type',
       'URL scraping with server-side fetch',
+      'Keyword stuffing detection',
       'Visual charts (bar, donut, stuffing meter, heatmap, cloud)',
       'CSV export',
       'No login, no API key, no tracking',
@@ -43,13 +45,14 @@ const DENSITY_JSONLD = [
     { name: 'Home', item: `${SITE}/` },
     { name: 'Keyword Density Checker', item: DENSITY_URL },
   ]),
+  faqPage(DENSITY_FAQ),
 ];
 
 export default function DensityDashboard() {
   usePageMeta({
-    title: 'Free Keyword Density Checker · 1-, 2- and 3-Word Analysis · RankedTag',
+    title: 'Keyword Density Checker — Free Online Tool | RankedTag',
     description:
-      'Free keyword density checker for SEO. Paste content or a URL and get live 1-, 2- and 3-word density with frequency tables, visual charts, and CSV export. Runs in your browser — your text never leaves your device.',
+      'Free keyword density checker. Paste text or a URL to see 1–4 word keyword frequency and %, catch keyword stuffing, and optimize for Google and AI search.',
     canonical: 'https://rankedtag.com/keyword-density-checker',
     jsonLd: DENSITY_JSONLD,
   });
@@ -104,12 +107,13 @@ export default function DensityDashboard() {
           <div className="container">
             <span className="eyebrow">Keyword Density Checker</span>
             <h1 className="h-2" style={{ marginTop: 16, maxWidth: 760 }}>
-              Free keyword density checker. Live 1-, 2- and 3-word analysis.
+              Keyword Density Checker — free, unlimited, no sign-up.
             </h1>
             <p className="lead" style={{ marginTop: 12 }}>
-              Paste your content or drop in a URL. Get word frequency, two- and three-word
-              phrase density, and a clean breakdown table. Text analysis runs in your browser.
-              URL fetches go through our own server-side scraper — no key, no login.
+              Paste your text or drop in a URL and instantly see how often every keyword and phrase
+              appears — as a count and a percentage, grouped into 1-, 2-, 3- and 4-word phrases.
+              Catch keyword stuffing, benchmark competitors, and optimize for Google and AI search.
+              Text analysis runs in your browser; URL fetches use our own server-side scraper.
             </p>
           </div>
         </section>
@@ -198,6 +202,8 @@ export default function DensityDashboard() {
             </div>
           </div>
         </section>
+
+        <DensityGuide />
       </main>
     </>
   );

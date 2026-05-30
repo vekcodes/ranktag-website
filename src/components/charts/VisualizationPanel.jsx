@@ -19,6 +19,7 @@ function VisualizationPanel({ keywords, content, totalWords }) {
     { key: '1gram', label: '1-Word' },
     { key: '2gram', label: '2-Word' },
     { key: '3gram', label: '3-Word' },
+    { key: '4gram', label: '4-Word' },
   ];
 
   return (
