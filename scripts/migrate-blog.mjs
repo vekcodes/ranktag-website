@@ -46,6 +46,7 @@ const STATEMENTS = [
      og_image_url  TEXT DEFAULT '',
      canonical_url TEXT DEFAULT '',
      custom_jsonld TEXT DEFAULT '',
+     faqs          JSONB NOT NULL DEFAULT '[]'::jsonb,
      tags          TEXT[] NOT NULL DEFAULT '{}',
      author        TEXT DEFAULT 'RankedTag',
      status        TEXT NOT NULL DEFAULT 'draft',
@@ -58,6 +59,10 @@ const STATEMENTS = [
   // auto-generated BlogPosting + BreadcrumbList on render. Added after the
   // initial schema, so guard with IF NOT EXISTS for existing databases.
   `ALTER TABLE posts ADD COLUMN IF NOT EXISTS custom_jsonld TEXT DEFAULT ''`,
+  // Per-post FAQ entries: a JSON array of { q, a } objects, rendered as a
+  // dropdown accordion at the bottom of the post and emitted as FAQPage
+  // JSON-LD. Added later, so guard with IF NOT EXISTS for existing databases.
+  `ALTER TABLE posts ADD COLUMN IF NOT EXISTS faqs JSONB NOT NULL DEFAULT '[]'::jsonb`,
   `CREATE INDEX IF NOT EXISTS idx_posts_status_pub
      ON posts (status, published_at DESC)`,
   `CREATE INDEX IF NOT EXISTS idx_posts_slug ON posts (slug)`,

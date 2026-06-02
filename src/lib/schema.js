@@ -32,10 +32,17 @@ export function breadcrumb(items) {
   });
 }
 
-/** FAQPage from [[question, answer], ...]. Answers are plain text. */
-export function faqPage(qa) {
+/**
+ * FAQPage from [[question, answer], ...]. Answers are plain text.
+ * Pass `id`/`isPartOf` (absolute @ids) to bind the node into a page graph —
+ * e.g. the homepage FAQ is `#faq` and `isPartOf` the homepage `#webpage`.
+ * Tool pages call this with no opts, so they stay @id-less and never collide.
+ */
+export function faqPage(qa, { id, isPartOf } = {}) {
   return ctx({
     '@type': 'FAQPage',
+    ...(id ? { '@id': id } : {}),
+    ...(isPartOf ? { isPartOf: { '@id': isPartOf } } : {}),
     mainEntity: qa.map(([q, a]) => ({
       '@type': 'Question',
       name: q,
@@ -69,49 +76,6 @@ export function softwareTool({
     publisher: { '@id': ORG_ID },
     provider: { '@id': ORG_ID },
     ...(featureList && featureList.length ? { featureList } : {}),
-  });
-}
-
-/**
- * The RankedTag service offering (homepage).
- * `serviceType` (array) and `services` ([{ name, description }]) carry the
- * target keyword clusters as structured data — strong SEO/AI signal without
- * touching any visible page copy.
- */
-export function professionalService({
-  name,
-  description,
-  url = `${SITE}/`,
-  serviceType,
-  services,
-}) {
-  return ctx({
-    '@type': 'ProfessionalService',
-    '@id': `${SITE}/#service`,
-    name,
-    description,
-    url,
-    image: LOGO,
-    provider: { '@id': ORG_ID },
-    areaServed: 'Worldwide',
-    serviceType: serviceType || 'SEO & Generative Engine Optimization for B2B SaaS',
-    ...(services && services.length
-      ? {
-          hasOfferCatalog: {
-            '@type': 'OfferCatalog',
-            name: 'SEO & AI Search services for B2B SaaS',
-            itemListElement: services.map((s) => ({
-              '@type': 'Offer',
-              itemOffered: {
-                '@type': 'Service',
-                name: s.name,
-                description: s.description,
-                provider: { '@id': ORG_ID },
-              },
-            })),
-          },
-        }
-      : {}),
   });
 }
 
@@ -165,5 +129,17 @@ export function articlePosting(post) {
     { name: 'Blog', item: `${SITE}/blog` },
     { name: post.title, item: url },
   ]);
-  return [blogPosting, crumbs, ...parseCustomJsonLd(post.custom_jsonld)];
+  const faqs = Array.isArray(post.faqs) ? post.faqs.filter((f) => f && f.q && f.a) : [];
+  const faq = faqs.length
+    ? faqPage(
+        faqs.map((f) => [f.q, f.a]),
+        { id: `${url}#faq` }
+      )
+    : null;
+  return [
+    blogPosting,
+    crumbs,
+    ...(faq ? [faq] : []),
+    ...parseCustomJsonLd(post.custom_jsonld),
+  ];
 }

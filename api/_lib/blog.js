@@ -121,6 +121,54 @@ export function validateCustomJsonLd(raw) {
   return str;
 }
 
+/**
+ * Normalise author-supplied FAQs into a clean array of { q, a } objects.
+ * Accepts [{ q, a }] or [{ question, answer }] or [[q, a]]. Drops rows missing
+ * a question or answer, trims whitespace, and caps the list at 30 entries.
+ */
+export function normalizeFaqs(input) {
+  let val = input;
+  // JSONB normally arrives pre-parsed; tolerate a raw JSON string just in case.
+  if (typeof val === 'string') {
+    try { val = JSON.parse(val); } catch { val = []; }
+  }
+  const arr = Array.isArray(val) ? val : [];
+  return arr
+    .map((item) => {
+      if (Array.isArray(item)) {
+        return { q: String(item[0] || '').trim(), a: String(item[1] || '').trim() };
+      }
+      if (item && typeof item === 'object') {
+        return {
+          q: String(item.q ?? item.question ?? '').trim(),
+          a: String(item.a ?? item.answer ?? '').trim(),
+        };
+      }
+      return { q: '', a: '' };
+    })
+    .filter((f) => f.q && f.a)
+    .slice(0, 30);
+}
+
+/**
+ * FAQPage JSON-LD from a post's faqs array (or null when there are none).
+ * Answers are plain text — Google allows limited HTML, but we keep it simple.
+ */
+export function faqJsonLd(faqs, url) {
+  const list = normalizeFaqs(faqs);
+  if (!list.length) return null;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    ...(url ? { '@id': `${url}#faq` } : {}),
+    mainEntity: list.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  };
+}
+
 /** Parse stored custom JSON-LD into an array of nodes (defensive, never throws). */
 export function parseCustomJsonLd(raw) {
   const str = String(raw == null ? '' : raw).trim();
@@ -175,6 +223,7 @@ export function normalizePostInput(body = {}) {
     status: body.status === 'published' ? 'published' : 'draft',
     reading_minutes: readingMinutes(content_html),
     custom_jsonld: validateCustomJsonLd(body.custom_jsonld),
+    faqs: normalizeFaqs(body.faqs),
   };
 }
 
@@ -206,6 +255,13 @@ export function articleJsonLd(post) {
       { '@type': 'ListItem', position: 3, name: post.title, item: url },
     ],
   };
-  // Auto schema first, then any author-supplied JSON-LD from the CMS.
-  return [blogPosting, breadcrumb, ...parseCustomJsonLd(post.custom_jsonld)];
+  // Auto schema first (BlogPosting, Breadcrumb, FAQPage from the post's FAQs),
+  // then any author-supplied JSON-LD from the CMS.
+  const faq = faqJsonLd(post.faqs, url);
+  return [
+    blogPosting,
+    breadcrumb,
+    ...(faq ? [faq] : []),
+    ...parseCustomJsonLd(post.custom_jsonld),
+  ];
 }

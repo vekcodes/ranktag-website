@@ -8,6 +8,7 @@ const EMPTY = {
   title: '', slug: '', status: 'draft', excerpt: '', meta_title: '',
   meta_description: '', tags: '', cover_image_url: '', cover_image_alt: '',
   og_image_url: '', canonical_url: '', custom_jsonld: '', content_html: '',
+  faqs: [],
 };
 
 function slugify(s) {
@@ -166,6 +167,9 @@ function PostForm({ id, onDone }) {
         canonical_url: p.canonical_url || '',
         custom_jsonld: p.custom_jsonld || '',
         content_html: p.content_html || '',
+        faqs: Array.isArray(p.faqs)
+          ? p.faqs.map((x) => ({ q: x?.q || '', a: x?.a || '' }))
+          : [],
       });
       setLoaded(true);
     }).catch((e) => setErr(e.message));
@@ -179,6 +183,27 @@ function PostForm({ id, onDone }) {
       ...(k === 'title' && !slugTouched ? { slug: slugify(v) } : {}),
     }));
   };
+
+  // FAQ accordion editor — add/edit/remove an arbitrary number of Q&A pairs.
+  const addFaq = () =>
+    setF((s) => ({ ...s, faqs: [...s.faqs, { q: '', a: '' }] }));
+  const updateFaq = (i, key) => (e) => {
+    const v = e.target.value;
+    setF((s) => ({
+      ...s,
+      faqs: s.faqs.map((row, idx) => (idx === i ? { ...row, [key]: v } : row)),
+    }));
+  };
+  const removeFaq = (i) =>
+    setF((s) => ({ ...s, faqs: s.faqs.filter((_, idx) => idx !== i) }));
+  const moveFaq = (i, dir) =>
+    setF((s) => {
+      const j = i + dir;
+      if (j < 0 || j >= s.faqs.length) return s;
+      const faqs = [...s.faqs];
+      [faqs[i], faqs[j]] = [faqs[j], faqs[i]];
+      return { ...s, faqs };
+    });
 
   const uploadCover = async (e) => {
     const file = e.target.files?.[0];
@@ -209,6 +234,9 @@ function PostForm({ id, onDone }) {
       source_format: 'html',
       status: publish ? 'published' : f.status,
       tags: f.tags.split(',').map((t) => t.trim()).filter(Boolean),
+      faqs: f.faqs
+        .map((x) => ({ q: x.q.trim(), a: x.a.trim() }))
+        .filter((x) => x.q && x.a),
     };
     try {
       if (id) await blogApi.update(id, payload);
@@ -349,6 +377,50 @@ function PostForm({ id, onDone }) {
             <input value={f.og_image_url} onChange={set('og_image_url')}
               placeholder="Defaults to cover image" />
           </label>
+        </div>
+
+        <div className="card">
+          <h3>FAQs</h3>
+          <p className="muted sm" style={{ marginTop: 0 }}>
+            Shown as a dropdown accordion at the bottom of the post and added as
+            FAQPage schema for rich results. Add as many as you like.
+          </p>
+          {f.faqs.length === 0 && (
+            <p className="muted sm">No FAQs yet.</p>
+          )}
+          <div className="faq-editor">
+            {f.faqs.map((row, i) => (
+              <div className="faq-row" key={i}>
+                <div className="faq-row-top">
+                  <span className="faq-row-n">Q{i + 1}</span>
+                  <div className="faq-row-actions">
+                    <button type="button" className="btn ghost sm"
+                      disabled={i === 0} onClick={() => moveFaq(i, -1)}
+                      title="Move up">↑</button>
+                    <button type="button" className="btn ghost sm"
+                      disabled={i === f.faqs.length - 1} onClick={() => moveFaq(i, 1)}
+                      title="Move down">↓</button>
+                    <button type="button" className="btn danger sm"
+                      onClick={() => removeFaq(i)} title="Remove">✕</button>
+                  </div>
+                </div>
+                <input
+                  value={row.q}
+                  onChange={updateFaq(i, 'q')}
+                  placeholder="Question"
+                />
+                <textarea
+                  rows={3}
+                  value={row.a}
+                  onChange={updateFaq(i, 'a')}
+                  placeholder="Answer (plain text)"
+                />
+              </div>
+            ))}
+          </div>
+          <button type="button" className="btn ghost sm faq-add" onClick={addFaq}>
+            + Add FAQ
+          </button>
         </div>
       </aside>
     </div>

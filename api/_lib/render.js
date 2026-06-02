@@ -1,7 +1,7 @@
 // Server-side HTML renderer for the SEO-critical /blog pages.
 // Self-contained document (brand styles inlined) so crawlers get full,
 // fast, fully-rendered HTML — no client JS required to read content.
-import { escapeHtml, SITE_URL, SITE_NAME } from './blog.js';
+import { escapeHtml, SITE_URL, SITE_NAME, normalizeFaqs } from './blog.js';
 
 const FONTS =
   'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=JetBrains+Mono:wght@400;500;600;700&display=swap';
@@ -64,6 +64,20 @@ border-radius:var(--r-lg);text-align:center}
 .lead-cta a{background:var(--red);color:#fff;display:inline-block;padding:13px 28px;
 border-radius:999px;font-weight:600}
 .lead-cta a:hover{background:var(--red-deep)}
+.faq-sec{margin:56px 0 0}
+.faq-sec h2{font-size:1.7rem;font-weight:700;margin-bottom:22px}
+.faq-list{display:flex;flex-direction:column;gap:12px}
+.faq-item{background:#fff;border:1px solid var(--paper-3);border-radius:var(--r-md);overflow:hidden}
+.faq-item[open]{border-color:var(--ink)}
+.faq-q{display:flex;justify-content:space-between;align-items:center;gap:16px;
+padding:20px 24px;font-family:'Fraunces',serif;font-weight:600;font-size:17px;
+cursor:pointer;list-style:none}
+.faq-q::-webkit-details-marker{display:none}
+.faq-ic{width:28px;height:28px;flex-shrink:0;background:var(--paper-2);border-radius:50%;
+display:flex;align-items:center;justify-content:center;font-size:20px;line-height:1;
+color:var(--ink);transition:transform .2s,background .2s,color .2s}
+.faq-item[open] .faq-ic{background:var(--red);color:#fff;transform:rotate(45deg)}
+.faq-a{padding:0 24px 22px;color:#26262b;font-size:16px;line-height:1.65}
 .idx-head{padding:56px 0 12px;text-align:center}
 .idx-head h1{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:800}
 .idx-head p{color:var(--muted);font-size:18px;margin-top:14px;max-width:560px;
@@ -142,6 +156,23 @@ ${ld}
 </head><body>${nav()}${body}${footer()}</body></html>`;
 }
 
+function renderFaqs(faqs) {
+  const list = normalizeFaqs(faqs);
+  if (!list.length) return '';
+  const items = list
+    .map(
+      (f) => `<details class="faq-item">
+<summary class="faq-q">${escapeHtml(f.q)}<span class="faq-ic" aria-hidden="true">+</span></summary>
+<div class="faq-a">${escapeHtml(f.a)}</div>
+</details>`
+    )
+    .join('');
+  return `<section class="faq-sec" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<div class="faq-list">${items}</div>
+</section>`;
+}
+
 function fmtDate(d) {
   if (!d) return '';
   return new Date(d).toLocaleDateString('en-US', {
@@ -215,6 +246,7 @@ export function renderPost(post, jsonLd) {
 ${cover}
 <article class="prose">${post.content_html}</article>
 ${tags ? `<div class="tags">${tags}</div>` : ''}
+${renderFaqs(post.faqs)}
 ${leadCta()}
 </div>`;
 

@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       const [post] = await sql`
         SELECT slug, title, excerpt, content_html, cover_image_url, cover_image_alt,
                meta_title, meta_description, og_image_url, canonical_url, custom_jsonld,
-               tags, author, reading_minutes, published_at, updated_at
+               faqs, tags, author, reading_minutes, published_at, updated_at
         FROM posts
         WHERE slug = ${slug} AND status = 'published' AND published_at <= now()
         LIMIT 1`;

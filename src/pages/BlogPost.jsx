@@ -108,6 +108,7 @@ export default function BlogPost() {
               className="blogx-prose"
               dangerouslySetInnerHTML={{ __html: post.content_html }}
             />
+            <PostFaqs faqs={post.faqs} />
             <div className="blogx-cta inline">
               <div className="container">
                 <h2>Want this engine pointed at your SaaS?</h2>
@@ -132,6 +133,29 @@ export default function BlogPost() {
         </div>
       </footer>
     </div>
+  );
+}
+
+// Per-post FAQ accordion. Native <details> so it works without JS and matches
+// the SSR markup. Renders nothing when the post has no FAQs.
+function PostFaqs({ faqs }) {
+  const list = Array.isArray(faqs) ? faqs.filter((f) => f && f.q && f.a) : [];
+  if (!list.length) return null;
+  return (
+    <section className="blogx-faq" aria-label="Frequently asked questions">
+      <h2>Frequently asked questions</h2>
+      <div className="blogx-faq-list">
+        {list.map((f, i) => (
+          <details className="blogx-faq-item" key={i}>
+            <summary className="blogx-faq-q">
+              {f.q}
+              <span className="blogx-faq-ic" aria-hidden="true">+</span>
+            </summary>
+            <div className="blogx-faq-a">{f.a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
   );
 }
 
