@@ -4,7 +4,7 @@ import Nav from '../components/Nav.jsx';
 import BlogLatest from '../components/BlogLatest.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
-import { professionalService, faqPage } from '../lib/schema.js';
+import { faqPage } from '../lib/schema.js';
 import { submitApplyForm } from '../lib/hubspot.js';
 import './Home.css';
 
@@ -19,28 +19,39 @@ const HOME_FAQ = [
   ['How much does it cost?', 'We share pricing once we have looked at your domain and confirmed it is a fit. Different stage of SaaS, different scope. Apply above and the founder will reply with a real number inside 48 hours.'],
 ];
 
+// Homepage-specific schema. The site-wide Organization+ProfessionalService (#org)
+// and WebSite (#website) live in index.html; these nodes reference them by @id.
+// The FAQPage mirrors the on-page FAQ section below — Google requires the markup
+// to match the visible Q&A.
 const HOME_JSONLD = [
-  professionalService({
-    name: 'RankedTag — SEO, AI SEO, AEO & GEO Agency for B2B SaaS',
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': 'https://rankedtag.com/#webpage',
+    url: 'https://rankedtag.com/',
+    name: 'SEO, AI SEO, AEO & GEO Agency for B2B SaaS | RankedTag',
     description:
-      'Done-for-you B2B SaaS SEO, AI SEO, answer engine optimization (AEO) and generative engine optimization (GEO). We get you ranked on Google and cited by ChatGPT, Perplexity, Gemini and Claude — turning AI search visibility into qualified pipeline inside 90 days.',
-    serviceType: [
-      'Search Engine Optimization (SEO)',
-      'AI SEO',
-      'Answer Engine Optimization (AEO)',
-      'Generative Engine Optimization (GEO)',
-      'LLM SEO (LLMO)',
-      'B2B SaaS content marketing',
-    ],
-    services: [
-      { name: 'B2B SaaS SEO', description: 'Full-funnel search engine optimization for B2B SaaS: technical SEO, content, and link authority that compounds into qualified pipeline.' },
-      { name: 'AI SEO', description: 'AI-assisted SEO that ships in days, not months — keyword research, drafting and optimization with senior human review.' },
-      { name: 'Generative Engine Optimization (GEO)', description: 'Get your brand cited in ChatGPT, Perplexity, Gemini and Claude answers and Google AI Overviews.' },
-      { name: 'Answer Engine Optimization (AEO)', description: 'Structured data, entity and topical authority so answer engines surface and cite your brand.' },
-      { name: 'LLM SEO (LLMO)', description: 'Track and grow brand visibility and citations across large language models and AI search.' },
-    ],
+      "Full-stack SEO, AI SEO, AEO & GEO for B2B SaaS. We took sendr.ai 0→1.05M impressions in 6 months — #2 on Google's AI Overview, above ZoomInfo.",
+    isPartOf: { '@id': 'https://rankedtag.com/#website' },
+    about: { '@id': 'https://rankedtag.com/#org' },
+    primaryImageOfPage: { '@id': 'https://rankedtag.com/#logo' },
+    inLanguage: 'en',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    '@id': 'https://rankedtag.com/#casestudy-sendr',
+    name: 'sendr.ai: 0 to 1.05M impressions in 6 months',
+    headline:
+      "Took sendr.ai from 0 to 1.05M impressions in 6 months — #2 on Google's AI Overview, above ZoomInfo",
+    about: { '@id': 'https://rankedtag.com/#org' },
+    author: { '@id': 'https://rankedtag.com/#org' },
+    inLanguage: 'en',
+  },
+  faqPage(HOME_FAQ, {
+    id: 'https://rankedtag.com/#faq',
+    isPartOf: 'https://rankedtag.com/#webpage',
   }),
-  faqPage(HOME_FAQ),
 ];
 
 function normalizeUrl(raw) {
