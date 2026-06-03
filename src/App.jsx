@@ -1,6 +1,7 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import Layout from './Layout.jsx';
 import Home from './pages/Home.jsx';
+import Apply from './pages/Apply.jsx';
 import NotFound from './pages/NotFound.jsx';
 
 // react-router's `lazy` expects a module exposing a named `Component`. Our pages
@@ -13,7 +14,7 @@ const lazyRoute = (factory) => async () => ({
 
 function ApplyRedirect() {
   const { search } = useLocation();
-  return <Navigate to={`/${search}#apply`} replace />;
+  return <Navigate to={`/apply${search}`} replace />;
 }
 
 // Route data array consumed by vite-react-ssg (and react-router on the client).
@@ -28,7 +29,10 @@ export const routes = [
     children: [
       { index: true, element: <Home /> },
 
-      // Founder Review IS the audit — these legacy paths bounce to the apply form.
+      // Dedicated founder-review application page (pre-rendered).
+      { path: 'apply', element: <Apply /> },
+
+      // Founder Review IS the audit — these legacy paths bounce to /apply.
       { path: 'audit', element: <ApplyRedirect /> },
       { path: 'technical-audit', element: <ApplyRedirect /> },
 

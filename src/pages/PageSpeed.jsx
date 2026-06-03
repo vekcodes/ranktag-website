@@ -298,7 +298,7 @@ export default function PageSpeed() {
               <h4>The product</h4>
               <a href="/#how-it-works">How it works</a>
               <a href="/#case-study">Sendr.ai story</a>
-              <a href="/#apply">Apply</a>
+              <a href="/apply">Apply</a>
             </div>
             <div className="footer-col">
               <h4>Free tools</h4>

@@ -105,14 +105,14 @@ function nav() {
 <a href="/#how-it-works">How it works</a>
 <a href="/#case-study">Sendr.ai story</a>
 <a href="/blog">Blog</a>
-<a class="cta" href="/#apply">Apply →</a>
+<a class="cta" href="/apply">Apply →</a>
 </div></div></nav>`;
 }
 
 function footer() {
   return `<footer><div class="wrap-wide">
 © ${new Date().getFullYear()} ${SITE_NAME} · <a href="/">Home</a> ·
-<a href="/blog">Blog</a> · <a href="/#apply">Founder Review</a> ·
+<a href="/blog">Blog</a> · <a href="/apply">Founder Review</a> ·
 <a href="/rss.xml">RSS</a></div></footer>`;
 }
 
@@ -120,7 +120,7 @@ function leadCta() {
   return `<div class="lead-cta">
 <h3>Want this engine pointed at your SaaS?</h3>
 <p>We took Sendr.ai from 0 to 1.05M organic impressions in 6 months. Get a free founder-level review of your inbound.</p>
-<a href="/#apply">Apply for a free review →</a></div>`;
+<a href="/apply">Apply for a free review →</a></div>`;
 }
 
 function shell({ title, description, canonical, ogImage, jsonLd, body, robots }) {

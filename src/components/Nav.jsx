@@ -81,7 +81,7 @@ export default function Nav({ variant = 'home' }) {
         {/* /blog is server-rendered for SEO — real navigation, not client routing */}
         <a href="/blog" className="nav-link" onClick={close}>Blog</a>
         <Link
-          to="/#apply"
+          to="/apply"
           className={`nav-link${isHome ? ' has-badge' : ''}`}
           style={isAudit ? ACTIVE_STYLE : undefined}
           onClick={close}
@@ -130,11 +130,11 @@ export default function Nav({ variant = 'home' }) {
           </div>
         </div>
 
-        <Link to="/#apply" className="nav-link nav-link-cta-mobile" onClick={close}>
+        <Link to="/apply" className="nav-link nav-link-cta-mobile" onClick={close}>
           Apply for the engine →
         </Link>
       </div>
-      <Link to="/#apply" className="nav-cta">
+      <Link to="/apply" className="nav-cta">
         Apply <span>→</span>
       </Link>
       <button

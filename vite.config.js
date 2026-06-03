@@ -52,6 +52,7 @@ export default defineConfig(({ isSsrBuild }) => ({
     includedRoutes() {
       return [
         '/',
+        '/apply',
         '/keyword-density-checker',
         '/domain-authority-checker',
         '/page-speed-checker',

@@ -1,5 +1,5 @@
-// Single source of truth for per-route <head> meta on the pre-rendered tool
-// pages. Imported by BOTH the page components (client-side usePageMeta, so the
+// Single source of truth for per-route <head> meta on the pre-rendered tool and
+// apply pages. Imported by BOTH the page components (client-side usePageMeta, so the
 // SPA shows correct meta on in-app navigation) AND vite.config.js's
 // onBeforePageRender hook (which bakes the same title/description/canonical into
 // the build-time static HTML). Keeping one source guarantees the raw HTML a
@@ -8,6 +8,12 @@
 // Pure data only — this module is imported by the Vite config at build time, so
 // it must not pull in React, CSS, or any browser globals.
 export const TOOL_META = {
+  '/apply': {
+    title: 'Apply for a Founder Review | RankedTag',
+    description:
+      'Apply for a free founder-reviewed SEO, AI SEO & GEO audit of your B2B SaaS. We take 4 founders a month and reply on LinkedIn within 48 hours — even if it’s a no.',
+    canonical: 'https://rankedtag.com/apply',
+  },
   '/keyword-density-checker': {
     title: 'Keyword Density Checker — Free Online Tool | RankedTag',
     description:
