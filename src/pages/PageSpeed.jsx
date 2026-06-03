@@ -4,6 +4,8 @@ import Nav from '../components/Nav.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
 import { softwareTool, breadcrumb, faqPage, SITE } from '../lib/schema.js';
+import { TOOL_META } from '../seo/routeMeta.js';
+import JsonLd from '../components/JsonLd.jsx';
 import PageSpeedGuide, { PS_FAQ } from '../components/seo/PageSpeedGuide';
 import { api } from '../lib/api.js';
 import { trackToolUse } from '../lib/track.js';
@@ -64,13 +66,7 @@ function scoreLabel(score) {
 
 export default function PageSpeed() {
   useScrollReveal();
-  usePageMeta({
-    title: 'Page Speed Checker — Free Website Speed Test | RankedTag',
-    description:
-      'Free page speed checker. Test any URL on mobile and desktop, scored on five real signals with a ranked fix-first list in under 5 seconds — plus how to pass Core Web Vitals. No PSI key.',
-    canonical: 'https://rankedtag.com/page-speed-checker',
-    jsonLd: PS_JSONLD,
-  });
+  usePageMeta(TOOL_META['/page-speed-checker']);
   const [searchParams] = useSearchParams();
   const [url, setUrl] = useState('');
   const [strategy, setStrategy] = useState('mobile');
@@ -108,6 +104,7 @@ export default function PageSpeed() {
 
   return (
     <>
+      <JsonLd data={PS_JSONLD} />
       <Nav />
 
       <section className="tool-hero" style={{paddingBottom: '40px'}}>

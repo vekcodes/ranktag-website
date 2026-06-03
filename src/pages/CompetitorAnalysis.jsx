@@ -10,6 +10,8 @@ import { trackToolUse } from '../lib/track';
 import { submitToolUsage, syntheticEmail } from '../lib/hubspot.js';
 import usePageMeta from '../hooks/usePageMeta';
 import { softwareTool, breadcrumb, faqPage, SITE } from '../lib/schema.js';
+import { TOOL_META } from '../seo/routeMeta.js';
+import JsonLd from '../components/JsonLd.jsx';
 import CompetitorGuide, { CA_FAQ } from '../components/seo/CompetitorGuide';
 import './CompetitorAnalysis.css';
 
@@ -36,13 +38,7 @@ const COMP_JSONLD = [
 ];
 
 export default function CompetitorAnalysis() {
-  usePageMeta({
-    title: 'Free Competitor Analysis Tool — SEO Side-by-Side | RankedTag',
-    description:
-      "Free competitor analysis tool. Compare your page against competitors side by side, find keyword gaps, and see who's winning in Google and AI search — no login.",
-    canonical: 'https://rankedtag.com/competitor-analysis',
-    jsonLd: COMP_JSONLD,
-  });
+  usePageMeta(TOOL_META['/competitor-analysis']);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -81,6 +77,7 @@ export default function CompetitorAnalysis() {
 
   return (
     <>
+      <JsonLd data={COMP_JSONLD} />
       <Nav variant="tech" />
       <main className="cp-main">
         {/* ── Hero ── */}

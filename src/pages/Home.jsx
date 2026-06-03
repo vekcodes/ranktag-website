@@ -4,6 +4,7 @@ import Nav from '../components/Nav.jsx';
 import BlogLatest from '../components/BlogLatest.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
+import JsonLd from '../components/JsonLd.jsx';
 import { faqPage } from '../lib/schema.js';
 import { submitApplyForm } from '../lib/hubspot.js';
 import './Home.css';
@@ -68,7 +69,6 @@ export default function Home() {
     description:
       "Full-stack SEO, AI SEO, AEO & GEO for B2B SaaS. We took sendr.ai 0→1.05M impressions in 6 months—#2 on Google's AI Overview, above ZoomInfo.",
     canonical: 'https://rankedtag.com/',
-    jsonLd: HOME_JSONLD,
   });
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -128,6 +128,9 @@ export default function Home() {
 
   return (
     <>
+      {/* Page-specific schema baked into the static HTML at build time. The
+          site-wide Organization + WebSite graph stays in index.html. */}
+      <JsonLd data={HOME_JSONLD} />
       <Nav variant="home" />
 
       {/* ═══ HERO ══════════════════════════════════════════════════════════ */}

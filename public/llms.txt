@@ -1,0 +1,19 @@
+# RankedTag
+
+> RankedTag is a B2B SaaS SEO, AI SEO, AEO and GEO agency. We build inbound engines that rank on Google and get cited by ChatGPT, Perplexity, Gemini and Claude. We took sendr.ai from 0 to 1.05M organic impressions in 6 months — ranked #2 in Google's AI Overview for "what is the best GTM tool", six places above ZoomInfo (#8).
+
+## Main pages
+
+- [Home — SEO, AI SEO, AEO & GEO agency for B2B SaaS](https://rankedtag.com/): Agency overview, the sendr.ai case study with live Google Search Console metrics (1.05M impressions, 7,430 clicks, avg position 7.1 over 6 months), how the senior-humans-plus-AI content engine works, the four free tools, and the founder-review application form.
+- [Blog](https://rankedtag.com/blog): Field notes on SEO, generative engine optimization (GEO), answer engine optimization (AEO), and building inbound engines that generate qualified pipeline for B2B SaaS.
+
+## Free SEO tools
+
+- [Keyword Density Checker](https://rankedtag.com/keyword-density-checker): Paste text or a URL to see 1-, 2-, 3- and 4-word keyword frequency and percentage, catch keyword stuffing, and optimize for Google and AI search. Text analysis runs in-browser; URL fetches use a server-side scraper. No login or API key.
+- [Domain Authority Checker](https://rankedtag.com/domain-authority-checker): Composite domain authority score built from Tranco traffic rank, Wayback Machine domain age, on-page schema and HTTP transport quality — every input cross-checkable against its public source. No Ahrefs or Moz key required.
+- [Page Speed Checker](https://rankedtag.com/page-speed-checker): Server-side speed test scoring any URL on five real signals (speed, weight, render-blocking, image hygiene, transport quality) with a ranked fix-first list in under 5 seconds, plus guidance on passing Core Web Vitals. No Google PSI key required.
+- [Competitor Analysis](https://rankedtag.com/competitor-analysis): Compare your page against up to five competitor URLs side by side across keyword optimisation, structure, readability, prominence and semantic coverage; surface the keywords competitors rank for that you do not. Radar chart, gap table and ranked recommendations.
+
+## Case study
+
+- [sendr.ai: 0 to 1.05M impressions in 6 months](https://rankedtag.com/#case-study): A seed-stage B2B SaaS competing against ZoomInfo. RankedTag shipped LLM-optimised pages targeting category-defining queries; six months of live Google Search Console data shows 1.05M organic impressions, 7,430 clicks, 0.7% average CTR and 7.1 average position, with sendr.ai ranked #2 in Google's AI Overview for "what is the best GTM tool".
