@@ -109,10 +109,13 @@ export default function Home() {
           </div>
 
           <h1 className="hero-title fade-up delay-1">
-            <span className="line">From <span className="accent">0 to 1.05M</span> organic impressions</span>
-            <span className="line">in <span className="hero-title-italic">6 months.</span> <span className="hero-title-italic em">7,430 clicks.</span></span>
-            <span className="line">Ranked <span className="accent">#2</span> above ZoomInfo on Google.</span>
+            <span className="line">B2B SaaS SEO &amp; GEO:{' '}</span>
+            <span className="line">0 → <span className="accent">1.05M</span> organic impressions</span>
           </h1>
+
+          <p className="hero-stats fade-up delay-1">
+            In <span className="hero-title-italic">6 months</span> — <strong>7,430 clicks</strong>, ranked <span className="accent">#2</span> above ZoomInfo on Google's AI Overview.
+          </p>
 
           <p className="hero-sub fade-up delay-2">
             That is what we built for sendr.ai. Live Google Search Console numbers. Sendr.ai now sits at #2 in Google's AI Overview for "what is the best GTM tool", six places above ZoomInfo at #8. <span className="highlight">No ads. No outreach. No PDF reports.</span>

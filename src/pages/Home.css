@@ -120,6 +120,23 @@ h1.hero-title .line{display:block}
 }
 .hero-title .hero-title-italic.em{color:var(--red)}
 
+/* Stat subheading directly below the keyword-led H1 — carries the proof points
+   that moved out of the H1 (6 months, clicks, #2 ranking). */
+.hero-stats{
+  font-size:clamp(15px, 1.5vw, 20px);
+  line-height:1.4;
+  margin:18px 0 28px;
+  color:var(--ink-2);
+  font-weight:500;
+}
+.hero-stats strong{ color:var(--ink); font-weight:700; }
+.hero-stats .accent{ color:var(--red); font-weight:700; }
+.hero-stats .hero-title-italic{
+  font-family:'Fraunces', serif;
+  font-style:italic;
+  font-weight:500;
+}
+
 .hero-sub{
   font-size:clamp(15.5px, 1.45vw, 19.5px);
   line-height:1.55;
