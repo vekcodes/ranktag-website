@@ -8,6 +8,11 @@
 import { db, dbConfigured } from './_lib/db.js';
 import { SITE_URL } from './_lib/blog.js';
 
+// Last meaningful content change for the static marketing/tool pages. Bump this
+// when you materially edit those pages so <lastmod> stays truthful. (The blog
+// index uses the latest post's date instead; posts carry their own lastmod.)
+const STATIC_LASTMOD = '2026-06-04';
+
 const STATIC = [
   { loc: '/', priority: '1.0', freq: 'weekly' },
   { loc: '/apply', priority: '0.9', freq: 'monthly' },
@@ -33,11 +38,18 @@ export default async function handler(req, res) {
     /* fall back to static-only sitemap */
   }
 
+  // The blog index's freshness tracks the most-recently-changed post (if any).
+  const blogLastmod = posts.length
+    ? new Date(Math.max(...posts.map((p) => new Date(p.lastmod).getTime())))
+        .toISOString()
+        .slice(0, 10)
+    : STATIC_LASTMOD;
+
   const urls = [
-    ...STATIC.map(
-      (s) =>
-        `<url><loc>${SITE_URL}${s.loc}</loc><changefreq>${s.freq}</changefreq><priority>${s.priority}</priority></url>`
-    ),
+    ...STATIC.map((s) => {
+      const lastmod = s.loc === '/blog' ? blogLastmod : STATIC_LASTMOD;
+      return `<url><loc>${SITE_URL}${s.loc}</loc><lastmod>${lastmod}</lastmod><changefreq>${s.freq}</changefreq><priority>${s.priority}</priority></url>`;
+    }),
     ...posts.map(
       (p) =>
         `<url><loc>${SITE_URL}/blog/${p.slug}</loc><lastmod>${new Date(
