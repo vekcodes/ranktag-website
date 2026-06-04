@@ -1,6 +1,25 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { TOOL_META } from './src/seo/routeMeta.js';
+import { ORG_WEBSITE_JSONLD } from './src/seo/orgGraph.js';
+
+// Inject the site-wide Organization + WebSite JSON-LD into index.html at build
+// time from the single shared source (src/seo/orgGraph.js). vite-react-ssg builds
+// every static route from this template, so all pre-rendered pages get the graph;
+// api/_lib/render.js imports the same module so the blog gets the identical node.
+const injectOrgJsonLd = {
+  name: 'inject-org-jsonld',
+  transformIndexHtml() {
+    return [
+      {
+        tag: 'script',
+        attrs: { type: 'application/ld+json' },
+        children: JSON.stringify(ORG_WEBSITE_JSONLD),
+        injectTo: 'head',
+      },
+    ];
+  },
+};
 
 const escapeHtml = (s) =>
   String(s)
@@ -39,6 +58,14 @@ function rewriteHeadForRoute(route, indexHTML) {
       .replace(/(<meta property="og:image" content=")[^"]*(")/, `$1${img}$2`)
       .replace(/(<meta name="twitter:image" content=")[^"]*(")/, `$1${img}$2`);
   }
+  // Keep the image alt in lockstep with a per-route image so it never describes
+  // the old logo.
+  if (meta.ogImageAlt) {
+    const alt = escapeHtml(meta.ogImageAlt);
+    out = out
+      .replace(/(<meta property="og:image:alt" content=")[^"]*(")/, `$1${alt}$2`)
+      .replace(/(<meta name="twitter:image:alt" content=")[^"]*(")/, `$1${alt}$2`);
+  }
   return out;
 }
 
@@ -46,7 +73,7 @@ function rewriteHeadForRoute(route, indexHTML) {
 // /api/*.js serverless functions on a single port (default 3000), matching prod.
 // Or run `npm run dev` for frontend-only on :5173 if you don't need the API.
 export default defineConfig(({ isSsrBuild }) => ({
-  plugins: [react()],
+  plugins: [react(), injectOrgJsonLd],
   // Static-generation scope for vite-react-ssg. Only the static marketing/tool
   // routes are pre-rendered to HTML. Blog routes are intentionally excluded so
   // the request-time SSR function (api/blog-page.js, wired via vercel.json) keeps

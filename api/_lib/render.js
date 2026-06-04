@@ -2,6 +2,11 @@
 // Self-contained document (brand styles inlined) so crawlers get full,
 // fast, fully-rendered HTML — no client JS required to read content.
 import { escapeHtml, SITE_URL, SITE_NAME, normalizeFaqs, authorNode } from './blog.js';
+import { ORG_WEBSITE_JSONLD } from '../../src/seo/orgGraph.js';
+
+// Default social-image alt, kept identical to index.html's so every route's
+// social-tag set matches.
+const DEFAULT_OG_ALT = 'RankedTag — SEO, AI SEO, AEO & GEO agency for B2B SaaS';
 
 const FONTS =
   'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=JetBrains+Mono:wght@400;500;600;700&display=swap';
@@ -123,7 +128,7 @@ function leadCta() {
 <a href="/apply">Apply for a free review →</a></div>`;
 }
 
-function shell({ title, description, canonical, ogImage, ogType, jsonLd, body, robots }) {
+function shell({ title, description, canonical, ogImage, ogImageAlt, ogType, jsonLd, body, robots }) {
   const ld = (jsonLd || [])
     .map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`)
     .join('');
@@ -142,10 +147,12 @@ function shell({ title, description, canonical, ogImage, ogType, jsonLd, body, r
 <meta property="og:description" content="${escapeHtml(description)}"/>
 <meta property="og:url" content="${escapeHtml(canonical)}"/>
 <meta property="og:image" content="${escapeHtml(ogImage)}"/>
+<meta property="og:image:alt" content="${escapeHtml(ogImageAlt || DEFAULT_OG_ALT)}"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="${escapeHtml(title)}"/>
 <meta name="twitter:description" content="${escapeHtml(description)}"/>
 <meta name="twitter:image" content="${escapeHtml(ogImage)}"/>
+<meta name="twitter:image:alt" content="${escapeHtml(ogImageAlt || DEFAULT_OG_ALT)}"/>
 <link rel="alternate" type="application/rss+xml" title="${SITE_NAME} Blog" href="${SITE_URL}/rss.xml"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -204,6 +211,7 @@ ${posts.length ? `<div class="grid">${cards}</div>` : `<div class="empty">No pos
 </div>`;
 
   const jsonLd = [
+    ORG_WEBSITE_JSONLD,
     {
       '@context': 'https://schema.org',
       '@type': 'Blog',
@@ -283,8 +291,9 @@ ${leadCta()}
     canonical: post.canonical_url || `${SITE_URL}/blog/${post.slug}`,
     ogImage:
       post.og_image_url || post.cover_image_url || `${SITE_URL}/rankedtag-logo.png`,
+    ogImageAlt: post.cover_image_alt || post.title,
     ogType: 'article',
-    jsonLd,
+    jsonLd: [ORG_WEBSITE_JSONLD, ...jsonLd],
     body,
   });
 }
