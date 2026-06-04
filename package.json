@@ -10,7 +10,8 @@
     "dev": "vite-react-ssg dev",
     "dev:api": "vercel dev",
     "build": "vite-react-ssg build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "seo:check": "node scripts/seo-check.mjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
