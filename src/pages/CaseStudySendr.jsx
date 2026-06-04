@@ -68,9 +68,12 @@ export default function CaseStudySendr() {
             <p className="cs-dek">
               sendr.ai is a seed-stage B2B SaaS competing in a category owned by
               ZoomInfo and other 8-figure incumbents. With no ad budget and no
-              outreach, RankedTag built an inbound engine that compounds on Google
-              and gets cited inside AI answer engines. These are live Google Search
-              Console numbers — cross-check by running the same query yourself.
+              outreach, RankedTag built an inbound engine measured on what actually
+              moves revenue — <strong>AI citation share, share of voice, and
+              pipeline</strong>, not vanity traffic. The result: sendr.ai is now the
+              answer Google's AI Overview gives for its category, six places above
+              ZoomInfo. Every number below is live Google Search Console data you can
+              cross-check yourself.
             </p>
             <div className="cs-meta">
               <span className="tag tag-red">SEED-STAGE B2B SAAS</span>
@@ -200,70 +203,158 @@ export default function CaseStudySendr() {
             </ol>
           </section>
 
-          {/* ── The results (proof screenshots) ────────────────────────── */}
+          {/* ── The results · three independently verifiable proofs ────── */}
           <section className="cs-section">
-            <h2 className="cs-h2">The results</h2>
+            <h2 className="cs-h2">The results — in three proofs</h2>
             <p className="cs-prose">
-              Six months in, the engine is compounding. Below is exactly what is on
-              screen — no rounding, no extra claims.
+              One engagement, three things you can check independently. Below is
+              exactly what is on screen — no rounding, no extra claims.
             </p>
 
-            <figure className="case-proof">
-              <figcaption className="case-proof-cap">
-                <span className="dot" />
-                Live Google Search Console · sendr.ai · last 6 months
-              </figcaption>
-              <img
-                src="/result-sendr.jpeg"
-                alt="Google Search Console screenshot showing 7.43k total clicks and 1.05M total impressions for sendr.ai over a 6-month period, with average CTR 0.7% and average position 7.1."
-                loading="lazy"
-                width="1080"
-                height="560"
-              />
-            </figure>
+            <ol className="cs-proofs">
+              {/* Proof 01 — organic visibility */}
+              <li className="cs-proof">
+                <div className="cs-proof-tag">Proof 01 · Organic visibility</div>
+                <h3 className="cs-h3">
+                  0 → 1.05M impressions and 7,430 clicks in 6 months
+                </h3>
+                <p className="cs-prose">
+                  Across the 09/11/2025–28/04/2026 window, sendr.ai compounded to
+                  1.05M organic impressions, 7.43k clicks, a 0.7% average CTR and a
+                  7.1 average position — the indexed surface area of a brand the
+                  category used to ignore. Straight from Google Search Console.
+                </p>
+                <figure className="case-proof">
+                  <figcaption className="case-proof-cap">
+                    <span className="dot" />
+                    Live Google Search Console · sendr.ai · last 6 months
+                  </figcaption>
+                  <img
+                    src="/result-sendr.jpeg"
+                    alt="Google Search Console screenshot showing 7.43k total clicks and 1.05M total impressions for sendr.ai over a 6-month period, with average CTR 0.7% and average position 7.1."
+                    loading="lazy"
+                    width="1080"
+                    height="560"
+                  />
+                </figure>
+              </li>
 
-            <div className="cs-rank-head">
-              <h3 className="cs-h3">
-                Ranked #2 in Google's AI Overview, above ZoomInfo
-              </h3>
-              <p className="cs-prose">
-                For the category-defining query <strong>"what is the best GTM
-                tool"</strong>, sendr.ai sits at <strong>#2</strong> in Google's AI
-                Overview while ZoomInfo sits at <strong>#8</strong> — and sendr.ai's
-                own blog post is the source Google cites in the right-hand panel.
-                That is the difference between renting traffic and owning the answer.
-              </p>
-            </div>
+              {/* Proof 02 — AI Overview citation */}
+              <li className="cs-proof">
+                <div className="cs-proof-tag">Proof 02 · AI citation share</div>
+                <h3 className="cs-h3">
+                  #2 in Google's AI Overview — above ZoomInfo — for the
+                  category-defining query
+                </h3>
+                <p className="cs-prose">
+                  For <strong>"what is the best GTM tool"</strong>, sendr.ai sits at
+                  <strong> #2</strong> in Google's AI Overview while ZoomInfo sits at
+                  <strong> #8</strong> — and sendr.ai's own blog post is the source
+                  Google cites in the right-hand panel. That is share of the answer,
+                  not a blue link below the fold. It is the difference between
+                  renting traffic and owning the recommendation buyers ask the AI for.
+                </p>
+                <figure className="case-proof case-proof-wide">
+                  <figcaption className="case-proof-cap">
+                    <span className="dot" />
+                    Google search · "what is the best GTM tool"
+                  </figcaption>
+                  <img
+                    src="/result-ranked.jpeg"
+                    alt="Google search result page for the query 'what is the best GTM tool'. The AI Overview lists Sendr.ai at position #2 and ZoomInfo at position #8. Sendr.ai's blog post is featured as the cited source on the right panel."
+                    loading="lazy"
+                    width="1080"
+                    height="700"
+                  />
+                </figure>
+              </li>
 
-            <figure className="case-proof case-proof-wide">
-              <figcaption className="case-proof-cap">
-                <span className="dot" />
-                Google search · "what is the best GTM tool"
-              </figcaption>
-              <img
-                src="/result-ranked.jpeg"
-                alt="Google search result page for the query 'what is the best GTM tool'. The AI Overview lists Sendr.ai at position #2 and ZoomInfo at position #8. Sendr.ai's blog post is featured as the cited source on the right panel."
-                loading="lazy"
-                width="1080"
-                height="700"
-              />
-            </figure>
+              {/* Proof 03 — the founder's words */}
+              <li className="cs-proof">
+                <div className="cs-proof-tag">Proof 03 · In the founder's words</div>
+                <blockquote className="case-quote">
+                  We went from invisible to the answer Google's AI Overview gives
+                  when someone asks for the best GTM tool. Six places above ZoomInfo.
+                  The pipeline runs while we ship product.
+                </blockquote>
+                <div className="case-author">
+                  <div className="case-author-avatar">SA</div>
+                  <div className="case-author-info">
+                    <strong>Founder, sendr.ai</strong>
+                    <span>Engagement: ongoing</span>
+                  </div>
+                </div>
+              </li>
+            </ol>
           </section>
 
-          {/* ── Quote ──────────────────────────────────────────────────── */}
+          {/* ── Verify it yourself (reproducibility = the strongest proof) ─ */}
           <section className="cs-section">
-            <blockquote className="case-quote">
-              We went from invisible to the answer Google's AI Overview gives when
-              someone asks for the best GTM tool. Six places above ZoomInfo. The
-              pipeline runs while we ship product.
-            </blockquote>
-            <div className="case-author">
-              <div className="case-author-avatar">SA</div>
-              <div className="case-author-info">
-                <strong>Founder, sendr.ai</strong>
-                <span>Engagement: ongoing</span>
+            <div className="cs-verify">
+              <div className="cs-verify-tag">Don't take our word for it</div>
+              <h2 className="cs-h2">Verify every claim yourself</h2>
+              <p className="cs-prose">
+                A GEO agency that cannot be fact-checked is just another PDF report.
+                These results are public and reproducible:
+              </p>
+              <ul className="cs-verify-list">
+                <li>
+                  <strong>The AI Overview ranking:</strong> open Google and search{' '}
+                  <span className="cs-q">"what is the best GTM tool"</span>. Read the
+                  AI Overview and its cited sources. Live results shift over time, but
+                  the screenshot above is timestamped to the engagement.
+                </li>
+                <li>
+                  <strong>The search numbers:</strong> the Google Search Console
+                  panel above shows the raw clicks, impressions, CTR and position for
+                  the exact six-month window — nothing aggregated or smoothed.
+                </li>
+                <li>
+                  <strong>Our method, on us:</strong> run your own domain through our{' '}
+                  <Link to="/domain-authority-checker">free tools</Link> — every score
+                  is broken down with the source links we used to compute it.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          {/* ── Stage 4 framing: pipeline, not vanity traffic ──────────── */}
+          <section className="cs-section">
+            <h2 className="cs-h2">Why this is a pipeline play, not a vanity metric</h2>
+            <p className="cs-prose">
+              Impressions are the input. The scoreboard that matters is the one
+              attached to revenue — and it is the one most agencies still do not
+              track:
+            </p>
+            <div className="cs-scoreboard">
+              <div className="cs-score">
+                <div className="cs-score-h">AI citation share</div>
+                <p>
+                  Whether the AI names <em>you</em> when a buyer asks for a
+                  recommendation. sendr.ai is the #2 cited answer in its category —
+                  above an eight-figure incumbent.
+                </p>
+              </div>
+              <div className="cs-score">
+                <div className="cs-score-h">Share of voice</div>
+                <p>
+                  Owning the answer panel, not a link buried below it. That is
+                  surface area competitors cannot simply out-spend you for overnight.
+                </p>
+              </div>
+              <div className="cs-score">
+                <div className="cs-score-h">Pipeline</div>
+                <p>
+                  Qualified inbound that compounds while you ship product — no ads to
+                  refill, no outreach to send. The engine runs whether or not you do.
+                </p>
               </div>
             </div>
+            <p className="cs-prose" style={{ marginTop: '24px' }}>
+              Traffic you rent stops the day you stop paying. An answer you own keeps
+              feeding pipeline. That is the entire point of building the engine
+              instead of buying clicks.
+            </p>
           </section>
 
           {/* ── CTA ────────────────────────────────────────────────────── */}

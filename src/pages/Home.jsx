@@ -227,7 +227,7 @@ export default function Home() {
           <div className="section-head">
             <div className="eyebrow">PROOF · live numbers, not promises</div>
             <h2 className="h-1">How <span className="serif" style={{color: 'var(--red)'}}>sendr.ai</span> hit <span style={{color: 'var(--red)'}}>1.05M impressions</span><br />and ranked <span style={{color: 'var(--red)'}}>#2 above ZoomInfo</span> on Google.</h2>
-            <p className="lead">Real Google Search Console numbers. Real Google AI Overview ranking. We are showing exactly what is on screen, no rounding, no extra claims. Cross-check by searching the same query yourself.</p>
+            <p className="lead">This is not a traffic vanity chart — it is AI citation share and pipeline. Sendr.ai is the answer Google's AI Overview gives for its category, six places above ZoomInfo. Real Google Search Console numbers, real AI Overview ranking, exactly what is on screen. Cross-check by searching the same query yourself.</p>
           </div>
 
           <div className="case-grid">
