@@ -4,6 +4,8 @@ import Nav from '../components/Nav.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
 import { softwareTool, breadcrumb, faqPage, SITE } from '../lib/schema.js';
+import { TOOL_META } from '../seo/routeMeta.js';
+import JsonLd from '../components/JsonLd.jsx';
 import DomainAuthorityGuide, { DA_FAQ } from '../components/seo/DomainAuthorityGuide';
 import { api } from '../lib/api.js';
 import { trackToolUse } from '../lib/track.js';
@@ -67,13 +69,7 @@ const COMPONENT_DESCRIPTIONS = {
 
 export default function BacklinkChecker() {
   useScrollReveal();
-  usePageMeta({
-    title: 'Domain Authority Checker — Free, No Ahrefs Key | RankedTag',
-    description:
-      'Free domain authority checker. Get a composite DA score from traffic rank, domain age, on-page schema and HTTP transport — every input source-linked. No login, no Ahrefs key.',
-    canonical: 'https://rankedtag.com/domain-authority-checker',
-    jsonLd: DA_JSONLD,
-  });
+  usePageMeta(TOOL_META['/domain-authority-checker']);
   const [searchParams] = useSearchParams();
   const [domain, setDomain] = useState('');
   const [loading, setLoading] = useState(false);
@@ -113,6 +109,7 @@ export default function BacklinkChecker() {
 
   return (
     <>
+      <JsonLd data={DA_JSONLD} />
       <Nav />
 
       <section className="tool-hero" style={{paddingBottom: '40px'}}>
@@ -282,7 +279,7 @@ export default function BacklinkChecker() {
               <h4>The product</h4>
               <a href="/#how-it-works">How it works</a>
               <a href="/#case-study">Sendr.ai story</a>
-              <a href="/#apply">Apply</a>
+              <a href="/apply">Apply</a>
             </div>
             <div className="footer-col">
               <h4>Free tools</h4>

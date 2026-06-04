@@ -10,6 +10,8 @@ import { SITE_URL } from './_lib/blog.js';
 
 const STATIC = [
   { loc: '/', priority: '1.0', freq: 'weekly' },
+  { loc: '/apply', priority: '0.9', freq: 'monthly' },
+  { loc: '/case-study/sendr', priority: '0.8', freq: 'monthly' },
   { loc: '/blog', priority: '0.9', freq: 'daily' },
   { loc: '/keyword-density-checker', priority: '0.7', freq: 'monthly' },
   { loc: '/domain-authority-checker', priority: '0.7', freq: 'monthly' },

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Nav from '../components/Nav.jsx';
 import BlogLatest from '../components/BlogLatest.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
+import JsonLd from '../components/JsonLd.jsx';
 import { faqPage } from '../lib/schema.js';
-import { submitApplyForm } from '../lib/hubspot.js';
 import './Home.css';
 
 // Mirrors the on-page FAQ section below — keep the two in sync.
@@ -44,6 +44,8 @@ const HOME_JSONLD = [
     name: 'sendr.ai: 0 to 1.05M impressions in 6 months',
     headline:
       "Took sendr.ai from 0 to 1.05M impressions in 6 months — #2 on Google's AI Overview, above ZoomInfo",
+    url: 'https://rankedtag.com/case-study/sendr',
+    mainEntityOfPage: { '@id': 'https://rankedtag.com/case-study/sendr#article' },
     about: { '@id': 'https://rankedtag.com/#org' },
     author: { '@id': 'https://rankedtag.com/#org' },
     inLanguage: 'en',
@@ -54,13 +56,6 @@ const HOME_JSONLD = [
   }),
 ];
 
-function normalizeUrl(raw) {
-  const v = (raw || '').trim();
-  if (!v) return '';
-  if (/^https?:\/\//i.test(v)) return v;
-  return `https://${v}`;
-}
-
 export default function Home() {
   useScrollReveal();
   usePageMeta({
@@ -68,48 +63,16 @@ export default function Home() {
     description:
       "Full-stack SEO, AI SEO, AEO & GEO for B2B SaaS. We took sendr.ai 0→1.05M impressions in 6 months—#2 on Google's AI Overview, above ZoomInfo.",
     canonical: 'https://rankedtag.com/',
-    jsonLd: HOME_JSONLD,
   });
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
   const [heroUrl, setHeroUrl] = useState('');
-  const [applyUrl, setApplyUrl] = useState('');
-  const [applyState, setApplyState] = useState({ status: 'idle', error: '' });
-
-  // If the hero (or another tool) sent us back with ?url=, pre-fill the apply form.
-  useEffect(() => {
-    const incoming = searchParams.get('url');
-    if (incoming) setApplyUrl(normalizeUrl(incoming));
-  }, [searchParams]);
 
   const onHeroSubmit = (e) => {
     e.preventDefault();
     const v = heroUrl.trim();
     const q = v ? `?url=${encodeURIComponent(v)}` : '';
-    // Founder Review IS the site audit — scroll to the apply section instead
-    // of routing to a separate page.
-    navigate(`/${q}#apply`);
-  };
-
-  const onApplySubmit = async (e) => {
-    e.preventDefault();
-    if (applyState.status === 'submitting') return;
-    const fd = new FormData(e.currentTarget);
-    setApplyState({ status: 'submitting', error: '' });
-    try {
-      await submitApplyForm({
-        name: fd.get('name'),
-        email: fd.get('email'),
-        website: fd.get('website'),
-        linkedin: fd.get('linkedin'),
-        message: fd.get('message'),
-      });
-      setApplyState({ status: 'success', error: '' });
-      const card = document.querySelector('.apply-card');
-      if (card) card.classList.add('submitted');
-    } catch (err) {
-      setApplyState({ status: 'error', error: err.message || 'Submission failed' });
-    }
+    // The Founder Review IS the site audit — hand the domain off to /apply.
+    navigate(`/apply${q}`);
   };
 
   // FAQ accordion (delegated)
@@ -128,6 +91,9 @@ export default function Home() {
 
   return (
     <>
+      {/* Page-specific schema baked into the static HTML at build time. The
+          site-wide Organization + WebSite graph stays in index.html. */}
+      <JsonLd data={HOME_JSONLD} />
       <Nav variant="home" />
 
       {/* ═══ HERO ══════════════════════════════════════════════════════════ */}
@@ -178,7 +144,7 @@ export default function Home() {
           <div className="hero-secondary fade-up delay-4">
             <span className="hero-rule" />
             <span className="hero-secondary-text">already convinced?</span>
-            <a href="#apply" className="hero-secondary-link">
+            <a href="/apply" className="hero-secondary-link">
               skip ahead, apply for the engine <span className="ar">↗</span>
             </a>
           </div>
@@ -261,7 +227,7 @@ export default function Home() {
           <div className="section-head">
             <div className="eyebrow">PROOF · live numbers, not promises</div>
             <h2 className="h-1">How <span className="serif" style={{color: 'var(--red)'}}>sendr.ai</span> hit <span style={{color: 'var(--red)'}}>1.05M impressions</span><br />and ranked <span style={{color: 'var(--red)'}}>#2 above ZoomInfo</span> on Google.</h2>
-            <p className="lead">Real Google Search Console numbers. Real Google AI Overview ranking. We are showing exactly what is on screen, no rounding, no extra claims. Cross-check by searching the same query yourself.</p>
+            <p className="lead">This is not a traffic vanity chart — it is AI citation share and pipeline. Sendr.ai is the answer Google's AI Overview gives for its category, six places above ZoomInfo. Real Google Search Console numbers, real AI Overview ranking, exactly what is on screen. Cross-check by searching the same query yourself.</p>
           </div>
 
           <div className="case-grid">
@@ -289,7 +255,10 @@ export default function Home() {
                 </div>
               </div>
 
-              <a href="#apply" className="btn btn-primary">Apply for the same engine <span className="ar">↗</span></a>
+              <div className="case-cta-row">
+                <a href="/apply" className="btn btn-primary">Apply for the same engine <span className="ar">↗</span></a>
+                <Link to="/case-study/sendr" className="case-readmore">Read the full case study <span className="ar">→</span></Link>
+              </div>
             </div>
 
             <div>
@@ -364,7 +333,7 @@ export default function Home() {
           </div>
 
           <div className="tools-grid">
-            <a href="#apply" className="tool-card feature">
+            <a href="/apply" className="tool-card feature">
               <div className="tool-tag">★ FREE · FOUNDER-REVIEWED · NOT AUTO-GENERATED</div>
               <h3 className="tool-h">Site Audit · Founder Review</h3>
               <p className="tool-desc">The Site Audit is the Founder Review. Drop your URL and the founder personally runs a 52-check audit across crawlability, schema, Core Web Vitals, mobile, security, GEO + LLM readiness, plus the non-technical layer most agencies skip: content depth, ICP clarity, conversion path, copy quality. You get a real reply on LinkedIn inside 48 hours — even if it is a no.</p>
@@ -432,95 +401,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ APPLY (replaces pricing/offer) ═══════════════════════════════ */}
-      <section className="apply" id="apply" data-reveal>
+      {/* ═══ APPLY CTA → dedicated /apply page ════════════════════════════ */}
+      {/* id="apply" kept so any existing /#apply links still land here. */}
+      <section className="apply apply-band" id="apply" data-reveal>
         <div className="container">
-          <div className="section-head" style={{textAlign:'center', margin:'0 auto 56px'}}>
+          <div className="apply-band-card">
+            <div className="apply-band-glow" aria-hidden="true" />
             <div className="eyebrow" style={{justifyContent:'center', color: 'var(--red)'}}>APPLY · founder-reviewed, not auto-routed</div>
-            <h2 className="h-1" style={{color: 'var(--paper)'}}>Tell us about your SaaS.<br />We <span style={{color: 'var(--red)'}}>read every one</span>.</h2>
-            <p className="lead" style={{color: 'rgba(244,239,231,.72)', margin:'24px auto 0'}}>
-              We take 4 SaaS founders a month. That is it. Drop your details below. The founder reads every application personally and replies on LinkedIn within 48 hours, even if it is a no.
+            <h2 className="apply-band-h">Tell us about your SaaS.<br /><span className="ser">We read every one.</span></h2>
+            <p className="apply-band-sub">
+              We take 4 SaaS founders a month. The founder reads every application personally and replies on LinkedIn within 48 hours — even if it is a no.
             </p>
-          </div>
-
-          <div className="apply-card">
-            <form className="apply-form" onSubmit={onApplySubmit} noValidate>
-              <div className="apply-row">
-                <label className="apply-field">
-                  <span className="apply-label">Your name</span>
-                  <input type="text" name="name" required placeholder="Alex Singh" />
-                </label>
-                <label className="apply-field">
-                  <span className="apply-label">Work email</span>
-                  <input type="email" name="email" required placeholder="alex@yoursaas.com" />
-                </label>
-              </div>
-              <div className="apply-row">
-                <label className="apply-field">
-                  <span className="apply-label">SaaS website</span>
-                  <input
-                    type="text"
-                    name="website"
-                    required
-                    placeholder="https://yoursaas.com"
-                    value={applyUrl}
-                    onChange={(e) => setApplyUrl(e.target.value)}
-                  />
-                </label>
-                <label className="apply-field">
-                  <span className="apply-label">LinkedIn (so we can DM you)</span>
-                  <input type="text" name="linkedin" required placeholder="linkedin.com/in/yourname" />
-                </label>
-              </div>
-              <label className="apply-field">
-                <span className="apply-label">What stage is your SaaS at? Who is it for?</span>
-                <textarea name="message" rows={3} placeholder="e.g. Seed-stage. We sell cold-outreach software to RevOps leaders at 50-200 person SaaS companies."></textarea>
-              </label>
-              {applyState.status === 'error' && (
-                <div className="apply-error" role="alert">
-                  {applyState.error}
-                </div>
-              )}
-              <div className="apply-foot">
-                <button
-                  type="submit"
-                  className="btn btn-red btn-lg"
-                  disabled={applyState.status === 'submitting'}
-                >
-                  {applyState.status === 'submitting' ? 'Sending…' : <>Send application <span className="ar">↗</span></>}
-                </button>
-                <p className="fineprint" style={{color:'rgba(244,239,231,.55)'}}>
-                  Reviewed by the founder. Reply on LinkedIn within 48 hours. We never sell, share, or spam your info.
-                </p>
-              </div>
-            </form>
-
-            <div className="apply-success">
-              <div className="apply-success-mark">✓</div>
-              <h3>Application received.</h3>
-              <p>The founder will personally review your domain, run a quick competitive scan, and DM you on LinkedIn inside 48 hours. Even if we are not the right fit, you will hear back with what we would do.</p>
-              <p className="fineprint" style={{color:'rgba(244,239,231,.5)', marginTop:'10px'}}>
-                If you do not see a DM by then, ping us at hello@rankedtag.com.
-              </p>
-            </div>
-          </div>
-
-          <div className="apply-bullets">
-            <div className="apply-bullet">
-              <div className="apply-bullet-num">01</div>
-              <h4>Reviewed by a human</h4>
-              <p>Not a chatbot. Not an SDR. The founder reads every application and runs a real scan of your domain.</p>
-            </div>
-            <div className="apply-bullet">
-              <div className="apply-bullet-num">02</div>
-              <h4>Reply on LinkedIn in 48h</h4>
-              <p>You get a real reply on LinkedIn. With a real opinion. Even if it is a no, it will be useful.</p>
-            </div>
-            <div className="apply-bullet">
-              <div className="apply-bullet-num">03</div>
-              <h4>Only 4 SaaS a month</h4>
-              <p>Senior strategists do not scale like ad spend. When the slots are full, you wait until next month.</p>
-            </div>
+            <Link to="/apply" className="btn btn-red btn-lg apply-band-btn">
+              Apply for review <span className="ar">↗</span>
+            </Link>
+            <ul className="apply-band-bullets">
+              <li><span className="b-check">✓</span> reviewed by a human</li>
+              <li><span className="b-check">✓</span> reply on LinkedIn in 48h</li>
+              <li><span className="b-check">✓</span> only 4 SaaS a month</li>
+            </ul>
           </div>
         </div>
       </section>
@@ -568,7 +467,7 @@ export default function Home() {
             <div className="faq-side">
               <h3>Still have questions?</h3>
               <p>Send your application. The founder reads every one and replies personally on LinkedIn. Even if the answer is "not a fit right now," you get a real opinion, free.</p>
-              <a href="#apply" className="btn btn-red w-full" style={{justifyContent: 'center'}}>Apply for review <span className="ar">↗</span></a>
+              <a href="/apply" className="btn btn-red w-full" style={{justifyContent: 'center'}}>Apply for review <span className="ar">↗</span></a>
             </div>
           </div>
         </div>
@@ -588,8 +487,8 @@ export default function Home() {
             Every week you wait, your competitor is one more cited article ahead in ChatGPT. Compounding works for them too.
           </p>
           <div style={{display: 'flex', gap: '14px', flexWrap: 'wrap', justifyContent: 'center'}}>
-            <a href="#apply" className="btn btn-primary btn-lg">Apply for the engine <span className="ar">↗</span></a>
-            <a href="#apply" className="btn btn-outline btn-lg">Free audit first <span className="ar">↗</span></a>
+            <a href="/apply" className="btn btn-primary btn-lg">Apply for the engine <span className="ar">↗</span></a>
+            <a href="/apply" className="btn btn-outline btn-lg">Free audit first <span className="ar">↗</span></a>
           </div>
         </div>
       </section>
@@ -607,8 +506,8 @@ export default function Home() {
             <div className="footer-col">
               <h4>The product</h4>
               <a href="#how-it-works">How it works</a>
-              <a href="#case-study">Sendr.ai story</a>
-              <a href="#apply">Apply</a>
+              <a href="/case-study/sendr">Sendr.ai case study</a>
+              <a href="/apply">Apply</a>
             </div>
             <div className="footer-col">
               <h4>Free tools</h4>
@@ -616,7 +515,7 @@ export default function Home() {
               <a href="/domain-authority-checker">Domain Authority Checker</a>
               <a href="/page-speed-checker">Page Speed Checker</a>
               <a href="/competitor-analysis">Competitor Analysis</a>
-              <a href="#apply">Site Audit (Founder Review)</a>
+              <a href="/apply">Site Audit (Founder Review)</a>
             </div>
             <div className="footer-col">
               <h4>Company</h4>

@@ -13,6 +13,8 @@ import { analyzeDensity } from '../utils/densityAnalyzer';
 import { trackToolUse } from '../lib/track';
 import usePageMeta from '../hooks/usePageMeta';
 import { softwareTool, breadcrumb, faqPage, SITE } from '../lib/schema.js';
+import { TOOL_META } from '../seo/routeMeta.js';
+import JsonLd from '../components/JsonLd.jsx';
 import '../components/charts/charts.css';
 import '../components/export/export.css';
 import './DensityDashboard.css';
@@ -49,13 +51,7 @@ const DENSITY_JSONLD = [
 ];
 
 export default function DensityDashboard() {
-  usePageMeta({
-    title: 'Keyword Density Checker — Free Online Tool | RankedTag',
-    description:
-      'Free keyword density checker. Paste text or a URL to see 1–4 word keyword frequency and %, catch keyword stuffing, and optimize for Google and AI search.',
-    canonical: 'https://rankedtag.com/keyword-density-checker',
-    jsonLd: DENSITY_JSONLD,
-  });
+  usePageMeta(TOOL_META['/keyword-density-checker']);
 
   const [content, setContent] = useState('');
   const [options, setOptions] = useState(DEFAULT_OPTIONS);
@@ -93,6 +89,7 @@ export default function DensityDashboard() {
 
   return (
     <>
+      <JsonLd data={DENSITY_JSONLD} />
       <Nav variant="tech" />
 
       <main className="ds-main">

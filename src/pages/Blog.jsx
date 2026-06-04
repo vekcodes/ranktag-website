@@ -139,7 +139,7 @@ export default function Blog() {
         <div className="container">
           <h2>Want this engine pointed at your SaaS?</h2>
           <p>0 → 1.05M organic impressions in 6 months for Sendr.ai. Get a free founder-level review of your inbound.</p>
-          <Link to="/#apply" className="btn btn-primary btn-lg">
+          <Link to="/apply" className="btn btn-primary btn-lg">
             Apply for a free review <span className="ar">↗</span>
           </Link>
         </div>
@@ -148,7 +148,7 @@ export default function Blog() {
       <footer className="blogx-foot">
         <div className="container">
           © {new Date().getFullYear()} RankedTag ·{' '}
-          <Link to="/">Home</Link> · <Link to="/#apply">Founder Review</Link> ·{' '}
+          <Link to="/">Home</Link> · <Link to="/apply">Founder Review</Link> ·{' '}
           <a href="/rss.xml">RSS</a>
         </div>
       </footer>
@@ -162,7 +162,7 @@ function EmptyState({ icon, title, body }) {
       <div className="blogx-empty-ic" aria-hidden="true">{icon}</div>
       <h2>{title}</h2>
       <p>{body}</p>
-      <Link to="/#apply" className="btn btn-red">
+      <Link to="/apply" className="btn btn-red">
         Get a free founder review <span className="ar">↗</span>
       </Link>
     </div>
