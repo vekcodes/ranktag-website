@@ -133,14 +133,14 @@ function shell({ title, description, canonical, ogImage, jsonLd, body, robots })
 <meta name="theme-color" content="#0E0E10"/>
 <title>${escapeHtml(title)}</title>
 <meta name="description" content="${escapeHtml(description)}"/>
-<link rel="canonical" href="${escapeHtml(canonical)}"/>
+${canonical ? `<link rel="canonical" href="${escapeHtml(canonical)}"/>` : ''}
 <meta name="robots" content="${robots || 'index, follow, max-image-preview:large'}"/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/><link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png"/><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/><link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <meta property="og:type" content="article"/>
 <meta property="og:site_name" content="${SITE_NAME}"/>
 <meta property="og:title" content="${escapeHtml(title)}"/>
 <meta property="og:description" content="${escapeHtml(description)}"/>
-<meta property="og:url" content="${escapeHtml(canonical)}"/>
+${canonical ? `<meta property="og:url" content="${escapeHtml(canonical)}"/>` : ''}
 <meta property="og:image" content="${escapeHtml(ogImage)}"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="${escapeHtml(title)}"/>
@@ -270,6 +270,30 @@ export function renderNotFound() {
     title: `Not found · ${SITE_NAME}`,
     description: 'Post not found.',
     canonical: `${SITE_URL}/blog`,
+    ogImage: `${SITE_URL}/rankedtag-logo.png`,
+    jsonLd: [],
+    body,
+    robots: 'noindex, follow',
+  });
+}
+
+// Site-wide 404 for any unmatched route (served by api/not-found.js with a real
+// 404 status). No canonical (it is a non-page); noindex so it never gets indexed.
+export function renderSiteNotFound() {
+  const body = `<div class="wrap"><div class="empty">
+<h1 style="font-size:2.4rem;margin-bottom:14px">Page not found</h1>
+<p style="font-size:18px;margin-bottom:28px">That page does not exist or has moved. Try one of these:</p>
+<p style="display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-weight:600">
+<a href="/" style="color:var(--red-deep);text-decoration:underline">Home</a>
+<a href="/blog" style="color:var(--red-deep);text-decoration:underline">Blog</a>
+<a href="/keyword-density-checker" style="color:var(--red-deep);text-decoration:underline">Free SEO tools</a>
+<a href="/apply" style="color:var(--red-deep);text-decoration:underline">Apply for a review</a>
+</p>
+</div></div>`;
+  return shell({
+    title: `Page not found (404) · ${SITE_NAME}`,
+    description: 'That page does not exist. Explore the blog, the free SEO tools, or apply for a founder review.',
+    canonical: '',
     ogImage: `${SITE_URL}/rankedtag-logo.png`,
     jsonLd: [],
     body,
