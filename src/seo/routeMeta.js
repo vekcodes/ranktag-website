@@ -9,9 +9,9 @@
 // it must not pull in React, CSS, or any browser globals.
 export const TOOL_META = {
   '/apply': {
-    title: 'Apply for a Founder Review | RankedTag',
+    title: 'Apply for a Free Founder Review of Your SaaS | RankedTag',
     description:
-      'Apply for a free founder-reviewed SEO, AI SEO & GEO audit of your B2B SaaS. We take 4 founders a month and reply on LinkedIn within 48 hours — even if it’s a no.',
+      'Apply for a free, founder-reviewed SEO, AI SEO and GEO audit of your B2B SaaS. We take four founders a month and reply on LinkedIn within 48 hours.',
     canonical: 'https://rankedtag.com/apply',
   },
   '/keyword-density-checker': {
@@ -23,13 +23,13 @@ export const TOOL_META = {
   '/domain-authority-checker': {
     title: 'Domain Authority Checker — Free, No Ahrefs Key | RankedTag',
     description:
-      'Free domain authority checker. Get a composite DA score from traffic rank, domain age, on-page schema and HTTP transport — every input source-linked. No login, no Ahrefs key.',
+      'Free domain authority checker. Get a composite DA score from traffic rank, domain age, schema and HTTP transport — every input source-linked. No Ahrefs key.',
     canonical: 'https://rankedtag.com/domain-authority-checker',
   },
   '/page-speed-checker': {
     title: 'Page Speed Checker — Free Website Speed Test | RankedTag',
     description:
-      'Free page speed checker. Test any URL on mobile and desktop, scored on five real signals with a ranked fix-first list in under 5 seconds — plus how to pass Core Web Vitals. No PSI key.',
+      'Free page speed checker. Test any URL on mobile and desktop across five real signals, with a ranked fix-first list in under five seconds. No PSI key needed.',
     canonical: 'https://rankedtag.com/page-speed-checker',
   },
   '/competitor-analysis': {
@@ -39,9 +39,9 @@ export const TOOL_META = {
     canonical: 'https://rankedtag.com/competitor-analysis',
   },
   '/case-study/sendr': {
-    title: 'sendr.ai Case Study: 0 → 1.05M Impressions in 6 Months | RankedTag',
+    title: 'sendr.ai: 1.05M Impressions in 6 Months | RankedTag',
     description:
-      "How RankedTag took sendr.ai from 0 to 1.05M organic impressions in 6 months and to #2 in Google's AI Overview for \"best GTM tool\" — above ZoomInfo. The full B2B SaaS SEO + GEO playbook, with live Google Search Console numbers.",
+      "How RankedTag took sendr.ai from 0 to 1.05M impressions in 6 months — and to #2 in Google's AI Overview, above ZoomInfo. The full B2B SaaS SEO and GEO playbook.",
     canonical: 'https://rankedtag.com/case-study/sendr',
     // Page-specific share image: the live GSC proof screenshot (not the logo).
     ogImage: 'https://rankedtag.com/result-sendr.jpeg',
