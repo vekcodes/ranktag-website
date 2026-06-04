@@ -4,6 +4,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "installCommand": "npm install",
+  "trailingSlash": false,
   "redirects": [
     { "source": "/backlink-checker", "destination": "/domain-authority-checker", "permanent": true },
     { "source": "/keyword-density", "destination": "/keyword-density-checker", "permanent": true },
@@ -19,7 +20,9 @@
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
     { "source": "/rss.xml", "destination": "/api/rss" },
     { "source": "/api/backlinks", "destination": "/api/authority" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/admin", "destination": "/index.html" },
+    { "source": "/admin/:path*", "destination": "/index.html" },
+    { "source": "/(.*)", "destination": "/api/not-found" }
   ],
   "functions": {
     "api/**/*.js": {

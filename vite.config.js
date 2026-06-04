@@ -23,7 +23,7 @@ function rewriteHeadForRoute(route, indexHTML) {
   const title = escapeHtml(meta.title);
   const desc = escapeHtml(meta.description);
   const url = escapeHtml(meta.canonical);
-  return indexHTML
+  let out = indexHTML
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${title}</title>`)
     .replace(/(<meta name="description" content=")[^"]*(")/, `$1${desc}$2`)
     .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${url}$2`)
@@ -32,6 +32,14 @@ function rewriteHeadForRoute(route, indexHTML) {
     .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${url}$2`)
     .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${title}$2`)
     .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${desc}$2`);
+  // Optional per-route share image (falls back to the site-wide logo otherwise).
+  if (meta.ogImage) {
+    const img = escapeHtml(meta.ogImage);
+    out = out
+      .replace(/(<meta property="og:image" content=")[^"]*(")/, `$1${img}$2`)
+      .replace(/(<meta name="twitter:image" content=")[^"]*(")/, `$1${img}$2`);
+  }
+  return out;
 }
 
 // Local dev: run `vercel dev` from the repo root to get the frontend AND the

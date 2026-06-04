@@ -102,6 +102,7 @@ export default function BlogPost() {
                 alt={post.cover_image_alt || post.title}
                 width="1200"
                 height="630"
+                fetchPriority="high"
               />
             )}
             <div

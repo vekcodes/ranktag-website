@@ -294,6 +294,8 @@ export default function Home() {
                   src="/result-sendr.jpeg"
                   alt="Google Search Console screenshot showing 7.43k total clicks and 1.05M total impressions for sendr.ai over a 6-month period, with average CTR 0.7% and average position 7.1."
                   loading="lazy"
+                  width="1453"
+                  height="656"
                 />
               </figure>
             </div>
@@ -317,6 +319,8 @@ export default function Home() {
                 src="/result-ranked.jpeg"
                 alt="Google search result page for the query 'what is the best GTM tool'. The AI Overview lists Sendr.ai at position #2 and ZoomInfo at position #8. Sendr.ai's blog post is featured as the cited source on the right panel."
                 loading="lazy"
+                width="1233"
+                height="868"
               />
             </figure>
           </div>
