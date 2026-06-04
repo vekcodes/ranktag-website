@@ -43,5 +43,7 @@ export const TOOL_META = {
     description:
       "How RankedTag took sendr.ai from 0 to 1.05M organic impressions in 6 months and to #2 in Google's AI Overview for \"best GTM tool\" — above ZoomInfo. The full B2B SaaS SEO + GEO playbook, with live Google Search Console numbers.",
     canonical: 'https://rankedtag.com/case-study/sendr',
+    // Page-specific share image: the live GSC proof screenshot (not the logo).
+    ogImage: 'https://rankedtag.com/result-sendr.jpeg',
   },
 };

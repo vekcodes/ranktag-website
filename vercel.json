@@ -4,6 +4,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "installCommand": "npm install",
+  "trailingSlash": false,
   "redirects": [
     { "source": "/backlink-checker", "destination": "/domain-authority-checker", "permanent": true },
     { "source": "/keyword-density", "destination": "/keyword-density-checker", "permanent": true },
