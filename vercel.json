@@ -9,7 +9,9 @@
     { "source": "/keyword-density", "destination": "/keyword-density-checker", "permanent": true },
     { "source": "/density", "destination": "/keyword-density-checker", "permanent": true },
     { "source": "/competitor", "destination": "/competitor-analysis", "permanent": true },
-    { "source": "/page-speed", "destination": "/page-speed-checker", "permanent": true }
+    { "source": "/page-speed", "destination": "/page-speed-checker", "permanent": true },
+    { "source": "/audit", "destination": "/apply", "permanent": false },
+    { "source": "/technical-audit", "destination": "/apply", "permanent": false }
   ],
   "rewrites": [
     { "source": "/blog", "destination": "/api/blog-page" },
