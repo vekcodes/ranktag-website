@@ -103,7 +103,7 @@ function nav() {
 <a class="logo" href="/" aria-label="RankedTag home"><img src="/rankedtag-logo.svg" alt="RankedTag" width="106" height="28"/></a>
 <div class="nav-links">
 <a href="/#how-it-works">How it works</a>
-<a href="/#case-study">Sendr.ai story</a>
+<a href="/case-study/sendr">Case study</a>
 <a href="/blog">Blog</a>
 <a class="cta" href="/apply">Apply →</a>
 </div></div></nav>`;
