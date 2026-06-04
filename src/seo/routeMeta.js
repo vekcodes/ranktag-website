@@ -19,24 +19,32 @@ export const TOOL_META = {
     description:
       'Free keyword density checker. Paste text or a URL to see 1–4 word keyword frequency and %, catch keyword stuffing, and optimize for Google and AI search.',
     canonical: 'https://rankedtag.com/keyword-density-checker',
+    ogImage: 'https://rankedtag.com/og/keyword-density-checker.png',
+    ogImageAlt: 'RankedTag free keyword density checker tool',
   },
   '/domain-authority-checker': {
     title: 'Domain Authority Checker — Free, No Ahrefs Key | RankedTag',
     description:
       'Free domain authority checker. Get a composite DA score from traffic rank, domain age, schema and HTTP transport — every input source-linked. No Ahrefs key.',
     canonical: 'https://rankedtag.com/domain-authority-checker',
+    ogImage: 'https://rankedtag.com/og/domain-authority-checker.png',
+    ogImageAlt: 'RankedTag free domain authority checker tool',
   },
   '/page-speed-checker': {
     title: 'Page Speed Checker — Free Website Speed Test | RankedTag',
     description:
       'Free page speed checker. Test any URL on mobile and desktop across five real signals, with a ranked fix-first list in under five seconds. No PSI key needed.',
     canonical: 'https://rankedtag.com/page-speed-checker',
+    ogImage: 'https://rankedtag.com/og/page-speed-checker.png',
+    ogImageAlt: 'RankedTag free page speed checker tool',
   },
   '/competitor-analysis': {
     title: 'Free Competitor Analysis Tool — SEO Side-by-Side | RankedTag',
     description:
       "Free competitor analysis tool. Compare your page against competitors side by side, find keyword gaps, and see who's winning in Google and AI search — no login.",
     canonical: 'https://rankedtag.com/competitor-analysis',
+    ogImage: 'https://rankedtag.com/og/competitor-analysis.png',
+    ogImageAlt: 'RankedTag free competitor analysis tool',
   },
   '/case-study/sendr': {
     title: 'sendr.ai: 1.05M Impressions in 6 Months | RankedTag',

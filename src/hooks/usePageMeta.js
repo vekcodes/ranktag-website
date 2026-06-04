@@ -12,7 +12,7 @@ import { useEffect } from 'react';
  * <script type="application/ld+json"> with id `ld-page`. The previous block
  * (if any) is replaced on each route change.
  */
-export default function usePageMeta({ title, description, canonical, ogImage, jsonLd } = {}) {
+export default function usePageMeta({ title, description, canonical, ogImage, ogImageAlt, jsonLd } = {}) {
   useEffect(() => {
     if (title) document.title = title;
 
@@ -41,6 +41,10 @@ export default function usePageMeta({ title, description, canonical, ogImage, js
       setMeta('meta[property="og:image"]', 'content', ogImage);
       setMeta('meta[name="twitter:image"]', 'content', ogImage);
     }
+    if (ogImageAlt) {
+      setMeta('meta[property="og:image:alt"]', 'content', ogImageAlt);
+      setMeta('meta[name="twitter:image:alt"]', 'content', ogImageAlt);
+    }
     if (canonical) {
       let link = document.head.querySelector('link[rel="canonical"]');
       if (!link) {
@@ -68,5 +72,5 @@ export default function usePageMeta({ title, description, canonical, ogImage, js
       const existing = document.getElementById('ld-page');
       if (existing) existing.remove();
     };
-  }, [title, description, canonical, ogImage, jsonLd]);
+  }, [title, description, canonical, ogImage, ogImageAlt, jsonLd]);
 }
