@@ -6,6 +6,12 @@
   "installCommand": "npm install",
   "trailingSlash": false,
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.rankedtag.com" }],
+      "destination": "https://rankedtag.com/:path*",
+      "permanent": true
+    },
     { "source": "/backlink-checker", "destination": "/domain-authority-checker", "permanent": true },
     { "source": "/keyword-density", "destination": "/keyword-density-checker", "permanent": true },
     { "source": "/density", "destination": "/keyword-density-checker", "permanent": true },
