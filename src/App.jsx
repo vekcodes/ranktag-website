@@ -32,6 +32,9 @@ export const routes = [
       // Dedicated founder-review application page (pre-rendered).
       { path: 'apply', element: <Apply /> },
 
+      // Standalone, indexable case study (pre-rendered).
+      { path: 'case-study/sendr', lazy: lazyRoute(() => import('./pages/CaseStudySendr.jsx')) },
+
       // Founder Review IS the audit — these legacy paths bounce to /apply.
       { path: 'audit', element: <ApplyRedirect /> },
       { path: 'technical-audit', element: <ApplyRedirect /> },

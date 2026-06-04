@@ -53,6 +53,7 @@ export default defineConfig(({ isSsrBuild }) => ({
       return [
         '/',
         '/apply',
+        '/case-study/sendr',
         '/keyword-density-checker',
         '/domain-authority-checker',
         '/page-speed-checker',

@@ -44,6 +44,8 @@ const HOME_JSONLD = [
     name: 'sendr.ai: 0 to 1.05M impressions in 6 months',
     headline:
       "Took sendr.ai from 0 to 1.05M impressions in 6 months — #2 on Google's AI Overview, above ZoomInfo",
+    url: 'https://rankedtag.com/case-study/sendr',
+    mainEntityOfPage: { '@id': 'https://rankedtag.com/case-study/sendr#article' },
     about: { '@id': 'https://rankedtag.com/#org' },
     author: { '@id': 'https://rankedtag.com/#org' },
     inLanguage: 'en',
@@ -253,7 +255,10 @@ export default function Home() {
                 </div>
               </div>
 
-              <a href="/apply" className="btn btn-primary">Apply for the same engine <span className="ar">↗</span></a>
+              <div className="case-cta-row">
+                <a href="/apply" className="btn btn-primary">Apply for the same engine <span className="ar">↗</span></a>
+                <Link to="/case-study/sendr" className="case-readmore">Read the full case study <span className="ar">→</span></Link>
+              </div>
             </div>
 
             <div>
@@ -501,7 +506,7 @@ export default function Home() {
             <div className="footer-col">
               <h4>The product</h4>
               <a href="#how-it-works">How it works</a>
-              <a href="#case-study">Sendr.ai story</a>
+              <a href="/case-study/sendr">Sendr.ai case study</a>
               <a href="/apply">Apply</a>
             </div>
             <div className="footer-col">

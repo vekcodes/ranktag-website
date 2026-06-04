@@ -932,6 +932,24 @@ h1.hero-title .line{display:block}
 .case-author-info strong{display:block;font-weight:700;font-size:14px}
 .case-author-info span{color:var(--muted)}
 
+.case-cta-row{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  flex-wrap:wrap;
+}
+.case-readmore{
+  font-family:'JetBrains Mono', monospace;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.02em;
+  color:var(--ink-2);
+  text-decoration:none;
+  border-bottom:1px solid var(--paper-3);
+  padding-bottom:2px;
+}
+.case-readmore:hover{ color:var(--red); border-color:var(--red); }
+
 .case-stats{
   display:grid;
   grid-template-columns:1fr 1fr;

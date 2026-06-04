@@ -38,4 +38,10 @@ export const TOOL_META = {
       "Free competitor analysis tool. Compare your page against competitors side by side, find keyword gaps, and see who's winning in Google and AI search — no login.",
     canonical: 'https://rankedtag.com/competitor-analysis',
   },
+  '/case-study/sendr': {
+    title: 'sendr.ai Case Study: 0 → 1.05M Impressions in 6 Months | RankedTag',
+    description:
+      "How RankedTag took sendr.ai from 0 to 1.05M organic impressions in 6 months and to #2 in Google's AI Overview for \"best GTM tool\" — above ZoomInfo. The full B2B SaaS SEO + GEO playbook, with live Google Search Console numbers.",
+    canonical: 'https://rankedtag.com/case-study/sendr',
+  },
 };
