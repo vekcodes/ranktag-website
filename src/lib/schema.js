@@ -120,7 +120,12 @@ export function articlePosting(post) {
     image: post.og_image_url || post.cover_image_url || LOGO,
     datePublished: post.published_at,
     dateModified: post.updated_at || post.published_at,
-    author: { '@type': 'Organization', name: post.author || 'RankedTag', url: SITE },
+    // A named human byline → Person; the house byline (blank/org name) →
+    // Organization. Mirrors api/_lib/blog.js authorNode so SSR + client agree.
+    author:
+      post.author && post.author !== 'RankedTag'
+        ? { '@type': 'Person', name: post.author }
+        : { '@type': 'Organization', name: 'RankedTag', url: SITE },
     publisher: { '@id': ORG_ID },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
   });

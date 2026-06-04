@@ -27,13 +27,13 @@ export default async function handler(req, res) {
       const rows = tag
         ? await sql`
             SELECT slug,title,excerpt,cover_image_url,cover_image_alt,
-                   reading_minutes,published_at
+                   reading_minutes,published_at,author
             FROM posts
             WHERE status='published' AND published_at<=now() AND ${tag}=ANY(tags)
             ORDER BY published_at DESC LIMIT 60`
         : await sql`
             SELECT slug,title,excerpt,cover_image_url,cover_image_alt,
-                   reading_minutes,published_at
+                   reading_minutes,published_at,author
             FROM posts
             WHERE status='published' AND published_at<=now()
             ORDER BY published_at DESC LIMIT 60`;

@@ -1,7 +1,7 @@
 // Server-side HTML renderer for the SEO-critical /blog pages.
 // Self-contained document (brand styles inlined) so crawlers get full,
 // fast, fully-rendered HTML — no client JS required to read content.
-import { escapeHtml, SITE_URL, SITE_NAME, normalizeFaqs } from './blog.js';
+import { escapeHtml, SITE_URL, SITE_NAME, normalizeFaqs, authorNode } from './blog.js';
 
 const FONTS =
   'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=JetBrains+Mono:wght@400;500;600;700&display=swap';
@@ -123,7 +123,7 @@ function leadCta() {
 <a href="/apply">Apply for a free review →</a></div>`;
 }
 
-function shell({ title, description, canonical, ogImage, jsonLd, body, robots }) {
+function shell({ title, description, canonical, ogImage, ogType, jsonLd, body, robots }) {
   const ld = (jsonLd || [])
     .map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`)
     .join('');
@@ -136,7 +136,7 @@ function shell({ title, description, canonical, ogImage, jsonLd, body, robots })
 <link rel="canonical" href="${escapeHtml(canonical)}"/>
 <meta name="robots" content="${robots || 'index, follow, max-image-preview:large'}"/>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/><link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png"/><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/><link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-<meta property="og:type" content="article"/>
+<meta property="og:type" content="${ogType || 'website'}"/>
 <meta property="og:site_name" content="${SITE_NAME}"/>
 <meta property="og:title" content="${escapeHtml(title)}"/>
 <meta property="og:description" content="${escapeHtml(description)}"/>
@@ -207,19 +207,46 @@ ${posts.length ? `<div class="grid">${cards}</div>` : `<div class="empty">No pos
     {
       '@context': 'https://schema.org',
       '@type': 'Blog',
+      '@id': `${SITE_URL}/blog#blog`,
       name: `${SITE_NAME} Blog`,
       url: `${SITE_URL}/blog`,
       description:
-        'SEO, generative engine optimization, and inbound growth for B2B SaaS founders.',
+        'SEO, generative engine optimization (GEO), and inbound growth for B2B SaaS founders.',
+      publisher: {
+        '@type': 'Organization',
+        name: SITE_NAME,
+        logo: { '@type': 'ImageObject', url: `${SITE_URL}/rankedtag-logo.png` },
+      },
+      ...(posts.length
+        ? {
+            mainEntity: posts.map((p) => ({
+              '@type': 'BlogPosting',
+              headline: p.title,
+              url: `${SITE_URL}/blog/${p.slug}`,
+              description: p.excerpt,
+              datePublished: p.published_at,
+              author: authorNode(p.author),
+            })),
+          }
+        : {}),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
+      ],
     },
   ];
 
   return shell({
-    title: `Blog · ${SITE_NAME} — SEO & Inbound for B2B SaaS`,
+    title: `${SITE_NAME} Blog — SEO, GEO & Inbound Growth for B2B SaaS`,
     description:
-      'Field notes on SEO, generative engine optimization (GEO), and building inbound engines that generate qualified pipeline for B2B SaaS.',
+      'Field notes on SEO, generative engine optimization (GEO), and building inbound engines that earn AI citations and qualified pipeline for B2B SaaS founders.',
     canonical: `${SITE_URL}/blog`,
     ogImage: `${SITE_URL}/rankedtag-logo.png`,
+    ogType: 'website',
     jsonLd,
     body,
   });
@@ -256,6 +283,7 @@ ${leadCta()}
     canonical: post.canonical_url || `${SITE_URL}/blog/${post.slug}`,
     ogImage:
       post.og_image_url || post.cover_image_url || `${SITE_URL}/rankedtag-logo.png`,
+    ogType: 'article',
     jsonLd,
     body,
   });

@@ -227,6 +227,18 @@ export function normalizePostInput(body = {}) {
   };
 }
 
+/**
+ * Author node for article schema. A named human → Person; the house byline
+ * (empty or the org name) → Organization. Never invents a fake Person.
+ */
+export function authorNode(name) {
+  const n = (name || '').trim();
+  if (!n || n === SITE_NAME) {
+    return { '@type': 'Organization', name: SITE_NAME, url: SITE_URL };
+  }
+  return { '@type': 'Person', name: n };
+}
+
 /** JSON-LD BlogPosting + BreadcrumbList for rich results. */
 export function articleJsonLd(post) {
   const url = postUrl(post.slug);
@@ -238,7 +250,7 @@ export function articleJsonLd(post) {
     image: post.og_image_url || post.cover_image_url || `${SITE_URL}/rankedtag-logo.png`,
     datePublished: post.published_at,
     dateModified: post.updated_at || post.published_at,
-    author: { '@type': 'Organization', name: post.author || SITE_NAME, url: SITE_URL },
+    author: authorNode(post.author),
     publisher: {
       '@type': 'Organization',
       name: SITE_NAME,
