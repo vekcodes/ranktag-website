@@ -21,8 +21,7 @@
     { "source": "/rss.xml", "destination": "/api/rss" },
     { "source": "/api/backlinks", "destination": "/api/authority" },
     { "source": "/admin", "destination": "/index.html" },
-    { "source": "/admin/:path*", "destination": "/index.html" },
-    { "source": "/(.*)", "destination": "/api/not-found" }
+    { "source": "/admin/:path*", "destination": "/index.html" }
   ],
   "functions": {
     "api/**/*.js": {
