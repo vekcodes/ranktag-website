@@ -43,7 +43,8 @@ font-weight:600;font-size:14px;transition:background .15s}
 text-transform:uppercase;color:var(--red);margin-bottom:14px}
 h1.title{font-size:clamp(2rem,5vw,3.1rem);font-weight:800}
 .meta{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--muted);font-size:14px;margin-top:18px}
-.cover{width:100%;border-radius:var(--r-lg);margin:8px 0 36px;border:1px solid var(--paper-3)}
+.cover{display:block;width:100%;aspect-ratio:1200/630;object-fit:cover;
+background:var(--paper-2);border-radius:var(--r-lg);margin:8px 0 36px;border:1px solid var(--paper-3)}
 .prose{font-size:18px;color:#26262b}
 .prose>*+*{margin-top:1.15em}
 .prose h2{font-size:1.7rem;font-weight:700;margin-top:1.9em}
@@ -51,7 +52,8 @@ h1.title{font-size:clamp(2rem,5vw,3.1rem);font-weight:800}
 .prose a{color:var(--red-deep);text-decoration:underline;text-underline-offset:3px}
 .prose a:hover{color:var(--red)}
 .prose ul,.prose ol{padding-left:1.3em}.prose li+li{margin-top:.4em}
-.prose img{border-radius:var(--r-md);margin:1.6em 0;border:1px solid var(--paper-3)}
+.prose img{display:block;width:100%;aspect-ratio:1200/630;object-fit:cover;
+background:var(--paper-2);border-radius:var(--r-md);margin:1.6em 0;border:1px solid var(--paper-3)}
 .prose blockquote{border-left:3px solid var(--red);padding:.2em 0 .2em 1.1em;
 color:var(--muted);font-style:italic}
 .prose pre{background:var(--ink);color:#f4efe7;padding:18px;border-radius:var(--r-md);
@@ -92,11 +94,24 @@ gap:26px;padding:44px 0 80px}
 .card{background:#fff;border:1px solid var(--paper-3);border-radius:var(--r-lg);
 overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
 .card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.07)}
-.card-img{aspect-ratio:16/9;object-fit:cover;width:100%;background:var(--paper-2)}
+.card-img{aspect-ratio:1200/630;object-fit:cover;width:100%;background:var(--paper-2)}
 .card-body{padding:22px;display:flex;flex-direction:column;flex:1}
 .card h2{font-size:1.28rem;font-weight:700}
 .card p{color:var(--muted);font-size:15px;margin:10px 0 16px;flex:1}
 .card .row{display:flex;gap:14px;color:var(--muted-2);font-size:13px}
+.feat{display:grid;grid-template-columns:1.1fr .9fr;background:#fff;border:1px solid var(--paper-3);
+border-radius:var(--r-lg);overflow:hidden;margin:44px 0 26px;transition:transform .2s,box-shadow .2s}
+.feat:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.07)}
+.feat-img{width:100%;height:100%;min-height:300px;object-fit:cover;background:var(--paper-2);display:block}
+.feat-body{padding:40px;display:flex;flex-direction:column;justify-content:center}
+.feat-kicker{align-self:flex-start;font-size:12px;font-weight:700;letter-spacing:.08em;
+text-transform:uppercase;color:var(--red);margin-bottom:14px}
+.feat-body h2{font-size:1.9rem;font-weight:700;line-height:1.18}
+.feat-body p{color:var(--muted);font-size:16px;line-height:1.6;margin:14px 0 20px}
+.feat-body .row{display:flex;gap:14px;color:var(--muted-2);font-size:13px}
+.feat + .grid{padding-top:0}
+@media(max-width:760px){.feat{grid-template-columns:1fr}.feat-img{min-height:0;aspect-ratio:1200/630}
+.feat-body{padding:28px}.feat-body h2{font-size:1.6rem}}
 .empty{text-align:center;padding:80px 0;color:var(--muted)}
 footer{border-top:1px solid var(--paper-3);padding:40px 0;margin-top:40px;
 color:var(--muted);font-size:14px;text-align:center}
@@ -188,26 +203,42 @@ function fmtDate(d) {
 }
 
 export function renderIndex(posts) {
-  const cards = posts
-    .map((p) => {
-      const img = p.cover_image_url
-        ? `<img class="card-img" src="${escapeHtml(p.cover_image_url)}" alt="${escapeHtml(p.cover_image_alt || p.title)}" loading="lazy" decoding="async" width="640" height="360"/>`
-        : `<div class="card-img"></div>`;
-      return `<a class="card" href="/blog/${escapeHtml(p.slug)}">
+  const card = (p) => {
+    const img = p.cover_image_url
+      ? `<img class="card-img" src="${escapeHtml(p.cover_image_url)}" alt="${escapeHtml(p.cover_image_alt || p.title)}" loading="lazy" decoding="async" width="640" height="336"/>`
+      : `<div class="card-img"></div>`;
+    return `<a class="card" href="/blog/${escapeHtml(p.slug)}">
 ${img}<div class="card-body">
 <h2>${escapeHtml(p.title)}</h2>
 <p>${escapeHtml(p.excerpt)}</p>
 <div class="row"><span>${fmtDate(p.published_at)}</span><span>${p.reading_minutes} min read</span></div>
 </div></a>`;
-    })
-    .join('');
+  };
+
+  // Most-recent post gets a full-width featured card; the rest fill the grid.
+  const featured = posts[0];
+  const rest = posts.slice(1);
+  const featuredImg = featured && featured.cover_image_url
+    ? `<img class="feat-img" src="${escapeHtml(featured.cover_image_url)}" alt="${escapeHtml(featured.cover_image_alt || featured.title)}" decoding="async" width="1200" height="630"/>`
+    : `<div class="feat-img"></div>`;
+  const featuredHtml = featured
+    ? `<a class="feat" href="/blog/${escapeHtml(featured.slug)}">
+${featuredImg}<div class="feat-body">
+<span class="feat-kicker">Latest</span>
+<h2>${escapeHtml(featured.title)}</h2>
+<p>${escapeHtml(featured.excerpt)}</p>
+<div class="row"><span>${fmtDate(featured.published_at)}</span><span>${featured.reading_minutes} min read</span></div>
+</div></a>`
+    : '';
 
   const body = `<div class="wrap-wide">
 <div class="idx-head">
 <h1>The RankedTag Blog</h1>
 <p>Field notes on SEO, generative engine optimization, and building inbound engines for B2B SaaS.</p>
 </div>
-${posts.length ? `<div class="grid">${cards}</div>` : `<div class="empty">No posts yet — check back soon.</div>`}
+${posts.length
+    ? `${featuredHtml}${rest.length ? `<div class="grid">${rest.map(card).join('')}</div>` : ''}`
+    : `<div class="empty">No posts yet — check back soon.</div>`}
 </div>`;
 
   const jsonLd = [

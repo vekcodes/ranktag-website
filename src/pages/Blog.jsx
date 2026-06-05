@@ -78,36 +78,69 @@ export default function Blog() {
         )}
 
         {status === 'ok' && posts.length > 0 && (
-          <div className="blogx-grid">
-            {posts.map((p) => (
-              <a className="blogx-card" key={p.slug} href={`/blog/${p.slug}`}>
-                {p.cover_image_url ? (
-                  <img
-                    className="blogx-img"
-                    src={p.cover_image_url}
-                    alt={p.cover_image_alt || p.title}
-                    loading="lazy"
-                    width="640"
-                    height="360"
-                  />
-                ) : (
-                  <div className="blogx-img blogx-img-ph" />
-                )}
-                <div className="blogx-body">
-                  <h2>{p.title}</h2>
-                  <p>{p.excerpt}</p>
-                  <span className="blogx-meta">
-                    {p.published_at
-                      ? new Date(p.published_at).toLocaleDateString('en-US', {
-                          month: 'short', day: 'numeric', year: 'numeric',
-                        })
-                      : 'Draft'}{' '}
-                    · {p.reading_minutes || 1} min read
-                  </span>
-                </div>
-              </a>
-            ))}
-          </div>
+          <>
+            {/* Most-recent post as a full-width featured card. */}
+            <a className="blogx-feat" href={`/blog/${posts[0].slug}`}>
+              {posts[0].cover_image_url ? (
+                <img
+                  className="blogx-feat-img"
+                  src={posts[0].cover_image_url}
+                  alt={posts[0].cover_image_alt || posts[0].title}
+                  width="1200"
+                  height="630"
+                  fetchPriority="high"
+                />
+              ) : (
+                <div className="blogx-feat-img blogx-img-ph" />
+              )}
+              <div className="blogx-feat-body">
+                <span className="blogx-feat-kicker">Latest</span>
+                <h2>{posts[0].title}</h2>
+                <p>{posts[0].excerpt}</p>
+                <span className="blogx-meta">
+                  {posts[0].published_at
+                    ? new Date(posts[0].published_at).toLocaleDateString('en-US', {
+                        month: 'short', day: 'numeric', year: 'numeric',
+                      })
+                    : 'Draft'}{' '}
+                  · {posts[0].reading_minutes || 1} min read
+                </span>
+              </div>
+            </a>
+
+            {posts.length > 1 && (
+              <div className="blogx-grid">
+                {posts.slice(1).map((p) => (
+                  <a className="blogx-card" key={p.slug} href={`/blog/${p.slug}`}>
+                    {p.cover_image_url ? (
+                      <img
+                        className="blogx-img"
+                        src={p.cover_image_url}
+                        alt={p.cover_image_alt || p.title}
+                        loading="lazy"
+                        width="640"
+                        height="336"
+                      />
+                    ) : (
+                      <div className="blogx-img blogx-img-ph" />
+                    )}
+                    <div className="blogx-body">
+                      <h2>{p.title}</h2>
+                      <p>{p.excerpt}</p>
+                      <span className="blogx-meta">
+                        {p.published_at
+                          ? new Date(p.published_at).toLocaleDateString('en-US', {
+                              month: 'short', day: 'numeric', year: 'numeric',
+                            })
+                          : 'Draft'}{' '}
+                        · {p.reading_minutes || 1} min read
+                      </span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            )}
+          </>
         )}
 
         {status === 'ok' && posts.length === 0 && (
