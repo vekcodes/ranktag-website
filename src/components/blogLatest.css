@@ -4,7 +4,7 @@
 overflow:hidden;display:flex;flex-direction:column;
 transition:transform var(--t-base) var(--ease),box-shadow var(--t-base) var(--ease)}
 .bl-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
-.bl-img{width:100%;aspect-ratio:1200/630;object-fit:cover;background:var(--paper-2)}
+.bl-img{width:100%;aspect-ratio:1200/630;object-fit:contain;background:var(--paper-2)}
 .bl-img-ph{background:linear-gradient(135deg,var(--paper-2),var(--paper-3))}
 .bl-body{padding:24px;display:flex;flex-direction:column;flex:1}
 .bl-body h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;line-height:1.25}
