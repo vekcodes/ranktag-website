@@ -43,8 +43,7 @@ font-weight:600;font-size:14px;transition:background .15s}
 text-transform:uppercase;color:var(--red);margin-bottom:14px}
 h1.title{font-size:clamp(2rem,5vw,3.1rem);font-weight:800}
 .meta{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--muted);font-size:14px;margin-top:18px}
-.cover{display:block;width:100%;aspect-ratio:1200/630;object-fit:contain;
-background:var(--paper-2);border-radius:var(--r-lg);margin:8px 0 36px;border:1px solid var(--paper-3)}
+.cover{display:block;width:100%;height:auto;border-radius:var(--r-lg);margin:8px 0 36px;border:1px solid var(--paper-3)}
 .prose{font-size:18px;color:#26262b}
 .prose>*+*{margin-top:1.15em}
 .prose h2{font-size:1.7rem;font-weight:700;margin-top:1.9em}
@@ -94,7 +93,8 @@ gap:26px;padding:44px 0 80px}
 .card{background:#fff;border:1px solid var(--paper-3);border-radius:var(--r-lg);
 overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
 .card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.07)}
-.card-img{aspect-ratio:1200/630;object-fit:contain;width:100%;background:var(--paper-2)}
+.card-img{width:100%;aspect-ratio:1200/630;background:var(--paper-2)}
+img.card-img{height:auto;aspect-ratio:auto}
 .card-body{padding:22px;display:flex;flex-direction:column;flex:1}
 .card h2{font-size:1.28rem;font-weight:700}
 .card p{color:var(--muted);font-size:15px;margin:10px 0 16px;flex:1}
@@ -103,7 +103,8 @@ overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-
 border:1px solid var(--paper-3);border-radius:var(--r-lg);overflow:hidden;margin:44px 0 26px;
 transition:transform .2s,box-shadow .2s}
 .feat:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.07)}
-.feat-img{width:100%;aspect-ratio:1200/630;object-fit:contain;background:var(--paper-2);display:block}
+.feat-img{width:100%;aspect-ratio:1200/630;background:var(--paper-2);display:block}
+img.feat-img{height:auto;aspect-ratio:auto}
 .feat-body{padding:40px;display:flex;flex-direction:column;justify-content:center}
 .feat-kicker{align-self:flex-start;font-size:12px;font-weight:700;letter-spacing:.08em;
 text-transform:uppercase;color:var(--red);margin-bottom:14px}

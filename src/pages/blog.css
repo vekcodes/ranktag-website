@@ -14,16 +14,15 @@ letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:16px
 overflow:hidden;display:flex;flex-direction:column;
 transition:transform var(--t-base) var(--ease),box-shadow var(--t-base) var(--ease)}
 a.blogx-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
-.blogx-img{width:100%;aspect-ratio:1200/630;object-fit:contain;background:var(--paper-2)}
-.blogx-img-ph{background:linear-gradient(135deg,var(--paper-2),var(--paper-3))}
+.blogx-img{display:block;width:100%;height:auto}
+.blogx-img-ph{aspect-ratio:1200/630;background:linear-gradient(135deg,var(--paper-2),var(--paper-3))}
 
 /* Featured (latest) card */
 .blogx-feat{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;background:#fff;
 border:1px solid var(--paper-3);border-radius:var(--r-lg);overflow:hidden;margin-bottom:26px;
 transition:transform var(--t-base) var(--ease),box-shadow var(--t-base) var(--ease)}
 a.blogx-feat:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
-.blogx-feat-img{width:100%;aspect-ratio:1200/630;object-fit:contain;
-background:var(--paper-2);display:block}
+.blogx-feat-img{display:block;width:100%;height:auto}
 .blogx-feat-body{padding:40px;display:flex;flex-direction:column;justify-content:center}
 .blogx-feat-kicker{align-self:flex-start;font-size:12px;font-weight:700;letter-spacing:.08em;
 text-transform:uppercase;color:var(--red);margin-bottom:14px}
@@ -62,9 +61,8 @@ box-shadow:var(--shadow-sm)}
 text-transform:uppercase;color:var(--red);margin:20px 0 12px}
 .blogx-title{font-size:clamp(2rem,5vw,3rem);font-weight:800;line-height:1.12}
 .blogx-pmeta{color:var(--muted);font-size:14px;margin-top:18px}
-.blogx-cover{display:block;width:100%;aspect-ratio:1200/630;object-fit:cover;
-background:var(--paper-2);border-radius:var(--r-lg);border:1px solid var(--paper-3);
-margin:28px 0 36px}
+.blogx-cover{display:block;width:100%;height:auto;border-radius:var(--r-lg);
+border:1px solid var(--paper-3);margin:28px 0 36px}
 .blogx-prose{font-size:18px;line-height:1.7;color:#26262b}
 .blogx-prose>*+*{margin-top:1.15em}
 .blogx-prose h2{font-family:'Fraunces',serif;font-size:1.7rem;margin-top:1.9em}
