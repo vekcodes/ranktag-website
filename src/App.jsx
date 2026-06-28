@@ -35,8 +35,8 @@ export const routes = [
       // Standalone, indexable case study (pre-rendered).
       { path: 'case-study/sendr', lazy: lazyRoute(() => import('./pages/CaseStudySendr.jsx')) },
 
-      // Canonical machine-readable facts page for AI assistants / answer engines.
-      { path: 'llm-info', lazy: lazyRoute(() => import('./pages/LlmInfo.jsx')) },
+      // NOTE: /llm-info is served as raw Markdown by api/llm-info.js (see the
+      // vercel.json rewrite), so it is intentionally NOT a React route.
 
       // Founder Review IS the audit — these legacy paths bounce to /apply.
       { path: 'audit', element: <ApplyRedirect /> },
