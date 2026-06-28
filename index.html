@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7PPJM1XXMS"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-7PPJM1XXMS');
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#0E0E10" />
@@ -53,15 +45,48 @@
          homepage-specific nodes (WebPage #webpage, #casestudy-sendr, FAQPage #faq)
          are rendered per-route in the page body and reference #org/#website by @id. -->
 
-    <!-- RB2B visitor de-anonymization -->
-    <script>!function(key) {if (window.reb2b) return;window.reb2b = {loaded: true};var s = document.createElement("script");s.async = true;s.src = "https://ddwl4m2hdecbv.cloudfront.net/b/" + key + "/" + key + ".js.gz";document.getElementsByTagName("script")[0].parentNode.insertBefore(s, document.getElementsByTagName("script")[0]);}("7N850H5EJVN1");</script>
+    <!-- Self-hosted fonts (latin woff2). Preload the two render-critical faces:
+         Fraunces (the H1/LCP heading) and Bricolage Grotesque (body). The italic
+         + mono faces load on demand via @font-face in brand.css. crossorigin is
+         required even same-origin because fonts are fetched in CORS mode. -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/bricolage-grotesque.woff2" crossorigin />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Analytics: Google tag (gtag.js) + RB2B visitor de-anonymization.
+         Commands queue in dataLayer immediately so the pageview is captured, but
+         the network requests are deferred to post-load idle so they stay off the
+         critical path (no LCP/TBT cost). -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7PPJM1XXMS');
+      (function () {
+        var done = false;
+        function loadAnalytics() {
+          if (done) return; done = true;
+          var g = document.createElement('script');
+          g.async = true;
+          g.src = 'https://www.googletagmanager.com/gtag/js?id=G-7PPJM1XXMS';
+          document.head.appendChild(g);
+          (function (key) {
+            if (window.reb2b) return;
+            window.reb2b = { loaded: true };
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://ddwl4m2hdecbv.cloudfront.net/b/' + key + '/' + key + '.js.gz';
+            var f = document.getElementsByTagName('script')[0];
+            f.parentNode.insertBefore(s, f);
+          })('7N850H5EJVN1');
+        }
+        function schedule() {
+          if ('requestIdleCallback' in window) requestIdleCallback(loadAnalytics, { timeout: 2500 });
+          else setTimeout(loadAnalytics, 1800);
+        }
+        if (document.readyState === 'complete') schedule();
+        else window.addEventListener('load', schedule);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
