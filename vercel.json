@@ -25,7 +25,7 @@
     { "source": "/blog/:slug", "destination": "/api/blog-page" },
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
     { "source": "/rss.xml", "destination": "/api/rss" },
-    { "source": "/llm-info", "destination": "/llm-info.txt" },
+    { "source": "/llm-info", "destination": "/llm-info.html" },
     { "source": "/llm-info.md", "destination": "/llm-info.txt" },
     { "source": "/api/backlinks", "destination": "/api/authority" },
     { "source": "/admin", "destination": "/index.html" },
