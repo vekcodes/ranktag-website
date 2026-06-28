@@ -6,6 +6,7 @@ import './blogLatest.css';
 // posts, so the section never shows empty before the blog launches.
 export default function BlogLatest() {
   const [posts, setPosts] = useState([]);
+  const [revealed, setRevealed] = useState(false);
 
   useEffect(() => {
     let alive = true;
@@ -16,10 +17,21 @@ export default function BlogLatest() {
     return () => { alive = false; };
   }, []);
 
+  // This section is injected only after the async fetch resolves, so the shared
+  // scroll-reveal observer (useScrollReveal in Home) — which queries [data-reveal]
+  // once at mount — never sees it. Without this it keeps the default [data-reveal]
+  // opacity:0 forever: an invisible ~600px gap below the FAQ. Add `.in` ourselves
+  // on the next frame so the section still fades in instead of sitting blank.
+  useEffect(() => {
+    if (!posts.length) return;
+    const id = requestAnimationFrame(() => setRevealed(true));
+    return () => cancelAnimationFrame(id);
+  }, [posts.length]);
+
   if (!posts.length) return null;
 
   return (
-    <section className="blog-latest" data-reveal id="blog">
+    <section className={`blog-latest${revealed ? ' in' : ''}`} data-reveal id="blog">
       <div className="container">
         <div className="section-head">
           <div className="eyebrow">From the blog · SEO &amp; inbound playbooks</div>
