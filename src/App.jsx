@@ -1,8 +1,6 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import Layout from './Layout.jsx';
 import Home from './pages/Home.jsx';
-import Apply from './pages/Apply.jsx';
-import NotFound from './pages/NotFound.jsx';
 
 // react-router's `lazy` expects a module exposing a named `Component`. Our pages
 // default-export their component, so this adapter wraps a dynamic import into the
@@ -29,8 +27,10 @@ export const routes = [
     children: [
       { index: true, element: <Home /> },
 
-      // Dedicated founder-review application page (pre-rendered).
-      { path: 'apply', element: <Apply /> },
+      // Dedicated founder-review application page (pre-rendered). Lazy so its
+      // chunk (HubSpot form helper etc.) stays out of the homepage bundle —
+      // vite-react-ssg still awaits it when pre-rendering /apply.
+      { path: 'apply', lazy: lazyRoute(() => import('./pages/Apply.jsx')) },
 
       // Standalone, indexable case study (pre-rendered).
       { path: 'case-study/sendr', lazy: lazyRoute(() => import('./pages/CaseStudySendr.jsx')) },
@@ -61,7 +61,7 @@ export const routes = [
       { path: 'blog', lazy: lazyRoute(() => import('./pages/Blog.jsx')) },
       { path: 'blog/:slug', lazy: lazyRoute(() => import('./pages/BlogPost.jsx')) },
 
-      { path: '*', element: <NotFound /> },
+      { path: '*', lazy: lazyRoute(() => import('./pages/NotFound.jsx')) },
     ],
   },
 ];

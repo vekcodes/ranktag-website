@@ -335,7 +335,38 @@ h1.hero-title .line{display:block}
   to{transform:translateX(-100%)}
 }
 @media (prefers-reduced-motion: reduce){
-  .hero-ticker-row{animation:none}
+  .hero-ticker-row,
+  .hero-eyebrow .live-dot,
+  .hero-ticker-label .t-dot,
+  .pipeline-meta .dot,
+  .scarcity-icon,
+  .case-proof-cap .dot{animation:none}
+}
+
+/* =====================================================================
+   MOBILE PERFORMANCE — cut the costliest paint on throttled phones.
+   The hero's large blur filters, backdrop-filter, and the box-shadow
+   "pulse" dots (non-composited → they repaint every frame on the main
+   thread) are the heaviest things to render on a 4x-throttled mobile CPU.
+   Desktop already scores ~98 and keeps the full treatment; phones get a
+   near-identical but far cheaper render.
+   ===================================================================== */
+@media (max-width:900px){
+  /* the radial-gradient blobs are already soft — drop the blur raster */
+  .hero-bg-blob,
+  .hero-bg-blob-2{filter:none}
+  /* backdrop-filter is GPU-expensive on mobile; a near-opaque bg reads the same */
+  .hero-eyebrow{
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    background:rgba(255,255,255,.9);
+  }
+  /* hold the decorative "live" dots static — the box-shadow pulse repaints forever */
+  .hero-eyebrow .live-dot,
+  .hero-ticker-label .t-dot,
+  .pipeline-meta .dot,
+  .scarcity-icon,
+  .case-proof-cap .dot{animation:none}
 }
 
 /* Mobile hero */
