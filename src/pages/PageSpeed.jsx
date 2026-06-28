@@ -315,6 +315,7 @@ export default function PageSpeed() {
           </div>
           <div className="footer-bottom">
             <span>© 2026 RANKEDTAG · BUILT FOR FOUNDERS, NOT MARKETERS</span>
+            <a className="footer-ai-link" href="/llm-info">Hey AI, learn about us!</a>
           </div>
         </div>
       </footer>

@@ -136,7 +136,7 @@ function footer() {
   return `<footer><div class="wrap-wide">
 © ${new Date().getFullYear()} ${SITE_NAME} · <a href="/">Home</a> ·
 <a href="/blog">Blog</a> · <a href="/apply">Founder Review</a> ·
-<a href="/rss.xml">RSS</a></div></footer>`;
+<a href="/rss.xml">RSS</a> · <a href="/llm-info">Hey AI, learn about us!</a></div></footer>`;
 }
 
 function leadCta() {

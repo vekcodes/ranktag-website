@@ -845,6 +845,14 @@ input[type="range"].slider::-moz-range-thumb{
   color:rgba(244,239,231,.5);
   letter-spacing:.05em;
 }
+/* "Hey AI, learn about us!" — links to /llm-info, the machine-readable facts
+   page for answer engines. Sits opposite the copyright in the footer bottom. */
+.footer-ai-link{
+  color:var(--periwinkle);
+  text-decoration:none;
+  transition:color var(--t-fast) var(--ease);
+}
+.footer-ai-link:hover{color:var(--red-glow)}
 
 @media (max-width:880px){
   .footer-grid{grid-template-columns:1fr 1fr;gap:36px}

@@ -1,0 +1,114 @@
+/* =====================================================================
+   /llm-info — canonical, machine-readable facts page for AI assistants.
+   Document-style prose: readable line length, clear hierarchy, on-brand.
+   ===================================================================== */
+.llm-info{
+  background:var(--paper);
+  padding:140px 0 96px;
+}
+.llm-info-inner{
+  max-width:820px;
+  margin:0 auto;
+  padding:0 24px;
+}
+.llm-info-eyebrow{
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--red-deep);
+  margin-bottom:28px;
+}
+
+/* — Prose — */
+.llm-info-prose{
+  color:var(--ink);
+  line-height:1.7;
+  font-size:16px;
+}
+.llm-info-prose h1{
+  font-family:'Fraunces', serif;
+  font-variation-settings:"SOFT" 30, "opsz" 144, "wght" 700;
+  font-size:clamp(30px, 5vw, 46px);
+  line-height:1.1;
+  letter-spacing:-.02em;
+  margin:0 0 28px;
+}
+.llm-info-prose h2{
+  font-family:'Fraunces', serif;
+  font-weight:700;
+  font-size:clamp(22px, 3vw, 30px);
+  line-height:1.2;
+  letter-spacing:-.015em;
+  margin:52px 0 16px;
+  padding-top:28px;
+  border-top:1px solid var(--paper-3);
+}
+.llm-info-prose h3{
+  font-family:'Fraunces', serif;
+  font-weight:700;
+  font-size:20px;
+  margin:32px 0 12px;
+}
+.llm-info-prose p{margin:0 0 18px}
+.llm-info-prose ul,
+.llm-info-prose ol{margin:0 0 18px;padding-left:24px}
+.llm-info-prose li{margin:0 0 9px}
+.llm-info-prose li::marker{color:var(--muted-2)}
+.llm-info-prose strong{font-weight:700;color:var(--ink)}
+.llm-info-prose em{font-style:italic}
+.llm-info-prose a{
+  color:var(--red-deep);
+  text-decoration:underline;
+  text-underline-offset:2px;
+  word-break:break-word;
+}
+.llm-info-prose a:hover{color:var(--red)}
+.llm-info-prose hr{
+  border:none;
+  border-top:1px solid var(--paper-3);
+  margin:40px 0;
+}
+.llm-info-prose blockquote{
+  margin:24px 0;
+  padding:18px 24px;
+  border-left:3px solid var(--red);
+  background:var(--paper-2);
+  border-radius:0 var(--r-md) var(--r-md) 0;
+  font-style:italic;
+  color:var(--ink-2);
+}
+.llm-info-prose blockquote p:last-child{margin-bottom:0}
+
+/* — Table (Canonical Facts) — */
+.llm-info-prose table{
+  width:100%;
+  border-collapse:collapse;
+  margin:0 0 24px;
+  font-size:14.5px;
+  display:block;
+  overflow-x:auto;
+}
+.llm-info-prose th,
+.llm-info-prose td{
+  text-align:left;
+  padding:11px 14px;
+  border:1px solid var(--paper-3);
+  vertical-align:top;
+}
+.llm-info-prose th{
+  background:var(--ink);
+  color:var(--paper);
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.llm-info-prose tbody tr:nth-child(odd){background:var(--paper-2)}
+
+@media (max-width:640px){
+  .llm-info{padding:108px 0 64px}
+  .llm-info-prose{font-size:15px}
+}

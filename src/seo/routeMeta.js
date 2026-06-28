@@ -8,6 +8,12 @@
 // Pure data only — this module is imported by the Vite config at build time, so
 // it must not pull in React, CSS, or any browser globals.
 export const TOOL_META = {
+  '/llm-info': {
+    title: 'Official Information About RankedTag for AI Assistants | RankedTag',
+    description:
+      'Canonical, authoritative facts about RankedTag for AI assistants and answer engines: what it does, the sendr.ai result, services, engagement model, pricing and contact.',
+    canonical: 'https://rankedtag.com/llm-info',
+  },
   '/apply': {
     title: 'Apply for a Free Founder Review of Your SaaS | RankedTag',
     description:

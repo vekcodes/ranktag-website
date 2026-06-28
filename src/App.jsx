@@ -35,6 +35,9 @@ export const routes = [
       // Standalone, indexable case study (pre-rendered).
       { path: 'case-study/sendr', lazy: lazyRoute(() => import('./pages/CaseStudySendr.jsx')) },
 
+      // Canonical machine-readable facts page for AI assistants / answer engines.
+      { path: 'llm-info', lazy: lazyRoute(() => import('./pages/LlmInfo.jsx')) },
+
       // Founder Review IS the audit — these legacy paths bounce to /apply.
       { path: 'audit', element: <ApplyRedirect /> },
       { path: 'technical-audit', element: <ApplyRedirect /> },
