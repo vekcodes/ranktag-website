@@ -10,11 +10,22 @@ export default function BlogLatest() {
 
   useEffect(() => {
     let alive = true;
-    blogApi
-      .list(3)
-      .then((r) => { if (alive) setPosts(r.posts || []); })
-      .catch(() => {});
-    return () => { alive = false; };
+    const run = () => {
+      if (!alive) return;
+      blogApi
+        .list(3)
+        .then((r) => { if (alive) setPosts(r.posts || []); })
+        .catch(() => {});
+    };
+    // This section is below the fold — defer its fetch off the critical load
+    // path so it doesn't compete with above-the-fold rendering on mobile.
+    const ric = window.requestIdleCallback;
+    const handle = ric ? ric(run, { timeout: 3000 }) : setTimeout(run, 1500);
+    return () => {
+      alive = false;
+      if (ric && window.cancelIdleCallback) window.cancelIdleCallback(handle);
+      else clearTimeout(handle);
+    };
   }, []);
 
   // This section is injected only after the async fetch resolves, so the shared

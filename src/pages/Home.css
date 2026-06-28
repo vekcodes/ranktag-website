@@ -369,6 +369,24 @@ h1.hero-title .line{display:block}
   .case-proof-cap .dot{animation:none}
 }
 
+/* =====================================================================
+   OFF-SCREEN SECTION SKIPPING (mobile) — content-visibility:auto lets the
+   browser skip layout/style/paint for sections that aren't near the viewport
+   until the user scrolls to them. On a 4x-throttled phone this is a big cut to
+   initial render work (LCP, Speed Index, main-thread time) on this long page.
+   Scoped to [data-reveal] sections only — the hero has no data-reveal, so it
+   always renders immediately. Every other section already clips its own paint
+   (overflow:hidden), so the added containment is visually a no-op. The
+   intrinsic-size estimate only sizes off-screen placeholders, so it can't shift
+   anything in the viewport. Desktop (already ~98) is untouched.
+   ===================================================================== */
+@media (max-width:900px){
+  section[data-reveal]{
+    content-visibility:auto;
+    contain-intrinsic-size:auto 1200px;
+  }
+}
+
 /* Mobile hero */
 @media (max-width:900px){
   .hero{padding:110px 0 0}
