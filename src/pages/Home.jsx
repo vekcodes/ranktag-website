@@ -514,6 +514,7 @@ export default function Home() {
               <h4>The product</h4>
               <a href="#how-it-works">How it works</a>
               <a href="/case-study/sendr">Sendr.ai case study</a>
+              <a href="/blog">Blog</a>
               <a href="/apply">Apply</a>
             </div>
             <div className="footer-col">
