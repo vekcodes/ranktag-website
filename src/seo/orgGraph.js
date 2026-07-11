@@ -68,6 +68,7 @@ export const ORG_WEBSITE_JSONLD = {
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "RankedTag Services",
+        "url": "https://rankedtag.com/services",
         "itemListElement": [
           {
             "@type": "Offer",
@@ -75,6 +76,7 @@ export const ORG_WEBSITE_JSONLD = {
               "@type": "Service",
               "name": "B2B SaaS SEO",
               "serviceType": "Search Engine Optimization",
+              "url": "https://rankedtag.com/services/b2b-saas-seo",
               "description": "Full-stack SEO for B2B SaaS: technical foundations, content engine and link strategy built to rank on Google and feed qualified pipeline.",
               "provider": { "@id": "https://rankedtag.com/#org" },
               "areaServed": { "@type": "Place", "name": "Worldwide" }
@@ -86,6 +88,7 @@ export const ORG_WEBSITE_JSONLD = {
               "@type": "Service",
               "name": "AI SEO",
               "serviceType": "AI Search Optimization",
+              "url": "https://rankedtag.com/services/ai-seo",
               "description": "Optimization for AI-driven search surfaces including Google AI Overviews and LLM-powered answers.",
               "provider": { "@id": "https://rankedtag.com/#org" }
             }
@@ -96,6 +99,7 @@ export const ORG_WEBSITE_JSONLD = {
               "@type": "Service",
               "name": "Answer Engine Optimization (AEO)",
               "serviceType": "Answer Engine Optimization",
+              "url": "https://rankedtag.com/services/answer-engine-optimization",
               "description": "Structuring content and entities so your SaaS becomes the answer in AI Overviews, featured snippets and answer engines.",
               "provider": { "@id": "https://rankedtag.com/#org" }
             }
@@ -106,7 +110,30 @@ export const ORG_WEBSITE_JSONLD = {
               "@type": "Service",
               "name": "Generative Engine Optimization (GEO)",
               "serviceType": "Generative Engine Optimization",
+              "url": "https://rankedtag.com/services/generative-engine-optimization",
               "description": "Getting your brand cited and recommended inside ChatGPT, Perplexity, Gemini and Claude responses.",
+              "provider": { "@id": "https://rankedtag.com/#org" }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Technical SEO",
+              "serviceType": "Technical SEO",
+              "url": "https://rankedtag.com/services/technical-seo",
+              "description": "52-point technical foundation: crawlability, Core Web Vitals, schema graphs, internal linking and AI-crawler readiness.",
+              "provider": { "@id": "https://rankedtag.com/#org" }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "SEO Content Engine",
+              "serviceType": "Content Marketing",
+              "url": "https://rankedtag.com/services/saas-content-marketing",
+              "description": "Senior-written, AI-accelerated SaaS content that ranks on Google and gets cited by LLMs — shipped weekly with schema and conversion paths.",
               "provider": { "@id": "https://rankedtag.com/#org" }
             }
           }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Nav from '../components/Nav.jsx';
+import SiteFooter from '../components/SiteFooter.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
 import { softwareTool, breadcrumb, faqPage, SITE } from '../lib/schema.js';
@@ -285,41 +286,7 @@ export default function PageSpeed() {
 
       <PageSpeedGuide />
 
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <a href="/" className="nav-logo" aria-label="RankedTag home">
-                <img src="/rankedtag-logo-light.svg" alt="RankedTag" width="121" height="32" />
-              </a>
-              <p className="footer-blurb">The Inbound Engine for SaaS founders who would rather build product than babysit an agency.</p>
-            </div>
-            <div className="footer-col">
-              <h4>The product</h4>
-              <a href="/#how-it-works">How it works</a>
-              <a href="/#case-study">Sendr.ai story</a>
-              <a href="/blog">Blog</a>
-              <a href="/apply">Apply</a>
-            </div>
-            <div className="footer-col">
-              <h4>Free tools</h4>
-              <a href="/technical-audit">Technical + Non-tech Audit</a>
-              <a href="/domain-authority-checker">Domain Authority</a>
-              <a href="/keyword-density-checker">Keyword Density</a>
-              <a href="/page-speed-checker">Page Speed</a>
-              <a href="/competitor-analysis">Competitor Analysis</a>
-            </div>
-            <div className="footer-col">
-              <h4>Company</h4>
-              <a href="mailto:hello@rankedtag.com">hello@rankedtag.com</a>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <span>© 2026 RANKEDTAG · BUILT FOR FOUNDERS, NOT MARKETERS</span>
-            <a className="footer-ai-link" href="/llm-info">Hey AI, learn about us!</a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }

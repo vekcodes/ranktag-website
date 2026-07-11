@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import Nav from '../components/Nav';
+import SiteFooter from '../components/SiteFooter.jsx';
 import CompetitorInput from '../components/competitor/CompetitorInput';
 import ComparisonTable from '../components/competitor/ComparisonTable';
 import KeywordGapTable from '../components/competitor/KeywordGapTable';
@@ -199,6 +200,8 @@ export default function CompetitorAnalysis() {
 
         <CompetitorGuide />
       </main>
+
+      <SiteFooter />
     </>
   );
 }
