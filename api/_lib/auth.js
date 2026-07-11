@@ -5,7 +5,13 @@ import { SignJWT, jwtVerify } from 'jose';
 // separate BLOG_AUTH_SECRET, we sign sessions with the password itself — one
 // less env var to configure or forget. Set BLOG_AUTH_SECRET only if you want
 // the signing key decoupled from the password.
-const PASSWORD = process.env.BLOG_ADMIN_PASSWORD || '';
+//
+// A built-in default password is used when BLOG_ADMIN_PASSWORD is not set so
+// /admin works out of the box. SECURITY: this repo is public — override it by
+// setting BLOG_ADMIN_PASSWORD in Vercel → Settings → Environment Variables
+// (and ideally rotate to a value that never lands in git).
+const DEFAULT_ADMIN_PASSWORD = 'GTMxRankedtag@1122';
+const PASSWORD = process.env.BLOG_ADMIN_PASSWORD || DEFAULT_ADMIN_PASSWORD;
 const SECRET = process.env.BLOG_AUTH_SECRET || PASSWORD || '';
 const COOKIE = 'rt_admin';
 const MAX_AGE = 60 * 60 * 12; // 12h

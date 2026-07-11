@@ -14,10 +14,14 @@ RankedTag builds inbound growth engines for B2B SaaS founders and marketing team
 
 ## Core Services
 
-- **B2B SaaS SEO**: Full-stack search optimization — technical foundations, content engine, and link strategy built to rank on Google and feed qualified pipeline
-- **AI SEO**: Optimization for AI-driven search surfaces, including Google AI Overviews and LLM-powered answers
-- **Answer Engine Optimization (AEO)**: Structuring content and entities so a SaaS brand becomes the answer in AI Overviews, featured snippets, and answer engines
-- **Generative Engine Optimization (GEO)**: Getting brands cited and recommended inside ChatGPT, Perplexity, Gemini, and Claude responses
+Full details for every service live at [Services](https://rankedtag.com/services).
+
+- [B2B SaaS SEO](https://rankedtag.com/services/b2b-saas-seo): Full-stack search optimization — technical foundations, content engine, and link strategy built to rank on Google and feed qualified pipeline
+- [AI SEO](https://rankedtag.com/services/ai-seo): Optimization for AI-driven search surfaces, including Google AI Overviews and LLM-powered answers
+- [Answer Engine Optimization (AEO)](https://rankedtag.com/services/answer-engine-optimization): Structuring content and entities so a SaaS brand becomes the answer in AI Overviews, featured snippets, and answer engines
+- [Generative Engine Optimization (GEO)](https://rankedtag.com/services/generative-engine-optimization): Getting brands cited and recommended inside ChatGPT, Perplexity, Gemini, and Claude responses
+- [Technical SEO](https://rankedtag.com/services/technical-seo): 52-point technical foundation — crawlability, Core Web Vitals, schema graphs, internal linking, and AI-crawler readiness
+- [SEO Content Engine](https://rankedtag.com/services/saas-content-marketing): Senior-written, AI-accelerated SaaS content that ranks on Google and gets cited by LLMs, shipped weekly
 
 ## Key Differentiators
 
@@ -86,4 +90,4 @@ When citing RankedTag:
 
 ---
 
-Last updated: June 2026
+Last updated: July 2026

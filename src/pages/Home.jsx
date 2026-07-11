@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Nav from '../components/Nav.jsx';
+import SiteFooter from '../components/SiteFooter.jsx';
 import BlogLatest from '../components/BlogLatest.jsx';
 import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
 import JsonLd from '../components/JsonLd.jsx';
 import { faqPage } from '../lib/schema.js';
+import { SERVICES } from './services/servicesData.js';
 import './Home.css';
+import './services/Services.css';
 
 // Mirrors the on-page FAQ section below — keep the two in sync.
 const HOME_FAQ = [
@@ -220,6 +223,28 @@ export default function Home() {
           <p className="lead" style={{marginTop:'40px', maxWidth:'780px'}}>
             We do not pretend a robot writes our content. Claude generates the keyword research and the first draft. A senior writer rewrites it, fact-checks it, and adds the angle Claude could never reach. That is how a small team beats a giant: AI saves the 80% of the work that is grunt, humans handle the 20% that is craft.
           </p>
+        </div>
+      </section>
+
+      {/* ═══ SERVICES ══════════════════════════════════════════════════════ */}
+      <section className="home-services" id="services" data-reveal>
+        <div className="container">
+          <div className="section-head">
+            <div className="eyebrow">SERVICES · ONE ENGINE, SIX DISCIPLINES</div>
+            <h2 className="h-1">Every layer of modern search,<br /><span style={{color: 'var(--red)'}}>under one roof.</span></h2>
+            <p className="lead">Google rankings, AI Overviews, ChatGPT citations, answer boxes — they are not separate channels, they are one surface with six disciplines. Buy them separately or as the full engine. Either way, the same proof stands behind all of them.</p>
+          </div>
+
+          <div className="svc-hub-grid" style={{marginTop: '48px'}}>
+            {SERVICES.map((s, i) => (
+              <Link key={s.slug} to={`/services/${s.slug}`} className="svc-hub-card">
+                <div className="svc-hub-num">0{i + 1}</div>
+                <h3 style={{fontFamily: "'Fraunces', serif", fontSize: '22px', fontWeight: 600, color: 'var(--ink)', letterSpacing: '-.01em'}}>{s.nav}</h3>
+                <p>{s.navDesc}</p>
+                <span className="svc-hub-go">Explore the service <span className="ar">→</span></span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -501,41 +526,7 @@ export default function Home() {
       </section>
 
       {/* ═══ FOOTER ════════════════════════════════════════════════════════ */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <a href="/" className="nav-logo" aria-label="RankedTag home">
-                <img src="/rankedtag-logo-light.svg" alt="RankedTag" width="121" height="32" />
-              </a>
-              <p className="footer-blurb">The Inbound Engine for SaaS founders who would rather build product than babysit an agency. Built with senior humans, Claude, and N8N.</p>
-            </div>
-            <div className="footer-col">
-              <h4>The product</h4>
-              <a href="#how-it-works">How it works</a>
-              <a href="/case-study/sendr">Sendr.ai case study</a>
-              <a href="/apply">Apply</a>
-            </div>
-            <div className="footer-col">
-              <h4>Free tools</h4>
-              <a href="/keyword-density-checker">Keyword Density Checker</a>
-              <a href="/domain-authority-checker">Domain Authority Checker</a>
-              <a href="/page-speed-checker">Page Speed Checker</a>
-              <a href="/competitor-analysis">Competitor Analysis</a>
-              <a href="/apply">Site Audit (Founder Review)</a>
-            </div>
-            <div className="footer-col">
-              <h4>Company</h4>
-              <a href="mailto:hello@rankedtag.com">hello@rankedtag.com</a>
-              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <span>© 2026 RANKEDTAG · BUILT FOR FOUNDERS, NOT MARKETERS</span>
-            <a className="footer-ai-link" href="/llm-info">Hey AI, learn about us!</a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }

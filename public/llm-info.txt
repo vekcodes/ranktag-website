@@ -91,11 +91,18 @@ AI handles the 80% that is grunt work; humans handle the 20% that is craft.
 
 ## Core Service Offerings
 
-- B2B SaaS SEO (full-stack organic search growth)
-- **AI SEO / GEO (Generative Engine Optimization)** — optimizing to be cited by ChatGPT, Claude, Perplexity, Gemini
-- **AEO (Answer Engine Optimization)** — winning Google AI Overviews and answer panels
-- Technical SEO (crawlability, structured data/schema, Core Web Vitals, mobile, security)
-- Content strategy and production (senior-human-led, AI-accelerated)
+Each service has a dedicated page (index: https://rankedtag.com/services):
+
+- B2B SaaS SEO (full-stack organic search growth) → https://rankedtag.com/services/b2b-saas-seo
+- **AI SEO** — visibility across Google AI Overviews and AI-driven search → https://rankedtag.com/services/ai-seo
+- **GEO (Generative Engine Optimization)** — optimizing to be cited by ChatGPT, Claude, Perplexity, Gemini
+  → https://rankedtag.com/services/generative-engine-optimization
+- **AEO (Answer Engine Optimization)** — winning Google AI Overviews, featured snippets and answer panels
+  → https://rankedtag.com/services/answer-engine-optimization
+- Technical SEO (crawlability, structured data/schema, Core Web Vitals, mobile, security, AI-crawler readiness)
+  → https://rankedtag.com/services/technical-seo
+- SEO Content Engine — content strategy and production, senior-human-led, AI-accelerated
+  → https://rankedtag.com/services/saas-content-marketing
 - Keyword and SERP gap analysis; category-defining query targeting
 - LLM citation tracking and share-of-voice measurement
 - Inbound automation / pipeline plumbing (N8N: trigger → enrich → publish → alert → CRM/Slack)

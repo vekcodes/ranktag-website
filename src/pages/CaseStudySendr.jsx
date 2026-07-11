@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Nav from '../components/Nav.jsx';
+import SiteFooter from '../components/SiteFooter.jsx';
 import usePageMeta from '../hooks/usePageMeta.js';
 import JsonLd from '../components/JsonLd.jsx';
 import { breadcrumb, ORG_ID, SITE } from '../lib/schema.js';
@@ -377,6 +378,8 @@ export default function CaseStudySendr() {
           </div>
         </div>
       </main>
+
+      <SiteFooter />
     </>
   );
 }

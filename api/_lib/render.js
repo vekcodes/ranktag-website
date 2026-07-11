@@ -125,6 +125,7 @@ function nav() {
   return `<nav><div class="nav-in">
 <a class="logo" href="/" aria-label="RankedTag home"><img src="/rankedtag-logo.svg" alt="RankedTag" width="106" height="28"/></a>
 <div class="nav-links">
+<a href="/services">Services</a>
 <a href="/#how-it-works">How it works</a>
 <a href="/case-study/sendr">Case study</a>
 <a href="/blog">Blog</a>
@@ -132,10 +133,18 @@ function nav() {
 </div></div></nav>`;
 }
 
+// Keep the services list in sync with src/components/SiteFooter.jsx — the SSR
+// blog shell is the only footer not rendered from that component.
 function footer() {
   return `<footer><div class="wrap-wide">
+<div style="margin-bottom:14px"><a href="/services/b2b-saas-seo">B2B SaaS SEO</a> ·
+<a href="/services/ai-seo">AI SEO</a> ·
+<a href="/services/generative-engine-optimization">GEO</a> ·
+<a href="/services/answer-engine-optimization">AEO</a> ·
+<a href="/services/technical-seo">Technical SEO</a> ·
+<a href="/services/saas-content-marketing">SEO Content Engine</a></div>
 © ${new Date().getFullYear()} ${SITE_NAME} · <a href="/">Home</a> ·
-<a href="/blog">Blog</a> · <a href="/apply">Founder Review</a> ·
+<a href="/services">Services</a> · <a href="/blog">Blog</a> · <a href="/apply">Founder Review</a> ·
 <a href="/rss.xml">RSS</a> · <a href="/llm-info">Hey AI, learn about us!</a></div></footer>`;
 }
 

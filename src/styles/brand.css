@@ -805,8 +805,8 @@ input[type="range"].slider::-moz-range-thumb{
 }
 .footer-grid{
   display:grid;
-  grid-template-columns:1.4fr 1fr 1fr 1fr;
-  gap:60px;
+  grid-template-columns:1.3fr 1.1fr 1.1fr 1fr .9fr;
+  gap:44px;
   padding-bottom:48px;
   border-bottom:1px solid rgba(255,255,255,.08);
   margin-bottom:24px;

@@ -11,11 +11,18 @@ import { SITE_URL } from './_lib/blog.js';
 // Last meaningful content change for the static marketing/tool pages. Bump this
 // when you materially edit those pages so <lastmod> stays truthful. (The blog
 // index uses the latest post's date instead; posts carry their own lastmod.)
-const STATIC_LASTMOD = '2026-06-04';
+const STATIC_LASTMOD = '2026-07-11';
 
 const STATIC = [
   { loc: '/', priority: '1.0', freq: 'weekly' },
   { loc: '/apply', priority: '0.9', freq: 'monthly' },
+  { loc: '/services', priority: '0.9', freq: 'monthly' },
+  { loc: '/services/b2b-saas-seo', priority: '0.9', freq: 'monthly' },
+  { loc: '/services/ai-seo', priority: '0.9', freq: 'monthly' },
+  { loc: '/services/generative-engine-optimization', priority: '0.9', freq: 'monthly' },
+  { loc: '/services/answer-engine-optimization', priority: '0.9', freq: 'monthly' },
+  { loc: '/services/technical-seo', priority: '0.9', freq: 'monthly' },
+  { loc: '/services/saas-content-marketing', priority: '0.9', freq: 'monthly' },
   { loc: '/case-study/sendr', priority: '0.8', freq: 'monthly' },
   { loc: '/llm-info', priority: '0.6', freq: 'monthly' },
   { loc: '/blog', priority: '0.9', freq: 'daily' },

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Nav from '../components/Nav';
+import SiteFooter from '../components/SiteFooter.jsx';
 import ProcessingBar from '../components/density/ProcessingBar';
 import StatsCards from '../components/density/StatsCards';
 import KeywordTable from '../components/density/KeywordTable';
@@ -202,6 +203,8 @@ export default function DensityDashboard() {
 
         <DensityGuide />
       </main>
+
+      <SiteFooter />
     </>
   );
 }
