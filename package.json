@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "vite-react-ssg dev",
     "dev:api": "vercel dev",
-    "build": "vite-react-ssg build",
+    "build": "vite-react-ssg build && node scripts/optimize-html.mjs",
     "preview": "vite preview",
     "seo:check": "node scripts/seo-check.mjs"
   },

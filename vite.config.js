@@ -82,6 +82,10 @@ export default defineConfig(({ isSsrBuild }) => ({
   // the client redirects, and dynamic :slug routes are excluded too.
   ssgOptions: {
     entry: 'src/main.jsx',
+    // Critical-CSS inlining (beasties) is explicitly OFF: it duplicates the
+    // stylesheet link (one async + one still render-blocking), which makes
+    // mobile FCP/LCP worse, not better.
+    beastiesOptions: false,
     // nested -> dist/<route>/index.html, which Vercel serves at /<route> via
     // directory-index resolution (more robust than flat .html on Vercel).
     dirStyle: 'nested',

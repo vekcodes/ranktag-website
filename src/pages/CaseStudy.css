@@ -330,3 +330,14 @@
     padding: 48px 22px;
   }
 }
+
+/* Off-screen section skipping (mobile), same treatment as the homepage's
+   [data-reveal] sections: the browser skips style/layout/paint for sections
+   below the viewport, which keeps full-page relayouts (e.g. on the post-paint
+   font swaps) from becoming long main-thread tasks on a throttled phone. */
+@media (max-width: 900px) {
+  .cs-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 1400px;
+  }
+}

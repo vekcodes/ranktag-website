@@ -45,12 +45,45 @@
          homepage-specific nodes (WebPage #webpage, #casestudy-sendr, FAQPage #faq)
          are rendered per-route in the page body and reference #org/#website by @id. -->
 
-    <!-- Self-hosted fonts (latin woff2). Preload the two render-critical faces:
-         Fraunces (the H1/LCP heading) and Bricolage Grotesque (body). The italic
-         + mono faces load on demand via @font-face in brand.css. crossorigin is
-         required even same-origin because fonts are fetched in CORS mode. -->
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces.woff2" crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/bricolage-grotesque.woff2" crossorigin />
+    <!-- Self-hosted fonts (latin woff2), loaded AFTER first paint. The @font-face
+         rules are injected here (not declared in brand.css) so the ~370 KB of
+         font bytes never compete with the first render: text paints instantly
+         with the metric-matched local fallbacks defined in brand.css (same
+         family names; these later-declared rules win once injected, and
+         size-adjust keeps the swap shift at ~0). Do not add font preloads back:
+         preloaded fonts land on the pre-LCP critical path and cost ~1s of
+         mobile LCP. -->
+    <script>
+      (function () {
+        function loadFonts() {
+          var s = document.createElement('style');
+          s.textContent =
+            "@font-face{font-family:'Fraunces';font-style:normal;font-weight:300 900;font-display:swap;src:url('/fonts/fraunces.woff2') format('woff2')}" +
+            "@font-face{font-family:'Fraunces';font-style:italic;font-weight:300 900;font-display:swap;src:url('/fonts/fraunces-italic.woff2') format('woff2')}" +
+            "@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:200 800;font-display:swap;src:url('/fonts/bricolage-grotesque.woff2') format('woff2')}" +
+            "@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400 700;font-display:swap;src:url('/fonts/jetbrains-mono.woff2') format('woff2')}";
+          document.head.appendChild(s);
+        }
+        // Wait for the REAL first contentful paint (PerformanceObserver), not
+        // rAF ticks, since rAF can fire before the first frame is actually painted,
+        // which would put the font bytes back on the render-critical path.
+        var done = false;
+        function go() {
+          if (done) return; done = true;
+          requestAnimationFrame(function () { loadFonts(); });
+        }
+        try {
+          if (performance.getEntriesByType('paint').some(function (e) { return e.name === 'first-contentful-paint'; })) {
+            go();
+          } else {
+            new PerformanceObserver(function (list, obs) {
+              if (list.getEntries().some(function (e) { return e.name === 'first-contentful-paint'; })) { obs.disconnect(); go(); }
+            }).observe({ type: 'paint', buffered: true });
+            setTimeout(go, 3500); // safety net if no paint entry ever fires
+          }
+        } catch (e) { setTimeout(go, 500); }
+      })();
+    </script>
 
     <!-- Analytics: Google tag (gtag.js) + RB2B visitor de-anonymization.
          Commands queue in dataLayer immediately so the pageview is captured, but
@@ -80,8 +113,11 @@
           })('7N850H5EJVN1');
         }
         function schedule() {
-          if ('requestIdleCallback' in window) requestIdleCallback(loadAnalytics, { timeout: 2500 });
-          else setTimeout(loadAnalytics, 1800);
+          // Fixed delay past load (not just idle): with fonts and hydration
+          // deferred, load + idle fire almost immediately, and analytics starting
+          // that early lands back on the LCP-critical path. ~2s after load is
+          // safely past first paint everywhere and loses no real data.
+          setTimeout(loadAnalytics, 2000);
         }
         if (document.readyState === 'complete') schedule();
         else window.addEventListener('load', schedule);
