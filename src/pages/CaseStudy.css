@@ -81,7 +81,10 @@
   letter-spacing:var(--track-micro);
   color:var(--text-4);
   grid-column:1;
-  grid-row:1 / span 99;
+  /* Was `1 / span 99`, which forced 99 grid rows. The section has a 24px
+     row-gap, so 98 empty rows added ~2,350px of dead space to every
+     section. align-self:start already pins the marker to the top. */
+  grid-row:1;
   align-self:start;
   padding-top:.6rem;
 }

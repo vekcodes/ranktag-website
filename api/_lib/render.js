@@ -27,19 +27,10 @@ const CSS = `
 --gutter:clamp(1.25rem,4vw,2.5rem);
 --ease:cubic-bezier(.16,1,.3,1);
 }
-/* The post page flips to the warm paper canvas — long-form reading is the one
-   place a light surface earns it. Same token names, different values. */
-.read{
---bg:var(--paper);--surface-1:#FBF8F3;--surface-2:#fff;--surface-3:var(--paper-2);
---text-1:var(--logo-ink);--text-2:#55524D;--text-3:#6A665F;--text-4:#78746D;
---line:rgba(24,24,24,.10);--line-strong:rgba(24,24,24,.22);
---accent-text:var(--red-on-paper);--peri:var(--peri-on-paper);
-}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:var(--font-body);background:var(--bg);color:var(--text-1);
 line-height:1.6;-webkit-font-smoothing:antialiased}
-body.read{background:var(--paper)}
 img,svg{display:block;max-width:100%}a{color:inherit;text-decoration:none}
 h1,h2,h3,h4{font-family:var(--font-display);line-height:1.1;letter-spacing:var(--track-tight);text-wrap:balance}
 .wrap{max-width:46rem;margin:0 auto;padding:0 var(--gutter)}
@@ -82,7 +73,7 @@ border:1px solid var(--line)}
 border-radius:var(--r-md);border:1px solid var(--line)}
 .prose blockquote{border-left:2px solid var(--red);padding:.2em 0 .2em 1.1em;
 color:var(--text-3);font-style:italic}
-.prose pre{background:var(--logo-ink);color:var(--logo-paper);padding:1.1rem;border-radius:var(--r-md);
+.prose pre{background:#131314;color:var(--text-1);border:1px solid var(--line);padding:1.1rem;border-radius:var(--r-md);
 overflow:auto;font-family:var(--font-mono);font-size:.875rem;line-height:1.6}
 .prose code{font-family:var(--font-mono);font-size:.9em;
 background:var(--surface-3);padding:.12em .4em;border-radius:var(--r-xs)}
@@ -90,10 +81,10 @@ background:var(--surface-3);padding:.12em .4em;border-radius:var(--r-xs)}
 .tags{display:flex;flex-wrap:wrap;gap:.5rem;margin:2.5rem 0 0}
 .tag{font-family:var(--font-mono);font-size:var(--fs-micro);letter-spacing:.06em;
 border:1px solid var(--line-strong);padding:.35rem .7rem;border-radius:var(--r-sm);color:var(--text-3)}
-.lead-cta{margin:5rem 0 0;padding:3rem 2rem;background:var(--logo-ink);color:var(--logo-paper);
-border-radius:var(--r-xl);text-align:center}
-.lead-cta h3{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:600;color:var(--logo-paper);line-height:1.1}
-.lead-cta p{color:var(--on-ink-2);margin:1rem 0 1.5rem;font-size:1rem;line-height:1.6}
+.lead-cta{margin:5rem 0 0;padding:3rem 2rem;background:var(--surface-1);color:var(--text-1);
+border:1px solid var(--line-strong);border-radius:var(--r-xl);text-align:center}
+.lead-cta h3{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:600;color:var(--text-1);line-height:1.1}
+.lead-cta p{color:var(--text-2);margin:1rem 0 1.5rem;font-size:1rem;line-height:1.6}
 .lead-cta a{background:var(--logo-red);color:var(--logo-ink);display:inline-block;padding:.9rem 1.75rem;
 border-radius:999px;font-weight:600;transition:background .2s var(--ease)}
 .lead-cta a:hover{background:#FF4A1F}
@@ -113,49 +104,50 @@ font-weight:500;letter-spacing:var(--track-micro);color:var(--text-4);padding-to
 transition:transform .35s var(--ease),color .2s var(--ease)}
 .faq-item[open] .faq-ic{transform:rotate(45deg);color:var(--accent-text)}
 .faq-a{padding:0 0 1.25rem 2.5rem;color:var(--text-2);font-size:1rem;line-height:1.75;max-width:60ch}
-.idx-head{padding:4rem 0 1rem;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);
+.idx-head{padding:clamp(3rem,6vw,5.5rem) 0 clamp(1.5rem,3vw,2.5rem);
+display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);
 gap:1.5rem var(--gutter);align-items:end}
-.idx-head h1{font-size:clamp(3rem,7vw,7rem);font-weight:700;line-height:.95;letter-spacing:var(--track-h1)}
-.idx-head p{color:var(--text-3);font-size:1.25rem;line-height:1.6;max-width:46ch}
+.idx-head h1{font-size:clamp(2.75rem,6.5vw,7rem);font-weight:700;line-height:.95;
+letter-spacing:var(--track-h1);max-width:14ch}
+.idx-head p{color:var(--text-3);font-size:1.125rem;line-height:1.6;max-width:44ch}
 @media(max-width:900px){.idx-head{grid-template-columns:1fr;align-items:start}}
-.grid{display:grid;counter-reset:post;padding:0 0 5rem}
-.card{counter-increment:post;display:grid;
-grid-template-columns:4rem 9rem minmax(0,6fr) minmax(0,4fr);align-items:center;gap:1.5rem;
-padding:1.5rem 0;border-bottom:1px solid var(--line);
-transition:background-color .35s var(--ease),padding .35s var(--ease)}
-.card::before{content:"00" counter(post);font-family:var(--font-mono);font-size:var(--fs-micro);
-letter-spacing:var(--track-micro);color:var(--text-4);transition:color .3s var(--ease)}
-.card:hover{background:var(--surface-1);padding-left:1.25rem;padding-right:1.25rem}
-.card:hover::before{color:var(--accent-text)}
-.card-img{width:100%;aspect-ratio:16/10;background:var(--surface-2);object-fit:cover;border-radius:var(--r-sm)}
-img.card-img{height:auto}
-.card-body{display:grid;gap:.4rem;min-width:0}
-.card h2{font-size:clamp(1.0625rem,1.8vw,1.5rem);font-weight:600;line-height:1.2}
-.card p{color:var(--text-3);font-size:.875rem;line-height:1.6;
+
+/* — Bento grid ————————————————————————————————————
+   Tiles vary in width; every image sits in a fixed-ratio frame and is
+   object-fit:contain, so a cover image is never cropped or half-cut. The
+   frame's padding and inset background make the letterboxing deliberate. */
+.bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
+gap:clamp(.875rem,1.4vw,1.25rem);padding:0 0 5rem;counter-reset:post}
+.tile{counter-increment:post;grid-column:span 4;display:flex;flex-direction:column;
+background:var(--surface-1);border:1px solid var(--line);border-radius:var(--r-xl);
+overflow:hidden;transition:transform .45s var(--ease),border-color .45s var(--ease)}
+.tile:hover{transform:translateY(-4px);border-color:var(--line-strong)}
+.tile-8{grid-column:span 8}
+.tile-6{grid-column:span 6}
+.tile-frame{position:relative;aspect-ratio:16/9;background:#131314;
+display:grid;place-items:center;padding:.625rem;border-bottom:1px solid var(--line)}
+.tile-8 .tile-frame{aspect-ratio:16/7}
+.tile-frame img{width:100%;height:100%;object-fit:contain;border-radius:var(--r-sm)}
+.tile-frame.is-empty::after{content:"";width:2.5rem;height:2.5rem;border-radius:50%;
+border:1px solid var(--line-strong)}
+.tile-num{position:absolute;top:.625rem;left:.75rem;font-family:var(--font-mono);
+font-size:var(--fs-micro);letter-spacing:var(--track-micro);color:var(--text-4)}
+/* flex, not grid: the meta row uses margin-top:auto to sit at the bottom
+   so a short tile sharing a row with a tall one does not leave a void. */
+.tile-body{padding:1.15rem 1.25rem 1.35rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+.tile h2{font-size:1.0625rem;font-weight:600;line-height:1.25;color:var(--text-1)}
+.tile-8 h2{font-size:clamp(1.375rem,2.4vw,2rem);letter-spacing:var(--track-h2);line-height:1.1}
+.tile p{color:var(--text-3);font-size:.875rem;line-height:1.6;
 display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.card .row{display:flex;gap:.9rem;font-family:var(--font-mono);font-size:var(--fs-micro);
-letter-spacing:.06em;text-transform:uppercase;color:var(--text-4)}
-@media(max-width:900px){.card{grid-template-columns:3rem 6rem minmax(0,1fr);gap:1rem}
-.card:hover{padding-left:0;padding-right:0}}
-@media(max-width:560px){.card{grid-template-columns:2.5rem minmax(0,1fr)}.card .card-img{display:none}}
-.feat{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:stretch;
-border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:2.5rem 0 0;
-transition:background-color .35s var(--ease)}
-.feat:hover{background:var(--surface-1)}
-.feat-img{width:100%;height:100%;aspect-ratio:1200/630;background:var(--surface-2);display:block;
-object-fit:cover;order:2}
-img.feat-img{height:100%}
-.feat-body{order:1;padding:4rem 2.5rem 4rem 0;display:flex;flex-direction:column;
-justify-content:center;gap:1.25rem}
-.feat-kicker{align-self:flex-start;font-family:var(--font-mono);font-size:var(--fs-micro);
+.tile-8 p{font-size:1rem;-webkit-line-clamp:3}
+.tile .row{display:flex;gap:.9rem;margin-top:auto;padding-top:.35rem;
+font-family:var(--font-mono);font-size:var(--fs-micro);letter-spacing:.06em;
+text-transform:uppercase;color:var(--text-4)}
+.tile-kicker{font-family:var(--font-mono);font-size:var(--fs-micro);
 letter-spacing:var(--track-micro);text-transform:uppercase;color:var(--accent-text)}
-.feat-body h2{font-size:clamp(1.75rem,4vw,3.5rem);font-weight:600;line-height:1.05;letter-spacing:var(--track-h2)}
-.feat-body p{color:var(--text-3);font-size:1rem;line-height:1.65;max-width:52ch}
-.feat-body .row{display:flex;gap:.9rem;font-family:var(--font-mono);font-size:var(--fs-micro);
-letter-spacing:.06em;text-transform:uppercase;color:var(--text-4)}
-.feat + .grid{padding-top:0}
-@media(max-width:900px){.feat{grid-template-columns:1fr}
-.feat-img{order:1;height:auto}.feat-body{order:2;padding:2rem 0}}
+@media(max-width:1024px){.tile,.tile-8,.tile-6{grid-column:span 6}}
+@media(max-width:680px){.tile,.tile-8,.tile-6{grid-column:span 12}
+.tile-8 .tile-frame{aspect-ratio:16/9}}
 .empty{text-align:center;padding:5rem 0;color:var(--text-3)}
 footer{border-top:1px solid var(--line);padding:2.5rem 0;margin-top:2.5rem;
 color:var(--text-3);font-family:var(--font-mono);font-size:var(--fs-micro);
@@ -173,11 +165,13 @@ function nav() {
 <div class="nav-links">
 <a href="/services">Services</a>
 <a href="/#how-it-works">How it works</a>
-<a href="/case-study/sendr">Case study</a>
-<a href="/blog">Blog</a>
+<a href="/case-study/sendr">Sendr.ai story</a>
+<a href="/blog" aria-current="page">Blog</a>
+<a href="/apply">Founder Review</a>
 <a class="cta" href="/apply">Apply →</a>
 </div></div></nav>`;
 }
+
 
 // Keep the services list in sync with src/components/SiteFooter.jsx — the SSR
 // blog shell is the only footer not rendered from that component.
@@ -259,33 +253,24 @@ function fmtDate(d) {
 }
 
 export function renderIndex(posts) {
-  const card = (p) => {
-    const img = p.cover_image_url
-      ? `<img class="card-img" src="${escapeHtml(p.cover_image_url)}" alt="${escapeHtml(p.cover_image_alt || p.title)}" loading="lazy" decoding="async" width="640" height="336"/>`
-      : `<div class="card-img"></div>`;
-    return `<a class="card" href="/blog/${escapeHtml(p.slug)}">
-${img}<div class="card-body">
+  // Bento rhythm: a wide lead tile, then a mix of thirds and halves. The
+  // pattern repeats so any number of posts lays out without orphan gaps.
+  const SPANS = ['tile-8', '', '', '', '', 'tile-8', 'tile-6', 'tile-6'];
+
+  const tile = (p, i) => {
+    const span = SPANS[i % SPANS.length];
+    const num = String(i + 1).padStart(3, '0');
+    const frame = p.cover_image_url
+      ? `<div class="tile-frame"><span class="tile-num">${num}</span><img src="${escapeHtml(p.cover_image_url)}" alt="${escapeHtml(p.cover_image_alt || p.title)}" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async" width="1200" height="630"/></div>`
+      : `<div class="tile-frame is-empty"><span class="tile-num">${num}</span></div>`;
+    return `<a class="tile ${span}" href="/blog/${escapeHtml(p.slug)}">
+${frame}<div class="tile-body">
+${i === 0 ? '<span class="tile-kicker">Latest</span>' : ''}
 <h2>${escapeHtml(p.title)}</h2>
 <p>${escapeHtml(p.excerpt)}</p>
 <div class="row"><span>${fmtDate(p.published_at)}</span><span>${p.reading_minutes} min read</span></div>
 </div></a>`;
   };
-
-  // Most-recent post gets a full-width featured card; the rest fill the grid.
-  const featured = posts[0];
-  const rest = posts.slice(1);
-  const featuredImg = featured && featured.cover_image_url
-    ? `<img class="feat-img" src="${escapeHtml(featured.cover_image_url)}" alt="${escapeHtml(featured.cover_image_alt || featured.title)}" decoding="async" width="1200" height="630"/>`
-    : `<div class="feat-img"></div>`;
-  const featuredHtml = featured
-    ? `<a class="feat" href="/blog/${escapeHtml(featured.slug)}">
-${featuredImg}<div class="feat-body">
-<span class="feat-kicker">Latest</span>
-<h2>${escapeHtml(featured.title)}</h2>
-<p>${escapeHtml(featured.excerpt)}</p>
-<div class="row"><span>${fmtDate(featured.published_at)}</span><span>${featured.reading_minutes} min read</span></div>
-</div></a>`
-    : '';
 
   const body = `<div class="wrap-wide">
 <div class="idx-head">
@@ -293,7 +278,7 @@ ${featuredImg}<div class="feat-body">
 <p>Field notes on SEO, generative engine optimization, and building inbound engines for B2B SaaS.</p>
 </div>
 ${posts.length
-    ? `${featuredHtml}${rest.length ? `<div class="grid">${rest.map(card).join('')}</div>` : ''}`
+    ? `<div class="bento">${posts.map(tile).join('')}</div>`
     : `<div class="empty">No posts yet — check back soon.</div>`}
 </div>`;
 
