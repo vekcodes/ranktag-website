@@ -49,68 +49,83 @@ export default function Services() {
 
       <main className="svc-page">
         <section className="svc-hero">
-          <div className="container">
-            <nav className="svc-crumb" aria-label="Breadcrumb">
-              <Link to="/">Home</Link>
-              <span aria-hidden="true">/</span>
-              <span aria-current="page">Services</span>
-            </nav>
-            <div className="eyebrow" style={{ color: 'var(--red)' }}>SERVICES · ONE ENGINE, SIX DISCIPLINES</div>
-            <h1 className="svc-h1">SEO, AI SEO, GEO &amp; AEO services for B2B SaaS.</h1>
-            <p className="svc-dek">
-              Six disciplines, one inbound engine. Senior strategists pick the fights, Claude compresses the
-              research, editors ship weekly — and every page is built to rank on Google <em>and</em> get cited
-              by ChatGPT, Perplexity, Gemini and Claude. Proof: sendr.ai, 0 → 1.05M impressions in 6 months,
-              #2 in Google's AI Overview above ZoomInfo.
-            </p>
-            <div className="svc-hero-cta">
-              <Link to="/apply" className="btn btn-red btn-lg">
-                Apply for a free founder review <span className="ar">↗</span>
+          <div className="container grid12 svc-hero-grid">
+            <div className="col-12 svc-hero-top">
+              <nav className="svc-crumb" aria-label="Breadcrumb">
+                <Link to="/" className="link-wipe">Home</Link>
+                <span aria-hidden="true">/</span>
+                <span aria-current="page">Services</span>
+              </nav>
+              <span className="idx" aria-hidden="true">001</span>
+            </div>
+
+            <div className="col-10 svc-hero-head">
+              <span className="eyebrow bracket svc-eyebrow">SERVICES · ONE ENGINE, SIX DISCIPLINES</span>
+              <h1 className="svc-h1">SEO, AI SEO, GEO &amp; AEO services for B2B SaaS.</h1>
+            </div>
+
+            <div className="col-6 svc-hero-dek">
+              <p className="svc-dek">
+                Six disciplines, one inbound engine. Senior strategists pick the fights, Claude compresses the
+                research, editors ship weekly — and every page is built to rank on Google <em>and</em> get cited
+                by ChatGPT, Perplexity, Gemini and Claude. Proof: sendr.ai, 0 → 1.05M impressions in 6 months,
+                #2 in Google's AI Overview above ZoomInfo.
+              </p>
+            </div>
+            <div className="col-5 start-8 svc-hero-cta">
+              <Link to="/apply" className="btn btn-red btn-lg ar-parent">
+                Apply for a free founder review <span className="ar-ne">↗</span>
               </Link>
             </div>
           </div>
         </section>
 
-        <section className="svc-hub-grid-wrap" data-reveal>
+        {/* Index of the six disciplines — numbered editorial rows, not cards. */}
+        <section className="svc-index ruled" data-reveal>
           <div className="container">
-            <div className="svc-hub-grid">
+            <ol className="svc-rows" data-reveal-children>
               {SERVICES.map((s, i) => (
-                <Link key={s.slug} to={`/services/${s.slug}`} className="svc-hub-card">
-                  <div className="svc-hub-num">0{i + 1}</div>
-                  <h2>{s.nav}</h2>
-                  <p>{s.navDesc}</p>
-                  <span className="svc-hub-go">Explore the service <span className="ar">→</span></span>
-                </Link>
+                <li key={s.slug}>
+                  <Link to={`/services/${s.slug}`} className="svc-row ar-parent">
+                    <span className="svc-row-num" aria-hidden="true">{String(i + 1).padStart(3, '0')}</span>
+                    <h2 className="svc-row-h">{s.nav}</h2>
+                    <p className="svc-row-desc">{s.navDesc}</p>
+                    <span className="svc-row-go">Explore the service <span className="ar">→</span></span>
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </section>
 
-        <section className="svc-proof" data-reveal>
+        <section className="svc-proof ruled" data-reveal>
           <div className="container">
             <div className="section-head">
-              <div className="eyebrow">PROOF · LIVE NUMBERS, NOT PROMISES</div>
-              <h2 className="h-1">Every service above shipped inside one real engagement.</h2>
-              <p className="lead">
-                sendr.ai bought the whole engine — technical foundation, content engine, AEO structure, GEO
-                citations. Six months later: 1.05M impressions, 7,430 clicks, and the #2 answer in Google's AI
-                Overview, above ZoomInfo. You can buy the disciplines separately; they compound together.
-              </p>
+              <span className="eyebrow" data-num="002">PROOF · LIVE NUMBERS, NOT PROMISES</span>
+              <div>
+                <h2 className="h-2">Every service above shipped inside one real engagement.</h2>
+                <p className="lead">
+                  sendr.ai bought the whole engine — technical foundation, content engine, AEO structure, GEO
+                  citations. Six months later: 1.05M impressions, 7,430 clicks, and the #2 answer in Google's AI
+                  Overview, above ZoomInfo. You can buy the disciplines separately; they compound together.
+                </p>
+              </div>
             </div>
-            <div className="svc-proof-stats">
-              <div className="svc-proof-stat"><strong>1.05M</strong><span>organic impressions · 6 months</span></div>
-              <div className="svc-proof-stat"><strong>7.43k</strong><span>clicks · same window</span></div>
+            <div className="svc-proof-stats" data-reveal-children>
+              <div className="svc-proof-stat"><strong data-countup="1500">1.05M</strong><span>organic impressions · 6 months</span></div>
+              <div className="svc-proof-stat"><strong data-countup="1400">7.43k</strong><span>clicks · same window</span></div>
               <div className="svc-proof-stat"><strong>#2</strong><span>Google AI Overview · above ZoomInfo</span></div>
-              <div className="svc-proof-stat"><strong>4</strong><span>SaaS founders taken per month</span></div>
+              <div className="svc-proof-stat"><strong data-countup="1200">4</strong><span>SaaS founders taken per month</span></div>
             </div>
-            <Link to="/case-study/sendr" className="case-readmore">
+            <Link to="/case-study/sendr" className="case-readmore link-wipe ar-parent">
               Read the full sendr.ai case study <span className="ar">→</span>
             </Link>
           </div>
         </section>
 
-        <section className="final-cta" data-reveal>
+        <section className="final-cta ruled" data-reveal>
           <div className="container final-cta-inner">
+            <span className="eyebrow bracket final-cta-eyebrow">FOUNDER REVIEW</span>
             <h2 className="final-h">
               Not sure which service you need?<br />
               <span className="ser">That is what the review is for.</span>
@@ -119,8 +134,8 @@ export default function Services() {
               Apply with your domain. The founder runs the 52-check audit, tells you which of the six
               disciplines will actually move your pipeline, and replies within 48 hours.
             </p>
-            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', justifyContent: 'center' }}>
-              <Link to="/apply" className="btn btn-primary btn-lg">Apply for the review <span className="ar">↗</span></Link>
+            <div className="final-cta-btns">
+              <Link to="/apply" className="btn btn-primary btn-lg ar-parent">Apply for the review <span className="ar-ne">↗</span></Link>
             </div>
           </div>
         </section>

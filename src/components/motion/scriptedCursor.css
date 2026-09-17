@@ -1,0 +1,64 @@
+/* =====================================================================
+   SCRIPTED CURSOR
+   Transform and opacity only. The host needs position:relative; the cursor
+   never takes pointer events, so real controls underneath stay usable.
+   ===================================================================== */
+.sc-cursor{
+  position:absolute;
+  top:0;left:0;
+  z-index:3;
+  width:16px;height:18px;
+  pointer-events:none;
+  opacity:0;
+  /* Overshoot and settle, rather than a linear slide. */
+  transition:
+    transform var(--sc-move, 720ms) cubic-bezier(.34, 1.26, .64, 1),
+    opacity .35s var(--ease-out);
+  will-change:transform;
+}
+.sc-cursor.is-on{opacity:1}
+
+.sc-cursor svg{
+  display:block;
+  width:100%;height:100%;
+  overflow:visible;
+  transition:transform .14s var(--ease-out);
+}
+.sc-cursor path{
+  fill:var(--logo-paper);
+  stroke:var(--logo-ink);
+  stroke-width:1.1;
+  stroke-linejoin:round;
+  /* Keeps the arrow readable over both the dark panel and a light chip. */
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.55));
+}
+/* Press feedback on click. */
+.sc-cursor.is-down svg{transform:scale(.82)}
+
+.sc-ripple{
+  position:absolute;
+  top:0;left:0;
+  width:34px;height:34px;
+  margin:-8px 0 0 -8px;
+  border-radius:50%;
+  border:1.5px solid var(--peri);
+  opacity:0;
+  transform:scale(.25);
+  pointer-events:none;
+}
+.sc-cursor.is-click .sc-ripple{animation:sc-ripple .6s var(--ease-out) 1}
+@keyframes sc-ripple{
+  from{opacity:.85;transform:scale(.25)}
+  to{opacity:0;transform:scale(1)}
+}
+
+/* The highlight the script applies to whatever it is pointing at. Panels
+   style .sc-hover themselves; this is only the shared fallback. */
+.sc-hover{position:relative}
+
+@media (max-width:767px){
+  .sc-cursor{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .sc-cursor{display:none}
+}

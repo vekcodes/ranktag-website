@@ -1,0 +1,150 @@
+/* =====================================================================
+   STRAND LAYER — node graph and filament burst.
+   Draw-in is stroke-dashoffset on pathLength="1" paths; everything else is
+   transform/opacity. Both blocks reserve their box with aspect-ratio so
+   nothing shifts as they animate.
+   ===================================================================== */
+
+/* — Node graph ————————————————————————————————————— */
+.ngraph{
+  position:relative;
+  display:grid;
+  gap:var(--s-5);
+  align-content:center;
+}
+.ngraph svg{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:300 / 320;
+  overflow:visible;
+}
+
+.ngraph-edges path{
+  fill:none;
+  stroke:var(--line-strong);
+  stroke-width:1.25;
+  stroke-dasharray:1;
+  stroke-dashoffset:1;
+  transition:stroke-dashoffset .9s var(--ease-out);
+  transition-delay:calc(var(--e) * 180ms + 200ms);
+}
+.ngraph.in .ngraph-edges path{stroke-dashoffset:0}
+
+.ngraph-node circle{
+  fill:var(--surface-2);
+  stroke:var(--peri);
+  stroke-width:1.5;
+}
+.ngraph-node.is-red circle{stroke:var(--red)}
+.ngraph-node .ngraph-halo{
+  fill:none;
+  stroke:var(--peri);
+  stroke-width:1;
+  opacity:.28;
+}
+.ngraph-node.is-red .ngraph-halo{stroke:var(--red)}
+.ngraph-node{
+  opacity:0;
+  transform:scale(.7);
+  transform-origin:center;
+  transform-box:fill-box;
+  transition:opacity .5s var(--ease-out), transform .5s var(--ease-out);
+  transition-delay:calc(var(--n) * 160ms);
+}
+.ngraph.in .ngraph-node{opacity:1;transform:none}
+
+.ngraph-labels{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  gap:var(--s-3);
+}
+.ngraph-label{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--s-4);
+  padding:var(--s-3) var(--s-4);
+  border:1px solid var(--line);
+  border-radius:var(--r-sm);
+  background:var(--surface-1);
+  font-family:var(--font-mono);
+  font-size:var(--fs-micro);
+  letter-spacing:var(--track-micro);
+  color:var(--text-2);
+  opacity:0;
+  transform:translateY(8px);
+  transition:opacity .5s var(--ease-out), transform .5s var(--ease-out);
+  transition-delay:calc(var(--n) * 160ms + 420ms);
+}
+.ngraph.in .ngraph-label{opacity:1;transform:none}
+.ngraph-label.is-red{border-color:color-mix(in srgb, var(--red) 35%, var(--line))}
+
+.ngraph-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  white-space:nowrap;
+  color:var(--text-3);
+}
+.ngraph-chip i{
+  width:.4rem;height:.4rem;
+  border-radius:50%;
+  background:var(--success);
+}
+.ngraph-chip.is-syncing{color:var(--accent-on-raised)}
+.ngraph-chip.is-syncing i{background:var(--accent-on-raised)}
+
+/* — Filament burst ————————————————————————————————— */
+.filament{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  display:grid;
+  place-items:center;
+  pointer-events:none;
+  overflow:hidden;
+}
+.filament svg{
+  width:min(104%, 52rem);
+  aspect-ratio:1;
+  /* Fades the filaments out at both ends so they read as light rather than
+     as a hard-edged starburst crossing the copy. */
+  -webkit-mask-image:radial-gradient(circle, transparent 14%, #000 34%, #000 62%, transparent 86%);
+  mask-image:radial-gradient(circle, transparent 14%, #000 34%, #000 62%, transparent 86%);
+  height:auto;
+  overflow:visible;
+}
+.filament line{
+  stroke:var(--red);
+  stroke-width:.75;
+  stroke-dasharray:1;
+  stroke-dashoffset:1;
+  opacity:.26;
+  transition:stroke-dashoffset 1.1s var(--ease-out);
+  transition-delay:calc(var(--f) * 55ms);
+}
+.filament.in line{stroke-dashoffset:0}
+
+/* One breathing loop on the group, rather than one per filament. */
+.filament-g{opacity:1}
+.filament[data-live] .filament-g{animation:filament-breathe 6.5s var(--ease-out) infinite alternate}
+@keyframes filament-breathe{
+  from{opacity:.55;transform:scale(.985)}
+  to{opacity:1;transform:scale(1.015)}
+}
+.filament-g{transform-origin:center;transform-box:view-box}
+
+@media (max-width:900px){
+  .filament{display:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ngraph-edges path{stroke-dashoffset:0;transition:none}
+  .ngraph-node{opacity:1;transform:none;transition:none}
+  .ngraph-label{opacity:1;transform:none;transition:none}
+  .filament line{stroke-dashoffset:0;transition:none}
+  .filament[data-live] .filament-g{animation:none}
+}

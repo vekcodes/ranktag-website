@@ -5,22 +5,72 @@
  * Every function is pure and memoizable.
  */
 
-// ── Brand palette (matches brand.css) ──
-export const COLORS = {
-  red:       '#FF3B14',
-  redDeep:   '#C8260A',
-  redSoft:   '#FFE2D9',
-  success:   '#2D8A5C',
-  warn:      '#D97706',
-  periwinkle:'#6B77E0',
-  ink:       '#0E0E10',
-  muted:     '#9A9AA0',
-  paper:     '#F4EFE7',
-  paper2:    '#EDE6D9',
-  paper3:    '#E4DCCC',
-  gold:      '#C49A37',
-  kelp:      '#1F4D3F',
+// ── Brand palette ──
+// Recharts and inline SVG need real colour values, not `var()`, so the palette
+// is mirrored here. The defaults are the dark-theme token values; in a browser
+// they are re-read from the live custom properties on first paint, so changing
+// a token in brand.css is enough to move every chart. Keys are unchanged.
+const TOKEN_OF = {
+  red: '--red',
+  redDeep: '--red-press',
+  redSoft: '--red-tint',
+  success: '--success',
+  warn: '--warn',
+  periwinkle: '--peri',
+  ink: '--bg',
+  muted: '--text-3',
+  paper: '--text-1',
+  paper2: '--surface-2',
+  paper3: '--surface-3',
+  gold: '--warn',
+  kelp: '--success',
+  // Chart-only additions.
+  grid: '--line-strong',
+  axis: '--text-3',
+  surface: '--surface-1',
+  tooltipBg: '--surface-2',
+  tooltipText: '--text-1',
+  heatLow: '--peri-tint',
 };
+
+export const COLORS = {
+  red:        '#F83000',
+  redDeep:    '#D62A00',
+  redSoft:    'rgba(248,48,0,.12)',
+  success:    '#5BC08A',
+  warn:       '#F0B43C',
+  periwinkle: '#98A8F8',
+  ink:        '#181818',
+  muted:      '#9A958D',
+  paper:      '#F4EFE7',
+  paper2:     '#27272A',
+  paper3:     '#303033',
+  gold:       '#F0B43C',
+  kelp:       '#5BC08A',
+  grid:       'rgba(244,239,231,.20)',
+  axis:       '#9A958D',
+  surface:    '#1F1F20',
+  tooltipBg:  '#27272A',
+  tooltipText:'#F4EFE7',
+  heatLow:    'rgba(152,168,248,.12)',
+};
+
+/**
+ * Re-read the palette from the live CSS custom properties. Mutates COLORS in
+ * place so components holding the imported reference pick the values up.
+ * No-op during SSR (no `document`).
+ */
+export function syncChartColors() {
+  if (typeof document === 'undefined') return COLORS;
+  const cs = getComputedStyle(document.documentElement);
+  for (const [key, token] of Object.entries(TOKEN_OF)) {
+    const v = cs.getPropertyValue(token).trim();
+    if (v) COLORS[key] = v;
+  }
+  return COLORS;
+}
+
+if (typeof document !== 'undefined') syncChartColors();
 
 /**
  * Return a density-zone color.

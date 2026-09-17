@@ -1,0 +1,155 @@
+/* =====================================================================
+   AMBIENT LAYER — grid, highlighted block type, floating badge, drift.
+   Everything here is transform/opacity, sits behind content at z-index 0,
+   and is aria-hidden. Looping pieces carry [data-loop] so the reveal hook
+   can idle them the moment they leave the viewport.
+   ===================================================================== */
+
+/* — Fine grid ————————————————————————————————————————
+   Fixed to the viewport, so the parallax is a small transform on a scroll
+   timeline rather than a scroll listener. Browsers without scroll-driven
+   animations simply get a static grid, which is the point of it anyway. */
+.bg-grid{
+  position:fixed;
+  inset:-10vh 0;
+  z-index:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size:clamp(46px, 5vw, 76px) clamp(46px, 5vw, 76px);
+  /* Fades out top and bottom so it never fights the nav or the footer. */
+  -webkit-mask-image:linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+  mask-image:linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+}
+:root{--grid-line:rgba(244,239,231,.035)}
+.theme-paper,.theme-paper-2{--grid-line:rgba(24,24,24,.045)}
+
+@supports (animation-timeline:scroll()){
+  .bg-grid{
+    animation:grid-parallax linear both;
+    animation-timeline:scroll(root block);
+  }
+}
+@keyframes grid-parallax{
+  from{transform:translate3d(0, 0, 0)}
+  to{transform:translate3d(0, -7vh, 0)}
+}
+
+/* — Drifting gradient panels ————————————————————————— */
+.drift{
+  position:absolute;
+  z-index:0;
+  pointer-events:none;
+  border-radius:50%;
+  filter:blur(60px);
+  opacity:.5;
+  will-change:transform;
+}
+.drift-a{
+  width:min(38vw, 30rem);aspect-ratio:1.2;
+  background:radial-gradient(circle, var(--peri-tint) 0%, transparent 68%);
+}
+.drift-b{
+  width:min(30vw, 24rem);aspect-ratio:1;
+  background:radial-gradient(circle, var(--red-tint) 0%, transparent 66%);
+}
+.drift[data-live]{animation:drift-a 26s var(--ease-out) infinite alternate}
+.drift-b[data-live]{animation:drift-b 31s var(--ease-out) infinite alternate}
+@keyframes drift-a{
+  from{transform:translate3d(-3%, -2%, 0) scale(1)}
+  to{transform:translate3d(5%, 6%, 0) scale(1.12)}
+}
+@keyframes drift-b{
+  from{transform:translate3d(4%, 3%, 0) scale(1.08)}
+  to{transform:translate3d(-4%, -5%, 0) scale(1)}
+}
+
+/* — Highlighted block type ——————————————————————————
+   A block wipes across on transform, and the text flips to ink behind it.
+   The text is painted from the start, so this never delays the headline. */
+.hl{
+  position:relative;
+  display:inline-block;
+  padding:0 .16em;
+  isolation:isolate;
+}
+.hl-bg{
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:var(--hl-fill, var(--logo-paper));
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .72s cubic-bezier(.76,0,.24,1);
+}
+.hl-tx{
+  position:relative;
+  transition:color .2s linear .34s;   /* flips once the wipe is halfway */
+}
+.hl.is-lit .hl-bg{transform:scaleX(1)}
+.hl.is-lit .hl-tx{color:var(--hl-ink, var(--logo-ink))}
+[data-reveal].in .hl .hl-bg,
+[data-reveal-lines].in .hl .hl-bg{transform:scaleX(1)}
+[data-reveal].in .hl .hl-tx,
+[data-reveal-lines].in .hl .hl-tx{color:var(--hl-ink, var(--logo-ink))}
+
+/* The hero cannot wait on an observer — it is the LCP element — so it lights
+   itself on a short delay instead. */
+.hl-auto .hl-bg{animation:hl-wipe .72s cubic-bezier(.76,0,.24,1) .55s both}
+.hl-auto .hl-tx{animation:hl-ink .01s linear .89s both}
+@keyframes hl-wipe{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes hl-ink{to{color:var(--hl-ink, var(--logo-ink))}}
+
+/* — Floating badge ————————————————————————————————— */
+.fbadge{
+  position:absolute;
+  z-index:1;
+  width:var(--fbadge-size, 7.5rem);
+  aspect-ratio:1;
+  pointer-events:none;
+  display:grid;
+  place-items:center;
+  will-change:transform;
+}
+.fbadge[data-live]{animation:fbadge-float 9s var(--ease-out) infinite alternate}
+@keyframes fbadge-float{
+  from{transform:translate3d(0, -6px, 0)}
+  to{transform:translate3d(0, 8px, 0)}
+}
+.fbadge-ring{
+  position:absolute;
+  inset:0;
+  border:1px solid var(--line-strong);
+  border-radius:50%;
+}
+.fbadge-text{position:absolute;inset:0;overflow:visible}
+.fbadge-text text{
+  font-family:var(--font-mono);
+  font-size:9.2px;
+  letter-spacing:.24em;
+  fill:var(--text-3);
+  text-transform:uppercase;
+}
+.fbadge[data-live] .fbadge-text{animation:fbadge-spin 24s linear infinite}
+@keyframes fbadge-spin{to{transform:rotate(360deg)}}
+.fbadge-glyph{
+  font-size:1.35rem;
+  line-height:1;
+  color:var(--accent-on-raised);
+}
+
+@media (max-width:900px){
+  /* Ambient layer is desktop-only: on a phone it is cost without payoff. */
+  .fbadge,.drift{display:none}
+  .bg-grid{opacity:.55}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .bg-grid{animation:none}
+  .drift[data-live],.drift-b[data-live]{animation:none}
+  .fbadge[data-live],.fbadge[data-live] .fbadge-text{animation:none}
+  .hl-bg{transform:scaleX(1);transition:none}
+  .hl-tx{color:var(--hl-ink, var(--logo-ink));transition:none}
+  .hl-auto .hl-bg,.hl-auto .hl-tx{animation:none}
+}

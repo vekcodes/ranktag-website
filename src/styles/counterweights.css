@@ -1,0 +1,164 @@
+/* =====================================================================
+   COUNTERWEIGHTS
+   Structure used as content, for rows that would otherwise leave more than
+   a third of their width empty. Two reusable primitives plus the targeted
+   applications the dead-space audit actually called for.
+
+   Everything here is a pseudo-element. Chrome and Firefox DO expose ::after
+   content to assistive tech, so each one carries the `/ ""` alt-text form
+   that marks it decorative — without it a screen reader would read "FREE
+   TOOL" and "01 - THE PROBLEM" aloud as if they were copy.
+   ===================================================================== */
+
+/* — Primitives ————————————————————————————————————— */
+
+/* Vertical mono label pinned to the outer edge, as the hero already does. */
+.spine{
+  position:absolute;
+  top:var(--spine-top, 4rem);
+  left:var(--spine-left, var(--s-4));
+  font-family:ui-monospace, 'Courier New', monospace;
+  font-size:var(--fs-micro);
+  letter-spacing:.3em;
+  color:var(--text-4);
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  pointer-events:none;
+  z-index:1;
+}
+
+/* Oversized index numeral: the structure of the page, at display size. */
+.big-index{
+  position:absolute;
+  right:var(--bi-right, 2vw);
+  top:var(--bi-top, 2rem);
+  /* Deliberately NOT var(--font-display): the webfont swaps in after first
+     paint, which resized these and showed up as layout shift. */
+  font-family:Arial, Helvetica, sans-serif;
+  font-weight:700;
+  font-size:clamp(5rem, 12vw, 13rem);
+  line-height:.8;
+  letter-spacing:var(--track-display);
+  color:transparent;
+  -webkit-text-stroke:1px var(--line-strong);
+  pointer-events:none;
+  user-select:none;
+  z-index:0;
+}
+
+/* — Applications ——————————————————————————————————
+   Each of these was measured at 1440 before being added; the comment is the
+   figure it was answering. */
+
+/* Homepage · problem — 36% of rows, worst gap 67%. */
+.problem{position:relative}
+.problem::after{
+  content:"01 — THE PROBLEM" / "";
+  position:absolute;
+  right:var(--gutter);
+  top:38%;
+  font-family:ui-monospace, 'Courier New', monospace;
+  font-size:var(--fs-micro);
+  letter-spacing:.3em;
+  color:var(--text-4);
+  writing-mode:vertical-rl;
+  pointer-events:none;
+  /* Explicit width is required: with contain:size an auto width resolves to
+     zero, which silently collapsed these to invisible slivers. */
+  width:1.75rem;
+  height:min(26rem, 46vh);
+  overflow:hidden;
+  contain:size layout paint;
+}
+
+/* Homepage · tools — 30% of rows, worst gap 83% on the head row. */
+.tools{position:relative}
+.tools .section-head{position:relative}
+.tools .section-head::after{
+  content:"006" / "";
+  position:absolute;
+  right:0;
+  top:-.35em;
+  /* Deliberately NOT var(--font-display): the webfont swaps in after first
+     paint, which resized these and showed up as layout shift. */
+  font-family:Arial, Helvetica, sans-serif;
+  font-weight:700;
+  font-size:clamp(4rem, 9vw, 9rem);
+  line-height:.8;
+  color:transparent;
+  -webkit-text-stroke:1px var(--line);
+  pointer-events:none;
+  width:min(30vw, 22rem);height:clamp(4rem, 9vw, 9rem);overflow:hidden;text-align:right;contain:size layout paint;
+}
+
+/* Homepage · apply band — 38% of rows, worst gap 67%. */
+.apply-band{position:relative}
+.apply-band::before{
+  /* Right edge, not left: anchored left it created rows whose only content
+     was the label itself, which measured worse than the gap it filled. */
+  content:"FOUR A MONTH · FOUNDER READ · 48H REPLY" / "";
+  position:absolute;
+  right:var(--gutter);
+  top:50%;
+  transform:translateY(-50%) rotate(180deg);
+  font-family:ui-monospace, 'Courier New', monospace;
+  font-size:var(--fs-micro);
+  letter-spacing:.3em;
+  color:var(--text-4);
+  writing-mode:vertical-rl;
+  pointer-events:none;
+  /* Explicit width is required: with contain:size an auto width resolves to
+     zero, which silently collapsed these to invisible slivers. */
+  width:1.75rem;
+  height:min(26rem, 46vh);
+  overflow:hidden;
+  contain:size layout paint;
+}
+
+/* Services · index list — 40% of rows. */
+.svc-index{position:relative}
+.svc-index::after{
+  content:"ONE ENGINE · SIX DISCIPLINES · ONE PROOF" / "";
+  position:absolute;
+  right:var(--gutter);
+  top:12%;
+  font-family:ui-monospace, 'Courier New', monospace;
+  font-size:var(--fs-micro);
+  letter-spacing:.3em;
+  color:var(--text-4);
+  writing-mode:vertical-rl;
+  pointer-events:none;
+  width:1.75rem;
+  height:min(26rem, 46vh);
+  overflow:hidden;
+  contain:size layout paint;
+}
+
+/* Tool page heroes: deliberately left bare. An outlined "FREE TOOL" numeral
+   filled the gap (80% of rows -> 57%) but the h1 length varies per tool, and
+   it ran straight through the heading on the density and competitor pages.
+   Anchoring it lower collided with the URL form on the others. A decoration
+   that crosses the headline is worse than the space it fills. */
+
+/* Case study · closing CTA — 33% of rows. */
+.cs-cta{position:relative;overflow:clip}
+.cs-cta::after{
+  content:"";
+  position:absolute;
+  right:-6%;
+  bottom:-30%;
+  width:min(26vw, 20rem);
+  aspect-ratio:1;
+  border-radius:50%;
+  background:radial-gradient(circle, var(--red-tint) 0%, transparent 66%);
+  filter:blur(50px);
+  pointer-events:none;
+}
+
+@media (max-width:1024px){
+  /* All of this is desktop breathing room; on narrow screens the rows are
+     full anyway and these would only crowd the copy. */
+  .spine,.big-index,
+  .problem::after,.tools .section-head::after,.apply-band::before,
+  .svc-index::after{display:none}
+}

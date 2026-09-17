@@ -108,10 +108,10 @@ export default function PageSpeed() {
       <JsonLd data={PS_JSONLD} />
       <Nav />
 
-      <section className="tool-hero" style={{paddingBottom: '40px'}}>
+      <section className="tool-hero">
         <div className="tool-hero-bg"></div>
         <div className="container tool-hero-inner">
-          <div className="eyebrow no-line" style={{justifyContent: 'center', marginBottom: '24px'}}>★ FREE TOOL · OUR OWN ENGINE · NO PSI KEY</div>
+          <span className="eyebrow bracket tool-eyebrow">★ FREE TOOL · OUR OWN ENGINE · NO PSI KEY</span>
           <h1>
             Page Speed Checker.<br />
             <span className="ser">We built our own</span><br />
@@ -121,7 +121,7 @@ export default function PageSpeed() {
             We fetch your URL server-side, time the request, parse the HTML, and score it on five real signals: speed, weight, render-blocking, image hygiene, and transport quality. Same checks Lighthouse runs on, computed by us in under 5 seconds. Verify by viewing source on the URL.
           </p>
 
-          <form className="url-form" onSubmit={run} autoComplete="off" style={{maxWidth:'660px', margin:'28px auto 0'}}>
+          <form className="url-form" onSubmit={run} autoComplete="off" >
             <span className="url-prefix">https://</span>
             <input
               type="text"
@@ -151,7 +151,7 @@ export default function PageSpeed() {
             >Desktop</button>
           </div>
 
-          <p className="fineprint" style={{marginTop:'18px'}}>
+          <p className="fineprint tool-trust-row">
             Tests load time on mobile and desktop, scores the five signals behind your Core Web Vitals (LCP, INP, CLS), and ranks what to fix first — so your pages rank faster on Google and stay crawlable for AI search.
           </p>
         </div>
@@ -159,7 +159,7 @@ export default function PageSpeed() {
 
       <div className="kwd-wrap">
         {error && (
-          <div style={{background:'rgba(255,59,20,.08)', border:'1px solid rgba(255,59,20,.3)', padding:'18px 22px', borderRadius:'var(--r-md)', color:'var(--red-deep)'}}>
+          <div className="tool-error">
             <strong>Backend error:</strong> {error}
           </div>
         )}
@@ -173,29 +173,29 @@ export default function PageSpeed() {
             <div className="bl-hero-card">
               <div>
                 <div className="apply-label">URL</div>
-                <div className="bl-domain" style={{wordBreak:'break-all'}}>{data.url}</div>
+                <div className="bl-domain report-url">{data.url}</div>
               </div>
               <div className="bl-score-block">
                 <div className="apply-label">Performance score</div>
                 <div className="bl-score" style={{color: scoreColor(data.scores.performance)}}>
                   {Math.round(data.scores.performance)}
                 </div>
-                <div className="fineprint" style={{marginTop:'4px'}}>
+                <div className="fineprint mt-1">
                   {scoreLabel(data.scores.performance)}
                 </div>
               </div>
               <div className="bl-score-block">
                 <div className="apply-label">Server response</div>
-                <div className="bl-score" style={{color:'var(--ink)', fontSize:'34px'}}>
-                  {data.metrics.fetchMs} <span style={{fontSize:'.5em', color:'var(--muted)'}}>ms</span>
+                <div className="bl-score score-num score-num-sm">
+                  {data.metrics.fetchMs} <span className="score-num-unit">ms</span>
                 </div>
-                <div className="fineprint" style={{marginTop:'4px'}}>
+                <div className="fineprint mt-1">
                   {data.metrics.htmlKb} KB · {data.metrics.compression}
                 </div>
               </div>
             </div>
 
-            <h3 className="apply-label" style={{marginTop:'36px', marginBottom:'12px'}}>
+            <h3 className="apply-label report-sec-head">
               Score breakdown · how we got to {Math.round(data.scores.performance)}
             </h3>
             <div className="auth-grid">
@@ -243,7 +243,7 @@ export default function PageSpeed() {
 
             {data.opportunities?.length > 0 && (
               <>
-                <h3 className="apply-label" style={{marginTop:'36px', marginBottom:'12px'}}>
+                <h3 className="apply-label report-sec-head">
                   {data.opportunities.length} fix-first opportunities
                 </h3>
                 <div className="ps-opps">
@@ -263,13 +263,13 @@ export default function PageSpeed() {
             )}
 
             {data.opportunities?.length === 0 && (
-              <div className="kwd-empty" style={{marginTop:'24px'}}>
+              <div className="kwd-empty mt-6">
                 No major issues flagged — all five signals came back clean. Your page is fast, lean, and well-structured for both Google and AI crawlers.
               </div>
             )}
 
-            <div style={{marginTop:'48px', textAlign:'center'}}>
-              <div style={{display:'flex', gap:'12px', justifyContent:'center', flexWrap:'wrap'}}>
+            <div className="report-foot">
+              <div className="report-foot-btns">
                 <a href="/audit" className="btn btn-primary btn-lg">Get a founder review <span className="ar">↗</span></a>
                 <a href="/domain-authority-checker" className="btn btn-outline btn-lg">Try the domain authority checker <span className="ar">↗</span></a>
               </div>

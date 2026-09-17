@@ -55,7 +55,7 @@ export default function DensityBarChart({ keywords, gram = '1gram' }) {
               axisLine={false}
               tickLine={false}
             />
-            <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(0,0,0,0.03)' }} />
+            <Tooltip content={<CustomTooltip />} cursor={{ fill: COLORS.redSoft }} />
             <Bar dataKey="density" radius={[0, 4, 4, 0]} maxBarSize={24} animationDuration={600}>
               {data.map((entry, i) => (
                 <Cell key={i} fill={entry.fill} />

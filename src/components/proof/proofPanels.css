@@ -1,0 +1,235 @@
+/* =====================================================================
+   PROOF BLOCK — true 12-column split.
+   Stats span 5, the panels span 7. Scoped to the homepage block; the
+   case study page keeps its own five-across .case-stats row.
+   ===================================================================== */
+.case-proof{
+  display:grid;
+  grid-template-columns:repeat(12, minmax(0, 1fr));
+  gap:var(--grid-gap);
+  /* Stretch, not start: the panel column has to reach the bottom of the stat
+     column or it opens a second hole under the AI card. */
+  align-items:stretch;
+  margin-bottom:var(--s-16);
+}
+
+/* — Stat column (5) ——————————————————————————————————
+   One hairline between cells, shared label baseline, so the four read as
+   one object with equal weight rather than trailing off. */
+.case-proof-stats{
+  grid-column:1 / span 5;
+  display:grid;
+  border:1px solid var(--line);
+  background:var(--bg);
+}
+.cps{
+  display:grid;
+  gap:var(--s-2);
+  padding:var(--s-6);
+  border-top:1px solid var(--line);
+}
+.cps:first-child{border-top:0}
+.cps-featured{background:var(--surface-1)}
+.cps-featured .stat-num{font-size:clamp(3rem, 6vw, 5rem);color:var(--red)}
+.cps .stat-num{font-size:clamp(1.75rem, 2.6vw, 2.5rem)}
+
+/* — Panel column (7) ————————————————————————————————— */
+.case-proof-panels{
+  grid-column:6 / -1;
+  display:grid;
+  grid-template-rows:auto 1fr;
+  gap:var(--s-5);
+}
+
+/* — Search Console panel ———————————————————————————— */
+.gsc{
+  margin:0;
+  border:1px solid var(--line-strong);
+  border-radius:var(--r-lg);
+  background:var(--surface-1);
+  overflow:hidden;
+}
+.gsc-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--s-4);
+  padding:var(--s-4) var(--s-5);
+  border-bottom:1px solid var(--line);
+  background:var(--bg-deep);
+  font-family:var(--font-mono);
+  font-size:var(--fs-micro);
+  letter-spacing:var(--track-micro);
+  color:var(--text-3);
+}
+.gsc-live{display:inline-flex;align-items:center;gap:.4rem;color:var(--success)}
+.gsc-dot{
+  width:.4rem;height:.4rem;border-radius:50%;
+  background:var(--success);
+  /* Opacity only, and it is one of the few things allowed to loop here. */
+  animation:gsc-blink 2.4s var(--ease-out) infinite alternate;
+  animation-play-state:paused;
+}
+.gsc[data-live] .gsc-dot{animation-play-state:running}
+@keyframes gsc-blink{from{opacity:.35}to{opacity:1}}
+
+.gsc-legend{
+  display:flex;
+  gap:var(--s-5);
+  padding:var(--s-4) var(--s-5) 0;
+  font-family:var(--font-mono);
+  font-size:var(--fs-micro);
+  letter-spacing:var(--track-micro);
+}
+.gsc-key{display:inline-flex;align-items:center;gap:.4rem}
+.gsc-key::before{content:"";width:.75rem;height:2px;border-radius:2px}
+.gsc-key-imp{color:var(--text-2)}
+.gsc-key-imp::before{background:var(--peri)}
+.gsc-key-clk{color:var(--text-3)}
+.gsc-key-clk::before{background:var(--accent-on-raised)}
+
+/* Explicit ratio reserves the box before anything draws: no CLS. */
+.gsc-chart{padding:var(--s-3) var(--s-5) 0}
+.gsc-chart svg{display:block;width:100%;height:auto;aspect-ratio:560 / 180;overflow:visible}
+.gsc-grid line{stroke:var(--line);stroke-width:1}
+.gsc-line{
+  fill:none;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  /* pathLength="1" on the path makes this a normalised 0–1 draw. */
+  stroke-dasharray:1;
+  stroke-dashoffset:1;
+  transition:stroke-dashoffset 1.6s var(--ease-out);
+}
+.gsc-line-imp{stroke:var(--peri)}
+.gsc-line-clk{stroke:var(--accent-on-raised);transition-delay:.18s}
+.gsc[data-reveal].in .gsc-line{stroke-dashoffset:0}
+
+.gsc-ranges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--s-2);
+  padding:var(--s-5);
+}
+.gsc-chip{
+  padding:.3rem .55rem;
+  border:1px solid var(--line);
+  border-radius:var(--r-sm);
+  font-family:var(--font-mono);
+  font-size:var(--fs-micro);
+  letter-spacing:var(--track-micro);
+  color:var(--text-4);
+  transition:border-color .3s var(--ease-out), color .3s var(--ease-out), background-color .3s var(--ease-out);
+}
+.gsc-chip.is-active{
+  border-color:var(--peri);
+  color:var(--text-1);
+  background:var(--peri-tint);
+}
+
+/* — AI Overview card ————————————————————————————————— */
+.aio{
+  display:grid;
+  grid-template-rows:auto 1fr;
+  border:1px solid var(--line-strong);
+  border-radius:var(--r-lg);
+  background:var(--surface-1);
+  overflow:hidden;
+}
+.aio-head{
+  display:grid;
+  gap:var(--s-2);
+  padding:var(--s-5) var(--s-5) var(--s-4);
+  border-bottom:1px solid var(--line);
+}
+.aio-label{
+  font-family:var(--font-mono);
+  font-size:var(--fs-micro);
+  letter-spacing:var(--track-micro);
+  color:var(--text-4);
+}
+.aio-q{
+  font-family:var(--font-mono);
+  font-size:var(--fs-micro-lg);
+  color:var(--text-2);
+}
+/* Rows stretch rather than centre, so the card has no blank bands. */
+.aio-list{list-style:none;margin:0;padding:0;display:grid;align-content:stretch}
+.aio-row{
+  display:grid;
+  align-content:center;
+  grid-template-columns:auto minmax(0, 1fr) auto;
+  align-items:center;
+  gap:var(--s-4);
+  padding:var(--s-4) var(--s-5);
+  border-top:1px solid var(--line);
+  font-family:var(--font-mono);
+  font-size:var(--fs-micro-lg);
+  color:var(--text-4);
+}
+.aio-row:first-child{border-top:0}
+.aio-row.is-top{background:var(--red-tint);color:var(--text-1)}
+.aio-rank{font-weight:700;color:var(--text-3)}
+.aio-row.is-top .aio-rank{color:var(--accent-on-raised)}
+.aio-row.is-top .aio-name{color:var(--text-1);font-weight:600}
+.aio-tag{
+  font-size:var(--fs-micro);
+  letter-spacing:var(--track-micro);
+  color:var(--accent-on-raised);
+}
+
+@media (max-width:1024px){
+  .case-proof{grid-template-columns:1fr}
+  .case-proof-stats,.case-proof-panels{grid-column:1 / -1}
+  .case-proof-stats{grid-template-columns:1fr 1fr}
+  .cps{border-left:1px solid var(--line)}
+  .cps:nth-child(odd){border-left:0}
+  .cps-featured{grid-column:1 / -1;border-left:0}
+}
+@media (max-width:640px){
+  .case-proof-stats{grid-template-columns:1fr}
+  .cps{border-left:0}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .gsc-dot{animation:none}
+  /* Resting state is the finished chart, not a blank one. */
+  .gsc-line{stroke-dashoffset:0;transition:none}
+}
+
+/* — Scripted cursor states ————————————————————————— */
+.gsc{position:relative}
+/* The chip the scripted cursor is pointing at. */
+.gsc-chip.sc-hover{
+  border-color:var(--peri);
+  color:var(--text-1);
+  background:var(--hover-wash);
+}
+/* Click snaps the curve back with no transition; removing the class lets the
+   normal draw-in run again. */
+.gsc[data-redraw] .gsc-line{transition:none;stroke-dashoffset:1}
+
+/* — AI Overview: cursor + cited-source reveal ————————————
+   The cite line always occupies its row, so revealing it is opacity and
+   transform only and nothing below it can move. */
+.aio{position:relative}
+/* Named areas exist only on the highlighted row, so the grid-area
+   assignments must be scoped to it — applied globally they auto-placed the
+   second row's rank into an implicit area and stranded it bottom-right. */
+.aio-row.is-top{grid-template-areas:"rank name tag" "cite cite cite"}
+.aio-row.is-top .aio-rank{grid-area:rank}
+.aio-row.is-top .aio-name{grid-area:name}
+.aio-row.is-top .aio-tag{grid-area:tag}
+.aio-cite{
+  grid-area:cite;
+  margin-top:var(--s-2);
+  font-size:var(--fs-micro);
+  letter-spacing:var(--track-micro);
+  color:var(--text-3);
+  opacity:0;
+  transform:translateY(-4px);
+  transition:opacity .45s var(--ease-out), transform .45s var(--ease-out);
+}
+.aio[data-cited] .aio-cite{opacity:1;transform:none}
+.aio-row.sc-hover{background:color-mix(in srgb, var(--red-tint) 70%, var(--surface-2))}

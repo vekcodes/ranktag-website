@@ -2,6 +2,8 @@ import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import ScrollToHash from './components/ScrollToHash.jsx';
 import useHubSpotTracking from './hooks/useHubSpotTracking.js';
+import './styles/tenora.css';
+import './styles/counterweights.css';
 
 /**
  * Root layout route. Holds the cross-route concerns that used to live in the
@@ -16,6 +18,8 @@ export default function Layout() {
   return (
     <React.StrictMode>
       <ScrollToHash />
+      {/* Ambient grid, once, for every route. */}
+      <div className="bg-grid" aria-hidden="true" />
       <Suspense fallback={null}>
         <Outlet />
       </Suspense>

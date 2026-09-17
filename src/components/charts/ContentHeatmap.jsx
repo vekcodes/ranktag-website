@@ -28,7 +28,7 @@ export default function ContentHeatmap({ content, keywords }) {
     if (t > 0.7) return COLORS.red;
     if (t > 0.4) return COLORS.warn;
     if (t > 0.15) return COLORS.success;
-    return '#b8d4c8';
+    return COLORS.heatLow;
   };
 
   return (
@@ -77,7 +77,7 @@ export default function ContentHeatmap({ content, keywords }) {
       <div className="ch-heat-legend">
         <span className="ch-heat-legend-label">Intensity:</span>
         <span className="ch-heat-legend-box" style={{ background: COLORS.paper2 }} /> None
-        <span className="ch-heat-legend-box" style={{ background: '#b8d4c8' }} /> Low
+        <span className="ch-heat-legend-box" style={{ background: COLORS.heatLow }} /> Low
         <span className="ch-heat-legend-box" style={{ background: COLORS.success }} /> Medium
         <span className="ch-heat-legend-box" style={{ background: COLORS.warn }} /> High
         <span className="ch-heat-legend-box" style={{ background: COLORS.red }} /> Dense

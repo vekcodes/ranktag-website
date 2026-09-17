@@ -113,10 +113,10 @@ export default function BacklinkChecker() {
       <JsonLd data={DA_JSONLD} />
       <Nav />
 
-      <section className="tool-hero" style={{paddingBottom: '40px'}}>
+      <section className="tool-hero">
         <div className="tool-hero-bg"></div>
         <div className="container tool-hero-inner">
-          <div className="eyebrow no-line" style={{justifyContent: 'center', marginBottom: '24px'}}>★ FREE TOOL · OUR OWN ENGINE · CROSS-CHECKABLE</div>
+          <span className="eyebrow bracket tool-eyebrow">★ FREE TOOL · OUR OWN ENGINE · CROSS-CHECKABLE</span>
           <h1>
             Domain Authority Checker.<br />
             <span className="ser">Built by us, not Ahrefs.</span><br />
@@ -126,7 +126,7 @@ export default function BacklinkChecker() {
             We pull free public signals — Tranco traffic rank, Wayback Machine domain age, on-page schema and link structure, real HTTP transport quality — and compute the RankedTag Authority Score with a transparent breakdown. Verify every component yourself with the source links we expose in the result.
           </p>
 
-          <form className="url-form" onSubmit={run} autoComplete="off" style={{maxWidth:'620px', margin:'28px auto 0'}}>
+          <form className="url-form" onSubmit={run} autoComplete="off" >
             <span className="url-prefix">https://</span>
             <input
               type="text"
@@ -143,7 +143,7 @@ export default function BacklinkChecker() {
             </button>
           </form>
 
-          <p className="fineprint" style={{marginTop:'18px'}}>
+          <p className="fineprint tool-trust-row">
             Every score is source-linked, so you can verify each input yourself — no API key, no login, no black box.
           </p>
         </div>
@@ -151,7 +151,7 @@ export default function BacklinkChecker() {
 
       <div className="kwd-wrap">
         {error && (
-          <div style={{background:'rgba(255,59,20,.08)', border:'1px solid rgba(255,59,20,.3)', padding:'18px 22px', borderRadius:'var(--r-md)', color:'var(--red-deep)'}}>
+          <div className="tool-error">
             <strong>Backend error:</strong> {error}
           </div>
         )}
@@ -172,18 +172,18 @@ export default function BacklinkChecker() {
                 <div className="bl-score" style={{color: scoreColor(data.score)}}>
                   {data.score != null ? data.score : '–'}
                 </div>
-                <div className="fineprint" style={{marginTop:'4px'}}>
+                <div className="fineprint mt-1">
                   {scoreVerdict(data.score)}
                 </div>
               </div>
               <div className="bl-score-block">
                 <div className="apply-label">Tranco rank</div>
-                <div className="bl-score" style={{color:'var(--ink)', fontSize:'34px'}}>
+                <div className="bl-score score-num score-num-sm">
                   {data.raw?.trancoRank != null
                     ? `#${Number(data.raw.trancoRank).toLocaleString()}`
                     : '–'}
                 </div>
-                <div className="fineprint" style={{marginTop:'4px'}}>
+                <div className="fineprint mt-1">
                   {data.raw?.firstSeen
                     ? `Seen since ${data.raw.firstSeen}`
                     : 'Domain age unknown'}
@@ -191,7 +191,7 @@ export default function BacklinkChecker() {
               </div>
             </div>
 
-            <h3 className="apply-label" style={{marginTop:'36px', marginBottom:'12px'}}>
+            <h3 className="apply-label report-sec-head">
               Score breakdown · how we got to {data.score}
             </h3>
             <div className="auth-grid">
@@ -246,11 +246,11 @@ export default function BacklinkChecker() {
               </div>
             )}
 
-            <div style={{marginTop:'48px', textAlign:'center'}}>
-              <p className="fineprint" style={{marginBottom:'18px'}}>
+            <div className="report-foot">
+              <p className="fineprint mb-5">
                 Want a senior strategist to read this and tell you what to fix? Apply for a founder review, free.
               </p>
-              <div style={{display:'flex', gap:'12px', justifyContent:'center', flexWrap:'wrap'}}>
+              <div className="report-foot-btns">
                 <a href="/audit" className="btn btn-primary btn-lg">Get a founder review <span className="ar">↗</span></a>
                 <a href="/page-speed-checker" className="btn btn-outline btn-lg">Try the page speed checker <span className="ar">↗</span></a>
               </div>

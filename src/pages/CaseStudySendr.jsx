@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom';
 import Nav from '../components/Nav.jsx';
 import SiteFooter from '../components/SiteFooter.jsx';
 import usePageMeta from '../hooks/usePageMeta.js';
+import useScrollReveal from '../hooks/useScrollReveal.js';
 import JsonLd from '../components/JsonLd.jsx';
 import { breadcrumb, ORG_ID, SITE } from '../lib/schema.js';
 import { TOOL_META } from '../seo/routeMeta.js';
+import SignupRail from '../components/proof/SignupRail.jsx';
 import './Home.css';
 import './CaseStudy.css';
 
@@ -40,6 +42,7 @@ const CASE_JSONLD = [
 
 export default function CaseStudySendr() {
   usePageMeta(TOOL_META['/case-study/sendr']);
+  useScrollReveal();
 
   return (
     <>
@@ -57,7 +60,7 @@ export default function CaseStudySendr() {
 
           {/* ── Header ─────────────────────────────────────────────────── */}
           <header className="cs-head">
-            <div className="eyebrow" style={{ color: 'var(--red)' }}>
+            <div className="eyebrow cs-eyebrow">
               CASE STUDY · B2B SAAS · SEO + GEO
             </div>
             <h1 className="cs-h1">
@@ -77,9 +80,9 @@ export default function CaseStudySendr() {
               cross-check yourself.
             </p>
             <div className="cs-meta">
-              <span className="tag tag-red">SEED-STAGE B2B SAAS</span>
-              <span className="tag tag-outline">RANKED ABOVE ZOOMINFO</span>
-              <span className="tag tag-live">Active engagement</span>
+              <span className="chip chip-accent">SEED-STAGE B2B SAAS</span>
+              <span className="chip">RANKED ABOVE ZOOMINFO</span>
+              <span className="chip chip-live">Active engagement</span>
             </div>
           </header>
 
@@ -88,32 +91,32 @@ export default function CaseStudySendr() {
             <div className="case-stats">
               <div className="case-stat featured">
                 <div className="stat-lbl">Total organic impressions · 6 months</div>
-                <div className="stat-num">1.05M</div>
+                <div className="stat-num" data-countup="1600">1.05M</div>
                 <div className="stat-delta">
                   ▲ Google Search Console · 09/11/2025 to 28/04/2026
                 </div>
               </div>
               <div className="case-stat">
                 <div className="stat-lbl">Total clicks</div>
-                <div className="stat-num">7.43k</div>
+                <div className="stat-num" data-countup="1400">7.43k</div>
                 <div className="stat-delta">▲ same 6-month window</div>
               </div>
               <div className="case-stat">
                 <div className="stat-lbl">Average CTR</div>
                 <div className="stat-num">
-                  0.7<span style={{ fontSize: '.6em' }}>%</span>
+                  <span data-countup="1400">0.7</span><span className="stat-num-unit">%</span>
                 </div>
                 <div className="stat-delta">▲ across all ranking queries</div>
               </div>
               <div className="case-stat">
                 <div className="stat-lbl">Average position</div>
-                <div className="stat-num">7.1</div>
+                <div className="stat-num" data-countup="1400">7.1</div>
                 <div className="stat-delta">▲ across the indexed surface area</div>
               </div>
               <div className="case-stat">
                 <div className="stat-lbl">Google AI Overview · "best GTM tool"</div>
                 <div className="stat-num">
-                  #2<span style={{ fontSize: '.42em', color: 'var(--muted)' }}>
+                  #2<span className="stat-num-vs">
                     {' '}
                     vs ZoomInfo #8
                   </span>
@@ -225,10 +228,10 @@ export default function CaseStudySendr() {
                   7.1 average position — the indexed surface area of a brand the
                   category used to ignore. Straight from Google Search Console.
                 </p>
-                <figure className="case-proof">
-                  <figcaption className="case-proof-cap">
-                    <span className="dot" />
-                    Live Google Search Console · sendr.ai · last 6 months
+                <figure className="frame">
+                  <figcaption className="frame-bar">
+                    <span className="frame-dots" aria-hidden="true"><i /><i /><i /></span>
+                    <span className="frame-url">Live Google Search Console · sendr.ai · last 6 months</span>
                   </figcaption>
                   <img
                     src="/result-sendr.jpeg"
@@ -255,10 +258,10 @@ export default function CaseStudySendr() {
                   not a blue link below the fold. It is the difference between
                   renting traffic and owning the recommendation buyers ask the AI for.
                 </p>
-                <figure className="case-proof case-proof-wide">
-                  <figcaption className="case-proof-cap">
-                    <span className="dot" />
-                    Google search · "what is the best GTM tool"
+                <figure className="frame frame-wide">
+                  <figcaption className="frame-bar">
+                    <span className="frame-dots" aria-hidden="true"><i /><i /><i /></span>
+                    <span className="frame-url">Google search · "what is the best GTM tool"</span>
                   </figcaption>
                   <img
                     src="/result-ranked.jpeg"
@@ -287,6 +290,19 @@ export default function CaseStudySendr() {
                 </div>
               </li>
             </ol>
+          </section>
+
+          {/* ── Signup alerts produced by the engine ──────────────────────── */}
+          <section className="cs-section">
+            <h2 className="cs-h2">A selection of the signups</h2>
+            <p className="cs-prose">
+              Production signup alerts for sendr.ai, each showing the country and the
+              attribution source recorded at sign-up. Customer details are blurred.
+              This is a selection, not the full record.
+            </p>
+            <div className="cs-signups">
+              <SignupRail label="Sendr.ai signup notification screenshots" />
+            </div>
           </section>
 
           {/* ── Verify it yourself (reproducibility = the strongest proof) ─ */}
@@ -351,7 +367,7 @@ export default function CaseStudySendr() {
                 </p>
               </div>
             </div>
-            <p className="cs-prose" style={{ marginTop: '24px' }}>
+            <p className="cs-prose cs-prose-gap">
               Traffic you rent stops the day you stop paying. An answer you own keeps
               feeding pipeline. That is the entire point of building the engine
               instead of buying clicks.

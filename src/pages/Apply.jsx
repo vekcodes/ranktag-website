@@ -76,14 +76,9 @@ export default function Apply() {
       <Nav variant="audit" />
 
       <main className="apply-page">
-        <div className="container">
+        <div className="container grid12 apply-page-grid">
           <div className="apply-page-head">
-            <div
-              className="eyebrow"
-              style={{ justifyContent: 'center', color: 'var(--red)' }}
-            >
-              APPLY · founder-reviewed, not auto-routed
-            </div>
+            <span className="eyebrow bracket apply-page-eyebrow">APPLY · founder-reviewed, not auto-routed</span>
             <h1 className="apply-page-h">
               Tell us about your SaaS.
               <br />
@@ -146,7 +141,7 @@ export default function Apply() {
                 >
                   {applyState.status === 'submitting' ? 'Sending…' : <>Send application <span className="ar">↗</span></>}
                 </button>
-                <p className="fineprint" style={{ color: 'rgba(244,239,231,.55)' }}>
+                <p className="fineprint">
                   Reviewed by the founder. Reply on LinkedIn within 48 hours. We never sell, share, or spam your info.
                 </p>
               </div>
@@ -158,7 +153,7 @@ export default function Apply() {
               <p>
                 The founder will personally review your domain, run a quick competitive scan, and DM you on LinkedIn inside 48 hours. Even if we are not the right fit, you will hear back with what we would do.
               </p>
-              <p className="fineprint" style={{ color: 'rgba(244,239,231,.5)', marginTop: '10px' }}>
+              <p className="fineprint mt-3">
                 If you do not see a DM by then, ping us at hello@rankedtag.com.
               </p>
             </div>

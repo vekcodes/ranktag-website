@@ -85,10 +85,10 @@ export default function CompetitorAnalysis() {
         <section className="cp-hero">
           <div className="container">
             <span className="eyebrow">Competitor Analysis</span>
-            <h1 className="h-2" style={{ marginTop: 16, maxWidth: 720 }}>
+            <h1 className="h-2 tool-dek">
               Free competitor analysis tool — compare your content side by side
             </h1>
-            <p className="lead" style={{ marginTop: 12 }}>
+            <p className="lead tool-trust-row">
               Enter your page and up to 5 competitor URLs. Get keyword gaps,
               side-by-side SEO scoring, and actionable optimization insights —
               free, no login.
@@ -132,7 +132,7 @@ export default function CompetitorAnalysis() {
                   </div>
                   <div className="cp-summary-card">
                     <div className="cp-summary-label">Competitor Avg</div>
-                    <div className="cp-summary-score" style={{ color: 'var(--periwinkle-deep)' }}>
+                    <div className="cp-summary-score" style={{ color: 'var(--peri)' }}>
                       {result.benchmarks.avg_overall_score}
                     </div>
                     <div className="cp-summary-grade">Benchmark</div>
@@ -148,7 +148,7 @@ export default function CompetitorAnalysis() {
                   </div>
                   <div className="cp-summary-card">
                     <div className="cp-summary-label">Pages Analyzed</div>
-                    <div className="cp-summary-score" style={{ color: 'var(--ink)' }}>
+                    <div className="cp-summary-score" style={{ color: 'var(--text-1)' }}>
                       {1 + validComps.length}
                     </div>
                     <div className="cp-summary-grade">{validComps.length} competitor{validComps.length !== 1 ? 's' : ''}</div>

@@ -61,7 +61,7 @@ export default function BlogPost() {
   });
 
   return (
-    <div className="blogx">
+    <div className="blogx blogx-read">
       <Nav variant="home" />
 
       <main className="container blogx-article">
@@ -71,7 +71,7 @@ export default function BlogPost() {
         </div>
 
         {status === 'loading' && (
-          <div className="blogx-card skeleton" style={{ marginTop: 24 }}>
+          <div className="blogx-card skeleton mt-6">
             <div className="sk-line w40" />
             <div className="sk-line w90" />
             <div className="sk-img" />

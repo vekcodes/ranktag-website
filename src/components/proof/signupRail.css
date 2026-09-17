@@ -1,0 +1,146 @@
+/* =====================================================================
+   SIGNUP RAIL — framed screenshots on a horizontal scroller.
+   Transform and opacity only; the frames carry an explicit aspect ratio so
+   nothing shifts as the lazy images land.
+   ===================================================================== */
+.rail-wrap{position:relative}
+
+.rail{
+  list-style:none;
+  margin:0;
+  padding:0 0 var(--s-4);
+  display:flex;
+  gap:var(--s-5);
+  overflow-x:auto;
+  overscroll-behavior-x:contain;
+  scroll-snap-type:x proximity;
+  scrollbar-width:thin;
+  scrollbar-color:var(--line-strong) transparent;
+  cursor:grab;
+}
+.rail:active{cursor:grabbing}
+.rail:focus-visible{outline:2px solid var(--peri);outline-offset:4px;border-radius:var(--r-sm)}
+.rail::-webkit-scrollbar{height:6px}
+.rail::-webkit-scrollbar-track{background:transparent}
+.rail::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:var(--r-pill)}
+
+.rail-card{
+  flex:0 0 auto;
+  width:clamp(17.5rem, 60vw, 27rem);
+  scroll-snap-align:start;
+}
+.rail-card figure{margin:0}
+/* Trailing breathing room so the last card is not flush against the edge. */
+.rail::after{content:'';flex:0 0 var(--gutter)}
+
+.rail-frame{
+  position:relative;
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  background:var(--surface-1);
+  overflow:hidden;
+  transition:transform .4s var(--ease-out), border-color .4s var(--ease-out);
+  will-change:transform;
+}
+.rail-card:hover .rail-frame{transform:translateY(-4px);border-color:var(--line-strong)}
+
+/* Product chrome: a title bar with three dots, drawn rather than shipped.
+   In flow above the image, so it adds to the frame rather than cropping it. */
+.rail-chrome{
+  height:1.75rem;
+  display:flex;
+  align-items:center;
+  gap:.3rem;
+  padding-inline:.625rem;
+  border-bottom:1px solid var(--line);
+  background:var(--bg-deep);
+}
+.rail-chrome i{
+  width:.4rem;height:.4rem;
+  border-radius:50%;
+  background:var(--line-strong);
+}
+.rail-frame img{
+  display:block;
+  width:100%;
+  height:auto;
+  /* Matches the 1200x675 intrinsic size on the <img>, so the box is reserved
+     before the lazy image decodes. Nothing is cropped. */
+  aspect-ratio:1200 / 675;
+  user-select:none;
+}
+
+.rail-cap{
+  display:flex;
+  align-items:center;
+  gap:var(--s-3);
+  padding-top:var(--s-3);
+  font-family:var(--font-mono);
+  font-size:var(--fs-micro);
+  letter-spacing:var(--track-micro);
+  text-transform:uppercase;
+}
+.rail-chip{
+  flex:0 0 auto;
+  padding:.2rem .45rem;
+  border:1px solid var(--line-strong);
+  border-radius:var(--r-sm);
+  color:var(--text-2);
+  transition:border-color .3s var(--ease-out), color .3s var(--ease-out);
+}
+.rail-card:hover .rail-chip{border-color:var(--peri);color:var(--peri-text)}
+.rail-meta{color:var(--text-4);min-width:0}
+
+.rail-nav{
+  display:flex;
+  gap:var(--s-2);
+  justify-content:flex-end;
+  padding-top:var(--s-5);
+}
+.rail-btn{
+  width:2.75rem;height:2.75rem;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--line-strong);
+  border-radius:var(--r-pill);
+  color:var(--text-2);
+  background:transparent;
+  transition:background-color .3s var(--ease-out), border-color .3s var(--ease-out), color .3s var(--ease-out);
+}
+.rail-btn:hover{background:var(--surface-1);border-color:var(--peri);color:var(--text-1)}
+.rail-btn:focus-visible{outline:2px solid var(--peri);outline-offset:2px}
+/* The shared .ar utility nudges right; the left control mirrors it. */
+.rail-btn:first-child:hover .ar{transform:translateX(-.25em)}
+
+@media (max-width:760px){
+  .rail{gap:var(--s-4)}
+  .rail-card{width:min(20rem, 82vw)}
+  .rail-nav{display:none} /* touch scrolling is the control here */
+}
+
+@media (prefers-reduced-motion:reduce){
+  .rail{scroll-behavior:auto}
+  .rail-frame,.rail-chip,.rail-btn,.rail-btn .ar{transition:none}
+  .rail-card:hover .rail-frame{transform:none}
+}
+
+/* Section wrapper on the homepage and the case study. */
+.signups-note{max-width:62ch}
+.signups-count{
+  display:inline-flex;
+  align-items:baseline;
+  gap:.35rem;
+  margin-left:.75rem;
+  padding-left:.75rem;
+  border-left:1px solid var(--line-strong);
+  font-family:var(--font-mono);
+  font-size:var(--fs-micro);
+  letter-spacing:var(--track-micro);
+  text-transform:uppercase;
+  color:var(--text-4);
+  font-variant-numeric:tabular-nums;
+}
+
+/* Case study: the rail sits in the prose column, so it gets its own top gap. */
+.cs-signups{margin-top:var(--s-8)}

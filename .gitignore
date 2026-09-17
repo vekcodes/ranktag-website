@@ -14,3 +14,7 @@ __pycache__
 .pytest_cache
 .coverage
 htmlcov
+
+# Raw signup screenshots (customer records). The optimised, published
+# versions live in public/proof/ — regenerate with scripts/optimize-signups.py
+Google and AI signups/

@@ -104,10 +104,10 @@ export default function DensityDashboard() {
         <section className="ds-hero">
           <div className="container">
             <span className="eyebrow">Keyword Density Checker</span>
-            <h1 className="h-2" style={{ marginTop: 16, maxWidth: 760 }}>
+            <h1 className="h-2 tool-dek">
               Keyword Density Checker — free, unlimited, no sign-up.
             </h1>
-            <p className="lead" style={{ marginTop: 12 }}>
+            <p className="lead tool-trust-row">
               Paste your text or drop in a URL and instantly see how often every keyword and phrase
               appears — as a count and a percentage, grouped into 1-, 2-, 3- and 4-word phrases.
               Catch keyword stuffing, benchmark competitors, and optimize for Google and AI search.

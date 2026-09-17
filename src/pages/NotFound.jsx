@@ -30,75 +30,32 @@ export default function NotFound() {
   return (
     <>
       <Nav />
-      <main
-        className="container"
-        style={{
-          minHeight: '70vh',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          textAlign: 'center',
-          padding: '120px 0 80px',
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: 'clamp(64px, 14vw, 140px)',
-            fontWeight: 700,
-            lineHeight: 1,
-            color: 'var(--red)',
-            letterSpacing: '-0.04em',
-          }}
-        >
-          404
-        </p>
-        <h1 style={{ marginTop: '16px', fontSize: 'clamp(24px, 4vw, 36px)', color: 'var(--ink)' }}>
-          This page took a wrong turn.
-        </h1>
-        <p style={{ marginTop: '12px', maxWidth: '46ch', color: 'var(--muted)', fontSize: '17px' }}>
-          The link may be broken, or the page may have moved. Let&rsquo;s get you back on track.
-        </p>
+      <main className="container nf">
+        <div className="nf-top">
+          <span className="idx" aria-hidden="true">404</span>
+        </div>
+        <p className="nf-code" aria-hidden="true">404</p>
+        <div className="nf-row">
+          <h1 className="nf-h">This page took a wrong turn.</h1>
+          <p className="nf-sub">
+            The link may be broken, or the page may have moved. Let&rsquo;s get you back on track.
+          </p>
+        </div>
 
-        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center', marginTop: '32px' }}>
-          <Link to="/" className="btn btn-primary btn-lg">
-            Back home <span className="ar">↗</span>
+        <div className="nf-ctas">
+          <Link to="/" className="btn btn-primary btn-lg ar-parent">
+            Back home <span className="ar-ne">↗</span>
           </Link>
-          <a href="/blog" className="btn btn-outline btn-lg">
-            Read the blog <span className="ar">↗</span>
+          <a href="/blog" className="btn btn-outline btn-lg ar-parent">
+            Read the blog <span className="ar-ne">↗</span>
           </a>
         </div>
 
-        <div style={{ marginTop: '56px', width: '100%', maxWidth: '560px' }}>
-          <p
-            style={{
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: '12px',
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              color: 'var(--muted-2)',
-              marginBottom: '16px',
-            }}
-          >
-            Or try a free tool
-          </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center' }}>
+        <div className="nf-tools">
+          <p className="nf-tools-label">Or try a free tool</p>
+          <div className="nf-tools-row">
             {TOOLS.map((t) => (
-              <Link
-                key={t.to}
-                to={t.to}
-                style={{
-                  padding: '10px 16px',
-                  borderRadius: 'var(--r-pill)',
-                  border: '1px solid var(--paper-3)',
-                  background: 'var(--paper-2)',
-                  color: 'var(--ink)',
-                  fontSize: '14px',
-                  fontWeight: 500,
-                  textDecoration: 'none',
-                }}
-              >
+              <Link key={t.to} to={t.to} className="nf-tool link-wipe">
                 {t.label}
               </Link>
             ))}
