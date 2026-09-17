@@ -112,42 +112,56 @@ letter-spacing:var(--track-h1);max-width:14ch}
 .idx-head p{color:var(--text-3);font-size:1.125rem;line-height:1.6;max-width:44ch}
 @media(max-width:900px){.idx-head{grid-template-columns:1fr;align-items:start}}
 
-/* — Bento grid ————————————————————————————————————
-   Tiles vary in width; every image sits in a fixed-ratio frame and is
-   object-fit:contain, so a cover image is never cropped or half-cut. The
-   frame's padding and inset background make the letterboxing deliberate. */
-.bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
-gap:clamp(.875rem,1.4vw,1.25rem);padding:0 0 5rem;counter-reset:post}
-.tile{counter-increment:post;grid-column:span 4;display:flex;flex-direction:column;
+/* — Bento ————————————————————————————————————————
+   Masonry columns, not a row grid. Tiles size to their own content, so a
+   short tile never stretches to match a tall neighbour and leave a void in
+   its middle. Images are flush to the tile edge at their natural ratio:
+   no frame, no inset border, nothing cropped. */
+.bento-lead{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:center;
+gap:0;background:var(--surface-1);border:1px solid var(--line);border-radius:var(--r-xl);
+overflow:hidden;margin:0 0 clamp(.875rem,1.4vw,1.25rem);
+transition:transform .45s var(--ease),border-color .45s var(--ease)}
+.bento-lead:hover{transform:translateY(-4px);border-color:var(--line-strong)}
+/* Natural ratio here too: the image sets the row height and the copy
+   column centres against it, so the lead cover is never cropped. */
+.bento-lead img{display:block;width:100%;height:auto;align-self:center}
+.bento-lead .tile-body{padding:clamp(1.5rem,2.6vw,2.5rem);justify-content:center}
+.bento-lead h2{font-size:clamp(1.5rem,2.6vw,2.25rem);letter-spacing:var(--track-h2);line-height:1.1}
+.bento-lead p{font-size:1rem;-webkit-line-clamp:3}
+@media(max-width:820px){.bento-lead{grid-template-columns:1fr}}
+
+.bento{columns:3;column-gap:clamp(.875rem,1.4vw,1.25rem);padding:0 0 5rem;counter-reset:post}
+@media(max-width:1100px){.bento{columns:2}}
+@media(max-width:680px){.bento{columns:1}}
+
+.tile{counter-increment:post;break-inside:avoid;-webkit-column-break-inside:avoid;
+display:block;width:100%;margin:0 0 clamp(.875rem,1.4vw,1.25rem);
 background:var(--surface-1);border:1px solid var(--line);border-radius:var(--r-xl);
 overflow:hidden;transition:transform .45s var(--ease),border-color .45s var(--ease)}
 .tile:hover{transform:translateY(-4px);border-color:var(--line-strong)}
-.tile-8{grid-column:span 8}
-.tile-6{grid-column:span 6}
-.tile-frame{position:relative;aspect-ratio:16/9;background:#131314;
-display:grid;place-items:center;padding:.625rem;border-bottom:1px solid var(--line)}
-.tile-8 .tile-frame{aspect-ratio:16/7}
-.tile-frame img{width:100%;height:100%;object-fit:contain;border-radius:var(--r-sm)}
-.tile-frame.is-empty::after{content:"";width:2.5rem;height:2.5rem;border-radius:50%;
-border:1px solid var(--line-strong)}
-.tile-num{position:absolute;top:.625rem;left:.75rem;font-family:var(--font-mono);
-font-size:var(--fs-micro);letter-spacing:var(--track-micro);color:var(--text-4)}
-/* flex, not grid: the meta row uses margin-top:auto to sit at the bottom
-   so a short tile sharing a row with a tall one does not leave a void. */
-.tile-body{padding:1.15rem 1.25rem 1.35rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+/* Flush, natural ratio: never cropped, never letterboxed, no visible frame. */
+.tile img{display:block;width:100%;height:auto}
+.tile-body{padding:1.05rem 1.15rem 1.25rem;display:flex;flex-direction:column;gap:.45rem}
 .tile h2{font-size:1.0625rem;font-weight:600;line-height:1.25;color:var(--text-1)}
-.tile-8 h2{font-size:clamp(1.375rem,2.4vw,2rem);letter-spacing:var(--track-h2);line-height:1.1}
 .tile p{color:var(--text-3);font-size:.875rem;line-height:1.6;
 display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.tile-8 p{font-size:1rem;-webkit-line-clamp:3}
-.tile .row{display:flex;gap:.9rem;margin-top:auto;padding-top:.35rem;
+.tile .row,.bento-lead .row{display:flex;gap:.9rem;padding-top:.15rem;
 font-family:var(--font-mono);font-size:var(--fs-micro);letter-spacing:.06em;
 text-transform:uppercase;color:var(--text-4)}
 .tile-kicker{font-family:var(--font-mono);font-size:var(--fs-micro);
 letter-spacing:var(--track-micro);text-transform:uppercase;color:var(--accent-on-raised)}
-@media(max-width:1024px){.tile,.tile-8,.tile-6{grid-column:span 6}}
-@media(max-width:680px){.tile,.tile-8,.tile-6{grid-column:span 12}
-.tile-8 .tile-frame{aspect-ratio:16/9}}
+
+/* Size variety, bento-style: a feature tile with bigger type, a compact tile
+   that drops the excerpt, and a text-only tile that fills awkward runs. */
+.t-lg h2{font-size:clamp(1.25rem,1.9vw,1.6rem);letter-spacing:var(--track-h2);line-height:1.15}
+.t-lg p{-webkit-line-clamp:3}
+.t-sm p{display:none}
+.t-sm .tile-body{padding:.9rem 1.05rem 1rem}
+.t-quote{background:linear-gradient(160deg,var(--surface-2),var(--surface-1))}
+.t-quote h2{font-size:clamp(1.15rem,1.7vw,1.45rem);line-height:1.2}
+.t-quote .tile-body{padding:1.35rem 1.25rem 1.4rem;gap:.6rem}
+.t-quote .tile-mark{font-family:var(--font-display);font-size:2rem;line-height:1;
+color:var(--accent-on-raised)}
 .empty{text-align:center;padding:5rem 0;color:var(--text-3)}
 footer{border-top:1px solid var(--line);padding:2.5rem 0;margin-top:2.5rem;
 color:var(--text-3);font-family:var(--font-mono);font-size:var(--fs-micro);
@@ -253,24 +267,38 @@ function fmtDate(d) {
 }
 
 export function renderIndex(posts) {
-  // Bento rhythm: a wide lead tile, then a mix of thirds and halves. The
-  // pattern repeats so any number of posts lays out without orphan gaps.
-  const SPANS = ['tile-8', '', '', '', '', 'tile-8', 'tile-6', 'tile-6'];
+  // Size rhythm across the masonry: feature, normal, compact, text-only.
+  // Repeating so any number of posts stays varied without leaving holes.
+  const VARIANTS = ['t-lg', '', 't-sm', '', 't-quote', 't-sm', 't-lg', ''];
 
   const tile = (p, i) => {
-    const span = SPANS[i % SPANS.length];
-    const num = String(i + 1).padStart(3, '0');
-    const frame = p.cover_image_url
-      ? `<div class="tile-frame"><span class="tile-num">${num}</span><img src="${escapeHtml(p.cover_image_url)}" alt="${escapeHtml(p.cover_image_alt || p.title)}" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async" width="1200" height="630"/></div>`
-      : `<div class="tile-frame is-empty"><span class="tile-num">${num}</span></div>`;
-    return `<a class="tile ${span}" href="/blog/${escapeHtml(p.slug)}">
-${frame}<div class="tile-body">
-${i === 0 ? '<span class="tile-kicker">Latest</span>' : ''}
+    const v = VARIANTS[i % VARIANTS.length];
+    const hasImg = !!p.cover_image_url && v !== 't-quote';
+    const img = hasImg
+      ? `<img src="${escapeHtml(p.cover_image_url)}" alt="${escapeHtml(p.cover_image_alt || p.title)}" loading="lazy" decoding="async" width="1200" height="630"/>`
+      : '';
+    return `<a class="tile ${v}" href="/blog/${escapeHtml(p.slug)}">
+${img}<div class="tile-body">
+${v === 't-quote' ? '<span class="tile-mark" aria-hidden="true">&ldquo;</span>' : ''}
 <h2>${escapeHtml(p.title)}</h2>
 <p>${escapeHtml(p.excerpt)}</p>
 <div class="row"><span>${fmtDate(p.published_at)}</span><span>${p.reading_minutes} min read</span></div>
 </div></a>`;
   };
+
+  const lead = posts[0];
+  const leadHtml = lead
+    ? `<a class="bento-lead" href="/blog/${escapeHtml(lead.slug)}">
+${lead.cover_image_url
+      ? `<img src="${escapeHtml(lead.cover_image_url)}" alt="${escapeHtml(lead.cover_image_alt || lead.title)}" decoding="async" width="1200" height="630"/>`
+      : '<span></span>'}
+<div class="tile-body">
+<span class="tile-kicker">Latest</span>
+<h2>${escapeHtml(lead.title)}</h2>
+<p>${escapeHtml(lead.excerpt)}</p>
+<div class="row"><span>${fmtDate(lead.published_at)}</span><span>${lead.reading_minutes} min read</span></div>
+</div></a>`
+    : '';
 
   const body = `<div class="wrap-wide">
 <div class="idx-head">
@@ -278,7 +306,7 @@ ${i === 0 ? '<span class="tile-kicker">Latest</span>' : ''}
 <p>Field notes on SEO, generative engine optimization, and building inbound engines for B2B SaaS.</p>
 </div>
 ${posts.length
-    ? `<div class="bento">${posts.map(tile).join('')}</div>`
+    ? `${leadHtml}<div class="bento">${posts.slice(1).map(tile).join('')}</div>`
     : `<div class="empty">No posts yet — check back soon.</div>`}
 </div>`;
 
