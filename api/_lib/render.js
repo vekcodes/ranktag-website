@@ -14,10 +14,10 @@ const CSS = `
 :root{
 --logo-ink:#181818;--logo-paper:#F4EFE7;--logo-red:#F83000;
 --bg:#181818;--surface-1:#1F1F20;--surface-2:#27272A;--surface-3:#303033;
---text-1:#F4EFE7;--text-2:#B9B4AC;--text-3:#9E9991;--text-4:#807B74;
+--text-1:#F4EFE7;--text-2:#B9B4AC;--text-3:#9E9991;--text-4:#949089;
 --line:rgba(244,239,231,.10);--line-strong:rgba(244,239,231,.20);
 --red:#F83000;--red-hover:#FF4A1F;--red-on-paper:#C42600;--peri:#98A8F8;--peri-on-paper:#4A5BC4;
---accent-text:var(--red);--on-ink-2:#B9B4AC;
+--accent-text:var(--red);--accent-on-raised:#FF6A44;--on-ink-2:#B9B4AC;
 --paper:#F4EFE7;--paper-2:#EBE4D8;
 --font-display:'Space Grotesk',Arial,sans-serif;
 --font-body:'Space Grotesk',Arial,sans-serif;
@@ -144,7 +144,7 @@ display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hi
 font-family:var(--font-mono);font-size:var(--fs-micro);letter-spacing:.06em;
 text-transform:uppercase;color:var(--text-4)}
 .tile-kicker{font-family:var(--font-mono);font-size:var(--fs-micro);
-letter-spacing:var(--track-micro);text-transform:uppercase;color:var(--accent-text)}
+letter-spacing:var(--track-micro);text-transform:uppercase;color:var(--accent-on-raised)}
 @media(max-width:1024px){.tile,.tile-8,.tile-6{grid-column:span 6}}
 @media(max-width:680px){.tile,.tile-8,.tile-6{grid-column:span 12}
 .tile-8 .tile-frame{aspect-ratio:16/9}}
