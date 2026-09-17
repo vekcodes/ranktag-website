@@ -130,21 +130,18 @@ transition:transform .45s var(--ease),border-color .45s var(--ease)}
 .bento-lead p{font-size:1rem;-webkit-line-clamp:3}
 @media(max-width:820px){.bento-lead{grid-template-columns:1fr}}
 
-/* Three columns at deliberately unequal widths — that inequality is what
-   makes it read as a bento box rather than a card grid. Posts are dealt
-   into the columns server-side, so tiles still size to their own content
-   and no tile is ever padded out to match a neighbour. */
-.bento{display:flex;align-items:flex-start;gap:clamp(.875rem,1.4vw,1.25rem);padding:0 0 5rem}
-.bcol{display:flex;flex-direction:column;min-width:0;gap:clamp(.875rem,1.4vw,1.25rem)}
-.bcol-1{flex:5.2}
-.bcol-2{flex:3.3}
-.bcol-3{flex:4.3}
-@media(max-width:1100px){.bento{flex-wrap:wrap}
-.bcol-1,.bcol-2,.bcol-3{flex:1 1 calc(50% - .75rem)}}
-@media(max-width:680px){.bcol-1,.bcol-2,.bcol-3{flex:1 1 100%}}
+/* Browser-balanced masonry. An earlier version dealt posts into three
+   fixed-width columns using an estimated tile height; server-side the cover
+   ratios are unknown, so the estimate drifted and the narrow column ran out
+   early, leaving a tall void down the middle. CSS multi-column balances by
+   real rendered height, so the columns always finish level. Bento variety
+   comes from the tile treatments instead of the column widths. */
+.bento{columns:3;column-gap:clamp(.875rem,1.4vw,1.25rem);padding:0 0 5rem;counter-reset:post}
+@media(max-width:1100px){.bento{columns:2}}
+@media(max-width:680px){.bento{columns:1}}
 
 .tile{counter-increment:post;break-inside:avoid;-webkit-column-break-inside:avoid;
-display:block;width:100%;margin:0 0 clamp(.875rem,1.4vw,1.25rem);
+page-break-inside:avoid;display:block;width:100%;margin:0 0 clamp(.875rem,1.4vw,1.25rem);
 background:var(--surface-1);border:1px solid var(--line);border-radius:var(--r-xl);
 overflow:hidden;transition:transform .45s var(--ease),border-color .45s var(--ease)}
 .tile:hover{transform:translateY(-4px);border-color:var(--line-strong)}
@@ -379,26 +376,7 @@ ${lead.cover_image_url
 </div></a>`
     : '';
 
-  // Deal into the columns by estimated height rather than round-robin, so the
-  // three columns finish at roughly the same point instead of one running
-  // long and leaving a hole at the bottom. Weights are per variant; the exact
-  // image ratio is unknown server-side, so this is an approximation that
-  // still balances far better than i % 3.
-  const WEIGHT = { 't-lg': 2.6, '': 2.2, 't-sm': 1.5, 't-accent': 1.15, 't-quote': 1.35 };
   const rest = posts.slice(1);
-  const cols = [[], [], []];
-  // Wider columns carry proportionally more, so height still evens out.
-  const capacity = [5.2, 3.3, 4.3];
-  const load = [0, 0, 0];
-  rest.forEach((p, i) => {
-    const v = VARIANTS[i % VARIANTS.length];
-    let best = 0;
-    for (let c = 1; c < 3; c++) {
-      if (load[c] / capacity[c] < load[best] / capacity[best]) best = c;
-    }
-    cols[best].push(tile(p, i));
-    load[best] += WEIGHT[v] ?? 2;
-  });
 
   const body = `<div class="wrap-wide">
 <div class="idx-head">
@@ -406,7 +384,7 @@ ${lead.cover_image_url
 <p>Field notes on SEO, generative engine optimization, and building inbound engines for B2B SaaS.</p>
 </div>
 ${posts.length
-    ? `${leadHtml}<div class="bento">${cols.map((c, n) => `<div class="bcol bcol-${n + 1}">${c.join('')}</div>`).join('')}</div>`
+    ? `${leadHtml}<div class="bento">${rest.map(tile).join('')}</div>`
     : `<div class="empty">No posts yet — check back soon.</div>`}
 </div>`;
 
