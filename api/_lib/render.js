@@ -130,9 +130,18 @@ transition:transform .45s var(--ease),border-color .45s var(--ease)}
 .bento-lead p{font-size:1rem;-webkit-line-clamp:3}
 @media(max-width:820px){.bento-lead{grid-template-columns:1fr}}
 
-.bento{columns:3;column-gap:clamp(.875rem,1.4vw,1.25rem);padding:0 0 5rem;counter-reset:post}
-@media(max-width:1100px){.bento{columns:2}}
-@media(max-width:680px){.bento{columns:1}}
+/* Three columns at deliberately unequal widths — that inequality is what
+   makes it read as a bento box rather than a card grid. Posts are dealt
+   into the columns server-side, so tiles still size to their own content
+   and no tile is ever padded out to match a neighbour. */
+.bento{display:flex;align-items:flex-start;gap:clamp(.875rem,1.4vw,1.25rem);padding:0 0 5rem}
+.bcol{display:flex;flex-direction:column;min-width:0;gap:clamp(.875rem,1.4vw,1.25rem)}
+.bcol-1{flex:5.2}
+.bcol-2{flex:3.3}
+.bcol-3{flex:4.3}
+@media(max-width:1100px){.bento{flex-wrap:wrap}
+.bcol-1,.bcol-2,.bcol-3{flex:1 1 calc(50% - .75rem)}}
+@media(max-width:680px){.bcol-1,.bcol-2,.bcol-3{flex:1 1 100%}}
 
 .tile{counter-increment:post;break-inside:avoid;-webkit-column-break-inside:avoid;
 display:block;width:100%;margin:0 0 clamp(.875rem,1.4vw,1.25rem);
@@ -140,12 +149,19 @@ background:var(--surface-1);border:1px solid var(--line);border-radius:var(--r-x
 overflow:hidden;transition:transform .45s var(--ease),border-color .45s var(--ease)}
 .tile:hover{transform:translateY(-4px);border-color:var(--line-strong)}
 /* Flush, natural ratio: never cropped, never letterboxed, no visible frame. */
-.tile img{display:block;width:100%;height:auto}
+.tile-media{position:relative;overflow:hidden;line-height:0}
+.tile-media img{display:block;width:100%;height:auto;
+transition:transform .7s var(--ease)}
+.tile:hover .tile-media img{transform:scale(1.045)}
+.tile-badge{position:absolute;top:.6rem;right:.6rem;padding:.24rem .58rem;border-radius:999px;
+background:rgba(19,19,20,.78);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+border:1px solid var(--line-strong);font-family:var(--font-mono);font-size:var(--fs-micro);
+letter-spacing:.06em;color:var(--text-2)}
 .tile-body{padding:1.05rem 1.15rem 1.25rem;display:flex;flex-direction:column;gap:.45rem}
 .tile h2{font-size:1.0625rem;font-weight:600;line-height:1.25;color:var(--text-1)}
 .tile p{color:var(--text-3);font-size:.875rem;line-height:1.6;
 display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.tile .row,.bento-lead .row{display:flex;gap:.9rem;padding-top:.15rem;
+.tile .row,.bento-lead .row{display:flex;align-items:center;gap:.9rem;padding-top:.15rem;
 font-family:var(--font-mono);font-size:var(--fs-micro);letter-spacing:.06em;
 text-transform:uppercase;color:var(--text-4)}
 .tile-kicker{font-family:var(--font-mono);font-size:var(--fs-micro);
@@ -162,11 +178,45 @@ letter-spacing:var(--track-micro);text-transform:uppercase;color:var(--accent-on
 .t-quote .tile-body{padding:1.35rem 1.25rem 1.4rem;gap:.6rem}
 .t-quote .tile-mark{font-family:var(--font-display);font-size:2rem;line-height:1;
 color:var(--accent-on-raised)}
+/* Accent tile: a warm wash so a run of dark cards is broken up. */
+.t-accent{background:linear-gradient(155deg,rgba(248,48,0,.15),var(--surface-1) 62%);
+border-color:color-mix(in srgb,var(--red) 22%,var(--line))}
+.t-accent h2{font-size:clamp(1.15rem,1.7vw,1.45rem);line-height:1.2}
+/* Arrow that resolves on hover, matching the app's .ar behaviour. */
+.tile-go{margin-left:auto;color:var(--accent-on-raised);opacity:0;
+transform:translateX(-.35em);transition:opacity .35s var(--ease),transform .35s var(--ease)}
+.tile:hover .tile-go{opacity:1;transform:none}
 .empty{text-align:center;padding:5rem 0;color:var(--text-3)}
-footer{border-top:1px solid var(--line);padding:2.5rem 0;margin-top:2.5rem;
-color:var(--text-3);font-family:var(--font-mono);font-size:var(--fs-micro);
-letter-spacing:var(--track-micro);text-transform:uppercase;text-align:center}
-footer a:hover{color:var(--accent-text)}
+/* — Site footer ————————————————————————————————————
+   Mirrors src/components/SiteFooter.jsx so the blog does not drop to a
+   different, lighter footer than every other page. */
+footer.footer{background:var(--bg);color:var(--text-1);padding:clamp(4rem,8vw,7rem) 0 2rem;
+position:relative;border-top:1px solid var(--line);overflow:hidden;margin-top:4rem}
+.footer-grid{display:grid;grid-template-columns:minmax(0,3fr) repeat(4,minmax(0,2fr));
+gap:2.5rem clamp(1rem,2vw,1.5rem);padding-bottom:4rem}
+.footer-brand{display:flex;flex-direction:column;gap:1.25rem;align-items:flex-start}
+.footer-brand img{height:32px;width:auto}
+.footer-blurb{font-size:.875rem;line-height:1.65;color:var(--text-3);max-width:32ch}
+.footer-col h4{display:flex;align-items:baseline;gap:.6em;font-family:var(--font-mono);
+font-size:var(--fs-micro);font-weight:500;letter-spacing:var(--track-micro);
+text-transform:uppercase;color:var(--text-3);margin-bottom:1.25rem}
+.footer-col h4 span{color:var(--text-4)}
+.footer-col a{display:block;width:fit-content;font-size:.875rem;line-height:1.5;
+color:var(--text-2);margin-bottom:.75rem;transition:color .25s var(--ease)}
+.footer-col a:hover{color:var(--text-1)}
+.footer-wordmark{font-family:var(--font-display);font-weight:700;
+font-size:clamp(3.5rem,15.2vw,17rem);line-height:.82;letter-spacing:-.05em;
+color:var(--text-1);opacity:.1;text-align:center;user-select:none;white-space:nowrap;
+margin:0 0 2rem;transition:opacity .6s var(--ease)}
+footer.footer:hover .footer-wordmark{opacity:.16}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;
+gap:.75rem;padding-top:1.5rem;border-top:1px solid var(--line);font-family:var(--font-mono);
+font-size:var(--fs-micro);letter-spacing:var(--track-micro);color:var(--text-3)}
+.footer-ai-link{color:var(--peri);transition:color .25s var(--ease)}
+.footer-ai-link:hover{color:#B3BFFA}
+@media(max-width:1024px){.footer-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:760px){.footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem 1.25rem}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){
 *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
 .card:hover,.feat:hover{padding-left:0;padding-right:0}
@@ -190,17 +240,43 @@ function nav() {
 // Keep the services list in sync with src/components/SiteFooter.jsx — the SSR
 // blog shell is the only footer not rendered from that component.
 function footer() {
-  return `<footer><div class="wrap-wide">
-<div style="margin-bottom:14px"><a href="/services/b2b-saas-seo">B2B SaaS SEO</a> ·
-<a href="/services/ai-seo">AI SEO</a> ·
-<a href="/services/generative-engine-optimization">GEO</a> ·
-<a href="/services/answer-engine-optimization">AEO</a> ·
-<a href="/services/technical-seo">Technical SEO</a> ·
-<a href="/services/saas-content-marketing">SEO Content Engine</a></div>
-© ${new Date().getFullYear()} ${SITE_NAME} · <a href="/">Home</a> ·
-<a href="/services">Services</a> · <a href="/blog">Blog</a> · <a href="/apply">Founder Review</a> ·
-<a href="/rss.xml">RSS</a> · <a href="/llm-info">Hey AI, learn about us!</a></div></footer>`;
+  const services = [
+    ['b2b-saas-seo', 'B2B SaaS SEO'], ['ai-seo', 'AI SEO'],
+    ['generative-engine-optimization', 'Generative Engine Optimization'],
+    ['answer-engine-optimization', 'Answer Engine Optimization'],
+    ['technical-seo', 'Technical SEO'], ['saas-content-marketing', 'SEO Content Engine'],
+  ];
+  return `<footer class="footer"><div class="wrap-wide">
+<div class="footer-grid">
+<div class="footer-brand">
+<a href="/" aria-label="RankedTag home"><img src="/rankedtag-logo-light.svg" alt="RankedTag" width="121" height="32"/></a>
+<p class="footer-blurb">The Inbound Engine for SaaS founders who would rather build product than babysit an agency. Built with senior humans, Claude, and N8N.</p>
+</div>
+<div class="footer-col"><h4><span>001</span>Services</h4>
+${services.map(([slug, label]) => `<a href="/services/${slug}">${label}</a>`).join('')}
+<a href="/services">All services →</a></div>
+<div class="footer-col"><h4><span>002</span>Free tools</h4>
+<a href="/keyword-density-checker">Keyword Density Checker</a>
+<a href="/domain-authority-checker">Domain Authority Checker</a>
+<a href="/page-speed-checker">Page Speed Checker</a>
+<a href="/competitor-analysis">Competitor Analysis</a>
+<a href="/apply">Site Audit (Founder Review)</a></div>
+<div class="footer-col"><h4><span>003</span>The product</h4>
+<a href="/#how-it-works">How it works</a>
+<a href="/case-study/sendr">Sendr.ai case study</a>
+<a href="/blog">Blog</a>
+<a href="/apply">Apply</a></div>
+<div class="footer-col"><h4><span>004</span>Company</h4>
+<a href="mailto:hello@rankedtag.com">hello@rankedtag.com</a>
+<a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a></div>
+</div>
+<div class="footer-wordmark" aria-hidden="true">RANKEDTAG</div>
+<div class="footer-bottom">
+<span>© ${new Date().getFullYear()} RANKEDTAG · BUILT FOR FOUNDERS, NOT MARKETERS</span>
+<a class="footer-ai-link" href="/llm-info">Hey AI, learn about us!</a>
+</div></div></footer>`;
 }
+
 
 function leadCta() {
   return `<div class="lead-cta">
@@ -269,20 +345,23 @@ function fmtDate(d) {
 export function renderIndex(posts) {
   // Size rhythm across the masonry: feature, normal, compact, text-only.
   // Repeating so any number of posts stays varied without leaving holes.
-  const VARIANTS = ['t-lg', '', 't-sm', '', 't-quote', 't-sm', 't-lg', ''];
+  // Size rhythm. The mix of feature / normal / compact / accent / text-only
+  // is what gives the grid its bento variety; it repeats so any number of
+  // posts stays varied.
+  const VARIANTS = ['t-lg', '', 't-sm', 't-accent', '', 't-quote', 't-sm', 't-lg'];
 
   const tile = (p, i) => {
     const v = VARIANTS[i % VARIANTS.length];
-    const hasImg = !!p.cover_image_url && v !== 't-quote';
-    const img = hasImg
-      ? `<img src="${escapeHtml(p.cover_image_url)}" alt="${escapeHtml(p.cover_image_alt || p.title)}" loading="lazy" decoding="async" width="1200" height="630"/>`
+    const textOnly = v === 't-quote' || v === 't-accent';
+    const media = !textOnly && p.cover_image_url
+      ? `<div class="tile-media"><img src="${escapeHtml(p.cover_image_url)}" alt="${escapeHtml(p.cover_image_alt || p.title)}" loading="lazy" decoding="async" width="1200" height="630"/><span class="tile-badge">${p.reading_minutes} min</span></div>`
       : '';
     return `<a class="tile ${v}" href="/blog/${escapeHtml(p.slug)}">
-${img}<div class="tile-body">
+${media}<div class="tile-body">
 ${v === 't-quote' ? '<span class="tile-mark" aria-hidden="true">&ldquo;</span>' : ''}
 <h2>${escapeHtml(p.title)}</h2>
 <p>${escapeHtml(p.excerpt)}</p>
-<div class="row"><span>${fmtDate(p.published_at)}</span><span>${p.reading_minutes} min read</span></div>
+<div class="row"><span>${fmtDate(p.published_at)}</span>${textOnly ? `<span>${p.reading_minutes} min read</span>` : ''}<span class="tile-go" aria-hidden="true">→</span></div>
 </div></a>`;
   };
 
@@ -300,13 +379,34 @@ ${lead.cover_image_url
 </div></a>`
     : '';
 
+  // Deal into the columns by estimated height rather than round-robin, so the
+  // three columns finish at roughly the same point instead of one running
+  // long and leaving a hole at the bottom. Weights are per variant; the exact
+  // image ratio is unknown server-side, so this is an approximation that
+  // still balances far better than i % 3.
+  const WEIGHT = { 't-lg': 2.6, '': 2.2, 't-sm': 1.5, 't-accent': 1.15, 't-quote': 1.35 };
+  const rest = posts.slice(1);
+  const cols = [[], [], []];
+  // Wider columns carry proportionally more, so height still evens out.
+  const capacity = [5.2, 3.3, 4.3];
+  const load = [0, 0, 0];
+  rest.forEach((p, i) => {
+    const v = VARIANTS[i % VARIANTS.length];
+    let best = 0;
+    for (let c = 1; c < 3; c++) {
+      if (load[c] / capacity[c] < load[best] / capacity[best]) best = c;
+    }
+    cols[best].push(tile(p, i));
+    load[best] += WEIGHT[v] ?? 2;
+  });
+
   const body = `<div class="wrap-wide">
 <div class="idx-head">
 <h1>The RankedTag Blog</h1>
 <p>Field notes on SEO, generative engine optimization, and building inbound engines for B2B SaaS.</p>
 </div>
 ${posts.length
-    ? `${leadHtml}<div class="bento">${posts.slice(1).map(tile).join('')}</div>`
+    ? `${leadHtml}<div class="bento">${cols.map((c, n) => `<div class="bcol bcol-${n + 1}">${c.join('')}</div>`).join('')}</div>`
     : `<div class="empty">No posts yet — check back soon.</div>`}
 </div>`;
 
