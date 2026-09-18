@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import ScrollToHash from './components/ScrollToHash.jsx';
+import EntryOffer from './components/offer/EntryOffer.jsx';
 import useHubSpotTracking from './hooks/useHubSpotTracking.js';
 import './styles/tenora.css';
 import './styles/counterweights.css';
@@ -23,6 +24,9 @@ export default function Layout() {
       <Suspense fallback={null}>
         <Outlet />
       </Suspense>
+      {/* Lead capture. Renders nothing until its trigger fires, so it costs
+          the pre-rendered pages nothing. */}
+      <EntryOffer />
     </React.StrictMode>
   );
 }

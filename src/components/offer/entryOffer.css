@@ -1,0 +1,259 @@
+/* =====================================================================
+   ENTRY OFFER — the 15-minute strategy call popup.
+   Built from the same parts as the tool heroes: bracketed eyebrow on a
+   hairline, three-line headline, mono micro-labels, one red CTA. The
+   scanline and the outlined numeral are the only ornament, and both are
+   pseudo-decoration hidden from assistive tech.
+   ===================================================================== */
+.eo-root{
+  position:fixed;
+  inset:0;
+  z-index:var(--z-modal);
+  display:grid;
+  place-items:center;
+  padding:var(--s-6);
+}
+.eo-scrim{
+  position:absolute;
+  inset:0;
+  background:rgba(17,17,18,.74);
+  -webkit-backdrop-filter:blur(6px) saturate(115%);
+  backdrop-filter:blur(6px) saturate(115%);
+  animation:eo-fade .35s var(--ease-out) both;
+}
+
+.eo-panel{
+  position:relative;
+  width:min(36rem, 100%);
+  /* Clips the bleeding numeral to the rounded corner. The scroll lives on
+     .eo-body instead, so decoration can never push a scrollbar into view. */
+  overflow:hidden;
+  background:var(--surface-1);
+  border:1px solid var(--line-strong);
+  border-radius:var(--r-xl);
+  box-shadow:var(--shadow-lg);
+  outline:none;
+  animation:eo-rise .45s var(--ease-out) both;
+}
+/* The dialog takes focus on open so screen readers announce it, but it is a
+   container, not a control — a focus ring around the whole panel reads as a
+   rendering fault. The controls inside keep theirs. */
+.eo-panel:focus,
+.eo-panel:focus-visible{outline:none;box-shadow:var(--shadow-lg)}
+.eo-body{
+  position:relative;
+  max-height:calc(100dvh - var(--s-12));
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding:var(--s-10) var(--s-10) var(--s-8);
+}
+
+/* Hairline mesh, faded out from the top-left corner — the tool-hero grid at
+   panel scale, so the popup reads as part of the same system. */
+.eo-mesh{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:38px 38px;
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 12% 0%, #000 0%, transparent 76%);
+  mask-image:radial-gradient(ellipse 80% 70% at 12% 0%, #000 0%, transparent 76%);
+}
+
+/* One pass of the analyser scanline across the top edge, then it rests. */
+.eo-scan{
+  position:absolute;
+  top:0;left:0;
+  height:2px;width:40%;
+  border-radius:var(--r-pill);
+  background:linear-gradient(90deg, transparent, var(--red), transparent);
+  animation:eo-scan 1.6s var(--ease-out) .25s 2 both;
+  pointer-events:none;
+}
+
+/* Four seats a month, drawn as structure rather than stated twice. */
+.eo-numeral{
+  position:absolute;
+  right:-.06em;
+  bottom:-.22em;
+  /* Not var(--font-display): the webfont swaps in after first paint and
+     resizing this large would show up as a shift. */
+  font-family:Arial, Helvetica, sans-serif;
+  font-weight:700;
+  font-size:11rem;
+  line-height:.8;
+  letter-spacing:-.04em;
+  color:transparent;
+  /* --line, not --line-strong: the copy runs over it, and at .20 the stroke
+     competed with the fineprint instead of sitting behind it. */
+  -webkit-text-stroke:1px var(--line);
+  pointer-events:none;
+  user-select:none;
+}
+
+.eo-close{
+  position:absolute;
+  top:var(--s-4);right:var(--s-4);
+  width:34px;height:34px;
+  display:grid;
+  place-items:center;
+  font-size:20px;
+  line-height:1;
+  color:var(--text-3);
+  border:1px solid transparent;
+  border-radius:var(--r-pill);
+  transition:color var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease);
+}
+.eo-close:hover{color:var(--text-1);background:var(--hover-wash);border-color:var(--line)}
+
+.eo-eyebrow{
+  position:relative;
+  display:flex;
+  width:100%;
+  color:var(--accent-text);
+  /* Keeps the label clear of the close button on narrow sheets. The hairline
+     still runs the full width — the border sits outside the padding. */
+  padding-right:var(--s-10);
+  padding-bottom:var(--s-4);
+  border-bottom:1px solid var(--line);
+  margin-bottom:var(--s-6);
+}
+
+.eo-title{
+  position:relative;
+  font-size:clamp(1.75rem, 4.4vw, 2.5rem);
+  font-weight:700;
+  line-height:1.03;
+  letter-spacing:var(--track-h2);
+  color:var(--text-1);
+  margin:0 0 var(--s-5);
+  text-wrap:balance;
+}
+.eo-title .ser{color:var(--text-3);font-weight:600}
+.eo-title .accent{color:var(--red)}
+
+.eo-dek{
+  position:relative;
+  font-size:var(--fs-small);
+  line-height:1.65;
+  color:var(--text-3);
+  margin:0 0 var(--s-6);
+  max-width:46ch;
+}
+
+/* — Form ————————————————————————————————————————— */
+.eo-form{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:var(--s-4);
+}
+.eo-field{display:flex;flex-direction:column;gap:var(--s-2)}
+.eo-label{
+  font-family:var(--font-mono);
+  font-size:var(--fs-micro);
+  letter-spacing:var(--track-micro);
+  text-transform:uppercase;
+  color:var(--text-3);
+}
+.eo-input{
+  width:100%;
+  padding:.9rem 1rem;
+  font-family:var(--font-mono);
+  /* 16px so iOS Safari does not zoom the viewport on focus. */
+  font-size:1rem;
+  color:var(--text-1);
+  background:var(--bg-deep);
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  outline:none;
+  transition:border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+.eo-input::placeholder{color:var(--text-4)}
+.eo-input:focus{border-color:var(--peri);box-shadow:0 0 0 3px var(--peri-tint)}
+.eo-input:disabled{opacity:.55}
+
+.eo-cta{width:100%;margin-top:var(--s-2)}
+.eo-error{
+  font-size:var(--fs-xs);
+  line-height:1.5;
+  color:var(--red-on-tint);
+  background:var(--red-tint);
+  border-radius:var(--r-sm);
+  padding:.6rem .8rem;
+  margin:0;
+}
+
+.eo-fine{
+  position:relative;
+  font-size:var(--fs-xs);
+  line-height:1.6;
+  color:var(--text-4);
+  margin:var(--s-5) 0 0;
+}
+.eo-decline{
+  font-size:inherit;
+  color:var(--text-3);
+  text-decoration:underline;
+  text-underline-offset:3px;
+  transition:color var(--t-fast) var(--ease);
+}
+.eo-decline:hover{color:var(--text-1)}
+
+/* — Confirmation ———————————————————————————————— */
+.eo-done{position:relative}
+.eo-done-row{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:var(--s-3);
+}
+.eo-done-row .eo-cta{width:auto;flex:1 1 16rem;margin-top:0}
+.eo-later{color:var(--text-3)}
+
+/* — Motion ————————————————————————————————————— */
+@keyframes eo-fade{from{opacity:0}to{opacity:1}}
+@keyframes eo-rise{
+  from{opacity:0;transform:translate3d(0,14px,0) scale(.985)}
+  to{opacity:1;transform:none}
+}
+/* Fades at both ends so the line never parks visibly against the top edge
+   once the sweep finishes. */
+@keyframes eo-scan{
+  from{transform:translate3d(-100%,0,0);opacity:0}
+  15%{opacity:1}
+  85%{opacity:1}
+  to{transform:translate3d(250%,0,0);opacity:0}
+}
+
+/* — Small screens: a sheet on the bottom edge, thumb-reachable —————— */
+@media (max-width:640px){
+  .eo-root{place-items:end center;padding:0}
+  .eo-panel{
+    width:100%;
+    border-radius:var(--r-xl) var(--r-xl) 0 0;
+    border-bottom:0;
+    animation-name:eo-sheet;
+  }
+  .eo-body{
+    max-height:92dvh;
+    padding:var(--s-8) var(--s-6) var(--s-6);
+  }
+  /* Comfortable thumb target on the sheet. */
+  .eo-close{width:42px;height:42px}
+  .eo-numeral{font-size:7.5rem}
+  .eo-done-row .eo-cta{flex:1 1 100%}
+}
+@keyframes eo-sheet{
+  from{opacity:0;transform:translate3d(0,100%,0)}
+  to{opacity:1;transform:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .eo-scrim,.eo-panel{animation-duration:.01ms}
+  .eo-scan{display:none}
+}

@@ -10,6 +10,7 @@
 
 const PORTAL_ID = import.meta.env.VITE_HUBSPOT_PORTAL_ID || '';
 const APPLY_FORM_ID = import.meta.env.VITE_HUBSPOT_APPLY_FORM_ID || '';
+const STRATEGY_FORM_ID = import.meta.env.VITE_HUBSPOT_STRATEGY_FORM_ID || '';
 
 export const hubspotConfigured = Boolean(PORTAL_ID && APPLY_FORM_ID);
 
@@ -74,6 +75,27 @@ export async function submitApplyForm({ name, email, website, linkedin, message 
     hs_linkedin_url: linkedin,
     message,
   });
+}
+
+/**
+ * Submit the entry popup's strategy-call request.
+ *
+ * Routes to its own form when VITE_HUBSPOT_STRATEGY_FORM_ID is set — worth
+ * doing so call requests report separately from applications — and falls back
+ * to the Apply form so the popup still books leads on a portal where the
+ * second form hasn't been created yet.
+ *
+ * Input shape: { email, website, message }. The HubSpot form needs the same
+ * three field internal names the per-tool forms use.
+ */
+export async function submitStrategyCall({ email, website, message } = {}) {
+  const formId = STRATEGY_FORM_ID || APPLY_FORM_ID;
+  if (!formId) {
+    console.warn('[hubspot] no strategy/apply form ID — skipping submission');
+    return { ok: false, mock: true };
+  }
+  if (!email) return { ok: false, skipped: 'no email' };
+  return postForm(formId, { email, website, message });
 }
 
 /**
