@@ -56,9 +56,9 @@ const RELATED = [
 
 export default function CompetitorGuide() {
   return (
-    <section className="dg-section">
-      <div className="container">
-        <article className="dg-article">
+    <div className="container">
+      <article className="dg-article">
+        <section className="dg-section">
           <h2 id="what-is-competitor-analysis">What is competitor analysis?</h2>
           <p>
             Competitor analysis is the process of studying the businesses competing for your audience to
@@ -71,7 +71,9 @@ export default function CompetitorGuide() {
             to five competitor URLs and it scores them side by side, surfaces the keyword gaps between you,
             and turns the differences into a prioritized list of what to improve — no account required.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="how-to-run-competitor-analysis">How to run a free competitor analysis (step-by-step)</h2>
           <ol className="dg-steps">
             <li>
@@ -92,7 +94,9 @@ export default function CompetitorGuide() {
               you're missing, then close the content and structure gaps the insights flag.
             </li>
           </ol>
+        </section>
 
+        <section className="dg-section">
           <h2 id="what-tools-measure">What competitor analysis tools actually measure</h2>
           <p>
             "Competitor analysis tools" don't measure one thing — each estimates a slice: organic keywords
@@ -107,7 +111,9 @@ export default function CompetitorGuide() {
             <Link to="/keyword-density-checker">keyword density check</Link> to see exactly what a rival page
             emphasizes.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="how-to-read-results">How to read your results</h2>
           <p>
             The report leads with four numbers: <strong>your score</strong>, the{' '}
@@ -125,7 +131,9 @@ export default function CompetitorGuide() {
             you're stronger but still outranked, the issue is usually content depth or authority, not on-page
             mechanics.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="free-vs-freemium">"Free" vs freemium: what you actually get</h2>
           <p>
             Be realistic about "free." Most competitor tools are freemium teasers — they show a headline
@@ -136,7 +144,9 @@ export default function CompetitorGuide() {
             This tool is genuinely free and needs no account — paste your URLs and get the full side-by-side
             breakdown, every time.
           </p>
+        </section>
 
+        <section className="dg-section">
           <div className="dg-ai-callout">
             <h2 id="competitors-ai-search" className="dg-ai-title">
               How to analyze your competitors in AI search
@@ -157,7 +167,9 @@ export default function CompetitorGuide() {
               advantage is being won.
             </p>
           </div>
+        </section>
 
+        <section className="dg-section">
           <h2 id="data-to-action">How to turn competitor data into action</h2>
           <p>Data only matters if it changes what you do. Translate findings into a prioritized plan:</p>
           <ul className="dg-list">
@@ -168,10 +180,14 @@ export default function CompetitorGuide() {
             <li><strong>AI-citation gaps</strong> → restructure the pages where competitors get cited and you don't, so your answer is the quotable one.</li>
           </ul>
           <p>Rank these by impact versus effort, and tackle the high-impact, low-effort items first.</p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="faq">Frequently asked questions</h2>
           <ToolFaq items={CA_FAQ} />
+        </section>
 
+        <section className="dg-section">
           <h2 id="related-tools">Related free SEO tools</h2>
           <div className="dg-related">
             {RELATED.map((r) => (
@@ -181,8 +197,8 @@ export default function CompetitorGuide() {
               </Link>
             ))}
           </div>
-        </article>
-      </div>
-    </section>
+        </section>
+      </article>
+    </div>
   );
 }

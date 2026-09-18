@@ -56,9 +56,9 @@ const RELATED = [
 
 export default function PageSpeedGuide() {
   return (
-    <section className="dg-section">
-      <div className="container">
-        <article className="dg-article">
+    <div className="container">
+      <article className="dg-article">
+        <section className="dg-section">
           <h2 id="what-is-a-page-speed-checker">What is a page speed checker?</h2>
           <p>
             A page speed checker is a tool that measures how quickly a web page loads and how stable and
@@ -72,7 +72,9 @@ export default function PageSpeedGuide() {
             easily in search. This checker runs its own five-signal analysis in seconds — no API key, no
             sign-up — and ranks what to fix first.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="how-to-check-page-speed">How to check your page speed (step-by-step)</h2>
           <ol className="dg-steps">
             <li>
@@ -92,7 +94,9 @@ export default function PageSpeedGuide() {
               large render-blocking script often moves the score more than a dozen small tweaks.
             </li>
           </ol>
+        </section>
 
+        <section className="dg-section">
           <h2 id="how-to-read-your-results">How to read your results</h2>
           <h3 id="five-signals">The five signals we score</h3>
           <p>
@@ -149,7 +153,9 @@ export default function PageSpeedGuide() {
             connection. Since most traffic is mobile and Google evaluates the mobile experience, treat the
             mobile score as the one that matters most — a great desktop score won't save a slow mobile page.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="good-page-speed-score">What is a good page speed score?</h2>
           <p>
             For the 0–100 performance score: <strong>90–100 is good (green), 50–89 needs improvement
@@ -162,7 +168,9 @@ export default function PageSpeedGuide() {
             competitors ranking above you are slower, speed is a lever you can pull; if they're already
             fast, treat parity as the baseline, not a differentiator.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="how-to-improve-page-speed">How to improve your page speed</h2>
           <h3 id="quick-wins">Quick wins: images, caching, fonts</h3>
           <p>Most speed problems start here, and these are the cheapest fixes:</p>
@@ -178,7 +186,9 @@ export default function PageSpeedGuide() {
             <li>Improve server response time (aim under ~600ms) with better hosting, caching, or a faster backend.</li>
             <li>Audit third-party scripts — analytics, chat widgets, ad tags. Each one should justify its cost; they're a leading cause of slow, janky pages.</li>
           </ul>
+        </section>
 
+        <section className="dg-section">
           <h2 id="does-page-speed-affect-seo">Does page speed affect SEO rankings?</h2>
           <p>
             Yes, but with nuance. Page experience — including Core Web Vitals — is a confirmed Google
@@ -191,7 +201,9 @@ export default function PageSpeedGuide() {
             The honest framing: fix speed because slow pages lose visitors and can hold you back among
             otherwise-equal competitors — not because a 100 score is a magic ranking button.
           </p>
+        </section>
 
+        <section className="dg-section">
           <div className="dg-ai-callout">
             <h2 id="page-speed-ai-search" className="dg-ai-title">
               Does page speed affect AI search visibility?
@@ -210,7 +222,9 @@ export default function PageSpeedGuide() {
               <Link to="/">generative engine optimization</Link> is about.
             </p>
           </div>
+        </section>
 
+        <section className="dg-section">
           <h2 id="how-to-use-this-checker">How to use this checker</h2>
           <h3 id="benchmark-competitors">Benchmark against your competitors</h3>
           <p>
@@ -224,7 +238,9 @@ export default function PageSpeedGuide() {
             every significant change, and check periodically, so a new plugin or tag doesn't silently tank
             your Core Web Vitals.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="vs-other-tools">Page speed checker vs PageSpeed Insights, GTmetrix and Pingdom</h2>
           <p>
             Those tools run distributed Lighthouse tests and surface CrUX field data — authoritative, but
@@ -235,10 +251,14 @@ export default function PageSpeedGuide() {
             for the full Lighthouse lab run and real-user Core Web Vitals; use this one to triage quickly and
             decide where to spend your time first.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="faq">Frequently asked questions</h2>
           <ToolFaq items={PS_FAQ} />
+        </section>
 
+        <section className="dg-section">
           <h2 id="related-tools">Related free SEO tools</h2>
           <div className="dg-related">
             {RELATED.map((r) => (
@@ -248,8 +268,8 @@ export default function PageSpeedGuide() {
               </Link>
             ))}
           </div>
-        </article>
-      </div>
-    </section>
+        </section>
+      </article>
+    </div>
   );
 }

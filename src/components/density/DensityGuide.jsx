@@ -51,9 +51,9 @@ const RELATED = [
 
 export default function DensityGuide() {
   return (
-    <section className="dg-section">
-      <div className="container">
-        <article className="dg-article">
+    <div className="container">
+      <article className="dg-article">
+        <section className="dg-section">
           <h2 id="what-is-a-keyword-density-checker">What is a keyword density checker?</h2>
           <p>
             A keyword density checker is a tool that scans a piece of content and reports how
@@ -66,7 +66,9 @@ export default function DensityGuide() {
             often enough to signal relevance — but not so often that it reads as manipulation?</em>{' '}
             That balance is what separates content that ranks from content that gets filtered.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="how-to-check-keyword-density">How to check keyword density (step-by-step)</h2>
           <ol className="dg-steps">
             <li>
@@ -91,7 +93,9 @@ export default function DensityGuide() {
             Comparing density side by side tells you whether you're under- or over-emphasizing your
             topic versus what's already winning.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="keyword-density-formula">Keyword density formula</h2>
           <p>The keyword density formula is:</p>
           <div className="dg-formula">
@@ -111,7 +115,9 @@ export default function DensityGuide() {
             1,000-word page, that's 10 mentions. One percent is a comfortable, natural range for most
             content — present enough to establish the topic, low enough that it never reads as forced.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="ideal-keyword-density">What is the ideal keyword density?</h2>
           <p>
             There is no single "correct" percentage, and any tool that promises one is overselling.
@@ -135,7 +141,9 @@ export default function DensityGuide() {
             2-, 3- and 4-word groupings, not just the single word, to understand how your topic is
             really distributed.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="how-to-read-your-results">How to read your results</h2>
           <h3 id="phrase-lengths">1-word, 2-word, 3-word and 4-word phrases</h3>
           <p>
@@ -152,7 +160,9 @@ export default function DensityGuide() {
             repetition across sentences, and cutting any phrase that was added for the search engine
             rather than the reader. The goal is a smooth distribution, not a spike.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="does-keyword-density-still-matter">Does keyword density still matter in 2026?</h2>
           <p>
             Less than it used to, and not in the way most people think. Search engines stopped
@@ -185,7 +195,9 @@ export default function DensityGuide() {
             keyword. Use this checker to confirm coverage and catch over-emphasis; use a keyword
             research or content-optimization tool to find the related terms you're missing.
           </p>
+        </section>
 
+        <section className="dg-section">
           <div className="dg-ai-callout">
             <h2 id="keyword-density-ai-search" className="dg-ai-title">
               Does keyword density matter for AI search?
@@ -206,7 +218,9 @@ export default function DensityGuide() {
               <Link to="/">generative engine optimization</Link> is about.
             </p>
           </div>
+        </section>
 
+        <section className="dg-section">
           <h2 id="when-to-use-this-tool">When to use this tool</h2>
           <h3 id="competitor-content-analysis">Competitor content analysis</h3>
           <p>
@@ -220,7 +234,9 @@ export default function DensityGuide() {
             over-used phrase or a missing target keyword <em>before</em> publication, instead of editing
             a live page after it's already been crawled.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="best-practices">Keyword density best practices</h2>
           <ul className="dg-list">
             <li>Write for the reader first; check density second.</li>
@@ -230,17 +246,23 @@ export default function DensityGuide() {
             <li>Cover the <em>related concepts</em> a topic implies — breadth beats repetition.</li>
             <li>Re-check after editing; small rewrites shift distribution more than you'd expect.</li>
           </ul>
+        </section>
 
+        <section className="dg-section">
           <h2 id="privacy">Your content is never stored</h2>
           <p>
             When you paste text into this tool, your content is analyzed in the moment and never stored,
             logged, or read by a human. When you check by URL, the tool only fetches the publicly
             available page body. Your drafts stay yours.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="faq">Frequently asked questions</h2>
           <ToolFaq items={DENSITY_FAQ} />
+        </section>
 
+        <section className="dg-section">
           <h2 id="related-tools">Related free SEO tools</h2>
           <div className="dg-related">
             {RELATED.map((r) => (
@@ -250,8 +272,8 @@ export default function DensityGuide() {
               </Link>
             ))}
           </div>
-        </article>
-      </div>
-    </section>
+        </section>
+      </article>
+    </div>
   );
 }

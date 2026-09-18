@@ -81,26 +81,35 @@ export default function CompetitorAnalysis() {
       <JsonLd data={COMP_JSONLD} />
       <Nav variant="tech" />
       <main className="cp-main">
-        {/* ── Hero ── */}
-        <section className="cp-hero">
-          <div className="container">
-            <span className="eyebrow">Competitor Analysis</span>
-            <h1 className="h-2 tool-dek">
-              Free competitor analysis tool — compare your content side by side
+        {/* ── Hero ── the same asymmetric grid the other three tools use:
+            index rail on a hairline, oversized headline, dek left, input right. */}
+        <section className="tool-hero">
+          <div className="tool-hero-bg"></div>
+          <div className="container tool-hero-inner">
+            <span className="eyebrow bracket tool-eyebrow">★ FREE TOOL · UP TO 5 COMPETITORS · NO LOGIN</span>
+            <h1>
+              Competitor Analysis Tool.<br />
+              <span className="ser">Your page against theirs,</span><br />
+              <span className="accent">side by side, free.</span>
             </h1>
-            <p className="lead tool-trust-row">
-              Enter your page and up to 5 competitor URLs. Get keyword gaps,
-              side-by-side SEO scoring, and actionable optimization insights —
-              free, no login.
+            <p>
+              Paste your page and up to five competitor URLs. We fetch each one, score them on the same
+              on-page signals, and surface the keyword gaps between you — then turn the differences into a
+              prioritized list of what to fix first.
+            </p>
+
+            <CompetitorInput onAnalyze={handleAnalyze} loading={loading} />
+
+            <p className="fineprint tool-trust-row">
+              Every score is computed from the live page we fetch — no account, no API key, no crawl budget
+              of yours spent.
             </p>
           </div>
         </section>
 
-        {/* ── Input ── */}
+        {/* ── Results ── */}
         <section className="cp-body">
           <div className="container-wide">
-            <CompetitorInput onAnalyze={handleAnalyze} loading={loading} />
-
             {error && (
               <div className="cp-error">
                 <strong>Error:</strong> {error}
@@ -117,7 +126,13 @@ export default function CompetitorAnalysis() {
               </div>
             )}
 
-            {/* ── Results ── */}
+            {!result && !loading && !error && (
+              <p className="cp-empty">
+                Drop your page and at least one competitor above. We will fetch every URL, score them side
+                by side, and render the keyword gaps and insights right here.
+              </p>
+            )}
+
             {result && !loading && (
               <div className="cp-results">
                 {/* Summary cards */}

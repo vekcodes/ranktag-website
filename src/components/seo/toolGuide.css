@@ -17,14 +17,24 @@
   padding:var(--s-12) 0;
   border-bottom:1px solid var(--line);
 }
+/* The footer draws its own top hairline, so the last section must not add a
+   second one directly above it. */
+.dg-section:last-child{border-bottom:0}
+/* The guides run to 12 sections, so the index is zero-padded by the counter
+   style rather than by a literal "00" prefix (which would print "-- 0012."). */
+@counter-style dg-index{system:extends decimal;pad:3 "0"}
 .dg-section::before{
-  content:"-- 00" counter(dg) ".";
+  content:"-- " counter(dg, dg-index) ".";
   font-family:var(--font-mono);
   font-size:var(--fs-micro);
   letter-spacing:var(--track-micro);
   color:var(--text-4);
   grid-column:1;
-  grid-row:1 / span 99;
+  /* Was `1 / span 99`, which forced 99 grid rows. The section has a 20px
+     row-gap, so the 98 empty rows added ~1,960px of dead space to every
+     section. align-self:start already pins the marker to the top.
+     Same bug, same fix as .cs-section::before in CaseStudy.css. */
+  grid-row:1;
   align-self:start;
   padding-top:.5rem;
 }
@@ -60,22 +70,27 @@
   .dg-section > *{grid-column:1}
 }
 
-.dg-list {
+/* .dg-steps drives its own counter. It used to increment `dg` — the section
+   counter — which both mis-numbered the bubbles and made the section rail skip
+   (001, 002, 007…). It also never got the list reset, so the native <ol>
+   markers printed alongside the bubbles. */
+.dg-list,
+.dg-steps {
   margin:8px 0 18px;
   padding:0;
   list-style:none;
-  counter-reset:dg;
 }
+.dg-steps{counter-reset:dg-step}
 .dg-steps li {
   position:relative;
   padding:4px 0 14px 44px;
   font-size:var(--fs-small);
   line-height:1.62;
   color:var(--text-2);
-  counter-increment:dg;
+  counter-increment:dg-step;
 }
 .dg-steps li::before {
-  content:counter(dg);
+  content:counter(dg-step);
   position:absolute;
   left:0;
   top:2px;
@@ -149,6 +164,9 @@
   padding:28px 30px;
   margin:44px 0 8px;
 }
+/* The callout is a numbered section of its own, so the section padding already
+   separates it — the standalone margin would double it up. */
+.dg-section > .dg-ai-callout{margin:0}
 .dg-ai-callout .dg-ai-title {
   margin-top:0;
   margin-bottom:14px;

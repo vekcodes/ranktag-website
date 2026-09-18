@@ -1,21 +1,38 @@
 /* =====================================================================
    COMPETITOR ANALYSIS PAGE
    ===================================================================== */
+/* .tool-hero / .eyebrow rails / .tool-trust-row — the shared free-tool
+   chrome the other three checkers pull in via ToolPage.css. */
+@import './_toolShared.css';
 
+/* The page mounts the shared .tool-hero (see _toolShared.css) so it reads like
+   the other three free tools; everything below is the result UI. */
 .cp-main {
-  padding-top:68px;
   min-height:100vh;
 }
-.cp-hero {
-  padding:56px 0 32px !important;
-  background:linear-gradient(180deg, var(--surface-1) 0%, var(--surface-2) 100%);
-  border-bottom:1px solid var(--line);
-}
 .cp-body {
-  padding:32px 0 80px !important;
+  padding:0 0 var(--section-y-dense);
+}
+.cp-empty {
+  font-size:var(--fs-small);
+  line-height:1.7;
+  color:var(--text-3);
+  max-width:60ch;
+  margin:0;
 }
 
 /* ── Input form ─────────────────────────────────────────────────────── */
+/* Sits in the hero's right-hand field, opposite the dek — the slot the
+   single-input tools fill with .url-form. */
+.tool-hero .cp-input {
+  grid-column:7 / span 6;
+  justify-self:stretch;
+  align-self:start;
+  margin-bottom:0;
+}
+@media (max-width:1024px){
+  .tool-hero .cp-input{grid-column:1 / -1}
+}
 .cp-input {
   background:var(--surface-1);
   border:1px solid var(--line);
@@ -46,18 +63,23 @@
   width:100%;
   padding:12px 16px;
   font-size:14px;
-  background:var(--surface-1);
+  font-family:var(--font-mono);
+  color:var(--text-1);
+  /* One step darker than the card it sits on — on --surface-1 the field was
+     invisible until you hit its hairline. */
+  background:var(--bg-deep);
   border:1px solid var(--line);
   border-radius:var(--r-sm);
   outline:none;
-  transition:border-color var(--t-fast);
+  transition:border-color var(--t-fast), box-shadow var(--t-fast);
 }
+.cp-input-field::placeholder{color:var(--text-4)}
 .cp-input-field:focus {
-  border-color:var(--line-strong);
+  border-color:var(--peri);
+  box-shadow:0 0 0 3px var(--peri-tint);
 }
 .cp-input-primary {
-  border-color:var(--red);
-  background:var(--surface-1);
+  border-color:var(--line-strong);
 }
 .cp-input-comp-row {
   display:flex;
@@ -86,26 +108,31 @@
 .cp-input-add:hover {
   background:var(--peri-tint);
 }
+/* Same primary treatment as .url-submit on the other tools — it used to be
+   --bg-deep on a --surface-1 card, which read as permanently disabled. */
 .cp-input-submit {
   width:100%;
+  margin-top:4px;
   padding:14px;
-  font-size:14px;
+  font-size:.9375rem;
   font-weight:600;
-  background:var(--bg-deep);
-  color:var(--text-1);
-  border-radius:var(--r-md);
-  transition:all var(--t-fast) var(--ease);
+  letter-spacing:-.01em;
+  background:var(--red);
+  color:var(--logo-ink);
+  border-radius:var(--r-pill);
+  cursor:pointer;
+  transition:background-color var(--t-fast) var(--ease);
   display:flex;
   align-items:center;
   justify-content:center;
   gap:10px;
 }
 .cp-input-submit:hover:not(:disabled) {
-  background:var(--red);
-  transform:translateY(-1px);
+  background:var(--red-hover);
 }
 .cp-input-submit:disabled {
-  opacity:0.5;
+  background:var(--surface-3);
+  color:var(--text-3);
   cursor:not-allowed;
 }
 .cp-spinner, .cp-spinner-lg {
@@ -114,6 +141,10 @@
   border-radius:50%;
   animation:spin 0.6s linear infinite;
   display:inline-block;
+}
+.cp-input-submit .cp-spinner {
+  border-color:var(--line);
+  border-top-color:currentColor;
 }
 .cp-spinner {
   width:16px;
@@ -408,28 +439,32 @@
   padding:14px 20px;
   border-bottom:1px solid var(--line);
 }
+/* Track and active pill both sat on --surface-1, the same colour as the card,
+   so the selected tab was invisible. */
 .cp-gap-tabs {
   display:flex;
   gap:4px;
-  background:var(--surface-1);
-  border-radius:var(--r-sm);
+  background:var(--bg-deep);
+  border:1px solid var(--line);
+  border-radius:var(--r-pill);
   padding:3px;
 }
 .cp-gap-tab {
-  padding:6px 12px;
+  padding:6px 14px;
   font-size:11px;
   font-weight:600;
   color:var(--text-3);
-  border-radius:var(--r-sm);
+  border-radius:var(--r-pill);
+  cursor:pointer;
   display:flex;
   align-items:center;
   gap:6px;
   transition:all var(--t-fast);
 }
+.cp-gap-tab:hover{color:var(--text-1)}
 .cp-gap-tab.active {
-  background:var(--surface-1);
+  background:var(--surface-2);
   color:var(--text-1);
-  box-shadow:var(--shadow-sm);
 }
 .cp-gap-tab-count {
   font-family:var(--font-mono);
@@ -439,12 +474,14 @@
 .cp-gap-filter {
   padding:6px 12px;
   font-size:11px;
+  color:var(--text-1);
   border:1px solid var(--line);
-  border-radius:var(--r-sm);
-  background:var(--surface-1);
+  border-radius:var(--r-pill);
+  background:var(--bg-deep);
   outline:none;
   width:140px;
 }
+.cp-gap-filter:focus{border-color:var(--peri)}
 .cp-gap-scroll {
   overflow-x:auto;
 }
@@ -476,7 +513,8 @@
 .cp-gap-kw code {
   font-family:var(--font-mono);
   font-size:11px;
-  background:var(--surface-1);
+  color:var(--text-1);
+  background:var(--bg-deep);
   padding:2px 6px;
   border-radius:3px;
 }

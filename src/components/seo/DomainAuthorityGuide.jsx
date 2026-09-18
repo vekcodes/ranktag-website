@@ -55,9 +55,9 @@ const RELATED = [
 
 export default function DomainAuthorityGuide() {
   return (
-    <section className="dg-section">
-      <div className="container">
-        <article className="dg-article">
+    <div className="container">
+      <article className="dg-article">
+        <section className="dg-section">
           <h2 id="what-is-domain-authority">What is domain authority?</h2>
           <p>
             Domain authority is a 0–100 score that estimates how much ranking power and trust a website
@@ -71,7 +71,9 @@ export default function DomainAuthorityGuide() {
             and weighting. That's precisely why a single number can mislead you, and why this checker
             shows the signals behind the score instead of asking you to trust a black box.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="how-to-check-domain-authority">How to check domain authority (step-by-step)</h2>
           <ol className="dg-steps">
             <li>
@@ -92,7 +94,9 @@ export default function DomainAuthorityGuide() {
               the Wayback Machine, your live page) so you can cross-check every input.
             </li>
           </ol>
+        </section>
 
+        <section className="dg-section">
           <h2 id="da-vs-dr-vs-authority-score">
             DA vs DR vs Authority Score: which metric should you trust?
           </h2>
@@ -137,7 +141,9 @@ export default function DomainAuthorityGuide() {
             traffic but a thin link profile — worth a closer look. That's the thinking behind our
             composite: several independent signals, weighted and shown transparently.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="how-is-domain-authority-calculated">How is domain authority calculated?</h2>
           <p>Every authority score works off broadly the same inputs, weighted differently by each vendor:</p>
           <ul className="dg-list">
@@ -152,7 +158,9 @@ export default function DomainAuthorityGuide() {
             from Tranco traffic rank, Wayback Machine domain age and archive history, HTTP transport
             quality, and on-page content signals (schema, headings, link structure).
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="good-domain-authority-score">What is a good domain authority score?</h2>
           <p>
             There's no universal "good" number, because authority is <strong>relative to your niche and
@@ -170,7 +178,9 @@ export default function DomainAuthorityGuide() {
             competitive spaces commonly run 60+. Treat these as context, not targets — chasing a number
             is the wrong goal. Steady upward movement relative to competitors is what matters.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="page-authority-vs-domain-authority">Page authority vs domain authority</h2>
           <p>
             Domain authority estimates the strength of an <strong>entire website</strong>. Page Authority
@@ -179,7 +189,9 @@ export default function DomainAuthorityGuide() {
             links of its own. When you're trying to rank one URL, page-level strength is often the more
             actionable signal.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="how-to-improve-domain-authority">How to improve your domain authority</h2>
           <p>
             You raise authority by earning links from more unique, reputable, relevant domains — there's
@@ -193,7 +205,9 @@ export default function DomainAuthorityGuide() {
             <li>Keep your link profile clean — avoid bought links, link schemes and spammy patterns.</li>
             <li>Be patient: authority moves slowly and updates periodically, not daily.</li>
           </ul>
+        </section>
 
+        <section className="dg-section">
           <h2 id="is-domain-authority-a-ranking-factor">Is domain authority a Google ranking factor?</h2>
           <p>
             Not directly. Google representatives have repeatedly said they don't use third-party "domain
@@ -208,7 +222,9 @@ export default function DomainAuthorityGuide() {
             quality and many signals these scores only approximate. Use authority to benchmark and
             prioritize — not as a number to game.
           </p>
+        </section>
 
+        <section className="dg-section">
           <div className="dg-ai-callout">
             <h2 id="domain-authority-ai-search" className="dg-ai-title">
               Does domain authority matter for AI search?
@@ -228,7 +244,9 @@ export default function DomainAuthorityGuide() {
               presence is what <Link to="/">generative engine optimization</Link> is about.
             </p>
           </div>
+        </section>
 
+        <section className="dg-section">
           <h2 id="how-to-use-this-checker">How to use this checker</h2>
           <h3 id="benchmark-competitors">Benchmark against competitors</h3>
           <p>
@@ -249,10 +267,14 @@ export default function DomainAuthorityGuide() {
             rank, the Wayback Machine history and your live page straight from the result and confirm the
             inputs — useful when you need to defend a number to a client or a founder, not just quote it.
           </p>
+        </section>
 
+        <section className="dg-section">
           <h2 id="faq">Frequently asked questions</h2>
           <ToolFaq items={DA_FAQ} />
+        </section>
 
+        <section className="dg-section">
           <h2 id="related-tools">Related free SEO tools</h2>
           <div className="dg-related">
             {RELATED.map((r) => (
@@ -262,8 +284,8 @@ export default function DomainAuthorityGuide() {
               </Link>
             ))}
           </div>
-        </article>
-      </div>
-    </section>
+        </section>
+      </article>
+    </div>
   );
 }
