@@ -435,7 +435,9 @@ ${posts.length
         'SEO, generative engine optimization (GEO), and inbound growth for B2B SaaS founders.',
       publisher: {
         '@type': 'Organization',
+        '@id': `${SITE_URL}/#org`,
         name: SITE_NAME,
+        url: SITE_URL,
         logo: { '@type': 'ImageObject', url: `${SITE_URL}/rankedtag-logo.png` },
       },
       ...(posts.length
@@ -445,6 +447,10 @@ ${posts.length
               headline: p.title,
               url: `${SITE_URL}/blog/${p.slug}`,
               description: p.excerpt,
+              // image is required on BlogPosting; the listing entries were
+              // omitting it. Falls back to the site logo when a post has no
+              // cover, which is still a valid image for the entity.
+              image: p.cover_image_url || `${SITE_URL}/rankedtag-logo.png`,
               datePublished: p.published_at,
               author: authorNode(p.author),
             })),

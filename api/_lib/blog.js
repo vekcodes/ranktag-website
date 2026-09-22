@@ -1,7 +1,7 @@
 // Shared blog helpers: slugs, markdown, HTML sanitisation, SEO metadata.
 import { marked } from 'marked';
 import sanitizeHtml from 'sanitize-html';
-import { AUTHOR } from '../../src/seo/author.js';
+import { AUTHOR, AUTHOR_ID } from '../../src/seo/author.js';
 
 export const SITE_URL = (process.env.SITE_URL || 'https://rankedtag.com').replace(/\/$/, '');
 export const SITE_NAME = 'RankedTag';
@@ -359,7 +359,7 @@ export function bylineName(name) {
 export function authorNode(name) {
   const n = bylineName(name);
   if (n === AUTHOR.name) {
-    return { '@type': 'Person', '@id': `${AUTHOR.url}#person`, name: AUTHOR.name, url: AUTHOR.url };
+    return { '@type': 'Person', '@id': AUTHOR_ID, name: AUTHOR.name, url: AUTHOR.url };
   }
   return { '@type': 'Person', name: n };
 }
@@ -378,7 +378,9 @@ export function articleJsonLd(post) {
     author: authorNode(post.author),
     publisher: {
       '@type': 'Organization',
+      '@id': `${SITE_URL}/#org`,
       name: SITE_NAME,
+      url: SITE_URL,
       logo: { '@type': 'ImageObject', url: `${SITE_URL}/rankedtag-logo.png` },
     },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },

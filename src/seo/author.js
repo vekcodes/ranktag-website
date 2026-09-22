@@ -18,9 +18,14 @@ export const AUTHOR_PATH = `/about/${AUTHOR.slug}`;
  * `sameAs` carries only profiles confirmed to exist — an invented profile URL
  * is worse than none, because it is a verifiable falsehood in structured data.
  */
+export const AUTHOR_ID = 'https://rankedtag.com/#founder';
+
 export const AUTHOR_PERSON = {
   '@type': 'Person',
-  '@id': `${AUTHOR.url}#person`,
+  // Deliberately the SAME @id the sitewide org graph already uses for the
+  // founder. Minting a second id would split one human into two entities that
+  // Google has to guess are the same person.
+  '@id': AUTHOR_ID,
   name: AUTHOR.name,
   url: AUTHOR.url,
   jobTitle: AUTHOR.jobTitle,

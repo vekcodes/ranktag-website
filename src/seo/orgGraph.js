@@ -54,6 +54,7 @@ export const ORG_WEBSITE_JSONLD = {
         "@type": "Person",
         "@id": "https://rankedtag.com/#founder",
         "name": "Bhushan Raj Shakya",
+        "url": "https://rankedtag.com/about/bhushan-raj-shakya",
         "jobTitle": "Founder",
         "worksFor": { "@id": "https://rankedtag.com/#org" },
         "sameAs": ["https://www.linkedin.com/in/bhushan-raj-shakya-9835a025b/"]
