@@ -6,7 +6,8 @@
 //   DELETE /api/admin/posts?id=...   -> delete
 import { db, schedulingSupported } from '../_lib/db.js';
 import { requireAdmin } from '../_lib/auth.js';
-import { normalizePostInput } from '../_lib/blog.js';
+import { normalizePostInput, SITE_URL } from '../_lib/blog.js';
+import { pingIndexNow, contentChanged } from '../_lib/indexnow.js';
 import { sendJson, sendError, httpError, readBody } from '../_lib/http.js';
 
 const MIGRATION_NEEDED =
@@ -62,7 +63,9 @@ export default async function handler(req, res) {
       if (req.method === 'PUT') {
         const schedCol = sql.unsafe(sched ? 'publish_at' : 'NULL::timestamptz AS publish_at');
         const [current] = await sql`
-          SELECT id, status, published_at, ${schedCol} FROM posts WHERE id = ${id}`;
+          SELECT id, status, published_at, slug, title, content_html, excerpt,
+                 meta_title, meta_description, ${schedCol}
+          FROM posts WHERE id = ${id}`;
         if (!current) throw httpError(404, 'Post not found');
 
         const p = normalizePostInput(readBody(req));
@@ -104,6 +107,16 @@ export default async function handler(req, res) {
             updated_at = now()
           WHERE id = ${id}
           RETURNING id, slug, status`;
+
+        // Tell IndexNow only when the post is publicly visible AND something a
+        // search result would show actually changed. A schedule tweak, a tag
+        // edit or a no-op re-save does not ping. Never awaited into the
+        // response path in a way that can fail the save.
+        if (row.status === 'published' && contentChanged(current, p)) {
+          const urls = [`${SITE_URL}/blog/${row.slug}`];
+          if (current.slug !== row.slug) urls.push(`${SITE_URL}/blog/${current.slug}`);
+          await pingIndexNow(urls);
+        }
         return sendJson(res, 200, { post: row });
       }
 
@@ -169,6 +182,12 @@ export default async function handler(req, res) {
       // column being there. Only runs when the post is actually scheduled.
       if (sched && p.publish_at) {
         await sql`UPDATE posts SET publish_at = ${p.publish_at} WHERE id = ${row.id}`;
+      }
+      // A post created straight to published is new and live: submit it.
+      // A draft or a scheduled post is not public yet, so it is not submitted
+      // here — it gets submitted by the update that publishes it.
+      if (row.status === 'published') {
+        await pingIndexNow([`${SITE_URL}/blog/${row.slug}`]);
       }
       return sendJson(res, 201, { post: row });
     }

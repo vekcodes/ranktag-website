@@ -43,7 +43,7 @@ export default async function handler(req, res) {
             WHERE ${VISIBLE}
             ORDER BY published_at DESC LIMIT 60`;
       return html(
-        res, 200, renderIndex(rows),
+        res, 200, renderIndex(rows, { tag }),
         's-maxage=120, stale-while-revalidate=600'
       );
     }
@@ -96,9 +96,17 @@ export default async function handler(req, res) {
       return html(res, 404, renderNotFound(), 'no-store');
     }
 
+    // Pool for the related-posts module. Slug/title/excerpt/tags only, so it
+    // stays a cheap second query on an already-cached page.
+    const related = await sql`
+      SELECT slug, title, excerpt, tags, published_at
+      FROM posts
+      WHERE ${VISIBLE} AND slug <> ${slug}
+      ORDER BY published_at DESC LIMIT 60`;
+
     return html(
       res, 200,
-      renderPost(post, articleJsonLd(post)),
+      renderPost(post, articleJsonLd(post), { related }),
       's-maxage=300, stale-while-revalidate=86400'
     );
   } catch (err) {

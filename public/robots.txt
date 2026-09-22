@@ -37,5 +37,12 @@ Allow: /
 Disallow: /api/
 Disallow: /admin
 
-# XML sitemap — auto-updates with every published post
+# XML sitemap index — auto-updates with every published post.
+# Children: sitemap-posts.xml, sitemap-services.xml, sitemap-pages.xml.
+#
+# Note there is deliberately no Disallow for /blog?tag=. Those filtered views
+# serve `noindex, follow`, and a URL blocked in robots.txt can never be
+# crawled, so the noindex would never be seen. They carry rel="nofollow" on
+# the links instead, which keeps them out of the crawl path without hiding
+# the directive.
 Sitemap: https://rankedtag.com/sitemap.xml

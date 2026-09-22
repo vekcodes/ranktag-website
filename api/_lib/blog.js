@@ -329,10 +329,22 @@ export function articleJsonLd(post) {
   // Auto schema first (BlogPosting, Breadcrumb, FAQPage from the post's FAQs),
   // then any author-supplied JSON-LD from the CMS.
   const faq = faqJsonLd(post.faqs, url);
-  return [
-    blogPosting,
-    breadcrumb,
-    ...(faq ? [faq] : []),
-    ...parseCustomJsonLd(post.custom_jsonld),
-  ];
+  const auto = [blogPosting, breadcrumb, ...(faq ? [faq] : [])];
+
+  // Drop any custom node that duplicates a type we already emit. Several posts
+  // carry a hand-written BlogPosting in custom_jsonld, which shipped alongside
+  // the generated one — two BlogPosting nodes on the same URL with conflicting
+  // datePublished values and different author shapes. Google picks one
+  // arbitrarily, so the dates it showed were effectively a coin flip. The
+  // generated node wins because its dates come from the database. Custom nodes
+  // of any OTHER type (Product, HowTo, VideoObject...) pass through untouched.
+  const autoTypes = new Set(auto.flatMap((n) =>
+    Array.isArray(n['@type']) ? n['@type'] : [n['@type']]
+  ));
+  const custom = parseCustomJsonLd(post.custom_jsonld).filter((n) => {
+    const types = Array.isArray(n['@type']) ? n['@type'] : [n['@type']];
+    return !types.some((t) => autoTypes.has(t));
+  });
+
+  return [...auto, ...custom];
 }

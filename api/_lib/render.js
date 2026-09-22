@@ -95,6 +95,16 @@ background:var(--surface-2);border-bottom:1px solid var(--line-strong)}
 .tags{display:flex;flex-wrap:wrap;gap:.5rem;margin:2.5rem 0 0}
 .tag{font-family:var(--font-mono);font-size:var(--fs-micro);letter-spacing:.06em;
 border:1px solid var(--line-strong);padding:.35rem .7rem;border-radius:var(--r-sm);color:var(--text-3)}
+.related{margin:4.5rem 0 0;padding:2.5rem 0 0;border-top:1px solid var(--line-strong)}
+.related-h{font-size:var(--fs-micro);letter-spacing:var(--track-micro);
+text-transform:uppercase;font-family:var(--font-mono);color:var(--text-3);margin:0 0 1.5rem}
+.related-list{list-style:none;margin:0;padding:0;display:grid;gap:1.25rem}
+.related-list li{padding:0}
+.related-list a{font-size:1.15rem;font-weight:600;color:var(--text-1);
+text-decoration:none;line-height:1.35;display:block}
+.related-list a:hover{text-decoration:underline}
+.related-x{display:block;margin-top:.35rem;color:var(--text-3);font-size:.95rem;line-height:1.5}
+@media(max-width:640px){.related-list a{font-size:1.05rem}}
 .lead-cta{margin:5rem 0 0;padding:3rem 2rem;background:var(--surface-1);color:var(--text-1);
 border:1px solid var(--line-strong);border-radius:var(--r-xl);text-align:center}
 .lead-cta h3{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:600;color:var(--text-1);line-height:1.1}
@@ -353,7 +363,15 @@ function fmtDate(d) {
   });
 }
 
-export function renderIndex(posts) {
+/**
+ * @param posts  rows to render
+ * @param opts.tag  the active ?tag= filter, if any. A filtered view is a thin
+ *   duplicate of /blog — same title, same description, a subset of the same
+ *   cards — so it is noindex, follow: Google drops it from the index but still
+ *   walks through to the posts. It is deliberately NOT blocked in robots.txt,
+ *   because a blocked URL can never be crawled to discover the noindex.
+ */
+export function renderIndex(posts, opts = {}) {
   // Size rhythm across the masonry: feature, normal, compact, text-only.
   // Repeating so any number of posts stays varied without leaving holes.
   // Size rhythm. The mix of feature / normal / compact / accent / text-only
@@ -445,6 +463,7 @@ ${posts.length
     description:
       'Field notes on SEO, generative engine optimization (GEO), and building inbound engines that earn AI citations and qualified pipeline for B2B SaaS founders.',
     canonical: `${SITE_URL}/blog`,
+    ...(opts.tag ? { robots: 'noindex, follow' } : {}),
     ogImage: `${SITE_URL}/rankedtag-logo.png`,
     ogType: 'website',
     jsonLd,
@@ -458,12 +477,57 @@ ${posts.length
  * noindex/nofollow so a leaked link cannot be indexed. The route also sends
  * no-store, so no preview ever reaches the shared edge cache.
  */
+/**
+ * Related posts: three server-rendered links chosen by shared tags.
+ *
+ * Before this, every post in the catalogue had exactly one inbound internal
+ * link — from /blog — leaving all 33 at crawl depth 2 with no lateral paths
+ * between them. Crawl demand follows links from pages a crawler already
+ * trusts, so a flat catalogue with a single hub starves every leaf equally.
+ *
+ * Ranking is by shared-tag count, then recency, so the links are topically
+ * genuine rather than a random block. Anchor text is the post's real title,
+ * never "read more" — the anchor is the strongest relevance signal a link
+ * carries, and a generic one wastes it.
+ */
+function renderRelated(current, pool) {
+  const tags = new Set(current.tags || []);
+  const scored = (pool || [])
+    .filter((p) => p.slug !== current.slug)
+    .map((p) => ({
+      p,
+      shared: (p.tags || []).filter((t) => tags.has(t)).length,
+    }))
+    .filter((x) => x.shared > 0)
+    .sort((a, b) =>
+      b.shared - a.shared ||
+      new Date(b.p.published_at) - new Date(a.p.published_at)
+    )
+    .slice(0, 3)
+    .map((x) => x.p);
+
+  if (scored.length < 2) return '';
+
+  return `<aside class="related">
+<h2 class="related-h">Related reading</h2>
+<ul class="related-list">
+${scored.map((p) => `<li><a href="/blog/${escapeHtml(p.slug)}">${escapeHtml(p.title)}</a>${
+    p.excerpt ? `<span class="related-x">${escapeHtml(p.excerpt.slice(0, 110))}</span>` : ''
+  }</li>`).join('')}
+</ul>
+</aside>`;
+}
+
 export function renderPost(post, jsonLd, opts = {}) {
   const cover = post.cover_image_url
     ? `<img class="cover" src="${escapeHtml(post.cover_image_url)}" alt="${escapeHtml(post.cover_image_alt || post.title)}" width="1200" height="630" fetchpriority="high"/>`
     : '';
   const tags = (post.tags || [])
-    .map((t) => `<a class="tag" href="/blog?tag=${encodeURIComponent(t)}">#${escapeHtml(t)}</a>`)
+    // rel="nofollow": 12 tag links per post across 33 posts generates 314
+    // unique ?tag= URLs — roughly six times the site's real URL count, all of
+    // them thin duplicates of /blog. They stay clickable for readers but are
+    // no longer a crawl path. Paired with noindex on the filtered view below.
+    .map((t) => `<a class="tag" rel="nofollow" href="/blog?tag=${encodeURIComponent(t)}">#${escapeHtml(t)}</a>`)
     .join('');
 
   const banner = opts.preview
@@ -488,6 +552,7 @@ ${cover}
 <article class="prose">${wrapProseTables(post.content_html)}</article>
 ${tags ? `<div class="tags">${tags}</div>` : ''}
 ${renderFaqs(post.faqs)}
+${renderRelated(post, opts.related)}
 ${leadCta()}
 </div>`;
 

@@ -13,66 +13,114 @@ import { SITE_URL } from './_lib/blog.js';
 // index uses the latest post's date instead; posts carry their own lastmod.)
 const STATIC_LASTMOD = '2026-07-11';
 
-const STATIC = [
-  { loc: '/', priority: '1.0', freq: 'weekly' },
-  { loc: '/apply', priority: '0.9', freq: 'monthly' },
-  { loc: '/services', priority: '0.9', freq: 'monthly' },
-  { loc: '/services/b2b-saas-seo', priority: '0.9', freq: 'monthly' },
-  { loc: '/services/ai-seo', priority: '0.9', freq: 'monthly' },
-  { loc: '/services/generative-engine-optimization', priority: '0.9', freq: 'monthly' },
-  { loc: '/services/answer-engine-optimization', priority: '0.9', freq: 'monthly' },
-  { loc: '/services/technical-seo', priority: '0.9', freq: 'monthly' },
-  { loc: '/services/saas-content-marketing', priority: '0.9', freq: 'monthly' },
-  { loc: '/case-study/sendr', priority: '0.8', freq: 'monthly' },
-  { loc: '/llm-info', priority: '0.6', freq: 'monthly' },
-  { loc: '/blog', priority: '0.9', freq: 'daily' },
-  { loc: '/keyword-density-checker', priority: '0.7', freq: 'monthly' },
-  { loc: '/domain-authority-checker', priority: '0.7', freq: 'monthly' },
-  { loc: '/page-speed-checker', priority: '0.7', freq: 'monthly' },
-  { loc: '/competitor-analysis', priority: '0.7', freq: 'monthly' },
+// Marketing pages, split by kind so each lands in the right child sitemap.
+// No <priority> or <changefreq>: Google has stated publicly it ignores both,
+// and a signal nobody reads is just weight in the file.
+const SERVICES = [
+  '/services',
+  '/services/b2b-saas-seo',
+  '/services/ai-seo',
+  '/services/generative-engine-optimization',
+  '/services/answer-engine-optimization',
+  '/services/technical-seo',
+  '/services/saas-content-marketing',
 ];
 
-export default async function handler(req, res) {
-  let posts = [];
-  try {
-    if (dbConfigured()) {
-      const sql = db();
-      // Degrades to the pre-scheduling condition when publish_at is absent.
-      const VISIBLE = sql.unsafe(await visibleWhere(sql));
-      posts = await sql`
-        SELECT slug, GREATEST(updated_at, published_at) AS lastmod
-        FROM posts
-        WHERE ${VISIBLE}
-        ORDER BY published_at DESC LIMIT 5000`;
-    }
-  } catch {
-    /* fall back to static-only sitemap */
-  }
+const PAGES = [
+  '/',
+  '/apply',
+  '/case-study/sendr',
+  '/llm-info',
+  '/blog',
+  '/keyword-density-checker',
+  '/domain-authority-checker',
+  '/page-speed-checker',
+  '/competitor-analysis',
+];
 
-  // The blog index's freshness tracks the most-recently-changed post (if any).
-  const blogLastmod = posts.length
-    ? new Date(Math.max(...posts.map((p) => new Date(p.lastmod).getTime())))
-        .toISOString()
-        .slice(0, 10)
-    : STATIC_LASTMOD;
+const urlset = (entries) =>
+  `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">` +
+  entries.map((e) => `<url><loc>${e.loc}</loc><lastmod>${e.lastmod}</lastmod></url>`).join('') +
+  `</urlset>`;
 
-  const urls = [
-    ...STATIC.map((s) => {
-      const lastmod = s.loc === '/blog' ? blogLastmod : STATIC_LASTMOD;
-      return `<url><loc>${SITE_URL}${s.loc}</loc><lastmod>${lastmod}</lastmod><changefreq>${s.freq}</changefreq><priority>${s.priority}</priority></url>`;
-    }),
-    ...posts.map(
-      (p) =>
-        `<url><loc>${SITE_URL}/blog/${p.slug}</loc><lastmod>${new Date(
-          p.lastmod
-        ).toISOString()}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`
-    ),
-  ].join('');
-
+function send(res, xml, cache = 's-maxage=300, stale-while-revalidate=86400') {
   res.status(200);
   res.setHeader('Content-Type', 'application/xml; charset=utf-8');
-  res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=86400');
-  res.send(
-    `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}</urlset>`
+  res.setHeader('Cache-Control', cache);
+  res.send(xml);
+}
+
+/**
+ * Serves the sitemap index and its three children:
+ *   /sitemap.xml          -> index, referencing the three below
+ *   /sitemap-posts.xml    -> blog posts, lastmod from the database
+ *   /sitemap-services.xml -> the six service pages + /services
+ *   /sitemap-pages.xml    -> home, apply, case study, tools, /blog
+ *
+ * lastmod is never the build or request time. Posts carry their own
+ * GREATEST(updated_at, published_at); marketing pages use STATIC_LASTMOD,
+ * a constant bumped by hand when those pages materially change. A sitemap
+ * whose dates all move on every deploy teaches Google to ignore the field.
+ *
+ * Only 200-status, indexable, canonical URLs appear. No ?tag= URLs (they are
+ * noindex), no redirects, no drafts, no scheduled posts before their time.
+ */
+async function posts() {
+  try {
+    if (!dbConfigured()) return [];
+    const sql = db();
+    const VISIBLE = sql.unsafe(await visibleWhere(sql));
+    return await sql`
+      SELECT slug, GREATEST(updated_at, published_at) AS lastmod
+      FROM posts
+      WHERE ${VISIBLE}
+      ORDER BY published_at DESC LIMIT 5000`;
+  } catch {
+    return [];
+  }
+}
+
+export default async function handler(req, res) {
+  const which = new URL(req.url, 'http://x').pathname.replace(/^\/|\.xml$/g, '');
+
+  if (which === 'sitemap-services') {
+    return send(res, urlset(SERVICES.map((loc) => ({ loc: SITE_URL + loc, lastmod: STATIC_LASTMOD }))));
+  }
+
+  if (which === 'sitemap-posts') {
+    const rows = await posts();
+    return send(res, urlset(rows.map((p) => ({
+      loc: `${SITE_URL}/blog/${p.slug}`,
+      lastmod: new Date(p.lastmod).toISOString(),
+    }))));
+  }
+
+  const rows = await posts();
+  // /blog's freshness legitimately tracks its most recently changed post.
+  const blogLastmod = rows.length
+    ? new Date(Math.max(...rows.map((p) => new Date(p.lastmod).getTime()))).toISOString().slice(0, 10)
+    : STATIC_LASTMOD;
+
+  if (which === 'sitemap-pages') {
+    return send(res, urlset(PAGES.map((loc) => ({
+      loc: SITE_URL + loc,
+      lastmod: loc === '/blog' ? blogLastmod : STATIC_LASTMOD,
+    }))));
+  }
+
+  // Default: the index.
+  const postsLastmod = rows.length
+    ? new Date(Math.max(...rows.map((p) => new Date(p.lastmod).getTime()))).toISOString()
+    : STATIC_LASTMOD;
+  const children = [
+    { loc: `${SITE_URL}/sitemap-posts.xml`, lastmod: postsLastmod },
+    { loc: `${SITE_URL}/sitemap-services.xml`, lastmod: STATIC_LASTMOD },
+    { loc: `${SITE_URL}/sitemap-pages.xml`, lastmod: blogLastmod },
+  ];
+  send(
+    res,
+    `<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">` +
+      children.map((c) => `<sitemap><loc>${c.loc}</loc><lastmod>${c.lastmod}</lastmod></sitemap>`).join('') +
+      `</sitemapindex>`
   );
 }
