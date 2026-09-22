@@ -8,6 +8,14 @@
 // Pure data only — this module is imported by the Vite config at build time, so
 // it must not pull in React, CSS, or any browser globals.
 import { SERVICES, SERVICES_HUB_META, serviceUrl } from '../pages/services/servicesData.js';
+import { AUTHOR, AUTHOR_PATH } from './author.js';
+
+export const AUTHOR_META = {
+  title: `${AUTHOR.name} — ${AUTHOR.jobTitle}, RankedTag`,
+  description:
+    `${AUTHOR.name} is the founder of RankedTag and the author of its field notes on SEO, generative engine optimization and inbound growth for B2B SaaS.`,
+  canonical: AUTHOR.url,
+};
 
 // One head entry per service page, derived from the same data that renders the
 // pages — the SSG head rewrite and the hydrated SPA can never drift apart.
@@ -21,6 +29,10 @@ const SERVICE_META = Object.fromEntries([
 
 export const TOOL_META = {
   ...SERVICE_META,
+  // The author page goes through the same build-time head rewrite as every
+  // other pre-rendered route, so the crawled HTML carries its real title and
+  // canonical rather than the homepage defaults.
+  [AUTHOR_PATH]: AUTHOR_META,
   '/apply': {
     title: 'Apply for a Free Founder Review of Your SaaS | RankedTag',
     description:

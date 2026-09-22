@@ -34,6 +34,7 @@ export const routes = [
 
       // Standalone, indexable case study (pre-rendered).
       { path: 'case-study/sendr', lazy: lazyRoute(() => import('./pages/CaseStudySendr.jsx')) },
+      { path: 'about/bhushan-raj-shakya', lazy: lazyRoute(() => import('./pages/AuthorPage.jsx')) },
 
       // Services — hub + one template-driven page per service (all pre-rendered;
       // the concrete slugs live in src/pages/services/servicesData.js).

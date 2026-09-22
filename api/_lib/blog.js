@@ -1,6 +1,7 @@
 // Shared blog helpers: slugs, markdown, HTML sanitisation, SEO metadata.
 import { marked } from 'marked';
 import sanitizeHtml from 'sanitize-html';
+import { AUTHOR } from '../../src/seo/author.js';
 
 export const SITE_URL = (process.env.SITE_URL || 'https://rankedtag.com').replace(/\/$/, '');
 export const SITE_NAME = 'RankedTag';
@@ -335,13 +336,30 @@ export function normalizePostInput(body = {}) {
 }
 
 /**
- * Author node for article schema. A named human → Person; the house byline
- * (empty or the org name) → Organization. Never invents a fake Person.
+ * The visible byline for a post. Posts written before there was an author
+ * entity carry 'RankedTag' (the column default), which reads as a faceless
+ * org byline on advice content — the E-E-A-T weakness the author page fixes.
+ * Those fall back to the site author; a post with a genuinely different named
+ * author keeps that name.
+ */
+export function bylineName(name) {
+  const n = (name || '').trim();
+  return !n || n === SITE_NAME ? AUTHOR.name : n;
+}
+
+/**
+ * Author node for article schema.
+ *
+ * The site author resolves to the Person entity at /about/<slug>, by @id, so
+ * the post, the author page and the organisation form one connected graph
+ * rather than three loose mentions of a name. Any other named human gets a
+ * plain Person with no url — better an unlinked name than a link to a page
+ * that does not exist. Never invents a profile.
  */
 export function authorNode(name) {
-  const n = (name || '').trim();
-  if (!n || n === SITE_NAME) {
-    return { '@type': 'Organization', name: SITE_NAME, url: SITE_URL };
+  const n = bylineName(name);
+  if (n === AUTHOR.name) {
+    return { '@type': 'Person', '@id': `${AUTHOR.url}#person`, name: AUTHOR.name, url: AUTHOR.url };
   }
   return { '@type': 'Person', name: n };
 }

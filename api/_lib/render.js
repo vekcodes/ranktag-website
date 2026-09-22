@@ -1,7 +1,8 @@
 // Server-side HTML renderer for the SEO-critical /blog pages.
 // Self-contained document (brand styles inlined) so crawlers get full,
 // fast, fully-rendered HTML — no client JS required to read content.
-import { escapeHtml, SITE_URL, SITE_NAME, normalizeFaqs, authorNode, dedupeJsonLd } from './blog.js';
+import { escapeHtml, SITE_URL, SITE_NAME, normalizeFaqs, authorNode, dedupeJsonLd, bylineName } from './blog.js';
+import { AUTHOR_PATH } from '../../src/seo/author.js';
 import { ORG_WEBSITE_JSONLD } from '../../src/seo/orgGraph.js';
 import { wrapProseTables } from '../../src/lib/proseTables.js';
 
@@ -105,6 +106,8 @@ text-decoration:none;line-height:1.35;display:block}
 .related-list a:hover{text-decoration:underline}
 .related-x{display:block;margin-top:.35rem;color:var(--text-3);font-size:.95rem;line-height:1.5}
 @media(max-width:640px){.related-list a{font-size:1.05rem}}
+.byline{color:inherit;text-decoration:none;border-bottom:1px solid currentColor}
+.byline:hover{opacity:.75}
 .lead-cta{margin:5rem 0 0;padding:3rem 2rem;background:var(--surface-1);color:var(--text-1);
 border:1px solid var(--line-strong);border-radius:var(--r-xl);text-align:center}
 .lead-cta h3{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:600;color:var(--text-1);line-height:1.1}
@@ -544,7 +547,7 @@ Preview — ${post.status === 'scheduled' && post.publish_at
 <span class="kicker">${escapeHtml((post.tags && post.tags[0]) || 'Article')}</span>
 <h1 class="title">${escapeHtml(post.title)}</h1>
 <div class="meta">
-<span>By ${escapeHtml(post.author || SITE_NAME)}</span>
+<span>By <a class="byline" href="${AUTHOR_PATH}">${escapeHtml(bylineName(post.author))}</a></span>
 <span>${fmtDate(post.published_at)}</span>
 <span>${post.reading_minutes} min read</span>
 </div></header>

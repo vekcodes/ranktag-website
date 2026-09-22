@@ -94,6 +94,7 @@ export default defineConfig(({ isSsrBuild }) => ({
         '/',
         '/apply',
         '/case-study/sendr',
+        '/about/bhushan-raj-shakya',
         '/services',
         ...SERVICES.map((s) => `/services/${s.slug}`),
         '/keyword-density-checker',

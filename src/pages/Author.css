@@ -1,0 +1,15 @@
+/* Author page — deliberately plain. It exists to give the Person entity a real
+   URL a crawler can resolve, not to be a landing page. */
+.author-wrap{max-width:720px;margin:0 auto;padding:7rem 1.5rem 6rem}
+.author-card{padding:0}
+.author-kicker{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.14em;
+text-transform:uppercase;color:var(--text-3);margin:0 0 1rem}
+.author-name{font-size:clamp(2rem,5vw,3rem);line-height:1.05;margin:0 0 .5rem;font-weight:600}
+.author-role{color:var(--text-3);margin:0 0 2.5rem;font-size:1.05rem}
+.author-bio p{font-size:1.1rem;line-height:1.7;margin:0 0 1.25rem;color:var(--text-2)}
+.author-links{list-style:none;display:flex;flex-wrap:wrap;gap:1.5rem;
+margin:2.5rem 0 0;padding:2rem 0 0;border-top:1px solid var(--line-strong)}
+.author-links a{color:var(--text-1);text-decoration:none;font-weight:600;
+border-bottom:1px solid currentColor;padding-bottom:2px}
+.author-links a:hover{opacity:.7}
+@media(max-width:560px){.author-wrap{padding:5rem 1.25rem 4rem}.author-links{gap:1rem}}
