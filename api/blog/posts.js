@@ -18,7 +18,7 @@ export default async function handler(req, res) {
                meta_title, meta_description, og_image_url, canonical_url, custom_jsonld,
                faqs, tags, author, reading_minutes, published_at, updated_at
         FROM posts
-        WHERE slug = ${slug} AND status = 'published' AND published_at <= now()
+        WHERE slug = ${slug} AND (status='published' OR (status='scheduled' AND publish_at<=now())) AND published_at<=now()
         LIMIT 1`;
       if (!post) throw httpError(404, 'Post not found');
       res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=86400');
@@ -35,14 +35,14 @@ export default async function handler(req, res) {
           SELECT slug, title, excerpt, cover_image_url, cover_image_alt,
                  tags, author, reading_minutes, published_at
           FROM posts
-          WHERE status = 'published' AND published_at <= now() AND ${tag} = ANY(tags)
+          WHERE (status='published' OR (status='scheduled' AND publish_at<=now())) AND published_at<=now() AND ${tag} = ANY(tags)
           ORDER BY published_at DESC
           LIMIT ${limit} OFFSET ${offset}`
       : await sql`
           SELECT slug, title, excerpt, cover_image_url, cover_image_alt,
                  tags, author, reading_minutes, published_at
           FROM posts
-          WHERE status = 'published' AND published_at <= now()
+          WHERE (status='published' OR (status='scheduled' AND publish_at<=now())) AND published_at<=now()
           ORDER BY published_at DESC
           LIMIT ${limit} OFFSET ${offset}`;
 
