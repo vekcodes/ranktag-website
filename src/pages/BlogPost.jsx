@@ -4,6 +4,7 @@ import Nav from '../components/Nav.jsx';
 import usePageMeta from '../hooks/usePageMeta.js';
 import { articlePosting } from '../lib/schema.js';
 import { blogApi, ApiUnreachableError } from '../lib/blogApi.js';
+import { wrapProseTables } from '../lib/proseTables.js';
 import './blog.css';
 
 // Client-side single-post fallback. Production serves this via the SSR
@@ -107,7 +108,7 @@ export default function BlogPost() {
             )}
             <div
               className="blogx-prose"
-              dangerouslySetInnerHTML={{ __html: post.content_html }}
+              dangerouslySetInnerHTML={{ __html: wrapProseTables(post.content_html) }}
             />
             <PostFaqs faqs={post.faqs} />
             <div className="blogx-cta inline">

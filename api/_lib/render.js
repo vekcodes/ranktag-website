@@ -3,6 +3,7 @@
 // fast, fully-rendered HTML — no client JS required to read content.
 import { escapeHtml, SITE_URL, SITE_NAME, normalizeFaqs, authorNode } from './blog.js';
 import { ORG_WEBSITE_JSONLD } from '../../src/seo/orgGraph.js';
+import { wrapProseTables } from '../../src/lib/proseTables.js';
 
 // Default social-image alt, kept identical to index.html's so every route's
 // social-tag set matches.
@@ -78,6 +79,19 @@ overflow:auto;font-family:var(--font-mono);font-size:.875rem;line-height:1.6}
 .prose code{font-family:var(--font-mono);font-size:.9em;
 background:var(--surface-3);padding:.12em .4em;border-radius:var(--r-xs)}
 .prose pre code{background:none;padding:0}
+.prose .prose-table{margin:2em 0;overflow-x:auto;-webkit-overflow-scrolling:touch;
+overscroll-behavior-x:contain;border:1px solid var(--line-strong);border-radius:var(--r-md);
+background:var(--surface-1)}
+.prose table{width:100%;min-width:32rem;border-collapse:collapse;font-size:1rem;line-height:1.6}
+.prose th,.prose td{padding:.85em 1.1em;text-align:left;vertical-align:top;
+border-bottom:1px solid var(--line)}
+.prose th{color:var(--text-1);font-weight:600;font-size:var(--fs-micro);
+letter-spacing:var(--track-micro);text-transform:uppercase;font-family:var(--font-mono);
+background:var(--surface-2);border-bottom:1px solid var(--line-strong)}
+.prose tbody tr:last-child td{border-bottom:0}
+.prose th>*,.prose td>*{margin:0}
+.prose th>*+*,.prose td>*+*{margin-top:.5em}
+.prose td img{margin:0;border:0;border-radius:var(--r-sm)}
 .tags{display:flex;flex-wrap:wrap;gap:.5rem;margin:2.5rem 0 0}
 .tag{font-family:var(--font-mono);font-size:var(--fs-micro);letter-spacing:.06em;
 border:1px solid var(--line-strong);padding:.35rem .7rem;border-radius:var(--r-sm);color:var(--text-3)}
@@ -457,7 +471,7 @@ export function renderPost(post, jsonLd) {
 <span>${post.reading_minutes} min read</span>
 </div></header>
 ${cover}
-<article class="prose">${post.content_html}</article>
+<article class="prose">${wrapProseTables(post.content_html)}</article>
 ${tags ? `<div class="tags">${tags}</div>` : ''}
 ${renderFaqs(post.faqs)}
 ${leadCta()}

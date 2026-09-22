@@ -89,6 +89,23 @@ font-family:'JetBrains Mono',monospace;font-size:14px;overflow:auto}
 .prose-input p.is-editor-empty:first-child::before{content:attr(data-placeholder);
 color:var(--muted-2);float:left;pointer-events:none;height:0}
 
+/* Tables: mirror the published look so the editor stays WYSIWYG. TipTap wraps
+   each table in div.tableWrapper, so a wide table scrolls there instead of
+   stretching the admin layout. */
+.prose-input .tableWrapper{overflow-x:auto;margin:1.4em 0;
+border:1px solid var(--paper-3);border-radius:10px}
+.prose-input table{width:100%;border-collapse:collapse;font-size:15px}
+.prose-input th,.prose-input td{padding:10px 12px;vertical-align:top;text-align:left;
+position:relative;border-bottom:1px solid var(--paper-3);
+border-right:1px solid var(--paper-3)}
+.prose-input th:last-child,.prose-input td:last-child{border-right:0}
+.prose-input tr:last-child th,.prose-input tr:last-child td{border-bottom:0}
+.prose-input th{background:var(--paper-2);font-weight:600;color:var(--ink)}
+.prose-input th>*,.prose-input td>*{margin:0}
+.prose-input th>*+*,.prose-input td>*+*{margin-top:.5em}
+/* ProseMirror's cell / column selection highlight. */
+.prose-input .selectedCell{background:rgba(248,48,0,.10)}
+
 .source-edit{padding:14px}
 .source-edit textarea{width:100%;min-height:440px;font-family:'JetBrains Mono',monospace;
 font-size:13px;line-height:1.6;border:1px solid var(--paper-3);border-radius:10px;
