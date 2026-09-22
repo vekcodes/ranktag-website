@@ -169,6 +169,54 @@ export function faqJsonLd(faqs, url) {
   };
 }
 
+/**
+ * Types that may appear at most once per page. Everything else (ListItem,
+ * Question, Answer, Offer, Service, ImageObject...) is legitimately repeated
+ * and is never touched.
+ */
+const SINGLETON_TYPES = new Set([
+  'BlogPosting', 'Article', 'NewsArticle', 'BreadcrumbList',
+  'FAQPage', 'WebPage', 'WebSite', 'Organization', 'ProfessionalService',
+]);
+
+/**
+ * Remove duplicate singleton nodes from a page's complete JSON-LD list,
+ * keeping the FIRST occurrence — which is always ours, because generated
+ * schema is emitted before author-supplied schema.
+ *
+ * Several posts carry a hand-written @graph in the CMS custom_jsonld field
+ * that repeats BlogPosting, BreadcrumbList, FAQPage, Organization and WebSite.
+ * They shipped alongside the generated nodes, so posts served two BlogPosting
+ * entities with conflicting datePublished values and two different author
+ * shapes; Google picks one arbitrarily. Crucially the duplicates are nested
+ * inside `@graph`, so a check of the top-level `@type` does not see them —
+ * this walks into the graph. A wrapper left empty is dropped entirely.
+ */
+export function dedupeJsonLd(nodes) {
+  const seen = new Set();
+  const keep = (n) => {
+    if (!n || typeof n !== 'object') return false;
+    const raw = n['@type'];
+    const types = (Array.isArray(raw) ? raw : [raw]).filter(Boolean);
+    const singles = types.filter((t) => SINGLETON_TYPES.has(t));
+    if (!singles.length) return true;            // not a singleton — always keep
+    if (singles.some((t) => seen.has(t))) return false;
+    for (const t of singles) seen.add(t);
+    return true;
+  };
+
+  const out = [];
+  for (const node of nodes || []) {
+    if (node && Array.isArray(node['@graph'])) {
+      const graph = node['@graph'].filter(keep);
+      if (graph.length) out.push({ ...node, '@graph': graph });
+    } else if (keep(node)) {
+      out.push(node);
+    }
+  }
+  return out;
+}
+
 /** Parse stored custom JSON-LD into an array of nodes (defensive, never throws). */
 export function parseCustomJsonLd(raw) {
   const str = String(raw == null ? '' : raw).trim();
@@ -338,13 +386,5 @@ export function articleJsonLd(post) {
   // arbitrarily, so the dates it showed were effectively a coin flip. The
   // generated node wins because its dates come from the database. Custom nodes
   // of any OTHER type (Product, HowTo, VideoObject...) pass through untouched.
-  const autoTypes = new Set(auto.flatMap((n) =>
-    Array.isArray(n['@type']) ? n['@type'] : [n['@type']]
-  ));
-  const custom = parseCustomJsonLd(post.custom_jsonld).filter((n) => {
-    const types = Array.isArray(n['@type']) ? n['@type'] : [n['@type']];
-    return !types.some((t) => autoTypes.has(t));
-  });
-
-  return [...auto, ...custom];
+  return [...auto, ...parseCustomJsonLd(post.custom_jsonld)];
 }

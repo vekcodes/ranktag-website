@@ -1,7 +1,7 @@
 // Server-side HTML renderer for the SEO-critical /blog pages.
 // Self-contained document (brand styles inlined) so crawlers get full,
 // fast, fully-rendered HTML — no client JS required to read content.
-import { escapeHtml, SITE_URL, SITE_NAME, normalizeFaqs, authorNode } from './blog.js';
+import { escapeHtml, SITE_URL, SITE_NAME, normalizeFaqs, authorNode, dedupeJsonLd } from './blog.js';
 import { ORG_WEBSITE_JSONLD } from '../../src/seo/orgGraph.js';
 import { wrapProseTables } from '../../src/lib/proseTables.js';
 
@@ -564,7 +564,7 @@ ${leadCta()}
       post.og_image_url || post.cover_image_url || `${SITE_URL}/rankedtag-logo.png`,
     ogImageAlt: post.cover_image_alt || post.title,
     ogType: 'article',
-    jsonLd: [ORG_WEBSITE_JSONLD, ...jsonLd],
+    jsonLd: dedupeJsonLd([ORG_WEBSITE_JSONLD, ...jsonLd]),
     body,
     ...(opts.preview ? { robots: 'noindex, nofollow' } : {}),
     // Long-form reading surface: flips the token set to the warm paper canvas.
