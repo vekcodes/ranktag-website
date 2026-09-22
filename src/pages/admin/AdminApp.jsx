@@ -1,10 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { blogApi, ApiUnreachableError } from '../../lib/blogApi.js';
 import { compressImage } from '../../lib/imageCompress.js';
-import {
-  londonToUtc, utcToLondonFields, londonTzLabel, formatLondon,
-  relativeTo, nextRoundHourFields,
-} from '../../lib/schedule.js';
 import Editor from './Editor.jsx';
 import './admin.css';
 
@@ -12,7 +8,7 @@ const EMPTY = {
   title: '', slug: '', status: 'draft', excerpt: '', meta_title: '',
   meta_description: '', tags: '', cover_image_url: '', cover_image_alt: '',
   og_image_url: '', canonical_url: '', custom_jsonld: '', content_html: '',
-  faqs: [], publish_at: null,
+  faqs: [],
 };
 
 function slugify(s) {
@@ -128,23 +124,14 @@ function PostList({ onNew, onEdit, onLogout }) {
                 </td>
                 <td>
                   <span className={`pill ${p.status}`}>{p.status}</span>
-                  {p.status === 'scheduled' && p.publish_at && (
-                    <div className="muted sm sched-when">
-                      {formatLondon(p.publish_at)}
-                    </div>
-                  )}
                 </td>
                 <td className="muted sm">
                   {new Date(p.updated_at).toLocaleDateString()}
                 </td>
                 <td className="row-actions">
                   <button className="btn sm" onClick={() => onEdit(p.id)}>Edit</button>
-                  {p.status === 'published' ? (
+                  {p.status === 'published' && (
                     <a className="btn sm ghost" href={`/blog/${p.slug}`} target="_blank" rel="noreferrer">View</a>
-                  ) : (
-                    // Drafts and not-yet-due scheduled posts render behind the
-                    // CMS session cookie. 401 for anyone else, never public.
-                    <a className="btn sm ghost" href={`/blog/${p.slug}?preview=1`} target="_blank" rel="noreferrer">Preview</a>
                   )}
                   <button className="btn sm danger" onClick={() => del(p.id)}>Delete</button>
                 </td>
@@ -165,19 +152,6 @@ function PostForm({ id, onDone }) {
   const [busy, setBusy] = useState(false);
   const [loaded, setLoaded] = useState(!id);
 
-  // ── Scheduled publishing ──
-  const [schedOpen, setSchedOpen] = useState(false);
-  const [schedDate, setSchedDate] = useState('');
-  const [schedTime, setSchedTime] = useState('');
-  const [schedErr, setSchedErr] = useState('');
-  // Ticks the countdown, and flips "Goes live" to "Went live" on its own once
-  // the moment passes — no reload needed to see a scheduled post go public.
-  const [now, setNow] = useState(() => Date.now());
-  useEffect(() => {
-    const t = setInterval(() => setNow(Date.now()), 30000);
-    return () => clearInterval(t);
-  }, []);
-
   useEffect(() => {
     if (!id) return;
     blogApi.get(id).then((r) => {
@@ -196,7 +170,6 @@ function PostForm({ id, onDone }) {
         faqs: Array.isArray(p.faqs)
           ? p.faqs.map((x) => ({ q: x?.q || '', a: x?.a || '' }))
           : [],
-        publish_at: p.publish_at ? new Date(p.publish_at).toISOString() : null,
       });
       setLoaded(true);
     }).catch((e) => setErr(e.message));
@@ -253,26 +226,13 @@ function PostForm({ id, onDone }) {
     }
   };
 
-  /**
-   * One save path for every button in the Publish card.
-   *   status      - the status to move to; omit to keep the current one, which
-   *                 is what makes "save changes" on a scheduled post preserve
-   *                 its schedule instead of silently unscheduling it.
-   *   publish_at  - UTC ISO string, or null to clear. Omit to keep.
-   *   stay        - keep the editor open (schedule/reschedule/cancel) instead
-   *                 of returning to the list.
-   */
-  const save = async ({ status, publish_at, stay } = {}) => {
+  const save = async (publish) => {
     setBusy(true);
     setErr('');
-    const nextStatus = status || f.status;
-    const nextPublishAt =
-      publish_at !== undefined ? publish_at : f.publish_at;
     const payload = {
       ...f,
       source_format: 'html',
-      status: nextStatus,
-      publish_at: nextStatus === 'scheduled' ? nextPublishAt : null,
+      status: publish ? 'published' : f.status,
       tags: f.tags.split(',').map((t) => t.trim()).filter(Boolean),
       faqs: f.faqs
         .map((x) => ({ q: x.q.trim(), a: x.a.trim() }))
@@ -281,14 +241,6 @@ function PostForm({ id, onDone }) {
     try {
       if (id) await blogApi.update(id, payload);
       else await blogApi.create(payload);
-      // A brand-new post has no id yet, so staying here would create a second
-      // row (and a slug clash) on the next save — go back to the list instead.
-      if (stay && id) {
-        setF((s) => ({ ...s, status: nextStatus, publish_at: payload.publish_at }));
-        setSchedOpen(false);
-        setSchedErr('');
-        return;
-      }
       onDone();
     } catch (e2) {
       setErr(e2.message);
@@ -297,45 +249,9 @@ function PostForm({ id, onDone }) {
     }
   };
 
-  // Open the panel prefilled: an existing schedule, else the next round hour.
-  const openSchedule = () => {
-    const seed = f.publish_at
-      ? utcToLondonFields(f.publish_at)
-      : nextRoundHourFields();
-    setSchedDate(seed.date);
-    setSchedTime(seed.time);
-    setSchedErr('');
-    setSchedOpen(true);
-  };
-
-  const submitSchedule = () => {
-    const utc = londonToUtc(schedDate, schedTime);
-    if (!utc) {
-      setSchedErr('Enter a valid date and time.');
-      return;
-    }
-    if (utc.getTime() <= Date.now()) {
-      setSchedErr('That time has already passed — pick a time in the future.');
-      return;
-    }
-    setSchedErr('');
-    save({ status: 'scheduled', publish_at: utc.toISOString(), stay: true });
-  };
-
   if (!loaded) return <div className="admin-wrap"><p className="muted">Loading…</p></div>;
 
   const metaLen = (f.meta_description || f.excerpt).length;
-
-  const isScheduled = f.status === 'scheduled';
-  const schedIsLive = isScheduled && f.publish_at && Date.parse(f.publish_at) <= now;
-  // The target instant currently typed into the picker (null while incomplete).
-  const pickedUtc = londonToUtc(schedDate, schedTime);
-  const tzLabel = londonTzLabel(pickedUtc || Date.now());
-  // Allowed, but the edge cache means readers may lag a couple of minutes.
-  const schedIsSoon =
-    pickedUtc && pickedUtc.getTime() > Date.now() &&
-    pickedUtc.getTime() - Date.now() < 5 * 60000;
-  const todayLondon = utcToLondonFields(Date.now()).date;
 
   // Live JSON validity for the optional custom JSON-LD block. Empty is fine;
   // invalid JSON blocks saving so the server never rejects on submit.
@@ -374,128 +290,16 @@ function PostForm({ id, onDone }) {
           <h3>Publish</h3>
           {err && <div className="err">{err}</div>}
           <div className="muted sm">Status: <strong>{f.status}</strong></div>
-
-          {isScheduled && f.publish_at && (
-            <div className="sched-target">
-              {schedIsLive ? 'Went live' : 'Goes live'}{' '}
-              <strong>{formatLondon(f.publish_at)}</strong>
-              {' · '}
-              <span className="muted">{relativeTo(f.publish_at, now)}</span>
-            </div>
-          )}
-
           <div className="btn-col">
-            <button
-              className="btn"
-              disabled={busy || Boolean(customLdError)}
-              onClick={() => save({})}
-            >
-              {busy ? 'Saving…' : isScheduled ? 'Save changes' : 'Save draft'}
+            <button className="btn" disabled={busy || Boolean(customLdError)} onClick={() => save(false)}>
+              {busy ? 'Saving…' : 'Save draft'}
             </button>
-            {/* While scheduled this becomes "Publish now", so the card never
-                offers two competing publish actions. */}
-            <button
-              className="btn primary"
-              disabled={busy || Boolean(customLdError)}
-              onClick={() => save({ status: 'published', publish_at: null })}
-            >
-              {isScheduled
-                ? 'Publish now'
-                : f.status === 'published'
-                  ? 'Update (live)'
-                  : 'Publish'}
+            <button className="btn primary" disabled={busy || Boolean(customLdError)} onClick={() => save(true)}>
+              {f.status === 'published' ? 'Update (live)' : 'Publish'}
             </button>
           </div>
           {customLdError && (
             <div className="muted sm warn">Fix the custom JSON-LD before saving.</div>
-          )}
-
-          {/* ── Schedule ── */}
-          {isScheduled ? (
-            <div className="sched-actions">
-              <button className="btn sm ghost" disabled={busy} onClick={openSchedule}>
-                Reschedule
-              </button>
-              <button
-                className="btn sm danger"
-                disabled={busy}
-                onClick={() => save({ status: 'draft', publish_at: null, stay: true })}
-              >
-                Cancel schedule
-              </button>
-            </div>
-          ) : (
-            <button
-              type="button"
-              className="sched-toggle"
-              aria-expanded={schedOpen}
-              aria-controls="sched-panel"
-              onClick={() => (schedOpen ? setSchedOpen(false) : openSchedule())}
-            >
-              <svg className="sched-icon" viewBox="0 0 16 16" aria-hidden="true">
-                <rect x="1.5" y="2.75" width="13" height="11.75" rx="2" />
-                <path d="M1.5 6.25h13M5 1.5v2.5M11 1.5v2.5" />
-              </svg>
-              <span>Schedule</span>
-              <svg
-                className={`sched-chevron${schedOpen ? ' open' : ''}`}
-                viewBox="0 0 16 16"
-                aria-hidden="true"
-              >
-                <path d="M4 6l4 4 4-4" />
-              </svg>
-            </button>
-          )}
-
-          {schedOpen && (
-            <div className="sched-panel" id="sched-panel">
-              <label htmlFor="sched-date">
-                Date
-                <input
-                  id="sched-date"
-                  type="date"
-                  min={todayLondon}
-                  value={schedDate}
-                  onChange={(e) => { setSchedDate(e.target.value); setSchedErr(''); }}
-                />
-              </label>
-              <label htmlFor="sched-time">
-                Time <span className="sched-tz">Europe/London ({tzLabel})</span>
-                <input
-                  id="sched-time"
-                  type="time"
-                  value={schedTime}
-                  onChange={(e) => { setSchedTime(e.target.value); setSchedErr(''); }}
-                />
-              </label>
-
-              {schedErr && (
-                <div className="err sm" role="alert">{schedErr}</div>
-              )}
-              {!schedErr && schedIsSoon && (
-                <div className="muted sm warn" role="status">
-                  That's under 5 minutes away — cached pages may take a few
-                  minutes to catch up.
-                </div>
-              )}
-
-              <button
-                className="btn primary sm sched-submit"
-                disabled={busy || !schedDate || !schedTime || Boolean(customLdError)}
-                onClick={submitSchedule}
-              >
-                {isScheduled ? 'Reschedule post' : 'Schedule post'}
-              </button>
-              {isScheduled && (
-                <button
-                  className="btn sm ghost"
-                  disabled={busy}
-                  onClick={() => { setSchedOpen(false); setSchedErr(''); }}
-                >
-                  Cancel
-                </button>
-              )}
-            </div>
           )}
         </div>
 

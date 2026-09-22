@@ -31,8 +31,6 @@ letter-spacing:.06em;color:var(--muted);padding:12px 16px;background:var(--paper
 .pill{font-size:12px;padding:3px 10px;border-radius:999px;font-weight:600}
 .pill.published{background:#d6f0e2;color:#1f6b48}
 .pill.draft{background:var(--paper-2);color:var(--muted)}
-.pill.scheduled{background:#fdf0d5;color:#8a5a00}
-.sched-when{margin-top:4px;white-space:nowrap}
 
 .admin-login{min-height:100vh;display:grid;place-items:center;background:
 radial-gradient(1200px 600px at 50% -10%,var(--paper-2),var(--paper))}
@@ -149,41 +147,4 @@ border:1px solid var(--paper-3);border-radius:8px;font-size:14px;color:var(--ink
 @media(max-width:900px){
   .editor-layout{grid-template-columns:1fr}
   .editor-side{position:static}
-}
-
-/* ── Scheduled publishing (Publish card) ── */
-.sched-target{margin-top:10px;padding:9px 11px;background:#fdf0d5;color:#6b4600;
-border-radius:9px;font-size:13px;line-height:1.45}
-.sched-target .muted{color:#8a5a00}
-
-.sched-toggle{display:flex;align-items:center;gap:8px;width:100%;margin-top:12px;
-padding:9px 11px;background:transparent;border:1px solid var(--paper-3);
-border-radius:10px;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer}
-.sched-toggle:hover{background:var(--paper-2)}
-.sched-toggle:focus-visible{outline:2px solid var(--red);outline-offset:2px}
-.sched-toggle span{flex:1;text-align:left}
-.sched-icon,.sched-chevron{width:15px;height:15px;flex:none;fill:none;
-stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
-.sched-chevron{transition:transform .18s ease}
-.sched-chevron.open{transform:rotate(180deg)}
-
-.sched-panel{margin-top:10px;padding:12px;border:1px solid var(--paper-3);
-border-radius:10px;background:var(--paper-2)}
-.sched-panel label:first-child{margin-top:0}
-.sched-panel .err{margin:10px 0 0}
-.sched-panel .warn{margin-top:10px;display:block}
-.sched-panel input:focus-visible{outline:2px solid var(--red);outline-offset:1px}
-.sched-tz{font-weight:500;color:var(--muted);text-transform:none;white-space:nowrap}
-.sched-submit{width:100%;margin-top:12px}
-.sched-panel .btn.ghost.sm{width:100%;margin:8px 0 0}
-
-.sched-actions{display:flex;gap:8px;margin-top:10px}
-.sched-actions .btn{flex:1;margin:0;white-space:nowrap}
-
-/* 375px: the card is already full-width there, just stop the two small
-   actions from squeezing their labels onto two lines. */
-@media (max-width:420px){
-  .sched-actions{flex-direction:column}
-  .sched-actions .btn{width:100%}
-  .sched-tz{display:block;margin-top:2px}
 }

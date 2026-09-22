@@ -39,7 +39,7 @@ export default async function handler(req, res) {
       posts = await db()`
         SELECT slug, GREATEST(updated_at, published_at) AS lastmod
         FROM posts
-        WHERE (status='published' OR (status='scheduled' AND publish_at<=now())) AND published_at<=now()
+        WHERE status='published' AND published_at<=now()
         ORDER BY published_at DESC LIMIT 5000`;
     }
   } catch {

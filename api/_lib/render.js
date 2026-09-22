@@ -452,13 +452,7 @@ ${posts.length
   });
 }
 
-/**
- * `opts.preview` renders a draft or not-yet-due scheduled post for a logged-in
- * admin: a banner so it can never be mistaken for the live page, and
- * noindex/nofollow so a leaked link cannot be indexed. The route also sends
- * no-store, so no preview ever reaches the shared edge cache.
- */
-export function renderPost(post, jsonLd, opts = {}) {
+export function renderPost(post, jsonLd) {
   const cover = post.cover_image_url
     ? `<img class="cover" src="${escapeHtml(post.cover_image_url)}" alt="${escapeHtml(post.cover_image_alt || post.title)}" width="1200" height="630" fetchpriority="high"/>`
     : '';
@@ -466,15 +460,7 @@ export function renderPost(post, jsonLd, opts = {}) {
     .map((t) => `<a class="tag" href="/blog?tag=${encodeURIComponent(t)}">#${escapeHtml(t)}</a>`)
     .join('');
 
-  const banner = opts.preview
-    ? `<div style="background:#3d2c00;color:#ffd97a;padding:10px 18px;font:600 14px/1.4 system-ui,sans-serif;text-align:center">
-Preview — ${post.status === 'scheduled' && post.publish_at
-        ? `scheduled for ${escapeHtml(fmtDate(post.publish_at))}`
-        : escapeHtml(post.status || 'draft')}. Not visible to the public.
-</div>`
-    : '';
-
-  const body = `${banner}<div class="wrap">
+  const body = `<div class="wrap">
 <div class="crumbs"><a href="/">Home</a> › <a href="/blog">Blog</a> › ${escapeHtml(post.title)}</div>
 <header class="post-head">
 <span class="kicker">${escapeHtml((post.tags && post.tags[0]) || 'Article')}</span>
@@ -501,7 +487,6 @@ ${leadCta()}
     ogType: 'article',
     jsonLd: [ORG_WEBSITE_JSONLD, ...jsonLd],
     body,
-    ...(opts.preview ? { robots: 'noindex, nofollow' } : {}),
     // Long-form reading surface: flips the token set to the warm paper canvas.
     bodyClass: 'read',
   });

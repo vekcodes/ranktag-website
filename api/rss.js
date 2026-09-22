@@ -9,7 +9,7 @@ export default async function handler(req, res) {
       posts = await db()`
         SELECT slug,title,excerpt,published_at
         FROM posts
-        WHERE (status='published' OR (status='scheduled' AND publish_at<=now())) AND published_at<=now()
+        WHERE status='published' AND published_at<=now()
         ORDER BY published_at DESC LIMIT 50`;
     }
   } catch {
@@ -30,9 +30,7 @@ export default async function handler(req, res) {
 
   res.status(200);
   res.setHeader('Content-Type', 'application/rss+xml; charset=utf-8');
-  // 300s so a scheduled post reaches the feed within ~5 minutes of going
-  // live. Publishing is decided at read time, so the only lag is this cache.
-  res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=86400');
+  res.setHeader('Cache-Control', 's-maxage=900, stale-while-revalidate=86400');
   res.send(`<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel>
 <title>${SITE_NAME} Blog</title>
