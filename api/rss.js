@@ -1,15 +1,18 @@
 // RSS 2.0 feed of published posts (helps discovery + syndication).
-import { db, dbConfigured } from './_lib/db.js';
+import { db, dbConfigured, visibleWhere } from './_lib/db.js';
 import { SITE_URL, SITE_NAME, escapeHtml } from './_lib/blog.js';
 
 export default async function handler(req, res) {
   let posts = [];
   try {
     if (dbConfigured()) {
-      posts = await db()`
+      const sql = db();
+      // Degrades to the pre-scheduling condition when publish_at is absent.
+      const VISIBLE = sql.unsafe(await visibleWhere(sql));
+      posts = await sql`
         SELECT slug,title,excerpt,published_at
         FROM posts
-        WHERE status='published' AND published_at<=now()
+        WHERE ${VISIBLE}
         ORDER BY published_at DESC LIMIT 50`;
     }
   } catch {
@@ -30,7 +33,9 @@ export default async function handler(req, res) {
 
   res.status(200);
   res.setHeader('Content-Type', 'application/rss+xml; charset=utf-8');
-  res.setHeader('Cache-Control', 's-maxage=900, stale-while-revalidate=86400');
+  // 300s so a scheduled post reaches the feed within ~5 minutes of going
+  // live. Publishing is decided at read time, so the only lag is this cache.
+  res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=86400');
   res.send(`<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel>
 <title>${SITE_NAME} Blog</title>

@@ -5,7 +5,7 @@
 //
 // Static/marketing pages: add ONE line to the STATIC array below whenever you
 // add a new public route in src/App.jsx. That's the only manual step.
-import { db, dbConfigured } from './_lib/db.js';
+import { db, dbConfigured, visibleWhere } from './_lib/db.js';
 import { SITE_URL } from './_lib/blog.js';
 
 // Last meaningful content change for the static marketing/tool pages. Bump this
@@ -36,10 +36,13 @@ export default async function handler(req, res) {
   let posts = [];
   try {
     if (dbConfigured()) {
-      posts = await db()`
+      const sql = db();
+      // Degrades to the pre-scheduling condition when publish_at is absent.
+      const VISIBLE = sql.unsafe(await visibleWhere(sql));
+      posts = await sql`
         SELECT slug, GREATEST(updated_at, published_at) AS lastmod
         FROM posts
-        WHERE status='published' AND published_at<=now()
+        WHERE ${VISIBLE}
         ORDER BY published_at DESC LIMIT 5000`;
     }
   } catch {

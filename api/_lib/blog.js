@@ -183,6 +183,56 @@ export function parseCustomJsonLd(raw) {
 }
 
 /**
+ * THE VISIBILITY RULE (single source of truth).
+ *
+ * A post is publicly visible if and only if:
+ *   status = 'published'  OR  (status = 'scheduled' AND publish_at <= now())
+ *
+ * There is no cron job that "flips" a scheduled post. Time passing is what
+ * publishes it, so accuracy is to the minute with zero infrastructure. Every
+ * public query (index, post page, tags, RSS, sitemap) inlines this exact
+ * condition — it is repeated as literal SQL rather than interpolated so the
+ * tagged-template client never sees it as a parameter. Routes do not inline it
+ * themselves — they ask visibleWhere() in api/_lib/db.js, which picks this or
+ * the legacy condition depending on whether the column actually exists.
+ *
+ *   (status='published' OR (status='scheduled' AND publish_at<=now()))
+ *     AND published_at<=now()
+ *
+ * The trailing published_at guard is belt-and-braces: published_at is set to
+ * publish_at at schedule time, so it is already due whenever the first clause
+ * passes, and a published post has always had it.
+ */
+export const VISIBLE_SCHEDULED =
+  "(status='published' OR (status='scheduled' AND publish_at<=now())) AND published_at<=now()";
+
+/**
+ * The pre-scheduling condition, used as a fallback when the `publish_at`
+ * column is not present. It is byte-for-byte what every public query used
+ * before scheduling existed, so a database without the migration serves the
+ * blog exactly as it always did instead of erroring into an empty page.
+ */
+export const VISIBLE_LEGACY = "status='published' AND published_at<=now()";
+
+export const POST_STATUSES = ['draft', 'scheduled', 'published'];
+
+/**
+ * Parse an author-supplied publish instant into a UTC ISO string (or null).
+ * The browser sends an ISO string it already converted from Europe/London;
+ * we never trust it blindly — this re-parses and the caller range-checks it.
+ */
+export function normalizePublishAt(raw) {
+  if (raw == null || raw === '') return null;
+  const d = new Date(raw);
+  if (Number.isNaN(d.getTime())) {
+    const e = new Error('Publish date & time is not a valid date.');
+    e.status = 400;
+    throw e;
+  }
+  return d.toISOString();
+}
+
+/**
  * Turn raw admin input into a normalised, SEO-complete post record.
  * Accepts markdown, raw HTML, or already-rich editor HTML.
  */
@@ -203,6 +253,14 @@ export function normalizePostInput(body = {}) {
   const excerpt =
     String(body.excerpt || '').trim() || autoExcerpt(content_html);
 
+  const status = POST_STATUSES.includes(body.status) ? body.status : 'draft';
+  const publish_at = normalizePublishAt(body.publish_at);
+  if (status === 'scheduled' && !publish_at) {
+    const e = new Error('A scheduled post needs a publish date and time.');
+    e.status = 400;
+    throw e;
+  }
+
   return {
     slug,
     title,
@@ -220,7 +278,8 @@ export function normalizePostInput(body = {}) {
       ? body.tags.map((t) => String(t).trim()).filter(Boolean).slice(0, 12)
       : [],
     author: String(body.author || SITE_NAME).trim(),
-    status: body.status === 'published' ? 'published' : 'draft',
+    status,
+    publish_at: status === 'scheduled' ? publish_at : null,
     reading_minutes: readingMinutes(content_html),
     custom_jsonld: validateCustomJsonLd(body.custom_jsonld),
     faqs: normalizeFaqs(body.faqs),

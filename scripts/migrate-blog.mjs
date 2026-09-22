@@ -52,6 +52,7 @@ const STATEMENTS = [
      status        TEXT NOT NULL DEFAULT 'draft',
      reading_minutes INT DEFAULT 1,
      published_at  TIMESTAMPTZ,
+     publish_at    TIMESTAMPTZ,
      created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
      updated_at    TIMESTAMPTZ NOT NULL DEFAULT now()
    )`,
@@ -63,8 +64,15 @@ const STATEMENTS = [
   // dropdown accordion at the bottom of the post and emitted as FAQPage
   // JSON-LD. Added later, so guard with IF NOT EXISTS for existing databases.
   `ALTER TABLE posts ADD COLUMN IF NOT EXISTS faqs JSONB NOT NULL DEFAULT '[]'::jsonb`,
+  // Scheduled publishing: the UTC instant a `scheduled` post becomes public.
+  // NULL for drafts and published posts. Existing rows need no backfill — they
+  // are all 'draft' or 'published', which the read-time condition treats
+  // exactly as it did before this column existed.
+  `ALTER TABLE posts ADD COLUMN IF NOT EXISTS publish_at TIMESTAMPTZ`,
   `CREATE INDEX IF NOT EXISTS idx_posts_status_pub
      ON posts (status, published_at DESC)`,
+  `CREATE INDEX IF NOT EXISTS idx_posts_publish_at
+     ON posts (publish_at) WHERE publish_at IS NOT NULL`,
   `CREATE INDEX IF NOT EXISTS idx_posts_slug ON posts (slug)`,
   `CREATE INDEX IF NOT EXISTS idx_posts_tags ON posts USING GIN (tags)`,
 ];
