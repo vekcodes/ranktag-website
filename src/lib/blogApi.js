@@ -73,16 +73,24 @@ export const blogApi = {
   // ── Authors ──
   // Authors have no pages and no public routes: this is the only surface they
   // have, and it is behind the admin session.
-  authorList: () => request('/api/admin/authors'),
+  //
+  // They hang off the posts endpoint via ?resource=authors rather than having
+  // their own, because Vercel's Hobby plan caps a deployment at 12 serverless
+  // functions and the project is already at exactly 12. See
+  // api/_lib/authorsAdmin.js.
+  authorList: () => request('/api/admin/posts?resource=authors'),
   authorCreate: (data) =>
-    request('/api/admin/authors', { method: 'POST', body: JSON.stringify(data) }),
+    request('/api/admin/posts?resource=authors', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
   authorUpdate: (id, data) =>
-    request(`/api/admin/authors?id=${id}`, {
+    request(`/api/admin/posts?resource=authors&id=${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
     }),
   authorRemove: (id, force) =>
-    request(`/api/admin/authors?id=${id}`, {
+    request(`/api/admin/posts?resource=authors&id=${id}`, {
       method: 'DELETE',
       body: JSON.stringify({ force: Boolean(force) }),
     }),

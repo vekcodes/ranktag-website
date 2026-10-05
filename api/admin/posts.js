@@ -9,6 +9,7 @@ import { requireAdmin } from '../_lib/auth.js';
 import { normalizePostInput, SITE_URL } from '../_lib/blog.js';
 import { pingIndexNow, contentChanged } from '../_lib/indexnow.js';
 import { sendJson, sendError, httpError, readBody } from '../_lib/http.js';
+import { handleAuthors } from '../_lib/authorsAdmin.js';
 
 const MIGRATION_NEEDED =
   'Scheduled publishing needs a one-off database migration. Run ' +
@@ -43,6 +44,16 @@ function resolvePublishedAt(p, currentPublishedAt) {
 }
 
 export default async function handler(req, res) {
+  // Authors ride on this endpoint rather than having their own route: Vercel's
+  // Hobby plan caps a deployment at 12 serverless functions and the project is
+  // already at exactly 12, so a 13th file fails the build outright. The
+  // handler itself lives in _lib/authorsAdmin.js (helpers there are not
+  // counted as functions) and owns its own auth, so this dispatch happens
+  // before anything post-specific runs.
+  if (new URL(req.url, 'http://x').searchParams.get('resource') === 'authors') {
+    return handleAuthors(req, res);
+  }
+
   try {
     await requireAdmin(req);
     const sql = db();

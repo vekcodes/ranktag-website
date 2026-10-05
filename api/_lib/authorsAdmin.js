@@ -1,13 +1,21 @@
 // Authors CRUD for the CMS. Auth required.
-//   GET    /api/admin/authors          list
-//   POST   /api/admin/authors          create
-//   PUT    /api/admin/authors?id=...   update
-//   DELETE /api/admin/authors?id=...   delete
-import { db } from '../_lib/db.js';
-import { requireAdmin } from '../_lib/auth.js';
-import { slugify } from '../_lib/blog.js';
-import { invalidateAuthors, initialsFor } from '../_lib/authors.js';
-import { sendJson, sendError, httpError, readBody } from '../_lib/http.js';
+//   GET    /api/admin/posts?resource=authors          list
+//   POST   /api/admin/posts?resource=authors          create
+//   PUT    /api/admin/posts?resource=authors&id=...   update
+//   DELETE /api/admin/posts?resource=authors&id=...   delete
+//
+// This lives in _lib rather than as api/admin/authors.js, and is dispatched to
+// by the posts function, because Vercel's Hobby plan caps a deployment at 12
+// serverless functions and the project is already at exactly 12. Files under
+// a _-prefixed directory are helpers, not functions, so routing authors
+// through an existing endpoint keeps the count unchanged. If the project ever
+// moves to a plan without that cap, this can go back to being its own route
+// with no change beyond the file's location and the client's URL.
+import { db } from './db.js';
+import { requireAdmin } from './auth.js';
+import { slugify } from './blog.js';
+import { invalidateAuthors, initialsFor } from './authors.js';
+import { sendJson, sendError, httpError, readBody } from './http.js';
 
 const MIGRATION_NEEDED =
   'The authors table does not exist yet. Run `node scripts/migrate-blog.mjs` ' +
@@ -67,7 +75,7 @@ function normalize(body) {
   };
 }
 
-export default async function handler(req, res) {
+export async function handleAuthors(req, res) {
   try {
     await requireAdmin(req);
     const sql = db();
