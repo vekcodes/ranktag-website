@@ -372,14 +372,15 @@ export function authorNode(name, authors) {
       '@type': 'Person',
       '@id': a.id,
       name: a.name,
-      ...(a.url ? { url: a.url } : {}),
+      // No `url`: authors have no pages. The @id identifies the entity
+      // without claiming a page exists for it.
       ...(a.jobTitle ? { jobTitle: a.jobTitle } : {}),
       ...(a.sameAs && a.sameAs.length ? { sameAs: a.sameAs } : {}),
       worksFor: { '@id': `${SITE_URL}/#org` },
     };
   }
   if (n === AUTHOR.name) {
-    return { '@type': 'Person', '@id': AUTHOR_ID, name: AUTHOR.name, url: AUTHOR.url };
+    return { '@type': 'Person', '@id': AUTHOR_ID, name: AUTHOR.name };
   }
   return { '@type': 'Person', name: n };
 }

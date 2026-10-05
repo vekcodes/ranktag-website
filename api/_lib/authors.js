@@ -48,10 +48,8 @@ export function fromRow(r) {
     slug: r.slug,
     name: r.name,
     id: personId(r),
-    // Only the founder has a page on this site, and it predates the CMS. No
-    // author created here gets a URL, so the Person simply carries none —
-    // better an unlinked name than a link to a page that does not exist.
-    url: r.name === AUTHOR.name ? AUTHOR.url : '',
+    // No author has a page on this site, so no Person carries a `url`. An @id
+    // identifies the entity without claiming a page exists for it.
     jobTitle: r.job_title || '',
     initials: r.initials || initialsFor(r.name),
     avatarUrl: r.avatar_url || '',

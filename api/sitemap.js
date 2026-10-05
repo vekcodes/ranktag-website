@@ -30,7 +30,6 @@ const PAGES = [
   '/',
   '/apply',
   '/case-study/sendr',
-  '/about/bhushan-raj-shakya',
   '/llm-info',
   '/blog',
   '/keyword-density-checker',
