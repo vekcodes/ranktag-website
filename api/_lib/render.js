@@ -80,9 +80,28 @@ overflow:auto;font-family:var(--font-mono);font-size:.875rem;line-height:1.6}
 .prose code{font-family:var(--font-mono);font-size:.9em;
 background:var(--surface-3);padding:.12em .4em;border-radius:var(--r-xs)}
 .prose pre code{background:none;padding:0}
+/* A table too wide for the screen scrolls inside its own card. On a phone a
+   three-column table runs past the viewport edge, and with mobile scrollbars
+   hidden there was nothing to say so — it just looked chopped off. The two
+   radial gradients are shadows pinned to the scroll container's edges: because
+   they are attached to the scrollport rather than the content, they show only
+   on the side that still has table off-screen, and fade out as you reach it.
+   The linear gradients sit on top in the surface colour and mask the shadow
+   away when there is nothing to scroll to. */
 .prose .prose-table{margin:2em 0;overflow-x:auto;-webkit-overflow-scrolling:touch;
 overscroll-behavior-x:contain;border:1px solid var(--line-strong);border-radius:var(--r-md);
-background:var(--surface-1)}
+background:
+linear-gradient(to right,var(--surface-1) 30%,rgba(31,31,32,0)) left center/2.5rem 100% no-repeat local,
+linear-gradient(to left,var(--surface-1) 30%,rgba(31,31,32,0)) right center/2.5rem 100% no-repeat local,
+radial-gradient(farthest-side at 0 50%,rgba(244,239,231,.22),rgba(244,239,231,0)) left center/1.5rem 100% no-repeat scroll,
+radial-gradient(farthest-side at 100% 50%,rgba(244,239,231,.22),rgba(244,239,231,0)) right center/1.5rem 100% no-repeat scroll,
+var(--surface-1)}
+/* Keep the scrollbar visible rather than letting the platform hide it: the
+   affordance is the whole point here. */
+.prose .prose-table::-webkit-scrollbar{height:8px}
+.prose .prose-table::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:999px}
+.prose .prose-table::-webkit-scrollbar-track{background:transparent}
+.prose .prose-table{scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent}
 .prose table{width:100%;min-width:32rem;border-collapse:collapse;font-size:1rem;line-height:1.6}
 .prose th,.prose td{padding:.85em 1.1em;text-align:left;vertical-align:top;
 border-bottom:1px solid var(--line)}
@@ -93,6 +112,17 @@ background:var(--surface-2);border-bottom:1px solid var(--line-strong)}
 .prose th>*,.prose td>*{margin:0}
 .prose th>*+*,.prose td>*+*{margin-top:.5em}
 .prose td img{margin:0;border:0;border-radius:var(--r-sm)}
+/* On a phone, a three-column table forced to 32rem leaves a column off-screen.
+   Letting it shrink to the viewport costs some line wrapping and keeps every
+   column visible, which is the better trade on a narrow screen: readers see
+   the whole table instead of discovering a third of it only if they think to
+   swipe. Tighter padding and type buy back the room the wrapping costs. Wider
+   tables still scroll, and still show the edge glow and scrollbar. */
+@media(max-width:560px){
+.prose table{min-width:0;font-size:.9375rem}
+.prose th,.prose td{padding:.7em .8em}
+.prose th{font-size:.625rem}
+}
 .tags{display:flex;flex-wrap:wrap;gap:.5rem;margin:2.5rem 0 0}
 .tag{display:inline-block;font-family:var(--font-mono);font-size:var(--fs-micro);letter-spacing:.06em;
 border:1px solid var(--line-strong);padding:.35rem .7rem;border-radius:var(--r-sm);color:var(--text-3)}

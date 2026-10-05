@@ -268,15 +268,32 @@ a.blogx-card:hover::before{color:var(--accent-text)}
    table scrolls inside its own card instead of pushing the article sideways.
    min-width keeps columns legible: below it the wrapper scrolls rather than
    crushing cells into single-character stacks. */
+/* The two radial gradients are edge shadows attached to the scrollport, so
+   they appear only on the side that still has table off-screen and fade as
+   you reach it; the linear gradients mask them away when there is nothing to
+   scroll to. Without this a cut-off column on a phone just looks broken,
+   because mobile hides the scrollbar. Mirrors api/_lib/render.js. */
 .blogx-prose .prose-table{
   margin:2em 0;
   overflow-x:auto;
   -webkit-overflow-scrolling:touch;
   border:1px solid var(--line-strong);
   border-radius:var(--r-md);
-  background:var(--surface-1);
+  background:
+    linear-gradient(to right,var(--surface-1) 30%,rgba(31,31,32,0)) left center/2.5rem 100% no-repeat local,
+    linear-gradient(to left,var(--surface-1) 30%,rgba(31,31,32,0)) right center/2.5rem 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%,rgba(244,239,231,.22),rgba(244,239,231,0)) left center/1.5rem 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%,rgba(244,239,231,.22),rgba(244,239,231,0)) right center/1.5rem 100% no-repeat scroll,
+    var(--surface-1);
   overscroll-behavior-x:contain;
+  scrollbar-width:thin;
+  scrollbar-color:var(--line-strong) transparent;
 }
+.blogx-prose .prose-table::-webkit-scrollbar{height:8px}
+.blogx-prose .prose-table::-webkit-scrollbar-thumb{
+  background:var(--line-strong);border-radius:999px;
+}
+.blogx-prose .prose-table::-webkit-scrollbar-track{background:transparent}}
 .blogx-prose table{
   width:100%;
   min-width:32rem;
@@ -308,6 +325,12 @@ a.blogx-card:hover::before{color:var(--accent-text)}
 .blogx-prose th>*+*,
 .blogx-prose td>*+*{margin-top:.5em}
 .blogx-prose td img{margin:0;border:0;border-radius:var(--r-sm)}
+/* Mirrors api/_lib/render.js: let the table fit a phone screen rather than
+   leaving a column off-screen behind a swipe. */
+@media(max-width:560px){
+  .blogx-prose table{min-width:0;font-size:.9375rem}
+  .blogx-prose th,.blogx-prose td{padding:.7em .8em}
+  .blogx-prose th{font-size:.625rem}
 
 /* FAQ accordion (bottom of a post) — native <details> */
 .blogx-faq{margin:var(--s-20) 0 0}
