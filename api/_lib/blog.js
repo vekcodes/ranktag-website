@@ -3,6 +3,7 @@ import { marked } from 'marked';
 import sanitizeHtml from 'sanitize-html';
 import { AUTHOR, AUTHOR_ID } from '../../src/seo/author.js';
 import { SITE_URL, SITE_NAME } from './site.js';
+import { restorePipeTables } from '../../src/lib/proseTables.js';
 
 // Re-exported: every existing importer takes these from blog.js.
 export { SITE_URL, SITE_NAME };
@@ -290,8 +291,14 @@ export function normalizePostInput(body = {}) {
   const fmt = (body.source_format || 'html').toLowerCase();
   const md = body.content_md || '';
   const rawHtml = body.content_html || '';
-  const content_html =
-    fmt === 'markdown' ? mdToHtml(md) : cleanHtml(rawHtml);
+  // A markdown table pasted into the HTML editor arrives as a wall of pipes in
+  // one paragraph. The renderer repairs those on the way out so existing posts
+  // read correctly; doing it here too means a post that is edited and saved
+  // keeps clean markup in the database, and the CMS editor shows a real table
+  // the next time it is opened.
+  const content_html = restorePipeTables(
+    fmt === 'markdown' ? mdToHtml(md) : cleanHtml(rawHtml)
+  );
 
   const title = String(body.title || '').trim();
   if (!title) {
