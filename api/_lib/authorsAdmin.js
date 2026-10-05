@@ -15,14 +15,86 @@ import { db } from './db.js';
 import { requireAdmin } from './auth.js';
 import { slugify } from './blog.js';
 import { invalidateAuthors, initialsFor } from './authors.js';
+import { AUTHOR } from '../../src/seo/author.js';
 import { sendJson, sendError, httpError, readBody } from './http.js';
 
 const MIGRATION_NEEDED =
-  'The authors table does not exist yet. Run `node scripts/migrate-blog.mjs` ' +
-  'against the production database to create it.';
+  'The authors table does not exist and could not be created automatically. ' +
+  'Run `node scripts/migrate-blog.mjs` against this database, or check that ' +
+  'the database user is allowed to create tables.';
 
 /** Postgres "relation does not exist". */
 const UNDEFINED_TABLE = '42P01';
+
+/**
+ * The authors schema, created on demand.
+ *
+ * Normally a schema change is a deploy-time migration, not something a request
+ * performs. This is the deliberate exception: the table is additive, nothing
+ * else reads or writes it, and the alternative was an admin staring at "run
+ * the migration" with no way to run it — the production connection string is
+ * not something you have to hand while using the CMS. Every statement is
+ * idempotent, so this is safe to attempt repeatedly and safe to race.
+ *
+ * Kept byte-for-byte in step with scripts/migrate-blog.mjs, which remains the
+ * way to do it ahead of time.
+ */
+const SCHEMA = [
+  `CREATE TABLE IF NOT EXISTS authors (
+     id          BIGSERIAL PRIMARY KEY,
+     slug        TEXT UNIQUE NOT NULL,
+     name        TEXT NOT NULL,
+     job_title   TEXT NOT NULL DEFAULT '',
+     initials    TEXT NOT NULL DEFAULT '',
+     avatar_url  TEXT NOT NULL DEFAULT '',
+     bio         TEXT NOT NULL DEFAULT '',
+     linkedin    TEXT NOT NULL DEFAULT '',
+     instagram   TEXT NOT NULL DEFAULT '',
+     x_url       TEXT NOT NULL DEFAULT '',
+     website     TEXT NOT NULL DEFAULT '',
+     sort_order  INT NOT NULL DEFAULT 100,
+     created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+     updated_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+   )`,
+  // Guards for a table created by an earlier version of this schema.
+  `ALTER TABLE authors ADD COLUMN IF NOT EXISTS avatar_url TEXT NOT NULL DEFAULT ''`,
+  `ALTER TABLE authors ADD COLUMN IF NOT EXISTS instagram TEXT NOT NULL DEFAULT ''`,
+  `CREATE INDEX IF NOT EXISTS idx_authors_name ON authors (lower(name))`,
+];
+
+// Postgres codes for "someone else just created this", which two admins
+// loading the page at once can produce. Both mean success, not failure.
+const ALREADY_EXISTS = new Set(['42P07', '42710']);
+
+// Per warm instance: the work is idempotent, but there is no reason to repeat
+// four round trips on every request.
+let _schemaReady = false;
+
+/**
+ * Create the authors table if it is missing, and seed it with the site's
+ * code-defined author so the CMS opens on a populated list rather than an
+ * empty one that looks broken.
+ */
+async function ensureAuthorsTable(sql) {
+  if (_schemaReady) return;
+  for (const stmt of SCHEMA) {
+    try {
+      await sql.query(stmt);
+    } catch (err) {
+      if (!ALREADY_EXISTS.has(err?.code)) throw err;
+    }
+  }
+  const [seeded] = await sql`SELECT 1 FROM authors LIMIT 1`;
+  if (!seeded) {
+    await sql`
+      INSERT INTO authors (slug, name, job_title, initials, linkedin, sort_order)
+      VALUES (${AUTHOR.slug}, ${AUTHOR.name}, ${AUTHOR.jobTitle},
+              ${initialsFor(AUTHOR.name)}, ${AUTHOR.linkedin}, 0)
+      ON CONFLICT (slug) DO NOTHING`;
+  }
+  _schemaReady = true;
+  invalidateAuthors();
+}
 
 /**
  * A profile URL is stored only if it is a real absolute http(s) URL on the
@@ -98,6 +170,10 @@ export async function handleAuthors(req, res) {
   try {
     await requireAdmin(req);
     const sql = db();
+    // Create the table on first use rather than making the admin go and find a
+    // production connection string. Idempotent, so it costs nothing after the
+    // first call on a warm instance.
+    await ensureAuthorsTable(sql);
     const id = parseInt(new URL(req.url, 'http://x').searchParams.get('id') || '0', 10);
 
     if (req.method === 'GET') {
