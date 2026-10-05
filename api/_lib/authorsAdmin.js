@@ -49,17 +49,36 @@ function profileUrl(raw, label, hosts) {
   return u.toString();
 }
 
+/**
+ * The internal key for an author, derived from their name and never entered by
+ * hand. It is NOT a URL and never appears in one: authors have no pages. It
+ * exists only to key the row and to derive a stable Person `@id` in the
+ * structured data, so that editing a name later does not split one human into
+ * two entities.
+ *
+ * Two people with the same name get `-2`, `-3` and so on, silently. Asking an
+ * editor to resolve a key collision for a field they never see would be a
+ * worse failure than a suffix nobody reads.
+ */
+async function uniqueSlug(sql, name) {
+  const base = slugify(name) || 'author';
+  const taken = await sql`
+    SELECT slug FROM authors WHERE slug = ${base} OR slug LIKE ${base + '-%'}`;
+  const used = new Set(taken.map((r) => r.slug));
+  if (!used.has(base)) return base;
+  for (let i = 2; ; i += 1) {
+    if (!used.has(`${base}-${i}`)) return `${base}-${i}`;
+  }
+}
+
 function normalize(body) {
   const name = String(body.name || '').trim();
   if (!name) throw httpError(400, 'Name is required.');
-  const slug = slugify(body.slug || name);
-  if (!slug) throw httpError(400, 'That name produces an empty slug — set one by hand.');
   const bio = String(body.bio || '').trim();
   if (bio.length > 600) {
     throw httpError(400, 'Bio is over 600 characters — the card is a short introduction, not a profile page.');
   }
   return {
-    slug,
     name,
     bio,
     initials: String(body.initials || '').trim().slice(0, 3) || initialsFor(name),
@@ -88,8 +107,7 @@ export async function handleAuthors(req, res) {
 
     if (req.method === 'POST') {
       const a = normalize(readBody(req));
-      const [clash] = await sql`SELECT 1 FROM authors WHERE slug = ${a.slug}`;
-      if (clash) throw httpError(409, `The slug "${a.slug}" is already taken.`);
+      a.slug = await uniqueSlug(sql, a.name);
       const [row] = await sql`
         INSERT INTO authors (slug,name,job_title,initials,avatar_url,bio,
                              linkedin,instagram,x_url,website,sort_order)
@@ -106,15 +124,10 @@ export async function handleAuthors(req, res) {
       const a = normalize(readBody(req));
       const [current] = await sql`SELECT slug FROM authors WHERE id = ${id}`;
       if (!current) throw httpError(404, 'Author not found');
-      // The slug derives the Person @id, which ties this human to every post
-      // they have written. Renaming it would mint a second entity for the same
-      // person and orphan the first, so it is fixed once created.
-      if (a.slug !== current.slug) {
-        throw httpError(
-          409,
-          `The URL slug cannot be changed once an author exists: it is part of their identity in the structured data. Delete and recreate if you really need "${a.slug}".`
-        );
-      }
+      // The stored slug stays put even when the name is edited. It derives the
+      // Person @id, which ties this human to every post they have written, so
+      // recomputing it from a corrected spelling would mint a second entity
+      // for the same person and orphan the first.
       await sql`
         UPDATE authors SET name=${a.name}, job_title=${a.job_title}, initials=${a.initials},
           avatar_url=${a.avatar_url}, bio=${a.bio}, linkedin=${a.linkedin},

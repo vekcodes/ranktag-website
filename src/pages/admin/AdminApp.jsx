@@ -16,7 +16,7 @@ const EMPTY = {
 };
 
 const EMPTY_AUTHOR = {
-  name: '', slug: '', job_title: '', initials: '', avatar_url: '', bio: '',
+  name: '', job_title: '', initials: '', avatar_url: '', bio: '',
   linkedin: '', instagram: '', x_url: '', website: '', sort_order: 100,
 };
 
@@ -151,7 +151,6 @@ function AuthorList({ onNew, onEdit, onBack }) {
               <tr key={a.id}>
                 <td>
                   <strong>{a.name}</strong>
-                  <div className="muted sm">{a.slug}</div>
                 </td>
                 <td className="muted sm">{a.job_title || '—'}</td>
                 <td className="muted sm">
@@ -182,13 +181,7 @@ function AuthorForm({ author, onDone }) {
   const [busy, setBusy] = useState(false);
   const set = (k) => (e) => {
     const v = e.target.value;
-    setF((s) => ({
-      ...s,
-      [k]: v,
-      // The slug is part of the Person @id and is fixed once an author exists,
-      // so it only ever tracks the name while creating one.
-      ...(k === 'name' && isNew ? { slug: slugify(v) } : {}),
-    }));
+    setF((s) => ({ ...s, [k]: v }));
   };
 
   const uploadAvatar = async (e) => {
@@ -250,14 +243,6 @@ function AuthorForm({ author, onDone }) {
           <label>Role / job title
             <input value={f.job_title} onChange={set('job_title')} placeholder="Content Writer" />
           </label>
-          <label>Slug
-            <input value={f.slug} onChange={set('slug')} disabled={!isNew} />
-          </label>
-          <div className="muted sm">
-            {isNew
-              ? 'Internal only — authors have no page and no URL. It identifies the person in the structured data.'
-              : 'Fixed once created: it identifies this person across every post they have written.'}
-          </div>
           <label>Initials (avatar fallback)
             <input value={f.initials} onChange={set('initials')} maxLength={3}
               placeholder="Auto from the name" />
