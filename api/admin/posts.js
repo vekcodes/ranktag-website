@@ -10,6 +10,7 @@ import { normalizePostInput, SITE_URL } from '../_lib/blog.js';
 import { pingIndexNow, contentChanged } from '../_lib/indexnow.js';
 import { sendJson, sendError, httpError, readBody } from '../_lib/http.js';
 import { handleAuthors } from '../_lib/authorsAdmin.js';
+import { restorePipeTables } from '../../src/lib/proseTables.js';
 
 const MIGRATION_NEEDED =
   'Scheduled publishing needs a one-off database migration. Run ' +
@@ -43,6 +44,39 @@ function resolvePublishedAt(p, currentPublishedAt) {
   return currentPublishedAt || null;
 }
 
+/**
+ * Rewrite tables that were stored as a flattened markdown paragraph.
+ *
+ * The renderer repairs these on the way out, so readers have seen correct
+ * tables since that shipped — but the CMS reads the raw column, so the editor
+ * still showed a wall of pipes, and anyone editing one of those posts would
+ * have saved the broken version straight back. Fixing the stored markup is the
+ * only thing that fixes the editor.
+ *
+ * Runs once per warm instance, on the post list, for the same reason the
+ * authors table is created on demand: the production connection string is not
+ * something you have to hand while using the CMS.
+ *
+ * `updated_at` is deliberately left alone. This repairs how markup is stored,
+ * not what the article says, and updated_at feeds `dateModified` in the
+ * schema — bumping every repaired post would tell Google that five articles
+ * were revised today when none of them were.
+ */
+let _pipeBackfillDone = false;
+
+async function backfillPipeTables(sql) {
+  if (_pipeBackfillDone) return;
+  // Only a row containing a pipe can possibly be affected, which keeps this to
+  // a handful of rows rather than pulling every article body into memory.
+  const rows = await sql`SELECT id, content_html FROM posts WHERE content_html LIKE '%|%'`;
+  for (const r of rows) {
+    const fixed = restorePipeTables(r.content_html || '');
+    if (fixed === r.content_html) continue;
+    await sql`UPDATE posts SET content_html = ${fixed} WHERE id = ${r.id}`;
+  }
+  _pipeBackfillDone = true;
+}
+
 export default async function handler(req, res) {
   // Authors ride on this endpoint rather than having their own route: Vercel's
   // Hobby plan caps a deployment at 12 serverless functions and the project is
@@ -68,6 +102,9 @@ export default async function handler(req, res) {
       if (req.method === 'GET') {
         const [row] = await sql`SELECT * FROM posts WHERE id = ${id}`;
         if (!row) throw httpError(404, 'Post not found');
+        // Belt and braces: an instance that has not run the backfill yet still
+        // hands the editor a real table rather than a wall of pipes.
+        row.content_html = restorePipeTables(row.content_html || '');
         return sendJson(res, 200, { post: row });
       }
 
@@ -142,6 +179,7 @@ export default async function handler(req, res) {
 
     // ── Collection operations (no id) ──
     if (req.method === 'GET') {
+      await backfillPipeTables(sql);
       // Drafts first, then scheduled (most imminent first), then published
       // (newest first) — the posts still awaiting a decision sit at the top.
       const listSchedCol = sql.unsafe(
