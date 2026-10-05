@@ -345,6 +345,9 @@ a.blogx-card:hover::before{color:var(--accent-text)}
   padding-top:.3rem;
 }
 .blogx-faq-q:hover{color:var(--accent-text)}
+/* The question heading is a document-outline node, not a style change: it
+   inherits everything from .blogx-faq-q so the accordion looks unchanged. */
+.blogx-faq-qt{font:inherit;letter-spacing:inherit;color:inherit;margin:0}
 .blogx-faq-ic{
   font-size:1.25rem;
   font-weight:300;

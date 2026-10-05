@@ -14,14 +14,20 @@ export default function ToolFaq({ items }) {
         const isOpen = open === i;
         return (
           <div className={`dg-faq-item ${isOpen ? 'open' : ''}`} key={q}>
-            <button
-              className="dg-faq-q"
-              aria-expanded={isOpen}
-              onClick={() => setOpen(isOpen ? -1 : i)}
-            >
-              <span>{q}</span>
-              <span className="dg-faq-ic" aria-hidden="true">{isOpen ? '–' : '+'}</span>
-            </button>
+            {/* The question is an <h3> wrapping the toggle, under the
+                section's <h2>: each Q&A is a real subsection and belongs in
+                the document outline. The heading wraps the button rather than
+                sitting inside it — a <button> only takes phrasing content. */}
+            <h3 className="dg-faq-qt">
+              <button
+                className="dg-faq-q"
+                aria-expanded={isOpen}
+                onClick={() => setOpen(isOpen ? -1 : i)}
+              >
+                <span>{q}</span>
+                <span className="dg-faq-ic" aria-hidden="true">{isOpen ? '–' : '+'}</span>
+              </button>
+            </h3>
             <div className="dg-faq-a" hidden={!isOpen}>
               <p>{a}</p>
             </div>

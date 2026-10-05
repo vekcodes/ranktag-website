@@ -12,7 +12,12 @@ const EMPTY = {
   title: '', slug: '', status: 'draft', excerpt: '', meta_title: '',
   meta_description: '', tags: '', cover_image_url: '', cover_image_alt: '',
   og_image_url: '', canonical_url: '', custom_jsonld: '', content_html: '',
-  faqs: [], publish_at: null,
+  faqs: [], publish_at: null, author: '',
+};
+
+const EMPTY_AUTHOR = {
+  name: '', slug: '', job_title: '', initials: '', avatar_url: '', bio: '',
+  linkedin: '', instagram: '', x_url: '', website: '', sort_order: 100,
 };
 
 function slugify(s) {
@@ -87,8 +92,238 @@ function Login({ onIn, onUnreachable }) {
   );
 }
 
+// ── Authors ──
+//
+// Authors exist only as a byline, a role and a set of off-site profile links,
+// all shown on the card at the foot of a post. There is no author page, no
+// author route and no author URL anywhere on the site, so nothing here creates
+// one — the only clickable things an author ever produces are their own
+// profile icons.
+function AuthorList({ onNew, onEdit, onBack }) {
+  const [authors, setAuthors] = useState(null);
+  const [err, setErr] = useState('');
+
+  const load = useCallback(() => {
+    setErr('');
+    blogApi.authorList()
+      .then((r) => setAuthors(r.authors))
+      .catch((e) => { setAuthors([]); setErr(e.message); });
+  }, []);
+  useEffect(load, [load]);
+
+  const del = async (a) => {
+    if (!window.confirm(`Delete ${a.name}?`)) return;
+    try {
+      await blogApi.authorRemove(a.id, false);
+    } catch (e) {
+      // The API refuses while the author still has posts, and says how many.
+      if (e.status !== 409 || !window.confirm(`${e.message}\n\nDelete anyway?`)) {
+        setErr(e.message);
+        return;
+      }
+      try { await blogApi.authorRemove(a.id, true); }
+      catch (e2) { setErr(e2.message); return; }
+    }
+    load();
+  };
+
+  return (
+    <div className="admin-wrap">
+      <header className="admin-top">
+        <h1>Authors</h1>
+        <div>
+          <button className="btn" onClick={onNew}>+ New author</button>
+          <button className="btn ghost" onClick={onBack}>← Posts</button>
+        </div>
+      </header>
+      {err && <div className="err">{err}</div>}
+      {!authors ? (
+        <p className="muted">Loading…</p>
+      ) : authors.length === 0 ? (
+        <p className="muted">No authors yet. Add the first one.</p>
+      ) : (
+        <table className="admin-table">
+          <thead>
+            <tr><th>Name</th><th>Role</th><th>Profiles</th><th></th></tr>
+          </thead>
+          <tbody>
+            {authors.map((a) => (
+              <tr key={a.id}>
+                <td>
+                  <strong>{a.name}</strong>
+                  <div className="muted sm">{a.slug}</div>
+                </td>
+                <td className="muted sm">{a.job_title || '—'}</td>
+                <td className="muted sm">
+                  {[
+                    a.linkedin && 'LinkedIn',
+                    a.instagram && 'Instagram',
+                    a.x_url && 'X',
+                    a.website && 'Website',
+                  ].filter(Boolean).join(', ') || '—'}
+                </td>
+                <td className="row-actions">
+                  <button className="btn sm" onClick={() => onEdit(a)}>Edit</button>
+                  <button className="btn sm danger" onClick={() => del(a)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+}
+
+function AuthorForm({ author, onDone }) {
+  const isNew = !author;
+  const [f, setF] = useState(() => ({ ...EMPTY_AUTHOR, ...(author || {}) }));
+  const [err, setErr] = useState('');
+  const [busy, setBusy] = useState(false);
+  const set = (k) => (e) => {
+    const v = e.target.value;
+    setF((s) => ({
+      ...s,
+      [k]: v,
+      // The slug is part of the Person @id and is fixed once an author exists,
+      // so it only ever tracks the name while creating one.
+      ...(k === 'name' && isNew ? { slug: slugify(v) } : {}),
+    }));
+  };
+
+  const uploadAvatar = async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    try {
+      setBusy(true);
+      const c = await compressImage(file, { maxDim: 320, targetBytes: 40_000 });
+      const r = await blogApi.upload({
+        filename: file.name,
+        // Decorative: the author's name sits beside it in text, so a repeated
+        // alt would just be read out twice.
+        alt: `${f.name || 'Author'} profile photo`,
+        dataBase64: c.dataUrl, type: c.type, width: c.width, height: c.height,
+      });
+      setF((s) => ({ ...s, avatar_url: r.url }));
+    } catch (e2) {
+      setErr(`Upload failed: ${e2.message}`);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const save = async () => {
+    setBusy(true);
+    setErr('');
+    try {
+      const payload = { ...f, sort_order: Number(f.sort_order) || 100 };
+      if (isNew) await blogApi.authorCreate(payload);
+      else await blogApi.authorUpdate(author.id, payload);
+      onDone();
+    } catch (e) {
+      setErr(e.message);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="admin-wrap">
+      <header className="admin-top">
+        <h1>{isNew ? 'New author' : `Edit ${author.name}`}</h1>
+        <div>
+          <button className="btn ghost" onClick={onDone}>← Authors</button>
+          <button className="btn primary" disabled={busy || !f.name.trim()} onClick={save}>
+            {busy ? 'Saving…' : 'Save author'}
+          </button>
+        </div>
+      </header>
+      {err && <div className="err">{err}</div>}
+
+      <div className="author-form">
+        <div className="card">
+          <h3>Identity</h3>
+          <label>Name
+            <input value={f.name} onChange={set('name')} placeholder="Bhushan Raj Shakya" />
+          </label>
+          <label>Role / job title
+            <input value={f.job_title} onChange={set('job_title')} placeholder="Content Writer" />
+          </label>
+          <label>Slug
+            <input value={f.slug} onChange={set('slug')} disabled={!isNew} />
+          </label>
+          <div className="muted sm">
+            {isNew
+              ? 'Internal only — authors have no page and no URL. It identifies the person in the structured data.'
+              : 'Fixed once created: it identifies this person across every post they have written.'}
+          </div>
+          <label>Initials (avatar fallback)
+            <input value={f.initials} onChange={set('initials')} maxLength={3}
+              placeholder="Auto from the name" />
+          </label>
+          <label>Bio (optional)
+            <textarea rows={3} value={f.bio} onChange={set('bio')}
+              placeholder="A sentence or two. Shown under the name on the card." />
+          </label>
+          <div className={`muted sm ${f.bio.length > 600 ? 'warn' : ''}`}>
+            {f.bio.length}/600 chars
+          </div>
+          <label>Sort order
+            <input type="number" value={f.sort_order} onChange={set('sort_order')} />
+          </label>
+        </div>
+
+        <div className="card">
+          <h3>Avatar</h3>
+          {f.avatar_url ? (
+            <img className="avatar-preview" src={f.avatar_url} alt="" />
+          ) : (
+            <p className="muted sm">No image — the card shows the initials instead.</p>
+          )}
+          <label className="btn ghost sm filebtn">
+            {busy ? 'Uploading…' : 'Upload avatar'}
+            <input type="file" accept="image/*" hidden onChange={uploadAvatar} />
+          </label>
+          {f.avatar_url && (
+            <button type="button" className="btn ghost sm"
+              onClick={() => setF((s) => ({ ...s, avatar_url: '' }))}>
+              Remove image
+            </button>
+          )}
+        </div>
+
+        <div className="card">
+          <h3>Profiles</h3>
+          <p className="muted sm" style={{ marginTop: 0 }}>
+            These are the clickable icons on the author card, and the author's{' '}
+            <code>sameAs</code> in the structured data. Leave blank to omit an
+            icon. The author's name itself is never a link.
+          </p>
+          <label>LinkedIn URL
+            <input value={f.linkedin} onChange={set('linkedin')}
+              placeholder="https://www.linkedin.com/in/…" />
+          </label>
+          <label>Instagram URL
+            <input value={f.instagram} onChange={set('instagram')}
+              placeholder="https://www.instagram.com/…" />
+          </label>
+          <label>X URL
+            <input value={f.x_url} onChange={set('x_url')}
+              placeholder="https://x.com/…" />
+          </label>
+          <label>Website URL
+            <input value={f.website} onChange={set('website')}
+              placeholder="https://…" />
+          </label>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Post list ──
-function PostList({ onNew, onEdit, onLogout }) {
+function PostList({ onNew, onEdit, onLogout, onAuthors }) {
   const [posts, setPosts] = useState(null);
   const [err, setErr] = useState('');
   const load = useCallback(() => {
@@ -106,6 +341,7 @@ function PostList({ onNew, onEdit, onLogout }) {
         <h1>Posts</h1>
         <div>
           <button className="btn" onClick={onNew}>+ New post</button>
+          <button className="btn ghost" onClick={onAuthors}>Authors</button>
           <button className="btn ghost" onClick={onLogout}>Log out</button>
         </div>
       </header>
@@ -164,6 +400,19 @@ function PostForm({ id, onDone }) {
   const [err, setErr] = useState('');
   const [busy, setBusy] = useState(false);
   const [loaded, setLoaded] = useState(!id);
+  // The author registry, for the byline picker. A byline not in it still saves
+  // — it just gets no author card, because the site holds no role or profiles
+  // for that person and borrowing someone else's would be a misattribution.
+  const [authors, setAuthors] = useState([]);
+
+  useEffect(() => {
+    let alive = true;
+    blogApi.authorList()
+      .then((r) => alive && setAuthors(r.authors || []))
+      // Not fatal: without it the byline is still free text.
+      .catch(() => alive && setAuthors([]));
+    return () => { alive = false; };
+  }, []);
 
   // ── Scheduled publishing ──
   const [schedOpen, setSchedOpen] = useState(false);
@@ -197,6 +446,7 @@ function PostForm({ id, onDone }) {
           ? p.faqs.map((x) => ({ q: x?.q || '', a: x?.a || '' }))
           : [],
         publish_at: p.publish_at ? new Date(p.publish_at).toISOString() : null,
+        author: p.author || '',
       });
       setLoaded(true);
     }).catch((e) => setErr(e.message));
@@ -325,6 +575,10 @@ function PostForm({ id, onDone }) {
   if (!loaded) return <div className="admin-wrap"><p className="muted">Loading…</p></div>;
 
   const metaLen = (f.meta_description || f.excerpt).length;
+
+  const matchedAuthor = authors.find(
+    (a) => a.name.toLowerCase() === f.author.trim().toLowerCase()
+  );
 
   const isScheduled = f.status === 'scheduled';
   const schedIsLive = isScheduled && f.publish_at && Date.parse(f.publish_at) <= now;
@@ -558,6 +812,40 @@ function PostForm({ id, onDone }) {
         </div>
 
         <div className="card">
+          <h3>Author</h3>
+          <label>Byline
+            <input
+              list="author-names"
+              autoComplete="off"
+              value={f.author}
+              onChange={set('author')}
+              placeholder={authors[0]?.name || 'Author name'}
+            />
+          </label>
+          <datalist id="author-names">
+            {authors.map((a) => (
+              <option key={a.id} value={a.name}>{a.job_title || ''}</option>
+            ))}
+          </datalist>
+          {matchedAuthor ? (
+            <div className="muted sm">
+              ✓ {matchedAuthor.job_title || 'No role set'} — author card and
+              profile icons will show on the post.
+            </div>
+          ) : f.author.trim() ? (
+            <div className="muted sm warn">
+              Not in the registry — the byline will show, but the post gets no
+              author card. Add them under <strong>Authors</strong> first.
+            </div>
+          ) : (
+            <div className="muted sm">
+              Leave blank to use the site author. Authors have no pages: the
+              name is never a link, only the profile icons are.
+            </div>
+          )}
+        </div>
+
+        <div className="card">
           <h3>Cover image</h3>
           {f.cover_image_url && (
             <img className="cover-preview" src={f.cover_image_url} alt={f.cover_image_alt} />
@@ -624,7 +912,7 @@ function PostForm({ id, onDone }) {
 }
 
 export default function AdminApp() {
-  const [state, setState] = useState({ view: 'loading', id: null });
+  const [state, setState] = useState({ view: 'loading', id: null, author: null });
 
   const probe = useCallback(() => {
     setState({ view: 'loading', id: null });
@@ -666,10 +954,29 @@ export default function AdminApp() {
         onDone={() => setState({ view: 'list', id: null })}
       />
     );
+  if (state.view === 'authors')
+    return (
+      <AuthorList
+        onNew={() => setState({ view: 'author-form', author: null })}
+        onEdit={(author) => setState({ view: 'author-form', author })}
+        onBack={() => setState({ view: 'list', id: null })}
+      />
+    );
+  if (state.view === 'author-form')
+    return (
+      <AuthorForm
+        // Remount on switching between authors, so the form never shows the
+        // previous person's fields.
+        key={state.author?.id || 'new'}
+        author={state.author}
+        onDone={() => setState({ view: 'authors', author: null })}
+      />
+    );
   return (
     <PostList
       onNew={() => setState({ view: 'new', id: null })}
       onEdit={(id) => setState({ view: 'edit', id })}
+      onAuthors={() => setState({ view: 'authors', author: null })}
       onLogout={logout}
     />
   );

@@ -1,6 +1,7 @@
 // SSR for /blog (index) and /blog/:slug — full HTML, ISR-cached at the edge.
 import { db, dbConfigured, visibleWhere, schedulingSupported } from './_lib/db.js';
 import { articleJsonLd } from './_lib/blog.js';
+import { loadAuthors } from './_lib/authors.js';
 import { requireAdmin } from './_lib/auth.js';
 import { renderIndex, renderPost, renderNotFound } from './_lib/render.js';
 
@@ -29,6 +30,7 @@ export default async function handler(req, res) {
 
     if (!slug) {
       const tag = (url.searchParams.get('tag') || '').trim();
+      const authors = await loadAuthors(sql);
       const rows = tag
         ? await sql`
             SELECT slug,title,excerpt,cover_image_url,cover_image_alt,
@@ -43,7 +45,7 @@ export default async function handler(req, res) {
             WHERE ${VISIBLE}
             ORDER BY published_at DESC LIMIT 60`;
       return html(
-        res, 200, renderIndex(rows, { tag }),
+        res, 200, renderIndex(rows, { tag, authors }),
         's-maxage=120, stale-while-revalidate=600'
       );
     }
@@ -74,9 +76,13 @@ export default async function handler(req, res) {
                status,${schedCol}
         FROM posts WHERE slug=${slug} LIMIT 1`;
       if (!draft) return html(res, 404, renderNotFound(), 'no-store');
+      const previewAuthors = await loadAuthors(sql);
       return html(
         res, 200,
-        renderPost(draft, articleJsonLd(draft), { preview: true }),
+        renderPost(draft, articleJsonLd(draft, previewAuthors), {
+          preview: true,
+          authors: previewAuthors,
+        }),
         'no-store'
       );
     }
@@ -98,6 +104,7 @@ export default async function handler(req, res) {
 
     // Pool for the related-posts module. Slug/title/excerpt/tags only, so it
     // stays a cheap second query on an already-cached page.
+    const authors = await loadAuthors(sql);
     const related = await sql`
       SELECT slug, title, excerpt, tags, published_at
       FROM posts
@@ -106,7 +113,7 @@ export default async function handler(req, res) {
 
     return html(
       res, 200,
-      renderPost(post, articleJsonLd(post), { related }),
+      renderPost(post, articleJsonLd(post, authors), { related, authors }),
       's-maxage=300, stale-while-revalidate=86400'
     );
   } catch (err) {

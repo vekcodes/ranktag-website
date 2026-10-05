@@ -69,6 +69,34 @@ const STATEMENTS = [
   // are all 'draft' or 'published', which the read-time condition treats
   // exactly as it did before this column existed.
   `ALTER TABLE posts ADD COLUMN IF NOT EXISTS publish_at TIMESTAMPTZ`,
+  // Authors live in the database so a byline's role, bio and profile links can
+  // be edited in the CMS rather than in a deploy. The single author in
+  // src/seo/author.js stays the fallback for when this table is empty or
+  // unreachable, so the blog never loses its bylines.
+  //
+  // There is deliberately no `has_page` or `url` column: authors have no pages
+  // and no URLs of their own. The card at the foot of a post is the whole
+  // surface, and the only links on it are the off-site profile icons.
+  `CREATE TABLE IF NOT EXISTS authors (
+     id          BIGSERIAL PRIMARY KEY,
+     slug        TEXT UNIQUE NOT NULL,
+     name        TEXT NOT NULL,
+     job_title   TEXT NOT NULL DEFAULT '',
+     initials    TEXT NOT NULL DEFAULT '',
+     avatar_url  TEXT NOT NULL DEFAULT '',
+     bio         TEXT NOT NULL DEFAULT '',
+     linkedin    TEXT NOT NULL DEFAULT '',
+     instagram   TEXT NOT NULL DEFAULT '',
+     x_url       TEXT NOT NULL DEFAULT '',
+     website     TEXT NOT NULL DEFAULT '',
+     sort_order  INT NOT NULL DEFAULT 100,
+     created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+     updated_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+   )`,
+  // Guarded for a database that already has the table from an earlier run.
+  `ALTER TABLE authors ADD COLUMN IF NOT EXISTS avatar_url TEXT NOT NULL DEFAULT ''`,
+  `ALTER TABLE authors ADD COLUMN IF NOT EXISTS instagram TEXT NOT NULL DEFAULT ''`,
+  `CREATE INDEX IF NOT EXISTS idx_authors_name ON authors (lower(name))`,
   `CREATE INDEX IF NOT EXISTS idx_posts_status_pub
      ON posts (status, published_at DESC)`,
   `CREATE INDEX IF NOT EXISTS idx_posts_publish_at
@@ -82,6 +110,23 @@ for (const stmt of STATEMENTS) {
   console.log('✓', stmt.split('\n')[0].trim());
 }
 
+// Seed the authors table from the code-defined author, the first time only. An
+// existing row is never overwritten: once an author is editable in the CMS,
+// re-running the migration must not quietly undo someone's edits.
+const { AUTHOR } = await import('../src/seo/author.js');
+const [seeded] = await sql`SELECT 1 FROM authors WHERE slug = ${AUTHOR.slug}`;
+if (seeded) {
+  console.log('• author', AUTHOR.slug, 'already present — left untouched');
+} else {
+  await sql`
+    INSERT INTO authors (slug, name, job_title, initials, linkedin, sort_order)
+    VALUES (${AUTHOR.slug}, ${AUTHOR.name}, ${AUTHOR.jobTitle},
+            ${AUTHOR.name.split(/\s+/).slice(0, 2).map((w) => w[0]).join('').toUpperCase()},
+            ${AUTHOR.linkedin}, 0)`;
+  console.log('✓ seeded author', AUTHOR.slug);
+}
+
 const [{ count }] = await sql`SELECT count(*)::int AS count FROM posts`;
-console.log(`\n✓ Schema ready. ${count} post(s) in the database.`);
+const [{ acount }] = await sql`SELECT count(*)::int AS acount FROM authors`;
+console.log(`\n✓ Schema ready. ${count} post(s), ${acount} author(s) in the database.`);
 process.exit(0);

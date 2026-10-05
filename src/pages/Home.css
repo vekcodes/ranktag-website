@@ -810,6 +810,9 @@ h1.hero-title .line{display:block}
 
 .faq-list{border-top:1px solid var(--line)}
 .faq-item{border-bottom:1px solid var(--line)}
+/* Outline node only — all the type and spacing stay on the button inside.
+   Shared by the homepage and the service pages. */
+.faq-h3{margin:0;font:inherit;letter-spacing:inherit}
 .faq-q{
   width:100%;
   display:grid;

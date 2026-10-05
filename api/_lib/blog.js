@@ -2,9 +2,10 @@
 import { marked } from 'marked';
 import sanitizeHtml from 'sanitize-html';
 import { AUTHOR, AUTHOR_ID } from '../../src/seo/author.js';
+import { SITE_URL, SITE_NAME } from './site.js';
 
-export const SITE_URL = (process.env.SITE_URL || 'https://rankedtag.com').replace(/\/$/, '');
-export const SITE_NAME = 'RankedTag';
+// Re-exported: every existing importer takes these from blog.js.
+export { SITE_URL, SITE_NAME };
 
 marked.setOptions({ gfm: true, breaks: false });
 
@@ -350,14 +351,33 @@ export function bylineName(name) {
 /**
  * Author node for article schema.
  *
- * The site author resolves to the Person entity at /about/<slug>, by @id, so
- * the post, the author page and the organisation form one connected graph
- * rather than three loose mentions of a name. Any other named human gets a
- * plain Person with no url — better an unlinked name than a link to a page
- * that does not exist. Never invents a profile.
+ * An author in the registry resolves to a Person with a stable `@id` and the
+ * profile links the author card already shows, so the post, the person and the
+ * organisation form one connected graph rather than three loose mentions of a
+ * name. Only the founder carries a `url`, because only the founder has a page;
+ * everyone else is an unlinked Person, which is honest. Never invents a
+ * profile: `sameAs` comes from what an admin actually entered.
+ *
+ * `authors` is the registry from loadAuthors(). Omitted (the sitemap, the RSS
+ * feed, any caller without a database handle) it falls back to the single
+ * code-defined author, which is exactly what this emitted before.
  */
-export function authorNode(name) {
+export function authorNode(name, authors) {
   const n = bylineName(name);
+  const a = (authors || []).find(
+    (x) => String(x.name).toLowerCase() === n.toLowerCase()
+  );
+  if (a) {
+    return {
+      '@type': 'Person',
+      '@id': a.id,
+      name: a.name,
+      ...(a.url ? { url: a.url } : {}),
+      ...(a.jobTitle ? { jobTitle: a.jobTitle } : {}),
+      ...(a.sameAs && a.sameAs.length ? { sameAs: a.sameAs } : {}),
+      worksFor: { '@id': `${SITE_URL}/#org` },
+    };
+  }
   if (n === AUTHOR.name) {
     return { '@type': 'Person', '@id': AUTHOR_ID, name: AUTHOR.name, url: AUTHOR.url };
   }
@@ -365,7 +385,7 @@ export function authorNode(name) {
 }
 
 /** JSON-LD BlogPosting + BreadcrumbList for rich results. */
-export function articleJsonLd(post) {
+export function articleJsonLd(post, authors) {
   const url = postUrl(post.slug);
   const blogPosting = {
     '@context': 'https://schema.org',
@@ -375,7 +395,7 @@ export function articleJsonLd(post) {
     image: post.og_image_url || post.cover_image_url || `${SITE_URL}/rankedtag-logo.png`,
     datePublished: post.published_at,
     dateModified: post.updated_at || post.published_at,
-    author: authorNode(post.author),
+    author: authorNode(post.author, authors),
     publisher: {
       '@type': 'Organization',
       '@id': `${SITE_URL}/#org`,

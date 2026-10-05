@@ -70,6 +70,23 @@ export const blogApi = {
     }),
   remove: (id) => request(`/api/admin/posts?id=${id}`, { method: 'DELETE' }),
 
+  // ── Authors ──
+  // Authors have no pages and no public routes: this is the only surface they
+  // have, and it is behind the admin session.
+  authorList: () => request('/api/admin/authors'),
+  authorCreate: (data) =>
+    request('/api/admin/authors', { method: 'POST', body: JSON.stringify(data) }),
+  authorUpdate: (id, data) =>
+    request(`/api/admin/authors?id=${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }),
+  authorRemove: (id, force) =>
+    request(`/api/admin/authors?id=${id}`, {
+      method: 'DELETE',
+      body: JSON.stringify({ force: Boolean(force) }),
+    }),
+
   upload: ({ filename, alt, dataBase64, type, width, height }) =>
     request('/api/admin/upload', {
       method: 'POST',

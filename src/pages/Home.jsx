@@ -672,11 +672,17 @@ export default function Home() {
           <div className="col-7 start-6 faq-list">
             {HOME_FAQ_VIEW.map(([q, a], i) => (
               <div className="faq-item" key={q}>
-                <button type="button" className="faq-q" aria-expanded="false">
-                  <span className="faq-n" aria-hidden="true">{String(i + 1).padStart(3, '0')}</span>
-                  <span className="faq-qt">{q}</span>
-                  <span className="faq-ic" aria-hidden="true">+</span>
-                </button>
+                {/* The question is an <h3> under the section's <h2>: each Q&A
+                    is a real subsection and belongs in the document outline.
+                    The heading wraps the toggle rather than sitting inside it
+                    — a <button> only takes phrasing content. */}
+                <h3 className="faq-h3">
+                  <button type="button" className="faq-q" aria-expanded="false">
+                    <span className="faq-n" aria-hidden="true">{String(i + 1).padStart(3, '0')}</span>
+                    <span className="faq-qt">{q}</span>
+                    <span className="faq-ic" aria-hidden="true">+</span>
+                  </button>
+                </h3>
                 <div className="faq-a"><div className="faq-a-inner">{a}</div></div>
               </div>
             ))}

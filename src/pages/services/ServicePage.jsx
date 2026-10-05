@@ -264,11 +264,15 @@ export default function ServicePage() {
             <div className="col-7 start-6 faq-list">
               {svc.faqs.map(([q, a], i) => (
                 <div className="faq-item" key={q}>
-                  <button type="button" className="faq-q" aria-expanded="false">
-                    <span className="faq-n" aria-hidden="true">{String(i + 1).padStart(3, '0')}</span>
-                    <span className="faq-qt">{q}</span>
-                    <span className="faq-ic" aria-hidden="true">+</span>
-                  </button>
+                  {/* Question as an <h3> under the section's <h2> — see the
+                      same block on the homepage. */}
+                  <h3 className="faq-h3">
+                    <button type="button" className="faq-q" aria-expanded="false">
+                      <span className="faq-n" aria-hidden="true">{String(i + 1).padStart(3, '0')}</span>
+                      <span className="faq-qt">{q}</span>
+                      <span className="faq-ic" aria-hidden="true">+</span>
+                    </button>
+                  </h3>
                   <div className="faq-a"><div className="faq-a-inner">{a}</div></div>
                 </div>
               ))}

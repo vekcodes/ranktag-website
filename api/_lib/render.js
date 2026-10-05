@@ -2,7 +2,7 @@
 // Self-contained document (brand styles inlined) so crawlers get full,
 // fast, fully-rendered HTML — no client JS required to read content.
 import { escapeHtml, SITE_URL, SITE_NAME, normalizeFaqs, authorNode, dedupeJsonLd, bylineName } from './blog.js';
-import { AUTHOR_PATH } from '../../src/seo/author.js';
+import { pickAuthor, initialsFor } from './authors.js';
 import { ORG_WEBSITE_JSONLD } from '../../src/seo/orgGraph.js';
 import { wrapProseTables } from '../../src/lib/proseTables.js';
 
@@ -94,7 +94,7 @@ background:var(--surface-2);border-bottom:1px solid var(--line-strong)}
 .prose th>*+*,.prose td>*+*{margin-top:.5em}
 .prose td img{margin:0;border:0;border-radius:var(--r-sm)}
 .tags{display:flex;flex-wrap:wrap;gap:.5rem;margin:2.5rem 0 0}
-.tag{font-family:var(--font-mono);font-size:var(--fs-micro);letter-spacing:.06em;
+.tag{display:inline-block;font-family:var(--font-mono);font-size:var(--fs-micro);letter-spacing:.06em;
 border:1px solid var(--line-strong);padding:.35rem .7rem;border-radius:var(--r-sm);color:var(--text-3)}
 .related{margin:4.5rem 0 0;padding:2.5rem 0 0;border-top:1px solid var(--line-strong)}
 .related-h{font-size:var(--fs-micro);letter-spacing:var(--track-micro);
@@ -106,8 +106,37 @@ text-decoration:none;line-height:1.35;display:block}
 .related-list a:hover{text-decoration:underline}
 .related-x{display:block;margin-top:.35rem;color:var(--text-3);font-size:.95rem;line-height:1.5}
 @media(max-width:640px){.related-list a{font-size:1.05rem}}
-.byline{color:inherit;text-decoration:none;border-bottom:1px solid currentColor}
-.byline:hover{opacity:.75}
+/* Plain text. The byline is not a link: the author's profiles live on the
+   card at the foot of the post, not in a meta line a reader skims on the way
+   into the article. */
+.byline{color:inherit}
+/* Author card ---------------------------------------------------------- */
+/* Who wrote this, what they do, where to find them. The name is deliberately
+   not a link — only the profile icons are clickable, and each goes off-site
+   to a profile the Person's sameAs also claims. */
+.author-card{margin:4.5rem 0 0;padding:1.5rem 1.65rem;
+border:1px solid var(--line-strong);border-radius:var(--r-xl);background:var(--surface-1)}
+.ac-title{font-size:1.0625rem;font-weight:700;line-height:1.3;margin:0 0 1rem;
+padding:0 0 1rem;border-bottom:1px solid var(--line-strong);letter-spacing:var(--track-tight)}
+.ac-row{display:flex;align-items:center;gap:1rem}
+.ac-avatar{flex:0 0 auto;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;
+overflow:hidden;border:1px solid var(--line-strong);background:var(--surface-2);color:var(--text-1);
+font-family:var(--font-mono);font-weight:600;font-size:.9375rem;letter-spacing:.02em}
+.ac-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.ac-id{min-width:0;flex:1 1 auto}
+.ac-name{font-size:1.0625rem;font-weight:600;line-height:1.3;color:var(--text-1);margin:0}
+.ac-role{color:var(--text-3);font-size:.875rem;line-height:1.4;margin:.2rem 0 0}
+.ac-bio{color:var(--text-2);font-size:.9375rem;line-height:1.65;margin:1rem 0 0;max-width:62ch}
+.ac-social{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0;padding:0}
+.ac-social a{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;
+background:var(--text-1);color:var(--bg);text-decoration:none;transition:opacity .2s var(--ease)}
+.ac-social a:hover{opacity:.75}
+@media(max-width:560px){
+.author-card{padding:1.25rem}
+.ac-row{flex-wrap:wrap}
+.ac-avatar{width:46px;height:46px;font-size:.875rem}
+.ac-social{flex-basis:100%;margin-top:.25rem}
+}
 .lead-cta{margin:5rem 0 0;padding:3rem 2rem;background:var(--surface-1);color:var(--text-1);
 border:1px solid var(--line-strong);border-radius:var(--r-xl);text-align:center}
 .lead-cta h3{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:600;color:var(--text-1);line-height:1.1}
@@ -127,6 +156,9 @@ cursor:pointer;list-style:none;transition:color .2s var(--ease)}
 .faq-q::before{content:"00" counter(faq);font-family:var(--font-mono);font-size:var(--fs-micro);
 font-weight:500;letter-spacing:var(--track-micro);color:var(--text-4);padding-top:.3rem}
 .faq-q:hover{color:var(--accent-text)}
+/* The question heading is a document-outline node, not a style change: it
+   inherits everything from .faq-q so the card looks exactly as it did. */
+.faq-qt{font:inherit;letter-spacing:inherit;color:inherit;margin:0}
 .faq-ic{font-size:1.25rem;font-weight:300;line-height:1;color:var(--text-3);
 transition:transform .35s var(--ease),color .2s var(--ease)}
 .faq-item[open] .faq-ic{transform:rotate(45deg);color:var(--accent-text)}
@@ -345,10 +377,16 @@ ${ld}
 function renderFaqs(faqs) {
   const list = normalizeFaqs(faqs);
   if (!list.length) return '';
+  // Each question is an <h3> inside the <summary>, under the section's <h2>.
+  // The questions are real subsections of the FAQ, so they belong in the
+  // document outline — a <summary> alone is a control, not a heading, and
+  // leaves the FAQ as one undifferentiated block to crawlers and to anyone
+  // navigating by headings. The h3 carries no styling of its own; the grid
+  // and type still come from .faq-q on the summary.
   const items = list
     .map(
       (f) => `<details class="faq-item">
-<summary class="faq-q">${escapeHtml(f.q)}<span class="faq-ic" aria-hidden="true">+</span></summary>
+<summary class="faq-q"><h3 class="faq-qt">${escapeHtml(f.q)}</h3><span class="faq-ic" aria-hidden="true">+</span></summary>
 <div class="faq-a">${escapeHtml(f.a)}</div>
 </details>`
     )
@@ -368,11 +406,14 @@ function fmtDate(d) {
 
 /**
  * @param posts  rows to render
- * @param opts.tag  the active ?tag= filter, if any. A filtered view is a thin
- *   duplicate of /blog — same title, same description, a subset of the same
- *   cards — so it is noindex, follow: Google drops it from the index but still
- *   walks through to the posts. It is deliberately NOT blocked in robots.txt,
- *   because a blocked URL can never be crawled to discover the noindex.
+ * @param opts.tag  the active ?tag= filter, if any. Nothing on the site links
+ *   here any more — post tags are plain labels — but the handler stays so the
+ *   ?tag= URLs Google already discovered keep resolving. A filtered view is a
+ *   thin duplicate of /blog, so it is noindex, follow: Google drops it from
+ *   the index but still walks through to the posts. It is deliberately NOT
+ *   blocked in robots.txt, because a blocked URL can never be crawled to
+ *   discover the noindex.
+ * @param opts.authors  the author registry, for the listing schema's bylines.
  */
 export function renderIndex(posts, opts = {}) {
   // Size rhythm across the masonry: feature, normal, compact, text-only.
@@ -452,7 +493,7 @@ ${posts.length
               // cover, which is still a valid image for the entity.
               image: p.cover_image_url || `${SITE_URL}/rankedtag-logo.png`,
               datePublished: p.published_at,
-              author: authorNode(p.author),
+              author: authorNode(p.author, opts.authors),
             })),
           }
         : {}),
@@ -527,16 +568,66 @@ ${scored.map((p) => `<li><a href="/blog/${escapeHtml(p.slug)}">${escapeHtml(p.ti
 </aside>`;
 }
 
+// Brand marks, inline so they need no network request and inherit the text
+// colour. 24x24 viewBox, single path each, aria-hidden because the link's
+// aria-label already names the destination.
+const SOCIAL_ICON = {
+  linkedin: '<path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13Zm1.78 13.02H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>',
+  instagram: '<path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9c-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07ZM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.88 5.88 0 0 0-2.13 1.38A5.88 5.88 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91a5.88 5.88 0 0 0 1.38 2.13c.67.67 1.34 1.08 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.88 5.88 0 0 0 2.13-1.38c.67-.67 1.08-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.88 5.88 0 0 0-1.38-2.13A5.88 5.88 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32Zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm7.85-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0Z"/>',
+  x: '<path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.584-6.64 7.584H.47l8.6-9.83L0 1.15h7.59l5.24 6.932ZM17.61 20.64h2.04L6.49 3.24H4.3Z"/>',
+  website: '<path d="M12 1.5a10.5 10.5 0 1 0 0 21 10.5 10.5 0 0 0 0-21Zm7.1 6.3h-3.02a16.3 16.3 0 0 0-1.6-4.03A8.56 8.56 0 0 1 19.1 7.8ZM12 3.56c.78 1.13 1.4 2.56 1.79 4.24h-3.58c.4-1.68 1.01-3.11 1.79-4.24ZM3.66 13.9A8.6 8.6 0 0 1 3.4 12c0-.65.1-1.29.26-1.9h3.46a17.9 17.9 0 0 0 0 3.8H3.66Zm.83 1.9h3.02c.37 1.46.9 2.82 1.6 4.03A8.56 8.56 0 0 1 4.49 15.8Zm3.02-7.6H4.49a8.56 8.56 0 0 1 4.62-4.03 16.3 16.3 0 0 0-1.6 4.03ZM12 20.44c-.78-1.13-1.4-2.56-1.79-4.24h3.58c-.4 1.68-1.01 3.11-1.79 4.24Zm2.16-6.14H9.84a16 16 0 0 1 0-4.6h4.32a16 16 0 0 1 0 4.6Zm.73 5.53c.7-1.21 1.23-2.57 1.6-4.03h3.02a8.56 8.56 0 0 1-4.62 4.03Zm1.99-5.93a17.9 17.9 0 0 0 0-3.8h3.46c.17.61.26 1.25.26 1.9s-.09 1.29-.26 1.9h-3.46Z"/>',
+};
+
+/**
+ * The author card that closes a post.
+ *
+ * Name, role and an optional short bio, as a plain identification block. The
+ * name is deliberately not a link: the site publishes no author pages, so
+ * there is nowhere for it to go, and a byline linking to a 404 is worse than
+ * plain text. Only the profile icons are clickable, and each one leaves the
+ * site for a profile the Person's `sameAs` also claims.
+ *
+ * A byline that is not in the registry gets no card: the site holds no role or
+ * profiles for that person, and borrowing someone else's would be a
+ * misattribution. The byline itself still renders either way.
+ */
+function authorCard(name, authors) {
+  const a = pickAuthor(authors, name);
+  if (!a) return '';
+  const links = (a.social || []).filter((s) => s.url && SOCIAL_ICON[s.key]);
+  const avatar = a.avatarUrl
+    ? `<img src="${escapeHtml(a.avatarUrl)}" alt="" width="52" height="52" loading="lazy" decoding="async"/>`
+    : escapeHtml(a.initials || initialsFor(a.name));
+  return `<aside class="author-card">
+<h2 class="ac-title">Author Profile</h2>
+<div class="ac-row">
+<div class="ac-avatar" aria-hidden="true">${avatar}</div>
+<div class="ac-id">
+<p class="ac-name">${escapeHtml(a.name)}</p>
+${a.jobTitle ? `<p class="ac-role">${escapeHtml(a.jobTitle)}</p>` : ''}
+</div>
+${links.length ? `<ul class="ac-social">
+${links.map((s) => `<li><a href="${escapeHtml(s.url)}" rel="me noopener noreferrer" target="_blank" aria-label="${escapeHtml(a.name)} on ${escapeHtml(s.label)}">
+<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">${SOCIAL_ICON[s.key]}</svg></a></li>`).join('')}
+</ul>` : ''}
+</div>
+${a.bio ? `<p class="ac-bio">${escapeHtml(a.bio)}</p>` : ''}
+</aside>`;
+}
+
 export function renderPost(post, jsonLd, opts = {}) {
   const cover = post.cover_image_url
     ? `<img class="cover" src="${escapeHtml(post.cover_image_url)}" alt="${escapeHtml(post.cover_image_alt || post.title)}" width="1200" height="630" fetchpriority="high"/>`
     : '';
   const tags = (post.tags || [])
-    // rel="nofollow": 12 tag links per post across 33 posts generates 314
-    // unique ?tag= URLs — roughly six times the site's real URL count, all of
-    // them thin duplicates of /blog. They stay clickable for readers but are
-    // no longer a crawl path. Paired with noindex on the filtered view below.
-    .map((t) => `<a class="tag" rel="nofollow" href="/blog?tag=${encodeURIComponent(t)}">#${escapeHtml(t)}</a>`)
+    // Labels, not links. Each tag used to point at /blog?tag=…: 12 tags per
+    // post across 33 posts minted 314 unique query URLs — roughly six times
+    // the site's real URL count, every one a thin duplicate of /blog, and GSC
+    // reported them as discovered alternates. rel="nofollow" only stopped the
+    // crawl path; the URLs were still discoverable from the rendered page and
+    // shareable. A <span> removes the alternate URL entirely, which is the
+    // only thing that actually fixes it.
+    .map((t) => `<span class="tag">#${escapeHtml(t)}</span>`)
     .join('');
 
   const banner = opts.preview
@@ -553,7 +644,7 @@ Preview — ${post.status === 'scheduled' && post.publish_at
 <span class="kicker">${escapeHtml((post.tags && post.tags[0]) || 'Article')}</span>
 <h1 class="title">${escapeHtml(post.title)}</h1>
 <div class="meta">
-<span>By <a class="byline" href="${AUTHOR_PATH}">${escapeHtml(bylineName(post.author))}</a></span>
+<span>By <span class="byline">${escapeHtml(bylineName(post.author))}</span></span>
 <span>${fmtDate(post.published_at)}</span>
 <span>${post.reading_minutes} min read</span>
 </div></header>
@@ -561,6 +652,7 @@ ${cover}
 <article class="prose">${wrapProseTables(post.content_html)}</article>
 ${tags ? `<div class="tags">${tags}</div>` : ''}
 ${renderFaqs(post.faqs)}
+${authorCard(bylineName(post.author), opts.authors)}
 ${renderRelated(post, opts.related)}
 ${leadCta()}
 </div>`;

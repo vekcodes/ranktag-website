@@ -222,6 +222,12 @@
 .dg-faq-item {
   border-bottom:1px solid var(--line);
 }
+/* Outline node only — all the type and spacing stay on the button inside. */
+.dg-faq-qt {
+  margin:0;
+  font:inherit;
+  letter-spacing:inherit;
+}
 .dg-faq-q {
   width:100%;
   display:flex;

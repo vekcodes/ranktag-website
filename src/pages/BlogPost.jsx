@@ -149,8 +149,11 @@ function PostFaqs({ faqs }) {
       <div className="blogx-faq-list">
         {list.map((f, i) => (
           <details className="blogx-faq-item" key={i}>
+            {/* The question is an <h3> under the section's <h2>: these are
+                real subsections of the FAQ and belong in the document
+                outline. Mirrors the SSR markup in api/_lib/render.js. */}
             <summary className="blogx-faq-q">
-              {f.q}
+              <h3 className="blogx-faq-qt">{f.q}</h3>
               <span className="blogx-faq-ic" aria-hidden="true">+</span>
             </summary>
             <div className="blogx-faq-a">{f.a}</div>
