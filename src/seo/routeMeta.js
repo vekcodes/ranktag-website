@@ -28,9 +28,9 @@ export const TOOL_META = {
     canonical: 'https://rankedtag.com/apply',
   },
   '/keyword-density-checker': {
-    title: 'Keyword Density Checker — Free Online Tool | RankedTag',
+    title: 'Keyword Density Checker: Free Word Density Tool | RankedTag',
     description:
-      'Free keyword density checker. Paste text or a URL to see 1–4 word keyword frequency and %, catch keyword stuffing, and optimize for Google and AI search.',
+      'Free keyword density checker. Paste text or a URL to see word and phrase density percentages, catch keyword stuffing, and optimize for Google and AI search.',
     canonical: 'https://rankedtag.com/keyword-density-checker',
     ogImage: 'https://rankedtag.com/og/keyword-density-checker.png',
     ogImageAlt: 'RankedTag free keyword density checker tool',
@@ -52,7 +52,7 @@ export const TOOL_META = {
     ogImageAlt: 'RankedTag free page speed checker tool',
   },
   '/competitor-analysis': {
-    title: 'Free Competitor Analysis Tool — SEO Side-by-Side | RankedTag',
+    title: 'Competitor Analysis Tool: Free Website Checker | RankedTag',
     description:
       "Free competitor analysis tool. Compare your page against competitors side by side, find keyword gaps, and see who's winning in Google and AI search — no login.",
     canonical: 'https://rankedtag.com/competitor-analysis',

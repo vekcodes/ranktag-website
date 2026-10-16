@@ -31,6 +31,14 @@ export const CA_FAQ = [
     'A keyword-gap analysis is the fastest way in: it surfaces the terms your competitors emphasize that your page does not. This tool shows shared keywords, the gaps to close, and the terms unique to you.',
   ],
   [
+    'How do I compare my site against competitors?',
+    "Enter your page URL and up to five competitor URLs, then run the analysis. You get a side by side comparison of keyword coverage, keyword prominence, readability and content structure, plus a keyword gap list showing the terms your competitors use that you do not.",
+  ],
+  [
+    'Does this tool track competitor keyword rankings?',
+    "No. It compares on-page content rather than search positions. It fetches your page and each competitor page and scores them on keyword distribution, keyword prominence, semantic coverage, readability and content structure, so you can see why a competing page may read as more relevant for a topic. For live position tracking you need a dedicated rank tracker.",
+  ],
+  [
     'How do I analyze competitors in AI search?',
     'Run your key questions through AI Overviews, ChatGPT and Perplexity, note which competitor domains get cited, and compare their pages to yours. The ones cited usually have clearer, more quotable, more authoritative content on the topic.',
   ],

@@ -688,7 +688,12 @@ ${leadCta()}
 </div>`;
 
   return shell({
-    title: `${post.meta_title || post.title} · ${SITE_NAME}`,
+    // No brand suffix. It cost 12 characters of every title while the site has
+    // effectively no brand search to protect, which pushed all 33 posts past the
+    // ~60 character SERP limit. Google renders the site name beside the title
+    // separately, so the brand is not lost. It also double-stamped the 7 posts
+    // whose CMS meta_title already ended in "| RankedTag".
+    title: post.meta_title || post.title,
     description: post.meta_description || post.excerpt,
     canonical: post.canonical_url || `${SITE_URL}/blog/${post.slug}`,
     ogImage:

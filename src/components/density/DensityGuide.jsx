@@ -26,6 +26,10 @@ export const DENSITY_FAQ = [
     'Divide the number of times a keyword appears by the total word count, then multiply by 100 to get a percentage. For example, 10 mentions in a 1,000-word article equals 1% density.',
   ],
   [
+    'Is word density the same as keyword density?',
+    "They measure the same thing at different widths. Word density usually means how often a single word appears as a percentage of total words, while keyword density often includes multi-word phrases. This tool reports both, from single words up to four-word phrases, so you can see a term on its own and inside the phrases it belongs to.",
+  ],
+  [
     'What counts as keyword stuffing?',
     "Keyword stuffing is overloading a page with a keyword in an unnatural way to manipulate rankings, such as repeating it far more than the content warrants, listing it out of context, or hiding it. It violates Google's guidelines and can lower rankings.",
   ],
