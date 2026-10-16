@@ -10,6 +10,7 @@ import { normalizePostInput, SITE_URL } from '../_lib/blog.js';
 import { pingIndexNow, contentChanged } from '../_lib/indexnow.js';
 import { sendJson, sendError, httpError, readBody } from '../_lib/http.js';
 import { handleAuthors } from '../_lib/authorsAdmin.js';
+import { handleGsc } from '../_lib/gscAdmin.js';
 import { restorePipeTables } from '../../src/lib/proseTables.js';
 
 const MIGRATION_NEEDED =
@@ -84,8 +85,14 @@ export default async function handler(req, res) {
   // handler itself lives in _lib/authorsAdmin.js (helpers there are not
   // counted as functions) and owns its own auth, so this dispatch happens
   // before anything post-specific runs.
-  if (new URL(req.url, 'http://x').searchParams.get('resource') === 'authors') {
+  const resource = new URL(req.url, 'http://x').searchParams.get('resource');
+  if (resource === 'authors') {
     return handleAuthors(req, res);
+  }
+  // Search Console reporting rides along for the same reason, and additionally
+  // accepts a bearer token so n8n and scripts can read it without a session.
+  if (resource === 'gsc') {
+    return handleGsc(req, res);
   }
 
   try {

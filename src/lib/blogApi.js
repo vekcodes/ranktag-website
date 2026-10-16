@@ -95,6 +95,18 @@ export const blogApi = {
       body: JSON.stringify({ force: Boolean(force) }),
     }),
 
+  // ── Search Console ──
+  // Rides on the posts function via ?resource=gsc, same as authors, to stay
+  // under the 12-function cap.
+  gscStatus: () => request('/api/admin/posts?resource=gsc&action=status'),
+  gscSites: () => request('/api/admin/posts?resource=gsc&action=sites'),
+  gscSitemaps: () => request('/api/admin/posts?resource=gsc&action=sitemaps'),
+  gscOverview: ({ days = 28, limit = 25, dataState = 'final' } = {}) =>
+    request(
+      `/api/admin/posts?resource=gsc&action=overview&days=${days}` +
+        `&limit=${limit}&dataState=${dataState}`
+    ),
+
   upload: ({ filename, alt, dataBase64, type, width, height }) =>
     request('/api/admin/upload', {
       method: 'POST',

@@ -205,3 +205,81 @@ border-radius:10px;background:var(--paper-2)}
   .sched-actions .btn{width:100%}
   .sched-tz{display:block;margin-top:2px}
 }
+
+/* ── Search Console dashboard ─────────────────────────────────── */
+.gsc-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.gsc-range { margin-left: auto; }
+
+.gsc-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.gsc-stat {
+  background: var(--ink-3);
+  border: 1px solid var(--ink-line);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.gsc-stat-label {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+.gsc-stat-value {
+  font-family: var(--font-display);
+  font-size: 30px;
+  line-height: 1.15;
+  margin-top: 6px;
+  color: var(--ink) ;
+}
+.gsc-delta { font-size: 12px; }
+.gsc-delta-note { color: var(--muted-2); }
+
+.gsc-charts,
+.gsc-tables {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.gsc-chart h3,
+.gsc-table-card h3 { margin: 0 0 10px; font-size: 15px; }
+
+.gsc-tip {
+  background: var(--ink-3);
+  border: 1px solid var(--ink-line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  box-shadow: var(--shadow-lg);
+}
+.gsc-tip-date { font-size: 11px; color: var(--muted-2); }
+.gsc-tip-value { font-size: 15px; color: var(--ink); }
+
+.gsc-table { width: 100%; }
+.gsc-table .num { text-align: right; white-space: nowrap; }
+.gsc-table td.gsc-key {
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.gsc-table td.gsc-key a { color: var(--periwinkle); text-decoration: none; }
+.gsc-table td.gsc-key a:hover { text-decoration: underline; }
+
+.gsc-setup .setup-steps { margin-bottom: 10px; }
+
+@media (max-width: 900px) {
+  .gsc-stats { grid-template-columns: repeat(2, 1fr); }
+  .gsc-charts, .gsc-tables { grid-template-columns: 1fr; }
+  .gsc-range { margin-left: 0; width: 100%; }
+}

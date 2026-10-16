@@ -6,6 +6,7 @@ import {
   relativeTo, nextRoundHourFields,
 } from '../../lib/schedule.js';
 import Editor from './Editor.jsx';
+import SearchConsole from './SearchConsole.jsx';
 import './admin.css';
 
 const EMPTY = {
@@ -308,7 +309,7 @@ function AuthorForm({ author, onDone }) {
 }
 
 // ── Post list ──
-function PostList({ onNew, onEdit, onLogout, onAuthors }) {
+function PostList({ onNew, onEdit, onLogout, onAuthors, onSearch }) {
   const [posts, setPosts] = useState(null);
   const [err, setErr] = useState('');
   const load = useCallback(() => {
@@ -326,6 +327,7 @@ function PostList({ onNew, onEdit, onLogout, onAuthors }) {
         <h1>Posts</h1>
         <div>
           <button className="btn" onClick={onNew}>+ New post</button>
+          <button className="btn ghost" onClick={onSearch}>Search</button>
           <button className="btn ghost" onClick={onAuthors}>Authors</button>
           <button className="btn ghost" onClick={onLogout}>Log out</button>
         </div>
@@ -939,6 +941,8 @@ export default function AdminApp() {
         onDone={() => setState({ view: 'list', id: null })}
       />
     );
+  if (state.view === 'search')
+    return <SearchConsole onBack={() => setState({ view: 'list', id: null })} />;
   if (state.view === 'authors')
     return (
       <AuthorList
@@ -962,6 +966,7 @@ export default function AdminApp() {
       onNew={() => setState({ view: 'new', id: null })}
       onEdit={(id) => setState({ view: 'edit', id })}
       onAuthors={() => setState({ view: 'authors', author: null })}
+      onSearch={() => setState({ view: 'search', id: null })}
       onLogout={logout}
     />
   );
