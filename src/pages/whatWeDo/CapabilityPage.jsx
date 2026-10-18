@@ -7,16 +7,17 @@ import usePageMeta from '../../hooks/usePageMeta.js';
 import useScrollReveal from '../../hooks/useScrollReveal.js';
 import JsonLd from '../../components/JsonLd.jsx';
 import { breadcrumb, faqPage, ORG_ID, SITE } from '../../lib/schema.js';
-import { SERVICE_BY_SLUG, SERVICES } from './servicesData.js';
+import { SERVICE_BY_SLUG, SERVICES } from './capabilitiesData.js';
+import { VERTICALS } from '../verticals/verticalsData.js';
 import '../Home.css';
-import './Services.css';
+import './WhatWeDo.css';
 
-// One template renders all /services/<slug> pages from servicesData.js. Each
+// One template renders all /what-we-do/<slug> pages from capabilitiesData.js. Each
 // page ships its own Service + WebPage + BreadcrumbList + FAQPage JSON-LD and
 // is pre-rendered at build time (vite.config.js includedRoutes), so crawlers
 // get complete static HTML with per-route meta.
 function serviceJsonLd(svc) {
-  const url = `${SITE}/services/${svc.slug}`;
+  const url = `${SITE}/what-we-do/${svc.slug}`;
   return [
     {
       '@context': 'https://schema.org',
@@ -28,13 +29,12 @@ function serviceJsonLd(svc) {
       url,
       provider: { '@id': ORG_ID },
       areaServed: { '@type': 'Place', name: 'Worldwide' },
-      audience: { '@type': 'BusinessAudience', name: 'B2B SaaS companies' },
       mainEntityOfPage: { '@type': 'WebPage', '@id': url },
       inLanguage: 'en',
     },
     breadcrumb([
       { name: 'Home', item: `${SITE}/` },
-      { name: 'Services', item: `${SITE}/services` },
+      { name: 'What we do', item: `${SITE}/what-we-do` },
       { name: svc.nav, item: url },
     ]),
     faqPage(svc.faqs, { id: `${url}#faq` }),
@@ -48,14 +48,14 @@ const TOOL_LABELS = {
   '/competitor-analysis': 'Competitor Analysis',
 };
 
-export default function ServicePage() {
+export default function CapabilityPage() {
   const { slug } = useParams();
   const svc = SERVICE_BY_SLUG[slug];
 
   useScrollReveal();
   usePageMeta(
     svc
-      ? { title: svc.title, description: svc.description, canonical: `${SITE}/services/${svc.slug}` }
+      ? { title: svc.title, description: svc.description, canonical: `${SITE}/what-we-do/${svc.slug}` }
       : undefined
   );
 
@@ -98,7 +98,7 @@ export default function ServicePage() {
               <nav className="svc-crumb" aria-label="Breadcrumb">
                 <Link to="/" className="link-wipe">Home</Link>
                 <span aria-hidden="true">/</span>
-                <Link to="/services" className="link-wipe">Services</Link>
+                <Link to="/what-we-do" className="link-wipe">What we do</Link>
                 <span aria-hidden="true">/</span>
                 <span aria-current="page">{svc.nav}</span>
               </nav>
@@ -115,7 +115,7 @@ export default function ServicePage() {
               <ul className="hero-benefits svc-hero-benefits">
                 <li><span className="b-check">✓</span> founder reviews every domain personally</li>
                 <li><span className="b-check">✓</span> reply within 48 hours</li>
-                <li><span className="b-check">✓</span> only 4 SaaS taken per month</li>
+                <li><span className="b-check">✓</span> four reviews taken a month</li>
               </ul>
             </div>
             <div className="col-5 start-8 svc-hero-cta">
@@ -133,7 +133,7 @@ export default function ServicePage() {
         <section className="problem svc-problem ruled" data-reveal>
           <div className="container grid12">
             <div className="col-4 problem-aside">
-              <span className="eyebrow bracket">WHY THIS KEEPS FAILING IN-HOUSE</span>
+              <h2 className="eyebrow bracket problem-h2">WHY THIS KEEPS FAILING IN-HOUSE</h2>
             </div>
             <ol className="col-7 start-6 problem-list" data-reveal-children>
               {svc.pains.map((pain, i) => (
@@ -280,14 +280,37 @@ export default function ServicePage() {
           </div>
         </section>
 
-        {/* ── Related services ─────────────────────────────────────────── */}
+        {/* ── Where this capability lands, per vertical ─────────── */}
+        <section className="svc-related ruled" data-reveal>
+          <div className="container">
+            <span className="eyebrow bracket">WHAT THIS LOOKS LIKE FOR YOU</span>
+            <p className="lead svc-verticals-lead">
+              The craft on this page is the same whoever you sell to. What changes is which part of it
+              matters most, and in what order.
+            </p>
+            <ol className="svc-rows svc-rows-compact" data-reveal-children>
+              {VERTICALS.map((v, i) => (
+                <li key={v.slug}>
+                  <Link to={`/${v.slug}`} className="svc-row ar-parent">
+                    <span className="svc-row-num" aria-hidden="true">{String(i + 1).padStart(3, '0')}</span>
+                    <span className="svc-row-h">{v.nav}</span>
+                    <p className="svc-row-desc">{v.navDesc}</p>
+                    <span className="svc-row-go">See the playbook <span className="ar">→</span></span>
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        {/* ── Related capabilities ─────────────────────────────────────── */}
         <section className="svc-related ruled" data-reveal>
           <div className="container">
             <span className="eyebrow bracket">PAIRS WITH</span>
             <ol className="svc-rows svc-rows-compact" data-reveal-children>
               {related.map((r, i) => (
                 <li key={r.slug}>
-                  <Link to={`/services/${r.slug}`} className="svc-row ar-parent">
+                  <Link to={`/what-we-do/${r.slug}`} className="svc-row ar-parent">
                     <span className="svc-row-num" aria-hidden="true">{String(i + 1).padStart(3, '0')}</span>
                     <span className="svc-row-h">{r.nav}</span>
                     <p className="svc-row-desc">{r.navDesc}</p>

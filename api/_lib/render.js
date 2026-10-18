@@ -8,7 +8,7 @@ import { wrapProseTables } from '../../src/lib/proseTables.js';
 
 // Default social-image alt, kept identical to index.html's so every route's
 // social-tag set matches.
-const DEFAULT_OG_ALT = 'RankedTag — SEO, AI SEO, AEO & GEO agency for B2B SaaS';
+const DEFAULT_OG_ALT = 'RankedTag — SEO, AI SEO, AEO and GEO agency';
 
 const CSS = `
 @font-face{font-family:'Space Grotesk';font-style:normal;font-weight:300 700;font-display:swap;src:url('/fonts/space-grotesk.woff2') format('woff2')}
@@ -313,7 +313,8 @@ function nav() {
   return `<nav><div class="nav-in">
 <a class="logo" href="/" aria-label="RankedTag home"><img src="/rankedtag-logo-light.svg" alt="RankedTag" width="106" height="28"/></a>
 <div class="nav-links">
-<a href="/services">Services</a>
+<a href="/what-we-do">What we do</a>
+<a href="/who-we-help">Who we help</a>
 <a href="/#how-it-works">How it works</a>
 <a href="/case-study/sendr">Sendr.ai story</a>
 <a href="/blog" aria-current="page">Blog</a>
@@ -323,36 +324,39 @@ function nav() {
 }
 
 
-// Keep the services list in sync with src/components/SiteFooter.jsx — the SSR
+// Keep the capability list in sync with src/components/SiteFooter.jsx — the SSR
 // blog shell is the only footer not rendered from that component.
 function footer() {
   const services = [
-    ['b2b-saas-seo', 'B2B SaaS SEO'], ['ai-seo', 'AI SEO'],
+    ['seo', 'Full-stack SEO'], ['ai-seo', 'AI SEO'],
     ['generative-engine-optimization', 'Generative Engine Optimization'],
     ['answer-engine-optimization', 'Answer Engine Optimization'],
-    ['technical-seo', 'Technical SEO'], ['saas-content-marketing', 'SEO Content Engine'],
+    ['technical-seo', 'Technical SEO'], ['content-marketing', 'SEO Content Engine'],
   ];
   return `<footer class="footer"><div class="wrap-wide">
 <div class="footer-grid">
 <div class="footer-brand">
 <a href="/" aria-label="RankedTag home"><img src="/rankedtag-logo-light.svg" alt="RankedTag" width="121" height="32"/></a>
-<p class="footer-blurb">The Inbound Engine for SaaS founders who would rather build product than babysit an agency. Built with senior humans, Claude, and N8N.</p>
+<p class="footer-blurb">The inbound engine for founders who would rather run the business than babysit an agency. Built with senior humans, Claude, and N8N.</p>
 </div>
-<div class="footer-col"><h4><span>001</span>Services</h4>
-${services.map(([slug, label]) => `<a href="/services/${slug}">${label}</a>`).join('')}
-<a href="/services">All services →</a></div>
-<div class="footer-col"><h4><span>002</span>Free tools</h4>
+<div class="footer-col"><h4><span>001</span>What we do</h4>
+${services.map(([slug, label]) => `<a href="/what-we-do/${slug}">${label}</a>`).join('')}
+<a href="/what-we-do">All capabilities →</a></div>
+<div class="footer-col"><h4><span>002</span>Who we help</h4>
+<a href="/saas-seo-agency">B2B SaaS</a><a href="/ecommerce-seo-agency">Ecommerce</a><a href="/local-seo-agency">Local &amp; service-area</a>
+<a href="/who-we-help">All verticals →</a><a href="/best">Agency comparisons →</a></div>
+<div class="footer-col"><h4><span>003</span>Free tools</h4>
 <a href="/keyword-density-checker">Keyword Density Checker</a>
 <a href="/domain-authority-checker">Domain Authority Checker</a>
 <a href="/page-speed-checker">Page Speed Checker</a>
 <a href="/competitor-analysis">Competitor Analysis</a>
 <a href="/apply">Site Audit (Founder Review)</a></div>
-<div class="footer-col"><h4><span>003</span>The product</h4>
+<div class="footer-col"><h4><span>004</span>The product</h4>
 <a href="/#how-it-works">How it works</a>
 <a href="/case-study/sendr">Sendr.ai case study</a>
 <a href="/blog">Blog</a>
 <a href="/apply">Apply</a></div>
-<div class="footer-col"><h4><span>004</span>Company</h4>
+<div class="footer-col"><h4><span>005</span>Company</h4>
 <a href="mailto:hello@rankedtag.com">hello@rankedtag.com</a>
 <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a></div>
 </div>
@@ -366,7 +370,7 @@ ${services.map(([slug, label]) => `<a href="/services/${slug}">${label}</a>`).jo
 
 function leadCta() {
   return `<div class="lead-cta">
-<h3>Want this engine pointed at your SaaS?</h3>
+<h3>Want this engine pointed at your site?</h3>
 <p>We took Sendr.ai from 0 to 1.05M organic impressions in 6 months. Get a free founder-level review of your inbound.</p>
 <a href="/apply">Apply for a free review →</a></div>`;
 }
@@ -487,7 +491,7 @@ ${lead.cover_image_url
   const body = `<div class="wrap-wide">
 <div class="idx-head">
 <h1>The RankedTag Blog</h1>
-<p>Field notes on SEO, generative engine optimization, and building inbound engines for B2B SaaS.</p>
+<p>Field notes on SEO, generative engine optimization, and building inbound engines that compound.</p>
 </div>
 ${posts.length
     ? `${leadHtml}<div class="bento">${rest.map(tile).join('')}</div>`
@@ -503,7 +507,7 @@ ${posts.length
       name: `${SITE_NAME} Blog`,
       url: `${SITE_URL}/blog`,
       description:
-        'SEO, generative engine optimization (GEO), and inbound growth for B2B SaaS founders.',
+        'SEO, generative engine optimization (GEO), and inbound growth for founders.',
       publisher: {
         '@type': 'Organization',
         '@id': `${SITE_URL}/#org`,
@@ -539,9 +543,9 @@ ${posts.length
   ];
 
   return shell({
-    title: `${SITE_NAME} Blog — SEO, GEO & Inbound Growth for B2B SaaS`,
+    title: `${SITE_NAME} Blog — SEO, GEO and Inbound Growth`,
     description:
-      'Field notes on SEO, generative engine optimization (GEO), and building inbound engines that earn AI citations and qualified pipeline for B2B SaaS founders.',
+      'Field notes on SEO, generative engine optimization (GEO), and building inbound engines that earn AI citations and qualified pipeline.',
     canonical: `${SITE_URL}/blog`,
     ...(opts.tag ? { robots: 'noindex, follow' } : {}),
     ogImage: `${SITE_URL}/rankedtag-logo.png`,

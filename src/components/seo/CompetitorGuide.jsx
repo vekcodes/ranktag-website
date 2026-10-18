@@ -279,7 +279,7 @@ export default function CompetitorGuide() {
               The competitors winning AI citations are usually the ones whose content is easiest for a model to
               lift a clean answer from, not necessarily the ones with the biggest backlink profiles. Closing
               that gap — being the source AI engines quote — is what{' '}
-              <Link to="/services/generative-engine-optimization">generative engine optimization</Link> is about, and it's where the next competitive
+              <Link to="/what-we-do/generative-engine-optimization">generative engine optimization</Link> is about, and it's where the next competitive
               advantage is being won.
             </p>
           </div>
@@ -318,7 +318,7 @@ export default function CompetitorGuide() {
             rather see it run at full depth on a live domain, the{' '}
             <Link to="/case-study/sendr">sendr.ai case study</Link> shows the same diagnosis applied across a
             whole site over six months, and{' '}
-            <Link to="/services/b2b-saas-seo">our B2B SaaS SEO service</Link> is this loop run weekly by
+            <Link to="/what-we-do/seo">our full-stack SEO programme</Link> is this loop run weekly by
             people who do it for a living.
           </p>
         </section>

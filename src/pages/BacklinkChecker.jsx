@@ -131,7 +131,7 @@ export default function BacklinkChecker() {
             <input
               type="text"
               className="url-input"
-              placeholder="yoursaas.com"
+              placeholder="yourdomain.com"
               value={domain}
               onChange={(e) => setDomain(e.target.value)}
               spellCheck={false}
@@ -251,7 +251,7 @@ export default function BacklinkChecker() {
                 Want a senior strategist to read this and tell you what to fix? Apply for a founder review, free.
               </p>
               <div className="report-foot-btns">
-                <a href="/audit" className="btn btn-primary btn-lg">Get a founder review <span className="ar">↗</span></a>
+                <a href="/apply" className="btn btn-primary btn-lg">Get a founder review <span className="ar">↗</span></a>
                 <a href="/page-speed-checker" className="btn btn-outline btn-lg">Try the page speed checker <span className="ar">↗</span></a>
               </div>
             </div>

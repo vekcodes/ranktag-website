@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { SERVICES } from '../pages/services/servicesData.js';
+import { SERVICES } from '../pages/whatWeDo/capabilitiesData.js';
+import { VERTICALS } from '../pages/verticals/verticalsData.js';
 
 const FREE_TOOLS = [
   {
@@ -26,7 +27,7 @@ const FREE_TOOLS = [
 ];
 
 /**
- * Full-width mega-menu panel shared by the Services and Free Tools menus.
+ * Full-width mega-menu panel shared by the What-we-do and Free Tools menus.
  * The panel is a sibling of the bar rather than a child of the trigger, so it
  * can span the viewport; only one is open at a time (openId lives in Nav state).
  * <Link> items keep client-side navigation; the parent closes on route change.
@@ -133,9 +134,17 @@ export default function Nav({ variant = 'home' }) {
   const close = () => { setOpen(false); setOpenId(null); };
 
   const serviceItems = SERVICES.map((s) => ({
-    to: `/services/${s.slug}`,
+    to: `/what-we-do/${s.slug}`,
     label: s.nav,
     desc: s.navDesc,
+  }));
+
+  // Verticals sit in their own menu because they answer a different question
+  // from the capabilities: who this is for, not what the work is.
+  const verticalItems = VERTICALS.map((v) => ({
+    to: `/${v.slug}`,
+    label: v.nav,
+    desc: v.navDesc,
   }));
 
   return (
@@ -148,7 +157,7 @@ export default function Nav({ variant = 'home' }) {
         <Link to="/" className="nav-logo" onClick={close} aria-label="RankedTag home">
           <img
             src="/rankedtag-logo-light.svg"
-            alt="RankedTag — SEO, AI SEO & GEO agency for B2B SaaS"
+            alt="RankedTag — SEO, AI SEO, AEO and GEO agency"
             width="106"
             height="28"
           />
@@ -156,14 +165,28 @@ export default function Nav({ variant = 'home' }) {
 
         <div className="nav-links">
           <NavMenu
-            id="services"
-            label="Services"
+            id="what-we-do"
+            label="What we do"
             items={serviceItems}
-            footerItem={{ to: '/services', label: 'All services →' }}
+            footerItem={{ to: '/what-we-do', label: 'All capabilities →' }}
             note="One engine, six disciplines."
             openId={openId}
             setOpenId={setOpenId}
-            active={location.pathname.startsWith('/services')}
+            active={location.pathname.startsWith('/what-we-do')}
+            onNavigate={close}
+          />
+          <NavMenu
+            id="who-we-help"
+            label="Who we help"
+            items={verticalItems}
+            footerItem={{ to: '/who-we-help', label: 'All three verticals →' }}
+            note="Three verticals, three playbooks."
+            openId={openId}
+            setOpenId={setOpenId}
+            active={
+              location.pathname === '/who-we-help' ||
+              VERTICALS.some((v) => location.pathname === `/${v.slug}`)
+            }
             onNavigate={close}
           />
           <Link to="/#how-it-works" className="nav-link" onClick={close}>How it works</Link>

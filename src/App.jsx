@@ -1,6 +1,8 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import Layout from './Layout.jsx';
 import Home from './pages/Home.jsx';
+import { VERTICALS } from './pages/verticals/verticalsData.js';
+import { COMPARISONS } from './pages/best/comparisonsData.js';
 
 // react-router's `lazy` expects a module exposing a named `Component`. Our pages
 // default-export their component, so this adapter wraps a dynamic import into the
@@ -35,10 +37,30 @@ export const routes = [
       // Standalone, indexable case study (pre-rendered).
       { path: 'case-study/sendr', lazy: lazyRoute(() => import('./pages/CaseStudySendr.jsx')) },
 
-      // Services — hub + one template-driven page per service (all pre-rendered;
-      // the concrete slugs live in src/pages/services/servicesData.js).
-      { path: 'services', lazy: lazyRoute(() => import('./pages/services/Services.jsx')) },
-      { path: 'services/:slug', lazy: lazyRoute(() => import('./pages/services/ServicePage.jsx')) },
+      // Vertical pages — commercial head-term pages, one per vertical, at
+      // root level (slugs in src/pages/verticals/verticalsData.js). A vertical
+      // only gets a route once its page is finished; an unfinished one must
+      // 404, never render thin.
+      // Comparison pages — shortlist intent, a different job from the
+      // vertical sales pages. One route per researched list.
+      { path: 'best', lazy: lazyRoute(() => import('./pages/best/BestHub.jsx')) },
+      ...COMPARISONS.map((c) => ({
+        path: `best/${c.slug}`,
+        lazy: lazyRoute(() => import('./pages/best/ComparisonPage.jsx')),
+      })),
+
+      { path: 'who-we-help', lazy: lazyRoute(() => import('./pages/verticals/WhoWeHelp.jsx')) },
+      ...VERTICALS.map((v) => ({
+        path: v.slug,
+        lazy: lazyRoute(() => import('./pages/verticals/VerticalPage.jsx')),
+      })),
+
+      // What we do — capability hub + one template-driven page per capability
+      // (all pre-rendered; the concrete slugs live in
+      // src/pages/whatWeDo/capabilitiesData.js). Moved from /services in the
+      // multi-vertical restructure; the old URLs 301 in vercel.json.
+      { path: 'what-we-do', lazy: lazyRoute(() => import('./pages/whatWeDo/WhatWeDo.jsx')) },
+      { path: 'what-we-do/:slug', lazy: lazyRoute(() => import('./pages/whatWeDo/CapabilityPage.jsx')) },
 
       // NOTE: /llm-info is served as raw Markdown by api/llm-info.js (see the
       // vercel.json rewrite), so it is intentionally NOT a React route.

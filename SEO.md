@@ -25,7 +25,7 @@ again.
   (`/infernomedia/*`, `/our-work`, `/contact-us`, `/audit`) so no old link
   lands on a 404.
 - The marketing site collapsed from six pages to one anchored page. The old
-  routes (`/services`, `/services/*`, `/work`, `/about`, `/contact`,
+  routes (`/what-we-do`, `/what-we-do/*`, `/work`, `/about`, `/contact`,
   `/free-email-audit`) all 308 to their section on `/`, so existing backlinks
   and ad destinations still land somewhere real. The tradeoff is deliberate
   and worth knowing: those four service URLs each targeted a distinct

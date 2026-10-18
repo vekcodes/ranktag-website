@@ -113,7 +113,7 @@ export default function BlogPost() {
             <PostFaqs faqs={post.faqs} />
             <div className="blogx-cta inline">
               <div className="container">
-                <h2>Want this engine pointed at your SaaS?</h2>
+                <h2>Want this engine pointed at your site?</h2>
                 <p>Get a free founder-level review of your inbound.</p>
                 <Link to="/apply" className="btn btn-primary btn-lg">
                   Apply for a free review <span className="ar">↗</span>

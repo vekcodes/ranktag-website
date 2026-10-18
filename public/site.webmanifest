@@ -1,7 +1,7 @@
 {
   "name": "RankedTag",
   "short_name": "RankedTag",
-  "description": "SEO, AI SEO, AEO & GEO agency for B2B SaaS.",
+  "description": "SEO, AI SEO, AEO and GEO agency. Ranked on Google, cited by AI.",
   "icons": [
     { "src": "/favicon-192x192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/favicon-512x512.png", "sizes": "512x512", "type": "image/png" }

@@ -188,7 +188,7 @@ export default function OfferPanel({ onClose, onConvert }) {
                     name="website"
                     type="text"
                     className="eo-input"
-                    placeholder="yoursaas.com"
+                    placeholder="yourdomain.com"
                     value={website}
                     onChange={(e) => setWebsite(e.target.value)}
                     spellCheck={false}

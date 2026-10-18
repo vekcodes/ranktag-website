@@ -1220,3 +1220,42 @@ h1.hero-title .line{display:block}
 @media (min-width:1025px){
   .case-shots{position:sticky;top:calc(var(--nav-h, 72px) + var(--s-10))}
 }
+
+/* =====================================================================
+   WHO WE HELP — three vertical cards on the homepage
+   Sits between the capability stack and the sendr.ai proof block. Fixed
+   min-height on the cards so the grid does not reflow as the webfont
+   swaps in, which is the usual source of CLS in this band.
+   ===================================================================== */
+.home-verticals { padding-block: clamp(4rem, 9vw, 8rem); }
+
+.home-vert-cards {
+  list-style: none;
+  margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grid-gap);
+}
+.home-vert-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  min-height: 16rem;
+  height: 100%;
+  padding: var(--s-6);
+  border: 1px solid var(--rule);
+  text-decoration: none;
+  transition: border-color .3s var(--ease-out), background-color .3s var(--ease-out);
+}
+.home-vert-card:hover,
+.home-vert-card:focus-visible { border-color: var(--peri); background: color-mix(in srgb, var(--peri) 5%, transparent); }
+.home-vert-num { font-size: .75rem; color: var(--text-3); font-variant-numeric: tabular-nums; }
+.home-vert-h { margin: 0; font-size: clamp(1.25rem, 2.2vw, 1.625rem); line-height: 1.2; color: var(--text-1); }
+.home-vert-desc { margin: 0; color: var(--text-2); line-height: 1.6; flex: 1; }
+.home-vert-go { font-size: .875rem; color: var(--peri); }
+
+@media (max-width: 900px) {
+  .home-vert-cards { grid-template-columns: 1fr; }
+  .home-vert-card { min-height: 0; }
+}

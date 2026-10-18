@@ -1,0 +1,679 @@
+{
+  "generated": "2026-10-18",
+  "site": "https://rankedtag.com",
+  "purpose": "Pre-migration URL baseline. Every entry must still resolve (200, or 301 in one hop) after every phase.",
+  "counts": {
+    "marketing_pages": 9,
+    "capability_pages": 0,
+    "blog_posts": 33,
+    "legacy_redirects": 15,
+    "endpoints": 8,
+    "app_noindex": 1,
+    "total": 81,
+    "indexable_in_sitemap": 57,
+    "what_we_do_pages": 7,
+    "vertical_pages": 3,
+    "vertical_hub": 1,
+    "comparison_pages": 3
+  },
+  "known_gaps": [
+    "OPEN: 33 published blog posts carry 108 in-body links to /services* which now 308 to /what-we-do*. Bodies live in the PRODUCTION Neon DB; the credentials supplied point at a dev branch containing one 'test' row. Unfixable until the production DATABASE_URL is supplied.",
+    "In-body internal links are emitted with target=_blank rel='noopener noreferrer nofollow' - internal links should not be nofollow.",
+    "/audit and /technical-audit are 307 (temporary) by config, and /audit is linked internally from 2 places - an internal link pointing at a redirect."
+  ],
+  "urls": [
+    {
+      "url": "/",
+      "kind": "marketing-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": ""
+    },
+    {
+      "url": "/apply",
+      "kind": "marketing-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": ""
+    },
+    {
+      "url": "/case-study/sendr",
+      "kind": "marketing-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": ""
+    },
+    {
+      "url": "/llm-info",
+      "kind": "marketing-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": ""
+    },
+    {
+      "url": "/blog",
+      "kind": "marketing-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": ""
+    },
+    {
+      "url": "/keyword-density-checker",
+      "kind": "marketing-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": ""
+    },
+    {
+      "url": "/domain-authority-checker",
+      "kind": "marketing-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": ""
+    },
+    {
+      "url": "/page-speed-checker",
+      "kind": "marketing-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": ""
+    },
+    {
+      "url": "/competitor-analysis",
+      "kind": "marketing-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": ""
+    },
+    {
+      "url": "/services",
+      "kind": "legacy-redirect",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 308,
+      "note": "moved in phase 1 -> /what-we-do"
+    },
+    {
+      "url": "/services/b2b-saas-seo",
+      "kind": "legacy-redirect",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 308,
+      "note": "moved in phase 1 -> /what-we-do/seo"
+    },
+    {
+      "url": "/services/ai-seo",
+      "kind": "legacy-redirect",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 308,
+      "note": "moved in phase 1 -> /what-we-do/ai-seo"
+    },
+    {
+      "url": "/services/generative-engine-optimization",
+      "kind": "legacy-redirect",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 308,
+      "note": "moved in phase 1 -> /what-we-do/generative-engine-optimization"
+    },
+    {
+      "url": "/services/answer-engine-optimization",
+      "kind": "legacy-redirect",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 308,
+      "note": "moved in phase 1 -> /what-we-do/answer-engine-optimization"
+    },
+    {
+      "url": "/services/technical-seo",
+      "kind": "legacy-redirect",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 308,
+      "note": "moved in phase 1 -> /what-we-do/technical-seo"
+    },
+    {
+      "url": "/services/saas-content-marketing",
+      "kind": "legacy-redirect",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 308,
+      "note": "moved in phase 1 -> /what-we-do/content-marketing"
+    },
+    {
+      "url": "/blog/why-website-visitors-leave",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/scale-business-without-hiring-big-team",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/track-marketing-sales-revenue-sources",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/marketing-not-converting-fix-low-sales",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/why-business-invisible-online",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/steady-stream-of-customers",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/product-pricing-strategy",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/why-competitors-grow-faster",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/prospects-ghosting-after-first-call",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/grow-business-tight-budget",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/why-are-my-leads-drying-up-suddenly",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/find-new-customers-2026",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/stop-wasting-money-on-agencies-avoid-bad-hires",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/grow-business-without-ads",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/product-praised-but-not-bought-how-to-fix",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/fast-growing-businesses-what-they-do-differently",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/business-growth-stalled",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/business-not-growing-60-hour-weeks",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/why-you-lose-customers",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/get-more-customers-2026",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/rank-website-in-claude-chatgpt-gemini-perplexity",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/find-customers-searching-for-your-product",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/website-traffic-but-no-sales-why",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/content-marketing-roi",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/is-your-seo-agency-working",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/global-saas-visibility-without-budget",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/ai-powered-content-marketing-real-customers",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/seo-vs-paid-ads-budget",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/why-nobody-knows-about-your-saas",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/why-traffic-but-no-demos-or-signups",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/how-small-saas-teams-compete-with-bigger-competitors-on-inbound",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/predictable-inbound-lead-engine-saas",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/blog/why-inbound-pipeline-slowing-down",
+      "kind": "blog-post",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "body stored in Neon DB"
+    },
+    {
+      "url": "/backlink-checker",
+      "kind": "legacy-redirect",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 308,
+      "note": "Vercel emits 308 (permanent) for permanent:true, 307 for permanent:false"
+    },
+    {
+      "url": "/keyword-density",
+      "kind": "legacy-redirect",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 308,
+      "note": "Vercel emits 308 (permanent) for permanent:true, 307 for permanent:false"
+    },
+    {
+      "url": "/density",
+      "kind": "legacy-redirect",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 308,
+      "note": "Vercel emits 308 (permanent) for permanent:true, 307 for permanent:false"
+    },
+    {
+      "url": "/competitor",
+      "kind": "legacy-redirect",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 308,
+      "note": "Vercel emits 308 (permanent) for permanent:true, 307 for permanent:false"
+    },
+    {
+      "url": "/page-speed",
+      "kind": "legacy-redirect",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 308,
+      "note": "Vercel emits 308 (permanent) for permanent:true, 307 for permanent:false"
+    },
+    {
+      "url": "/audit",
+      "kind": "legacy-redirect",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 307,
+      "note": "Vercel emits 308 (permanent) for permanent:true, 307 for permanent:false"
+    },
+    {
+      "url": "/technical-audit",
+      "kind": "legacy-redirect",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 307,
+      "note": "Vercel emits 308 (permanent) for permanent:true, 307 for permanent:false"
+    },
+    {
+      "url": "/about/bhushan-raj-shakya",
+      "kind": "legacy-redirect",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 308,
+      "note": "Vercel emits 308 (permanent) for permanent:true, 307 for permanent:false"
+    },
+    {
+      "url": "/sitemap.xml",
+      "kind": "endpoint",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 200,
+      "note": ""
+    },
+    {
+      "url": "/sitemap-pages.xml",
+      "kind": "endpoint",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 200,
+      "note": ""
+    },
+    {
+      "url": "/sitemap-services.xml",
+      "kind": "endpoint",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 200,
+      "note": ""
+    },
+    {
+      "url": "/sitemap-posts.xml",
+      "kind": "endpoint",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 200,
+      "note": ""
+    },
+    {
+      "url": "/rss.xml",
+      "kind": "endpoint",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 200,
+      "note": ""
+    },
+    {
+      "url": "/robots.txt",
+      "kind": "endpoint",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 200,
+      "note": ""
+    },
+    {
+      "url": "/llms.txt",
+      "kind": "endpoint",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 200,
+      "note": ""
+    },
+    {
+      "url": "/llm-info.md",
+      "kind": "endpoint",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 200,
+      "note": ""
+    },
+    {
+      "url": "/admin",
+      "kind": "app-noindex",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 200,
+      "note": ""
+    },
+    {
+      "url": "/what-we-do",
+      "kind": "capability-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 1"
+    },
+    {
+      "url": "/what-we-do/seo",
+      "kind": "capability-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 1"
+    },
+    {
+      "url": "/what-we-do/ai-seo",
+      "kind": "capability-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 1"
+    },
+    {
+      "url": "/what-we-do/generative-engine-optimization",
+      "kind": "capability-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 1"
+    },
+    {
+      "url": "/what-we-do/answer-engine-optimization",
+      "kind": "capability-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 1"
+    },
+    {
+      "url": "/what-we-do/technical-seo",
+      "kind": "capability-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 1"
+    },
+    {
+      "url": "/what-we-do/content-marketing",
+      "kind": "capability-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 1"
+    },
+    {
+      "url": "/saas-seo-agency",
+      "kind": "vertical-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 2"
+    },
+    {
+      "url": "/who-we-help",
+      "kind": "vertical-hub",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 2"
+    },
+    {
+      "url": "/ecommerce-seo-agency",
+      "kind": "vertical-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 2"
+    },
+    {
+      "url": "/local-seo-agency",
+      "kind": "vertical-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 2"
+    },
+    {
+      "url": "/best/seo-agencies-for-saas",
+      "kind": "comparison-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 3"
+    },
+    {
+      "url": "/best/seo-agencies-for-ecommerce",
+      "kind": "comparison-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 3"
+    },
+    {
+      "url": "/best/seo-agencies-for-local-business",
+      "kind": "comparison-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 3"
+    },
+    {
+      "url": "/best",
+      "kind": "comparison-hub",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 6 polish"
+    }
+  ],
+  "phases": {
+    "phase_1": "2026-10-18 /services -> /what-we-do; b2b-saas-seo -> seo; saas-content-marketing -> content-marketing",
+    "phase_2": "2026-10-18 /saas-seo-agency, /ecommerce-seo-agency, /local-seo-agency, /who-we-help",
+    "phase_3": "2026-10-18 all three /best/* comparison pages"
+  }
+}

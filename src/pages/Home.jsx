@@ -16,9 +16,10 @@ import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
 import JsonLd from '../components/JsonLd.jsx';
 import { faqPage } from '../lib/schema.js';
-import { SERVICES } from './services/servicesData.js';
+import { SERVICES } from './whatWeDo/capabilitiesData.js';
+import { VERTICALS } from './verticals/verticalsData.js';
 import './Home.css';
-import './services/Services.css';
+import './whatWeDo/WhatWeDo.css';
 
 // Mirrors the on-page FAQ section below — keep the two in sync.
 const HOME_FAQ = [
@@ -26,9 +27,9 @@ const HOME_FAQ = [
   ['How is this different from a regular SEO agency?', 'Three things. (1) We optimize for ChatGPT, Claude, Perplexity and Gemini citations alongside Google. Most agencies are not even tracking that yet. (2) We use AI to compress the work that is grunt, so we ship in days what a regular team ships in months. (3) The pipeline lives on your infrastructure when we are done. You keep the prompts and workflows.'],
   ['When do we see results?', 'Pipeline live by week 2. First indexed pages by week 3. First top-20 rankings around weeks 5 to 7. First LLM citation typically inside 30 to 45 days. Compounding traffic curve hits in months 3 to 6. Sendr.ai hit 1.05M impressions and 7.43k clicks in 6 months on Google Search Console.'],
   ['Do you guarantee #1 rankings?', 'No. Anyone who does is lying. We aim for measurable lift in organic impressions and at least one LLM citation inside the first 90 days. That is testable. Sendr.ai is the proof we have shipped this before.'],
-  ['What stage of company is this for?', 'Best fit: B2B SaaS with $20K to $2M MRR, an English-speaking ICP, and at least one founder who can do 90 minutes a week of strategy. Bad fit: pre-product, B2C consumer apps, or category-of-one products with no search demand yet.'],
+  ['What kind of company is this for?', 'Three verticals: B2B SaaS, ecommerce, and local or service-area businesses. Across all three the fit test is the same — you already have something people search for, and at least one founder can give 90 minutes a week to strategy. Bad fit: pre-product, and categories with no search demand yet.'],
   ['Can we just hire a freelancer?', 'Sure. The version a freelancer ships will be: 8 articles, no schema, no GEO optimization, no inbound automation, no citation tracking, no senior strategy oversight. Same hours, a quarter of the surface area.'],
-  ['How much does it cost?', 'We share pricing once we have looked at your domain and confirmed it is a fit. Different stage of SaaS, different scope. Apply above and the founder will reply with a real number inside 48 hours.'],
+  ['How much does it cost?', 'We share pricing once we have looked at your domain and confirmed it is a fit. Different stage, different vertical, different scope. Apply above and the founder will reply with a real number inside 48 hours.'],
 ];
 
 // Homepage-specific schema. The site-wide Organization+ProfessionalService (#org)
@@ -41,9 +42,9 @@ const HOME_JSONLD = [
     '@type': 'WebPage',
     '@id': 'https://rankedtag.com/#webpage',
     url: 'https://rankedtag.com/',
-    name: 'SEO, AI SEO, AEO & GEO Agency for B2B SaaS | RankedTag',
+    name: 'SEO and AI Search Agency: Rank and Get Cited | RankedTag',
     description:
-      "Full-stack SEO, AI SEO, AEO & GEO for B2B SaaS. We took sendr.ai 0→1.05M impressions in 6 months — #2 on Google's AI Overview, above ZoomInfo.",
+      "Full-stack SEO, AI SEO, AEO and GEO for SaaS, ecommerce and local brands. Sendr.ai: 0 to 1.05M impressions in 6 months, #2 in Google's AI Overview.",
     isPartOf: { '@id': 'https://rankedtag.com/#website' },
     about: { '@id': 'https://rankedtag.com/#org' },
     primaryImageOfPage: { '@id': 'https://rankedtag.com/#logo' },
@@ -71,7 +72,7 @@ const HOME_JSONLD = [
 // The visible FAQ copy. Two answers intentionally differ from HOME_FAQ
 // above (which feeds the FAQPage schema), so the two are kept separate.
 const HOME_FAQ_VIEW = [
-  ["\"Are we just paying for ChatGPT to write our articles?\"",
+  ["Are we just paying for ChatGPT to write our articles?",
    "No. Claude does the keyword research and the first-pass draft. A senior writer rewrites it, fact-checks it, and adds the angle. Nothing ships without a human review. The unfair advantage is the combination, not any single piece."],
   ["How is this different from a regular SEO agency?",
    "Three things. (1) We optimize for ChatGPT, Claude, Perplexity and Gemini citations alongside Google. Most agencies are not even tracking that yet. (2) We use AI to compress the work that is grunt, so we ship in days what a regular team ships in months. (3) The pipeline lives on your infrastructure when we are done. You keep the prompts and workflows."],
@@ -79,12 +80,12 @@ const HOME_FAQ_VIEW = [
    "Pipeline live by week 2. First indexed pages by week 3. First top-20 rankings around weeks 5 to 7. First LLM citation typically inside 30 to 45 days. Compounding traffic curve hits in months 3 to 6. Sendr.ai hit 1.05M impressions and 7.43k clicks in 6 months on Google Search Console."],
   ["Do you guarantee #1 rankings?",
    "No. Anyone who does is lying. We aim for measurable lift in organic impressions and at least one LLM citation inside the first 90 days. That is testable. Sendr.ai is the proof we have shipped this before."],
-  ["What stage of company is this for?",
-   "Best fit: B2B SaaS with $20K to $2M MRR, an English-speaking ICP, and at least one founder who can do 90 minutes a week of strategy. Bad fit: pre-product, B2C consumer apps, or category-of-one products with no search demand yet."],
+  ["What kind of company is this for?",
+   "Three verticals: B2B SaaS, ecommerce, and local or service-area businesses. Across all three the fit test is the same — you already have something people search for, and at least one founder can give 90 minutes a week to strategy. Bad fit: pre-product, and categories with no search demand yet."],
   ["Can we just hire a freelancer?",
    "Sure. The version a freelancer ships will be: 8 articles, no schema, no GEO optimization, no inbound automation, no citation tracking, no senior strategy oversight. Same hours, a quarter of the surface area. We would pick us. We are biased."],
   ["How much does it cost?",
-   "We share pricing once we have looked at your domain and confirmed it is a fit. Different stage of SaaS, different scope. Apply above. The founder will DM you on LinkedIn with a real number inside 48 hours."],
+   "We share pricing once we have looked at your domain and confirmed it is a fit. Different stage, different vertical, different scope. Apply above. The founder will DM you on LinkedIn with a real number inside 48 hours."],
 ];
 
 /* Hover the apply CTA, hold, drift off, repeat. */
@@ -98,9 +99,9 @@ export default function Home() {
   useScrollReveal();
   const applyRef = useRef(null);
   usePageMeta({
-    title: 'SEO, AI SEO, AEO & GEO Agency for B2B SaaS | RankedTag',
+    title: 'SEO and AI Search Agency: Rank and Get Cited | RankedTag',
     description:
-      "Full-stack SEO, AI SEO, AEO & GEO for B2B SaaS. We took sendr.ai 0→1.05M impressions in 6 months—#2 on Google's AI Overview, above ZoomInfo.",
+      "Full-stack SEO, AI SEO, AEO and GEO for SaaS, ecommerce and local brands. Sendr.ai: 0 to 1.05M impressions in 6 months, #2 in Google's AI Overview.",
     canonical: 'https://rankedtag.com/',
   });
   const navigate = useNavigate();
@@ -151,18 +152,19 @@ export default function Home() {
         <div className="container hero-inner">
           <div className="grid12 hero-grid">
             <div className="col-12 hero-top fade-up">
-              <span className="eyebrow bracket">FOR B2B SAAS FOUNDERS COMPETING AGAINST GIANTS</span>
+              <span className="eyebrow bracket">FOR FOUNDERS COMPETING AGAINST GIANTS</span>
               <span className="idx hero-idx" aria-hidden="true">001</span>
             </div>
 
             <h1 className="col-11 hero-title fade-up delay-1">
-              <span className="line">We make B2B SaaS the{' '}</span>
+              <span className="line">We make you the{' '}</span>
               <span className="line">source <span className="hl hl-auto"><span className="hl-bg" /><span className="hl-tx">AI cites</span></span>.</span>
             </h1>
 
             <div className="col-5 hero-say fade-up delay-2">
               <p className="hero-sub">
-                Full-stack SEO, AEO and GEO built for founders. Senior strategy, shipped monthly, measured in pipeline rather than rankings.
+                Full-stack SEO, AEO and GEO for B2B SaaS, ecommerce and local businesses. Senior strategy, shipped
+                weekly, measured on revenue rather than rankings.
               </p>
               <ul className="hero-stat-strip">
                 <li>
@@ -186,7 +188,7 @@ export default function Home() {
                 <input
                   type="text"
                   className="hero-form-input"
-                  placeholder="yoursaas.com"
+                  placeholder="yourdomain.com"
                   value={heroUrl}
                   onChange={(e) => setHeroUrl(e.target.value)}
                   aria-label="Your domain"
@@ -201,7 +203,7 @@ export default function Home() {
               <ul className="hero-benefits">
                 <li><span className="b-check">✓</span> founder reviews every domain personally</li>
                 <li><span className="b-check">✓</span> reply on LinkedIn within 48 hours</li>
-                <li><span className="b-check">✓</span> only 4 SaaS taken per month</li>
+                <li><span className="b-check">✓</span> only four reviews taken per month</li>
               </ul>
 
               <div className="hero-secondary">
@@ -221,10 +223,10 @@ export default function Home() {
         <div className="marquee-track">
           {[0, 1].map((dup) => (
             <div className="marquee-group" key={dup}>
-              <span>4 SAAS PER MONTH</span>
+              <span>4 REVIEWS PER MONTH</span>
               <span>FOUNDER-REVIEWED</span>
               <span>48H REPLY ON LINKEDIN</span>
-              <span>4 SAAS PER MONTH</span>
+              <span>4 REVIEWS PER MONTH</span>
               <span>FOUNDER-REVIEWED</span>
               <span>48H REPLY ON LINKEDIN</span>
             </div>
@@ -330,15 +332,15 @@ export default function Home() {
         <span className="drift drift-b drift-svc" data-loop aria-hidden="true" />
         <div className="container">
           <div className="section-head">
-            <span className="eyebrow" data-num="003">SERVICES · ONE ENGINE, SIX DISCIPLINES</span>
+            <span className="eyebrow" data-num="003">WHAT WE DO · ONE ENGINE, SIX DISCIPLINES</span>
             <div>
               <h2 className="h-2" data-reveal-lines>Every layer of modern search,<br /><span className="accent">under one roof.</span></h2>
               <p className="lead">Google rankings, AI Overviews, ChatGPT citations, answer boxes — they are not separate channels, they are one surface with six disciplines. Buy them separately or as the full engine. Either way, the same proof stands behind all of them.</p>
               {/* The hub needs an in-body link from the page with the most
                   authority, not just a nav entry: nav links repeat on every
-                  page and carry little context, and /services had none. */}
-              <Link to="/services" className="case-readmore link-wipe ar-parent">
-                Compare all six services <span className="ar">→</span>
+                  page and carry little context, and /what-we-do had none. */}
+              <Link to="/what-we-do" className="case-readmore link-wipe ar-parent">
+                Compare all six capabilities <span className="ar">→</span>
               </Link>
             </div>
           </div>
@@ -359,7 +361,7 @@ export default function Home() {
           {SERVICES.map((s, i) => (
             <Link
               key={s.slug}
-              to={`/services/${s.slug}`}
+              to={`/what-we-do/${s.slug}`}
               className="svc-stack-card ar-parent"
               data-sticky-item
               style={{ '--i': i, '--n': SERVICES.length }}
@@ -367,10 +369,48 @@ export default function Home() {
               <span className="svc-stack-num" aria-hidden="true">{String(i + 1).padStart(3, '0')}</span>
               <h3 className="svc-stack-h">{s.nav}</h3>
               <p className="svc-stack-desc">{s.navDesc}</p>
-              <span className="svc-stack-go">Explore the service <span className="ar">→</span></span>
+              <span className="svc-stack-go">Explore the capability <span className="ar">→</span></span>
             </Link>
           ))}
           </div>
+        </div>
+      </section>
+
+      {/* ═══ WHO WE HELP ═══════════════════════════════════ */}
+      {/* Deliberately after the capability section, not before it: the page
+          leads with what we do and what it produces, and only then narrows to
+          who it is for. Three cards, one per vertical page. */}
+      <section className="home-verticals ruled" id="who-we-help" data-reveal>
+        <div className="container">
+          <div className="section-head">
+            <span className="eyebrow" data-num="004">WHO WE HELP · THREE VERTICALS</span>
+            <div>
+              <h2 className="h-2" data-reveal-lines>
+                The craft is shared.<br /><span className="accent">The playbook is not.</span>
+              </h2>
+              <p className="lead">
+                A SaaS company fighting for a category that has no name yet, a catalogue generating more
+                filter URLs than it has products, and a service-area business trying to hold three slots on
+                a map are three different problems. We run them as three different programmes.
+              </p>
+              <Link to="/who-we-help" className="case-readmore link-wipe ar-parent">
+                Compare the three playbooks <span className="ar">→</span>
+              </Link>
+            </div>
+          </div>
+
+          <ol className="home-vert-cards" data-reveal-children>
+            {VERTICALS.map((v, i) => (
+              <li key={v.slug}>
+                <Link to={`/${v.slug}`} className="home-vert-card ar-parent">
+                  <span className="home-vert-num" aria-hidden="true">{String(i + 1).padStart(3, '0')}</span>
+                  <h3 className="home-vert-h">{v.nav}</h3>
+                  <p className="home-vert-desc">{v.navDesc}</p>
+                  <span className="home-vert-go">See the playbook <span className="ar">→</span></span>
+                </Link>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
@@ -532,7 +572,7 @@ export default function Home() {
               <p className="tool-desc">The Site Audit is the Founder Review. Drop your URL and the founder personally runs a 52-check audit across crawlability, schema, Core Web Vitals, mobile, security, GEO + LLM readiness, plus the non-technical layer most agencies skip: content depth, ICP clarity, conversion path, copy quality. You get a real reply on LinkedIn inside 48 hours — even if it is a no.</p>
 
               <div className="tool-visual">
-                <ToolDemo url="yoursaas.com" runLabel="RUN AUDIT" startDelay={0}>
+                <ToolDemo url="yourdomain.com" runLabel="RUN AUDIT" startDelay={0}>
                   <div className="mock-body mock-checks">
                     {['Technical SEO', 'GEO Readiness', 'Content + ICP', 'Conversion'].map((c, i) => (
                       <div className="mock-check" key={c} style={{ '--w': [92, 74, 61, 83][i] + '%' }}>
@@ -556,7 +596,7 @@ export default function Home() {
               <div className="tool-tag">★ FREE · OUR OWN ENGINE</div>
               <p className="tool-desc">We do not sell you Ahrefs data. We built our own. Tranco traffic rank, Wayback Machine domain age, on-page schema and link structure, real HTTP transport quality. Composite RankedTag Authority Score with a transparent breakdown you can verify against our public source links.</p>
               <div className="tool-visual">
-                <ToolDemo url="yoursaas.com" runLabel="CHECK" startDelay={700} className="mock-dial">
+                <ToolDemo url="yourdomain.com" runLabel="CHECK" startDelay={700} className="mock-dial">
                   <svg viewBox="0 0 120 70" role="img" aria-label="Illustrative authority score dial">
                     <path className="dial-track" d="M10 62 A50 50 0 0 1 110 62" />
                     <path className="dial-fill" d="M10 62 A50 50 0 0 1 110 62" />
@@ -579,7 +619,7 @@ export default function Home() {
               <div className="tool-tag">★ FREE · REAL-TIME · NO TRACKING</div>
               <p className="tool-desc">Paste your copy or drop in a URL. Live 1-, 2- and 3-word density as you type, SEO score with readability and stuffing warnings, visual charts, and CSV export. Text analysis runs in your browser. URL fetches go through our own server-side scraper. No login, no key.</p>
               <div className="tool-visual">
-                <ToolDemo url="yoursaas.com/post" runLabel="ANALYSE" startDelay={1400} className="mock-bars">
+                <ToolDemo url="yourdomain.com/post" runLabel="ANALYSE" startDelay={1400} className="mock-bars">
                   {[68, 44, 86, 30, 55, 22, 70, 38].map((h, i) => (
                     <span className="mock-bar-col" key={i} style={{ '--h': h + '%' }} />
                   ))}
@@ -597,7 +637,7 @@ export default function Home() {
               <div className="tool-tag">★ FREE · OUR OWN ENGINE · NO PSI KEY</div>
               <p className="tool-desc">We fetch your URL server-side, time the response, parse the HTML, and score it on five real signals: speed, weight, render-blocking, image hygiene, transport quality. Runs in under 5 seconds. Cross-check at pagespeed.web.dev for full Lighthouse.</p>
               <div className="tool-visual">
-                <ToolDemo url="yoursaas.com" runLabel="MEASURE" startDelay={2100} className="mock-speed">
+                <ToolDemo url="yourdomain.com" runLabel="MEASURE" startDelay={2100} className="mock-speed">
                   <div className="speed-read"><span className="speed-num">0.42</span><span className="speed-unit">s</span></div>
                   <div className="speed-rows">
                     {[['TTFB', 82], ['TRANSPORT', 91], ['BLOCKING', 64]].map(([l, w]) => (
@@ -620,7 +660,7 @@ export default function Home() {
               <div className="tool-tag">★ FREE · OUR OWN ENGINE · UP TO 5 COMPETITORS</div>
               <p className="tool-desc">Drop your page plus up to 5 competitor URLs. We score every page on keyword optimisation, structure, readability, prominence, semantic coverage and distribution — then surface the keywords competitors rank for that you do not. Side-by-side comparison, radar chart, gap table and ranked recommendations.</p>
               <div className="tool-visual">
-                <ToolDemo url="yoursaas.com" runLabel="COMPARE" startDelay={2800} className="mock-versus">
+                <ToolDemo url="yourdomain.com" runLabel="COMPARE" startDelay={2800} className="mock-versus">
                   {[['YOU', 78, 'you'], ['COMP A', 52, ''], ['COMP B', 61, ''], ['COMP C', 35, '']].map(([l, w, k]) => (
                     <div className={`versus-row${k ? ' is-you' : ''}`} key={l} style={{ '--w': w + '%' }}>
                       <span className="versus-lbl">{l}</span>
@@ -646,9 +686,9 @@ export default function Home() {
           </div>
           <div className="col-7 start-6 apply-band-main" ref={applyRef}>
             <ScriptedCursor hostRef={applyRef} timeline={APPLY_TIMELINE} startDelay={1200} />
-            <h2 className="apply-band-h">Tell us about your SaaS.<br /><span className="ser">We read every one.</span></h2>
+            <h2 className="apply-band-h">Tell us about your business.<br /><span className="ser">We read every one.</span></h2>
             <p className="apply-band-sub">
-              We take 4 SaaS founders a month. The founder reads every application personally and replies on LinkedIn within 48 hours — even if it is a no.
+              We take four founders a month. The founder reads every application personally and replies on LinkedIn within 48 hours — even if it is a no.
             </p>
             <Link to="/apply" className="btn btn-red btn-lg apply-band-btn ar-parent">
               Apply for review <span className="ar-ne">↗</span>
@@ -656,7 +696,7 @@ export default function Home() {
             <ul className="apply-band-bullets">
               <li><span className="b-check">✓</span> reviewed by a human</li>
               <li><span className="b-check">✓</span> reply on LinkedIn in 48h</li>
-              <li><span className="b-check">✓</span> only 4 SaaS a month</li>
+              <li><span className="b-check">✓</span> only four a month</li>
             </ul>
           </div>
         </div>
@@ -702,7 +742,7 @@ export default function Home() {
       {/* ═══ FINAL CTA ═════════════════════════════════════════════════════ */}
       <section className="final-cta ruled" data-reveal>
         <FilamentBurst />
-        <FloatingBadge id="cta" text="4 SaaS per month" className="fbadge-cta" />
+        <FloatingBadge id="cta" text="4 reviews per month" className="fbadge-cta" />
         <div className="container final-cta-inner">
           <span className="eyebrow bracket final-cta-eyebrow">THE INBOUND ENGINE</span>
           <h2 className="final-h">

@@ -8,32 +8,140 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.rankedtag.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.rankedtag.com"
+        }
+      ],
       "destination": "https://rankedtag.com/:path*",
       "permanent": true
     },
-    { "source": "/backlink-checker", "destination": "/domain-authority-checker", "permanent": true },
-    { "source": "/keyword-density", "destination": "/keyword-density-checker", "permanent": true },
-    { "source": "/density", "destination": "/keyword-density-checker", "permanent": true },
-    { "source": "/competitor", "destination": "/competitor-analysis", "permanent": true },
-    { "source": "/page-speed", "destination": "/page-speed-checker", "permanent": true },
-    { "source": "/about/bhushan-raj-shakya", "destination": "/", "permanent": true },
-    { "source": "/audit", "destination": "/apply", "permanent": false },
-    { "source": "/technical-audit", "destination": "/apply", "permanent": false }
+    {
+      "source": "/services",
+      "destination": "/what-we-do",
+      "permanent": true
+    },
+    {
+      "source": "/services/b2b-saas-seo",
+      "destination": "/what-we-do/seo",
+      "permanent": true
+    },
+    {
+      "source": "/services/ai-seo",
+      "destination": "/what-we-do/ai-seo",
+      "permanent": true
+    },
+    {
+      "source": "/services/generative-engine-optimization",
+      "destination": "/what-we-do/generative-engine-optimization",
+      "permanent": true
+    },
+    {
+      "source": "/services/answer-engine-optimization",
+      "destination": "/what-we-do/answer-engine-optimization",
+      "permanent": true
+    },
+    {
+      "source": "/services/technical-seo",
+      "destination": "/what-we-do/technical-seo",
+      "permanent": true
+    },
+    {
+      "source": "/services/saas-content-marketing",
+      "destination": "/what-we-do/content-marketing",
+      "permanent": true
+    },
+    {
+      "source": "/backlink-checker",
+      "destination": "/domain-authority-checker",
+      "permanent": true
+    },
+    {
+      "source": "/keyword-density",
+      "destination": "/keyword-density-checker",
+      "permanent": true
+    },
+    {
+      "source": "/density",
+      "destination": "/keyword-density-checker",
+      "permanent": true
+    },
+    {
+      "source": "/competitor",
+      "destination": "/competitor-analysis",
+      "permanent": true
+    },
+    {
+      "source": "/page-speed",
+      "destination": "/page-speed-checker",
+      "permanent": true
+    },
+    {
+      "source": "/about/bhushan-raj-shakya",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/audit",
+      "destination": "/apply",
+      "permanent": true
+    },
+    {
+      "source": "/technical-audit",
+      "destination": "/apply",
+      "permanent": true
+    }
   ],
   "rewrites": [
-    { "source": "/blog", "destination": "/api/blog-page" },
-    { "source": "/blog/:slug", "destination": "/api/blog-page" },
-    { "source": "/sitemap.xml", "destination": "/api/sitemap" },
-    { "source": "/sitemap-posts.xml", "destination": "/api/sitemap" },
-    { "source": "/sitemap-services.xml", "destination": "/api/sitemap" },
-    { "source": "/sitemap-pages.xml", "destination": "/api/sitemap" },
-    { "source": "/rss.xml", "destination": "/api/rss" },
-    { "source": "/llm-info", "destination": "/llm-info.html" },
-    { "source": "/llm-info.md", "destination": "/llm-info.txt" },
-    { "source": "/api/backlinks", "destination": "/api/authority" },
-    { "source": "/admin", "destination": "/index.html" },
-    { "source": "/admin/:path*", "destination": "/index.html" }
+    {
+      "source": "/blog",
+      "destination": "/api/blog-page"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/api/blog-page"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    },
+    {
+      "source": "/sitemap-posts.xml",
+      "destination": "/api/sitemap"
+    },
+    {
+      "source": "/sitemap-services.xml",
+      "destination": "/api/sitemap"
+    },
+    {
+      "source": "/sitemap-pages.xml",
+      "destination": "/api/sitemap"
+    },
+    {
+      "source": "/rss.xml",
+      "destination": "/api/rss"
+    },
+    {
+      "source": "/llm-info",
+      "destination": "/llm-info.html"
+    },
+    {
+      "source": "/llm-info.md",
+      "destination": "/llm-info.txt"
+    },
+    {
+      "source": "/api/backlinks",
+      "destination": "/api/authority"
+    },
+    {
+      "source": "/admin",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "/index.html"
+    }
   ],
   "functions": {
     "api/**/*.js": {
@@ -44,25 +152,37 @@
     {
       "source": "/assets/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/(.*)\\.(png|jpg|jpeg|gif|webp|svg|ico)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/(.*)\\.(woff|woff2|ttf|otf|eot)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/robots.txt",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, must-revalidate"
+        }
       ]
     }
   ]

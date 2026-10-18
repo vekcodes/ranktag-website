@@ -1,8 +1,10 @@
-// SINGLE SOURCE OF TRUTH for the /services pages.
+// SINGLE SOURCE OF TRUTH for the /what-we-do capability pages.
 //
-// Each entry drives one pre-rendered service page (ServicePage.jsx), the nav
-// dropdown, the footer column, the /services hub, and the homepage services
-// section. Pure data only — imported by vite.config.js at build time via
+// Each entry drives one pre-rendered capability page (CapabilityPage.jsx), the
+// nav dropdown, the footer column, the /what-we-do hub, and the homepage
+// capability section. Copy here is deliberately VERTICAL-NEUTRAL — the
+// audience-specific argument lives on the vertical pages (/saas-seo-agency,
+// /ecommerce-seo-agency, /local-seo-agency), not here. Pure data only — imported by vite.config.js at build time via
 // routeMeta.js, so no React/CSS/browser globals.
 //
 // SEO notes per page live next to the copy they justify:
@@ -13,21 +15,22 @@ export const SITE = 'https://rankedtag.com';
 
 export const SERVICES = [
   {
-    slug: 'b2b-saas-seo',
-    nav: 'B2B SaaS SEO',
-    navDesc: 'Full-stack SEO built for SaaS pipeline, not traffic',
-    // Money keyword: "B2B SaaS SEO agency"
-    title: 'B2B SaaS SEO Agency: Pipeline, Not Traffic',
+    slug: 'seo',
+    nav: 'Full-stack SEO',
+    navDesc: 'Technical, content and authority in one compounding programme',
+    // Money keyword: "full-stack SEO services" (vertical head terms live on the
+    // vertical pages, which this page links out to).
+    title: 'Full-Stack SEO Services: Revenue, Not Traffic',
     description:
-      'B2B SaaS SEO agency that took sendr.ai 0→1.05M impressions in 6 months. Senior strategists + AI velocity. Technical, content and authority, built for pipeline.',
-    eyebrow: 'SERVICE · B2B SAAS SEO',
-    h1: 'B2B SaaS SEO that fills pipeline, not dashboards.',
-    dek: 'Most SEO agencies sell traffic. Traffic does not pay your AWS bill. We build the full stack — technical foundations, keyword strategy, content engine, internal authority — measured on signups, demos and pipeline. It is the exact system that took sendr.ai from zero to 1.05M impressions and #2 in Google\'s AI Overview, above ZoomInfo.',
+      'Full-stack SEO: technical foundations, keyword architecture, a content engine and authority building, measured on revenue. Senior strategists at AI speed.',
+    eyebrow: 'CAPABILITY · FULL-STACK SEO',
+    h1: 'Full-stack SEO that fills pipeline, not dashboards.',
+    dek: 'Most SEO agencies sell traffic. Traffic does not pay the bills. We build the full stack — technical foundations, keyword architecture, content engine, internal authority — measured on the thing you actually sell. It is the exact system that took sendr.ai from zero to 1.05M impressions and #2 in Google\'s AI Overview, above ZoomInfo.',
     serviceType: 'Search Engine Optimization',
     pains: [
       {
         h: 'Ranking for keywords nobody buys from',
-        p: 'Your agency ranked you for "what is CRM". Great. Those readers are students, not buyers. B2B SaaS SEO starts from your ICP\'s buying queries and works backwards.',
+        p: 'Your agency ranked you for "what is CRM". Great. Those readers are students, not buyers. Full-stack SEO starts from the queries your buyers type with a wallet open, and works backwards.',
       },
       {
         h: 'Content that reads like everyone else\'s',
@@ -39,11 +42,11 @@ export const SERVICES = [
       },
     ],
     deliverables: [
-      ['ICP-first keyword architecture', 'Every target keyword mapped to a funnel stage and a revenue hypothesis — bottom-of-funnel comparison, alternative and use-case pages first.'],
+      ['Intent-first keyword architecture', 'Every target keyword mapped to a funnel stage and a revenue hypothesis — bottom-of-funnel comparison, alternatives and buying-intent pages first.'],
       ['Technical foundation', 'Crawlability, Core Web Vitals, schema markup, internal linking — the 52-point checklist we run on every domain before a word of content ships.'],
       ['Content engine', 'Claude-accelerated research and drafts, senior-writer rewrites. The pace of a 30-person content team, run by 3.'],
       ['Entity & authority building', 'Organization schema, consistent NAP-style entity signals, digital PR moments — so Google and LLMs know exactly who you are.'],
-      ['AI Overview + LLM optimization', 'Every page shipped GEO-ready: citable claims, structured answers, sourced data. Rank on Google and get cited by ChatGPT with the same asset.'],
+      ['AI Overview + LLM optimisation', 'Every page shipped GEO-ready: citable claims, structured answers, sourced data. Rank on Google and get cited by ChatGPT with the same asset.'],
       ['Pipeline instrumentation', 'Form fills route to your CRM and Slack, enriched — not a Google Sheet emailed on Fridays.'],
     ],
     process: [
@@ -53,14 +56,14 @@ export const SERVICES = [
       ['Compound & report', 'Weekly shipping, monthly strategy. Reported on impressions, citations, signups and pipeline — never just "sessions".'],
     ],
     faqs: [
-      ['What does a B2B SaaS SEO agency actually do differently?', 'Generic agencies optimize for traffic volume. A B2B SaaS SEO agency optimizes for pipeline: bottom-of-funnel comparison and alternative pages, pricing-intent queries, integration pages and use-case pages that convert trial signups — then the top-of-funnel engine that feeds them. We also optimize for AI search surfaces (Google AI Overviews, ChatGPT, Perplexity), because that is where 40% of B2B software research now starts.'],
-      ['How long does B2B SaaS SEO take to work?', 'Pipeline live by week 2, first indexed pages by week 3, first top-20 rankings around weeks 5 to 7, first LLM citation typically inside 30 to 45 days. The compounding curve hits in months 3 to 6 — sendr.ai reached 1.05M impressions and 7,430 clicks in 6 months from a standing start.'],
-      ['How much does B2B SaaS SEO cost?', 'We share pricing after we have reviewed your domain and confirmed fit — a seed-stage SaaS and a $2M MRR SaaS need different scopes. Apply for the free founder review and you get a real number within 48 hours, not a sales sequence.'],
+      ['What does full-stack SEO include?', 'Four layers shipped as one programme: a technical foundation (crawlability, Core Web Vitals, schema graph), keyword architecture mapped to buying intent rather than volume, a content engine that ships weekly, and authority work — entity signals and earned mentions — that makes the first three compound. We also optimise for AI search surfaces (Google AI Overviews, ChatGPT, Perplexity) as part of the same build, because the structural work that earns a ranking is the work that earns a citation.'],
+      ['How long does SEO take to work?', 'Pipeline live by week 2, first indexed pages by week 3, first top-20 rankings around weeks 5 to 7, first LLM citation typically inside 30 to 45 days. The compounding curve hits in months 3 to 6 — sendr.ai reached 1.05M impressions and 7,430 clicks in 6 months from a standing start.'],
+      ['How much does SEO cost?', 'We share pricing after we have reviewed your domain and confirmed fit — a six-page local business and a 40,000-SKU catalogue need very different scopes. Apply for the free founder review and you get a real number within 48 hours, not a sales sequence.'],
       ['We already tried an SEO agency and it did not work. Why would this be different?', 'Three structural differences: (1) senior strategists pick every keyword and approve every brief — no junior account managers; (2) AI compresses research and drafting so we ship in days what others ship in quarters; (3) everything is measured on signups and pipeline, and the workflows live on your infrastructure when we are done.'],
-      ['Do you only work with B2B SaaS?', 'Yes. Best fit is B2B SaaS between $20K and $2M MRR with an English-speaking ICP. Specializing is why the playbook works — we are not re-learning your buyer every engagement.'],
+      ['What kinds of business do you work with?', 'Three verticals, each with its own playbook: B2B SaaS, ecommerce, and local and service-area businesses. The technical and content craft on this page is shared across all three; the keyword strategy, the architecture and the measurement are not, which is why each vertical gets its own approach rather than a renamed template.'],
     ],
     tools: ['/competitor-analysis', '/domain-authority-checker'],
-    related: ['ai-seo', 'technical-seo', 'saas-content-marketing'],
+    related: ['ai-seo', 'technical-seo', 'content-marketing'],
   },
   {
     slug: 'ai-seo',
@@ -69,8 +72,8 @@ export const SERVICES = [
     // Money keyword: "AI SEO agency" / "AI SEO services"
     title: 'AI SEO Agency: Rank in Google AI Overviews',
     description:
-      'AI SEO services that get B2B SaaS ranked in Google AI Overviews and cited by AI search. We put sendr.ai at #2 in the AI Overview, above ZoomInfo.',
-    eyebrow: 'SERVICE · AI SEO',
+      'AI SEO services that get you ranked in Google AI Overviews and cited by AI search engines. We put sendr.ai at #2 in the AI Overview, above ZoomInfo.',
+    eyebrow: 'CAPABILITY · AI SEO',
     h1: 'AI SEO: own the answer, not just the ranking.',
     dek: 'Google now answers the query before anyone scrolls to your blue link. AI SEO is how you become that answer. We restructure your content, entities and schema so AI Overviews cite you — the way sendr.ai sits at #2 for its category-defining query, six places above ZoomInfo.',
     serviceType: 'AI Search Optimization',
@@ -103,31 +106,31 @@ export const SERVICES = [
       ['Track citation share', 'Monthly reporting on AI Overview presence and LLM citations alongside classic rankings.'],
     ],
     faqs: [
-      ['What is AI SEO?', 'AI SEO is optimizing your website to rank inside AI-generated search results — Google AI Overviews, AI Mode, and answer engines like ChatGPT and Perplexity — as well as the classic organic results. It combines traditional technical SEO with entity engineering, structured data and answer-first content formatting so extraction models can find, trust and cite you.'],
+      ['What is AI SEO?', 'AI SEO is optimising your website to rank inside AI-generated search results — Google AI Overviews, AI Mode, and answer engines like ChatGPT and Perplexity — as well as the classic organic results. It combines traditional technical SEO with entity engineering, structured data and answer-first content formatting so extraction models can find, trust and cite you.'],
       ['Is AI SEO different from GEO and AEO?', 'They overlap. AI SEO is the umbrella: visibility across all AI-driven search. GEO (generative engine optimization) targets citations inside LLM chat products like ChatGPT and Perplexity. AEO (answer engine optimization) targets structured answer boxes like featured snippets and AI Overviews. We run all three as one program because they share the same foundation — clean entities, structured content, citable claims.'],
       ['Can you guarantee we appear in Google AI Overviews?', 'No — nobody controls Google\'s models, and anyone promising placement is lying. What we can show is the repeatable mechanism: sendr.ai went from invisible to the #2 answer in Google\'s AI Overview for "what is the best GTM tool", above ZoomInfo, in six months. We target measurable citation lift inside 90 days.'],
       ['Does AI SEO hurt our normal Google rankings?', 'The opposite. Answer-first structure, schema and entity signals are also classic ranking factors. Sendr.ai\'s 1.05M impressions came from the same pages that earned the AI Overview citation — one asset, two surfaces.'],
       ['How do you track AI search visibility?', 'We track your money queries across Google AI Overviews, ChatGPT, Perplexity, Gemini and Claude monthly — recording when you are cited, what for, and which page earned it. That citation share is reported next to Search Console data so you see the whole picture.'],
     ],
     tools: ['/competitor-analysis', '/page-speed-checker'],
-    related: ['generative-engine-optimization', 'answer-engine-optimization', 'b2b-saas-seo'],
+    related: ['generative-engine-optimization', 'answer-engine-optimization', 'seo'],
   },
   {
     slug: 'generative-engine-optimization',
     nav: 'Generative Engine Optimization',
     navDesc: 'Get cited by ChatGPT, Perplexity, Gemini & Claude',
     // Money keyword: "generative engine optimization agency" / "GEO agency"
-    title: 'Generative Engine Optimization (GEO) Agency for SaaS',
+    title: 'Generative Engine Optimization (GEO) Agency',
     description:
-      'GEO agency for B2B SaaS: get cited and recommended by ChatGPT, Perplexity, Gemini and Claude. Proof-led and founder-reviewed. First citation in 30–45 days.',
-    eyebrow: 'SERVICE · GEO',
+      'GEO agency: get cited and recommended by ChatGPT, Perplexity, Gemini and Claude. Proof-led and founder-reviewed. First citation typically in 30–45 days.',
+    eyebrow: 'CAPABILITY · GEO',
     h1: 'Generative Engine Optimization: get recommended by ChatGPT.',
-    dek: 'When a founder asks ChatGPT "what\'s the best tool for X", one of two things happens: you get recommended, or your competitor does. GEO is the discipline of making it you — structuring your content, entities and third-party footprint so LLMs cite your brand in their answers.',
+    dek: 'When a buyer asks ChatGPT "what\'s the best X", one of two things happens: you get recommended, or your competitor does. GEO is the discipline of making it you — structuring your content, entities and third-party footprint so LLMs cite your brand in their answers.',
     serviceType: 'Generative Engine Optimization',
     pains: [
       {
-        h: '40% of buyer research starts in an LLM',
-        p: 'Your buyers ask ChatGPT and Perplexity for shortlists before they ever see a SERP. If you are not in the training-and-retrieval footprint, you are not in the deal.',
+        h: 'Buyer research now starts in an LLM',
+        p: 'Your buyers ask ChatGPT and Perplexity for shortlists before they ever see a SERP. If you are not in the training-and-retrieval footprint, you are not on the list.',
       },
       {
         h: 'You can\'t see the leak',
@@ -153,24 +156,24 @@ export const SERVICES = [
       ['Measure & compound', 'First citation typically lands inside 30–45 days. From there we widen query coverage and defend the positions you win.'],
     ],
     faqs: [
-      ['What is generative engine optimization (GEO)?', 'GEO is the practice of optimizing your brand and content so generative AI systems — ChatGPT, Perplexity, Gemini, Claude and Google\'s AI Mode — cite or recommend you in their answers. Where classic SEO earns a ranking on a results page, GEO earns a mention inside the answer itself.'],
-      ['How is GEO different from SEO?', 'SEO optimizes for a crawler-ranked list of links; GEO optimizes for retrieval and citation by language models. The tactics overlap (clean structure, authority, entities) but GEO adds LLM-specific work: quotable passage structure, corroborating third-party mentions, machine-readable brand facts and AI crawler access. Strong SEO is the foundation — GEO is the layer that turns rankings into recommendations.'],
+      ['What is generative engine optimization (GEO)?', 'GEO is the practice of optimising your brand and content so generative AI systems — ChatGPT, Perplexity, Gemini, Claude and Google\'s AI Mode — cite or recommend you in their answers. Where classic SEO earns a ranking on a results page, GEO earns a mention inside the answer itself.'],
+      ['How is GEO different from SEO?', 'SEO optimises for a crawler-ranked list of links; GEO optimises for retrieval and citation by language models. The tactics overlap (clean structure, authority, entities) but GEO adds LLM-specific work: quotable passage structure, corroborating third-party mentions, machine-readable brand facts and AI crawler access. Strong SEO is the foundation — GEO is the layer that turns rankings into recommendations.'],
       ['How do you measure GEO results?', 'Citation share: for a fixed set of buying queries, we record which brands each engine cites monthly and track your movement. It is the GEO equivalent of rank tracking — and we report it alongside Search Console so you see both surfaces.'],
       ['How fast can we get cited by ChatGPT?', 'Retrieval-augmented engines (Perplexity, ChatGPT with browsing, Gemini) can cite new content within weeks — our engagements typically land a first citation inside 30 to 45 days. Answers drawn purely from training data move slower, which is why the third-party footprint work matters: it compounds into the next model update.'],
-      ['Is GEO worth it for a small SaaS?', 'Small SaaS benefit most. LLM answers are not pay-to-play and do not simply mirror domain authority — a precise, well-structured, corroborated source can out-cite an 8-figure incumbent. That is exactly how sendr.ai ended up above ZoomInfo.'],
+      ['Is GEO worth it for a small brand?', 'Small brands benefit most. LLM answers are not pay-to-play and do not simply mirror domain authority — a precise, well-structured, corroborated source can out-cite an 8-figure incumbent. That is exactly how sendr.ai ended up above ZoomInfo.'],
     ],
     tools: ['/domain-authority-checker', '/competitor-analysis'],
-    related: ['ai-seo', 'answer-engine-optimization', 'saas-content-marketing'],
+    related: ['ai-seo', 'answer-engine-optimization', 'content-marketing'],
   },
   {
     slug: 'answer-engine-optimization',
     nav: 'Answer Engine Optimization',
     navDesc: 'Win featured snippets, PAA and AI answer boxes',
     // Money keyword: "answer engine optimization services" / "AEO agency"
-    title: 'Answer Engine Optimization (AEO) Services for SaaS',
+    title: 'Answer Engine Optimization (AEO) Services',
     description:
-      'AEO services for B2B SaaS: structure your content to win featured snippets, People Also Ask and Google AI Overviews, and become the answer buyers see first.',
-    eyebrow: 'SERVICE · AEO',
+      'AEO services: structure your content to win featured snippets, People Also Ask boxes and Google AI Overviews, and become the answer your buyers see first.',
+    eyebrow: 'CAPABILITY · AEO',
     h1: 'Answer Engine Optimization: be the answer buyers see first.',
     dek: 'Every high-intent query now resolves to an answer box — a featured snippet, a People-Also-Ask card, an AI Overview. AEO is the craft of formatting truth so machines pick your version of it. Structured questions, direct answers, schema that binds it together.',
     serviceType: 'Answer Engine Optimization',
@@ -185,7 +188,7 @@ export const SERVICES = [
       },
       {
         h: 'No schema, no seat at the table',
-        p: 'FAQ, HowTo, Article and Organization markup are how you hand-deliver your answers to the machine. Most SaaS sites ship none of it correctly.',
+        p: 'FAQ, HowTo, Article and Organization markup are how you hand-deliver your answers to the machine. Most sites ship none of it correctly.',
       },
     ],
     deliverables: [
@@ -203,7 +206,7 @@ export const SERVICES = [
       ['Win, track, defend', 'Answer boxes flip in weeks, not quarters. We track ownership monthly and defend positions competitors try to take back.'],
     ],
     faqs: [
-      ['What is answer engine optimization (AEO)?', 'AEO is optimizing content to be selected as the direct answer to a query — in featured snippets, People Also Ask cards, voice results and Google AI Overviews. It focuses on question-led structure, concise extractable answers and schema markup, so answer engines can lift your content verbatim.'],
+      ['What is answer engine optimization (AEO)?', 'AEO is optimising content to be selected as the direct answer to a query — in featured snippets, People Also Ask cards, voice results and Google AI Overviews. It focuses on question-led structure, concise extractable answers and schema markup, so answer engines can lift your content verbatim.'],
       ['What is the difference between AEO and GEO?', 'AEO targets answer boxes on search surfaces — snippets, PAA, AI Overviews. GEO targets citations inside generative chat products like ChatGPT and Perplexity. The content foundation is shared, so we build them together: a page structured for AEO is 80% of the way to being GEO-citable.'],
       ['Does AEO still matter if AI Overviews replace snippets?', 'Yes — more, not less. AI Overviews are assembled from the same extractable, well-structured passages that win snippets, and they cite their sources. The sites winning snippets today are disproportionately the ones cited in AI Overviews tomorrow. Same discipline, higher stakes.'],
       ['How long does it take to win a featured snippet?', 'If you already rank on page one for the query, answer-first restructuring can flip the snippet in 2 to 6 weeks. If you rank nowhere, we build ranking and answer formatting together, which follows the normal SEO curve — first top-20 rankings around weeks 5 to 7.'],
@@ -217,10 +220,10 @@ export const SERVICES = [
     nav: 'Technical SEO',
     navDesc: 'Crawlability, Core Web Vitals, schema — the 52-check stack',
     // Money keyword: "technical SEO agency" / "technical SEO services"
-    title: 'Technical SEO Services and Audit for B2B SaaS',
+    title: 'Technical SEO Services and Audit: 52-Check Stack',
     description:
-      'Technical SEO for SaaS: crawlability, Core Web Vitals, schema graphs, internal links and AI-crawler readiness: the 52-check foundation content needs to rank.',
-    eyebrow: 'SERVICE · TECHNICAL SEO',
+      'Technical SEO: crawlability, Core Web Vitals, schema graphs, internal links and AI-crawler readiness — the 52-check foundation your content needs to rank.',
+    eyebrow: 'CAPABILITY · TECHNICAL SEO',
     h1: 'Technical SEO: the foundation your content deserves.',
     dek: 'Great content on a broken foundation is money on fire. Slow templates, orphaned pages, mangled schema, AI crawlers bounced at the door — every one of them silently caps how far your rankings can go. We run the 52-check technical stack first, so everything shipped after it compounds.',
     serviceType: 'Technical SEO',
@@ -260,18 +263,18 @@ export const SERVICES = [
       ['How fast will we see results from technical fixes?', 'Crawl and indexation fixes show in Search Console within days to weeks. Core Web Vitals improvements need a 28-day field-data window to register. Rankings respond as recrawling propagates — typically visible lift inside 4 to 8 weeks on affected templates.'],
     ],
     tools: ['/page-speed-checker', '/domain-authority-checker', '/competitor-analysis'],
-    related: ['b2b-saas-seo', 'ai-seo', 'answer-engine-optimization'],
+    related: ['seo', 'ai-seo', 'answer-engine-optimization'],
   },
   {
-    slug: 'saas-content-marketing',
+    slug: 'content-marketing',
     nav: 'SEO Content Engine',
     navDesc: 'Senior-written, AI-accelerated content that ranks & converts',
-    // Money keyword: "SaaS content marketing agency"
-    title: 'SaaS Content Marketing Agency: The SEO Content Engine',
+    // Money keyword: "content marketing agency"
+    title: 'Content Marketing Agency: The SEO Content Engine',
     description:
-      'SaaS content marketing that ranks and converts: senior strategists pick the fights, Claude compresses research, editors ship weekly. Built to be cited by AI.',
-    eyebrow: 'SERVICE · CONTENT ENGINE',
-    h1: 'A SaaS content engine that outships teams 10x its size.',
+      'Content marketing that ranks and converts: senior strategists pick the fights, Claude compresses the research, editors ship weekly. Built to be cited by AI.',
+    eyebrow: 'CAPABILITY · CONTENT ENGINE',
+    h1: 'A content engine that outships teams 10x its size.',
     dek: 'Content is a volume game and a quality game at the same time — which is why most teams lose it. Our engine runs both: senior strategists pick every fight, Claude compresses the research and first drafts, senior editors add the angle machines cannot. Weekly shipping, every piece built to rank on Google and get cited by LLMs.',
     serviceType: 'Content Marketing',
     pains: [
@@ -305,12 +308,12 @@ export const SERVICES = [
     faqs: [
       ['Is this just AI-generated content?', 'No. Claude does keyword research, source-gathering and first-pass drafts — the grunt 80%. A senior writer rewrites every piece, fact-checks it and adds the angle and opinion an LLM cannot generate. Nothing publishes without human review. The advantage is the combination: senior judgment at AI speed.'],
       ['How much content do we actually need to compete?', 'It depends on your category\'s surface area, not a magic number. The real answer comes out of the SWOT: we map every winnable topic, then ship weekly against the ranked list. Sendr.ai\'s 1.05M impressions in 6 months came from disciplined weekly shipping into mapped gaps — not from a 100-post blitz.'],
-      ['What kinds of content work best for B2B SaaS SEO?', 'Bottom-of-funnel first: comparison pages ("X vs Y"), alternatives pages, use-case and integration pages — they convert from day one. Then the middle: how-tos and templates that earn links and LLM citations. Thought leadership last, once the engine is feeding pipeline.'],
+      ['What kinds of content work best for SEO?', 'Bottom-of-funnel first: comparison pages ("X vs Y"), alternatives pages, buying guides and use-case pages — they convert from day one. Then the middle: how-tos, templates and original data that earn links and LLM citations. Thought leadership last, once the engine is already feeding revenue.'],
       ['Will Google penalize AI-assisted content?', 'Google\'s published position is that it rewards helpful content regardless of how it is produced, and penalizes low-value automation. Unedited AI slop gets filtered; researched, human-edited, opinionated content ranks. Our human-review gate exists precisely to stay on the right side of that line.'],
       ['Who owns the content and the system when we stop?', 'You do — all of it. Every article is on your domain from day one, and the prompts, n8n workflows and editorial checklists are handed over on your infrastructure. We think retainers should be earned by results, not by holding your content ops hostage.'],
     ],
     tools: ['/keyword-density-checker', '/competitor-analysis'],
-    related: ['b2b-saas-seo', 'generative-engine-optimization', 'ai-seo'],
+    related: ['seo', 'generative-engine-optimization', 'ai-seo'],
   },
 ];
 
@@ -318,10 +321,10 @@ export const SERVICE_BY_SLUG = Object.fromEntries(SERVICES.map((s) => [s.slug, s
 
 /** Hub-page + shared meta (imported by routeMeta.js so build-time head rewrite works). */
 export const SERVICES_HUB_META = {
-  title: 'SEO, AI SEO, GEO and AEO Services for B2B SaaS',
+  title: 'What We Do: SEO, AI SEO, GEO, AEO and Content',
   description:
-    'B2B SaaS SEO, AI SEO, GEO, AEO, technical SEO and content: six services, one inbound engine. Proof: sendr.ai, 0 to 1.05M impressions in 6 months.',
-  canonical: `${SITE}/services`,
+    'Full-stack SEO, AI SEO, GEO, AEO, technical SEO and content: six capabilities, one compounding search engine. Proof: sendr.ai, 0 to 1.05M impressions.',
+  canonical: `${SITE}/what-we-do`,
 };
 
-export const serviceUrl = (slug) => `${SITE}/services/${slug}`;
+export const serviceUrl = (slug) => `${SITE}/what-we-do/${slug}`;

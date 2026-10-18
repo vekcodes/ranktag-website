@@ -7,17 +7,17 @@ import JsonLd from '../../components/JsonLd.jsx';
 import { breadcrumb, faqPage, ORG_ID, SITE } from '../../lib/schema.js';
 import ToolFaq from '../../components/seo/ToolFaq.jsx';
 import '../../components/seo/toolGuide.css';
-import { SERVICES, SERVICES_HUB_META } from './servicesData.js';
+import { SERVICES, SERVICES_HUB_META } from './capabilitiesData.js';
 import '../Home.css';
-import './Services.css';
+import './WhatWeDo.css';
 
 // Answered so the first sentence stands alone: these are the questions the hub
 // has to settle before a visitor picks a child page, and the first sentence of
 // each is what an answer engine can lift without the rest of the page.
 const HUB_FAQ = [
   [
-    'Which SEO service should a B2B SaaS start with?',
-    'Start with technical SEO if your pages are not being indexed, and with B2B SaaS SEO if they are. Indexation is the gate: content, AEO and GEO all assume search engines can crawl, read and store your pages, so a crawl or schema problem makes every other service slower and more expensive. Once the foundation is sound, the order that compounds fastest is content first, then AEO and GEO on top of the pages content produced.',
+    'Which capability should we start with?',
+    'Start with technical SEO if your pages are not being indexed, and with full-stack SEO if they are. Indexation is the gate: content, AEO and GEO all assume search engines can crawl, read and store your pages, so a crawl or schema problem makes every other service slower and more expensive. Once the foundation is sound, the order that compounds fastest is content first, then AEO and GEO on top of the pages content produced.',
   ],
   [
     'What is the difference between AI SEO, AEO and GEO?',
@@ -28,19 +28,19 @@ const HUB_FAQ = [
     'Yes. Each of the six is scoped and priced to run on its own, and plenty of engagements start as a single discipline. They compound when combined, because technical work makes content indexable and content gives AEO and GEO something to cite, but none of them depends on buying the others first.',
   ],
   [
-    'How much do these services cost?',
-    'Pricing is shared after the founder review, because a seed-stage SaaS and a $2M MRR SaaS need different scopes. Apply with your domain, the founder runs the 52-check audit, and you get a real number within 48 hours rather than a sales sequence.',
+    'How much do these capabilities cost?',
+    'Pricing is shared after the founder review, because a six-page local business and a 40,000-SKU catalogue need different scopes. Apply with your domain, the founder runs the 52-check audit, and you get a real number within 48 hours rather than a sales sequence.',
   ],
 ];
 
-// /services hub — the crawlable index of every service page. An ItemList node
+// /what-we-do hub — the crawlable index of every capability page. An ItemList node
 // tells Google (and answer engines) these six URLs form one catalog owned by #org.
 const HUB_JSONLD = [
   {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    '@id': `${SITE}/services#webpage`,
-    url: `${SITE}/services`,
+    '@id': `${SITE}/what-we-do#webpage`,
+    url: `${SITE}/what-we-do`,
     name: SERVICES_HUB_META.title,
     description: SERVICES_HUB_META.description,
     isPartOf: { '@id': `${SITE}/#website` },
@@ -52,18 +52,18 @@ const HUB_JSONLD = [
         '@type': 'ListItem',
         position: i + 1,
         name: s.nav,
-        url: `${SITE}/services/${s.slug}`,
+        url: `${SITE}/what-we-do/${s.slug}`,
       })),
     },
   },
   breadcrumb([
     { name: 'Home', item: `${SITE}/` },
-    { name: 'Services', item: `${SITE}/services` },
+    { name: 'What we do', item: `${SITE}/what-we-do` },
   ]),
-  faqPage(HUB_FAQ, { isPartOf: `${SITE}/services#webpage` }),
+  faqPage(HUB_FAQ, { isPartOf: `${SITE}/what-we-do#webpage` }),
 ];
 
-export default function Services() {
+export default function WhatWeDo() {
   useScrollReveal();
   usePageMeta(SERVICES_HUB_META);
 
@@ -79,23 +79,23 @@ export default function Services() {
               <nav className="svc-crumb" aria-label="Breadcrumb">
                 <Link to="/" className="link-wipe">Home</Link>
                 <span aria-hidden="true">/</span>
-                <span aria-current="page">Services</span>
+                <span aria-current="page">What we do</span>
               </nav>
               <span className="idx" aria-hidden="true">001</span>
             </div>
 
             <div className="col-10 svc-hero-head">
-              <span className="eyebrow bracket svc-eyebrow">SERVICES · ONE ENGINE, SIX DISCIPLINES</span>
-              <h1 className="svc-h1">SEO, AI SEO, GEO &amp; AEO services for B2B SaaS.</h1>
+              <span className="eyebrow bracket svc-eyebrow">WHAT WE DO · ONE ENGINE, SIX DISCIPLINES</span>
+              <h1 className="svc-h1">SEO, AI SEO, GEO &amp; AEO, under one roof.</h1>
             </div>
 
             <div className="col-6 svc-hero-dek">
               {/* Direct answer first, narrative second. An answer engine asked
                   "what does RankedTag do" can lift this paragraph whole. */}
               <p className="svc-dek">
-                RankedTag runs six services for B2B SaaS companies: B2B SaaS SEO, AI SEO, generative engine
-                optimization, answer engine optimization, technical SEO and SaaS content marketing. Buy one on
-                its own or buy the whole engine. Every page we ship is built twice over, to rank in Google
+                RankedTag runs six capabilities: full-stack SEO, AI SEO, generative engine optimization,
+                answer engine optimization, technical SEO and content marketing. They are the craft, applied
+                the same way whoever you sell to. Buy one on its own or buy the whole engine. Every page we ship is built twice over, to rank in Google
                 <em> and</em> to be quotable by ChatGPT, Perplexity, Gemini and Claude.
               </p>
               <p className="svc-dek">
@@ -118,11 +118,11 @@ export default function Services() {
             <ol className="svc-rows" data-reveal-children>
               {SERVICES.map((s, i) => (
                 <li key={s.slug}>
-                  <Link to={`/services/${s.slug}`} className="svc-row ar-parent">
+                  <Link to={`/what-we-do/${s.slug}`} className="svc-row ar-parent">
                     <span className="svc-row-num" aria-hidden="true">{String(i + 1).padStart(3, '0')}</span>
                     <h2 className="svc-row-h">{s.nav}</h2>
                     <p className="svc-row-desc">{s.navDesc}</p>
-                    <span className="svc-row-go">Explore the service <span className="ar">→</span></span>
+                    <span className="svc-row-go">Explore the capability <span className="ar">→</span></span>
                   </Link>
                 </li>
               ))}
@@ -131,7 +131,7 @@ export default function Services() {
         </section>
 
         {/* Prose hub. The index above is the catalog; this is the page's own
-            content, the thing that lets /services rank for the category term
+            content, the thing that lets /what-we-do rank for the category term
             instead of competing with its own six children on 257 words. Every
             service is linked here in context, with its own name as the anchor
             text, because that is where a crawler picks up what the target page
@@ -142,48 +142,48 @@ export default function Services() {
               <section className="dg-section">
                 <h2 id="which-service">Which service do you actually need?</h2>
                 <p>
-                  Most SaaS teams arrive knowing something is wrong with their search presence and not which
-                  of the six fixes it. The short version: find the first thing that is broken and start there.
+                  Most teams arrive knowing something is wrong with their search presence and not which of
+                  the six fixes it. The short version: find the first thing that is broken and start there.
                   Each description below says who it is for, not what it includes.
                 </p>
                 <p>
                   <strong>Pages are not getting indexed, or the site is slow and the schema is a mess.</strong>{' '}
-                  Start with <Link to="/services/technical-seo">technical SEO</Link>. Crawlability, Core Web
+                  Start with <Link to="/what-we-do/technical-seo">technical SEO</Link>. Crawlability, Core Web
                   Vitals, the schema graph, internal links and AI-crawler access are the 52-check foundation we
                   run on every domain before a word of content ships. A page Google cannot crawl cannot rank,
                   and a page an AI crawler is blocked from cannot be cited, however good the writing is.
                 </p>
                 <p>
                   <strong>The foundation is fine but there is nothing on the site worth ranking.</strong>{' '}
-                  Start with <Link to="/services/saas-content-marketing">SaaS content marketing</Link>. Senior
+                  Start with <Link to="/what-we-do/content-marketing">content marketing</Link>. Senior
                   strategists pick the targets, Claude compresses the research, and a senior writer rewrites
-                  every draft. The output is the comparison, alternative, integration and use-case pages your
+                  every draft. The output is the comparison, alternatives, buying-guide and use-case pages your
                   buyers actually search for, not another round of "top 10 tools" that Google collapses into
                   one answer.
                 </p>
                 <p>
-                  <strong>You want the whole engine, measured on pipeline.</strong> That is{' '}
-                  <Link to="/services/b2b-saas-seo">B2B SaaS SEO</Link>: technical foundation, ICP-first
+                  <strong>You want the whole engine, measured on revenue.</strong> That is{' '}
+                  <Link to="/what-we-do/seo">full-stack SEO</Link>: technical foundation, intent-first
                   keyword architecture, the content engine, entity and authority work, and instrumentation
-                  that routes form fills into your CRM. It is the same stack that took sendr.ai from zero to
-                  1.05M impressions in six months.
+                  that routes enquiries where your team already works. It is the same stack that took
+                  sendr.ai from zero to 1.05M impressions in six months.
                 </p>
                 <p>
                   <strong>You rank on Google, but the AI Overview above your result names someone else.</strong>{' '}
-                  That is <Link to="/services/ai-seo">AI SEO</Link>. The ten blue links are being pushed down
+                  That is <Link to="/what-we-do/ai-seo">AI SEO</Link>. The ten blue links are being pushed down
                   the page by an answer most of your buyers read instead, and the sources it draws on are not
                   always the pages ranking beneath it.
                 </p>
                 <p>
                   <strong>You want the answer slot itself.</strong> That is{' '}
-                  <Link to="/services/answer-engine-optimization">answer engine optimization</Link>: featured
+                  <Link to="/what-we-do/answer-engine-optimization">answer engine optimization</Link>: featured
                   snippets, People Also Ask and the AI answer boxes, won by structuring a page so the answer
                   to a specific question is self-contained, unambiguous and sitting exactly where an extractor
                   looks for it.
                 </p>
                 <p>
                   <strong>Buyers ask ChatGPT for a shortlist and you are not on it.</strong> That is{' '}
-                  <Link to="/services/generative-engine-optimization">generative engine optimization</Link>,
+                  <Link to="/what-we-do/generative-engine-optimization">generative engine optimization</Link>,
                   the discipline of being cited and recommended inside assistant answers rather than ranked in
                   a list of links. There is no analytics event for the deals lost here, which is why most
                   teams find out late.
@@ -191,12 +191,12 @@ export default function Services() {
               </section>
 
               <section className="dg-section">
-                <h2 id="how-they-fit">How the six services fit together</h2>
+                <h2 id="how-they-fit">How the six capabilities fit together</h2>
                 <p>
                   They are one engine sold in parts, and the parts have an order. Technical work makes a page
                   reachable. Content gives search engines and models something worth storing. AEO and GEO
                   decide whether that stored page is the one quoted back to a buyer. Running them out of order
-                  is the most common way SaaS teams waste a year: GEO work on a site whose pages are not
+                  is the most common way teams waste a year: GEO work on a site whose pages are not
                   indexed changes nothing, because a model can only cite what it can retrieve.
                 </p>
                 <p>
@@ -243,7 +243,7 @@ export default function Services() {
               <div className="svc-proof-stat"><strong data-countup="1500">1.05M</strong><span>organic impressions · 6 months</span></div>
               <div className="svc-proof-stat"><strong data-countup="1400">7.43k</strong><span>clicks · same window</span></div>
               <div className="svc-proof-stat"><strong>#2</strong><span>Google AI Overview · above ZoomInfo</span></div>
-              <div className="svc-proof-stat"><strong data-countup="1200">4</strong><span>SaaS founders taken per month</span></div>
+              <div className="svc-proof-stat"><strong data-countup="1200">4</strong><span>founder reviews taken per month</span></div>
             </div>
             <Link to="/case-study/sendr" className="case-readmore link-wipe ar-parent">
               Read the full sendr.ai case study <span className="ar">→</span>
