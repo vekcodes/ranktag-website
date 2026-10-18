@@ -23,6 +23,7 @@ const STATIC_LASTMOD = '2026-07-11';
 const PAGE_LASTMOD = {
   '/': '2026-10-18',
   '/who-we-help': '2026-10-18',
+  '/best/seo-agencies-for-saas': '2026-10-18',
   '/saas-seo-agency': '2026-10-18',
   '/ecommerce-seo-agency': '2026-10-18',
   '/local-seo-agency': '2026-10-18',
@@ -64,6 +65,9 @@ const PAGES = [
   // Vertical pages. Added one at a time, each only once its page is finished
   // and live — a sitemap entry for an unfinished page is a soft 404 invitation.
   '/who-we-help',
+  // Comparison pages. Refreshed quarterly; bump the lastmod above when the
+  // list is actually re-checked, never on a deploy.
+  '/best/seo-agencies-for-saas',
   '/saas-seo-agency',
   '/ecommerce-seo-agency',
   '/local-seo-agency',

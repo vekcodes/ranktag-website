@@ -9,6 +9,7 @@
 // it must not pull in React, CSS, or any browser globals.
 import { SERVICES, SERVICES_HUB_META, serviceUrl } from '../pages/whatWeDo/capabilitiesData.js';
 import { VERTICALS, verticalUrl, WHO_WE_HELP_META } from '../pages/verticals/verticalsData.js';
+import { COMPARISONS, comparisonUrl } from '../pages/best/comparisonsData.js';
 
 // One head entry per service page, derived from the same data that renders the
 // pages — the SSG head rewrite and the hydrated SPA can never drift apart.
@@ -34,6 +35,12 @@ export const TOOL_META = {
   ...SERVICE_META,
   ...VERTICAL_META,
   '/who-we-help': WHO_WE_HELP_META,
+  ...Object.fromEntries(
+    COMPARISONS.map((c) => [
+      c.path,
+      { title: `${c.title} | RankedTag`, description: c.description, canonical: comparisonUrl(c.slug) },
+    ])
+  ),
   '/apply': {
     title: 'Apply for a Free Founder Review of Your SaaS | RankedTag',
     description:

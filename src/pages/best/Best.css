@@ -1,0 +1,138 @@
+/* =====================================================================
+   BEST — comparison pages (/best/<slug>)
+   Layered on top of WhatWeDo.css, which supplies the hero, prose, FAQ and
+   section rhythm. Only the pieces unique to a comparison page live here:
+   the disclosure block, the table and the agency profiles.
+   ===================================================================== */
+
+/* Visible dateModified under the answer paragraph. */
+.best-updated {
+  margin-top: var(--s-5);
+  font-size: .875rem;
+  line-height: 1.6;
+  color: var(--text-3);
+}
+.best-updated time { color: var(--text-2); font-variant-numeric: tabular-nums; }
+
+/* ── Publisher disclosure ────────────────────────────────────────────
+   Deliberately loud and above the table. A bias note a reader has to go
+   looking for is not a disclosure. */
+.best-disclosure-wrap { padding-block: var(--s-10); }
+.best-disclosure {
+  border-left: 3px solid var(--peri);
+  padding: var(--s-6) var(--s-7);
+  background: color-mix(in srgb, var(--peri) 6%, transparent);
+  max-width: 78ch;
+}
+.best-disclosure .eyebrow { display: block; margin-bottom: var(--s-4); }
+.best-disclosure p { margin: 0; color: var(--text-2); line-height: 1.65; }
+
+/* ── Comparison table ────────────────────────────────────────────────
+   Horizontally scrollable rather than reflowed: five columns of short
+   phrases stay comparable side by side, and a fixed layout means the
+   column widths do not jump once the font loads. */
+.best-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--rule);
+  /* a visible focus ring matters: this region is keyboard-scrollable */
+}
+.best-table-scroll:focus-visible { outline: 2px solid var(--peri); outline-offset: 2px; }
+
+.best-table {
+  width: 100%;
+  min-width: 56rem;
+  border-collapse: collapse;
+  font-size: .9375rem;
+  line-height: 1.5;
+  table-layout: fixed;
+}
+.best-table th,
+.best-table td {
+  padding: var(--s-4) var(--s-5);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--rule);
+}
+.best-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  font-size: .75rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  border-bottom: 1px solid var(--text-3);
+  white-space: nowrap;
+}
+.best-table tbody th {
+  font-weight: 600;
+  color: var(--text-1);
+  width: 11rem;
+}
+.best-table tbody td { color: var(--text-2); }
+.best-table tbody tr:last-child th,
+.best-table tbody tr:last-child td { border-bottom: 0; }
+.best-table tbody tr.is-us {
+  background: color-mix(in srgb, var(--peri) 8%, transparent);
+}
+
+/* "publisher" / "that is us" tag — the bias marker repeated in context. */
+.best-us-tag {
+  display: inline-block;
+  margin-left: var(--s-2);
+  padding: .125rem .4rem;
+  border: 1px solid var(--peri);
+  border-radius: 2px;
+  font-size: .625rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--peri);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* ── Selection criteria ──────────────────────────────────────────────── */
+.best-criteria { margin: 0; padding-left: 1.1rem; display: grid; gap: var(--s-4); }
+.best-criteria li { color: var(--text-2); line-height: 1.65; }
+
+/* ── Agency profiles ─────────────────────────────────────────────────── */
+.best-profile-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-8);
+  counter-reset: none;
+}
+.best-profile {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: var(--s-5);
+  padding-top: var(--s-7);
+  border-top: 1px solid var(--rule);
+  /* anchor links from the table land below the sticky nav */
+  scroll-margin-top: 6rem;
+}
+.best-profile-num {
+  font-size: .8125rem;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+  padding-top: .35rem;
+}
+.best-profile-body h3 {
+  margin: 0 0 var(--s-3);
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  line-height: 1.25;
+}
+.best-profile-body p { margin: 0 0 var(--s-4); color: var(--text-2); line-height: 1.7; max-width: 72ch; }
+.best-profile-body p:last-child { margin-bottom: 0; }
+.best-profile-body strong { color: var(--text-1); }
+.best-profile-bestfor { color: var(--text-3) !important; font-size: .9375rem; }
+.best-profile.is-us { border-left: 3px solid var(--peri); padding-left: var(--s-5); }
+
+@media (max-width: 640px) {
+  .best-profile { grid-template-columns: 1fr; gap: var(--s-3); }
+  .best-profile-num { padding-top: 0; }
+  .best-disclosure { padding: var(--s-5); }
+}

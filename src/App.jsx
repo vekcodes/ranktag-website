@@ -2,6 +2,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import Layout from './Layout.jsx';
 import Home from './pages/Home.jsx';
 import { VERTICALS } from './pages/verticals/verticalsData.js';
+import { COMPARISONS } from './pages/best/comparisonsData.js';
 
 // react-router's `lazy` expects a module exposing a named `Component`. Our pages
 // default-export their component, so this adapter wraps a dynamic import into the
@@ -40,6 +41,13 @@ export const routes = [
       // root level (slugs in src/pages/verticals/verticalsData.js). A vertical
       // only gets a route once its page is finished; an unfinished one must
       // 404, never render thin.
+      // Comparison pages — shortlist intent, a different job from the
+      // vertical sales pages. One route per researched list.
+      ...COMPARISONS.map((c) => ({
+        path: `best/${c.slug}`,
+        lazy: lazyRoute(() => import('./pages/best/ComparisonPage.jsx')),
+      })),
+
       { path: 'who-we-help', lazy: lazyRoute(() => import('./pages/verticals/WhoWeHelp.jsx')) },
       ...VERTICALS.map((v) => ({
         path: v.slug,

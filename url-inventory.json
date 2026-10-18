@@ -9,11 +9,12 @@
     "legacy_redirects": 15,
     "endpoints": 8,
     "app_noindex": 1,
-    "total": 77,
-    "indexable_in_sitemap": 53,
+    "total": 78,
+    "indexable_in_sitemap": 54,
     "what_we_do_pages": 7,
     "vertical_pages": 3,
-    "vertical_hub": 1
+    "vertical_hub": 1,
+    "comparison_pages": 1
   },
   "known_gaps": [
     "OPEN: 33 published blog posts carry 108 in-body links to /services* which now 308 to /what-we-do*. Bodies live in the PRODUCTION Neon DB; the credentials supplied point at a dev branch containing one 'test' row. Unfixable until the production DATABASE_URL is supplied.",
@@ -636,10 +637,19 @@
       "indexable": true,
       "expected_status": 200,
       "note": "phase 2"
+    },
+    {
+      "url": "/best/seo-agencies-for-saas",
+      "kind": "comparison-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 3"
     }
   ],
   "phases": {
     "phase_1": "2026-10-18 /services -> /what-we-do; b2b-saas-seo -> seo; saas-content-marketing -> content-marketing",
-    "phase_2": "2026-10-18 /saas-seo-agency, /ecommerce-seo-agency, /local-seo-agency, /who-we-help"
+    "phase_2": "2026-10-18 /saas-seo-agency, /ecommerce-seo-agency, /local-seo-agency, /who-we-help",
+    "phase_3": "2026-10-18 /best/seo-agencies-for-saas (ecommerce + local pending)"
   }
 }
