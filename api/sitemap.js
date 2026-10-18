@@ -24,6 +24,8 @@ const PAGE_LASTMOD = {
   '/': '2026-10-18',
   '/who-we-help': '2026-10-18',
   '/best/seo-agencies-for-saas': '2026-10-18',
+  '/best/seo-agencies-for-ecommerce': '2026-10-18',
+  '/best/seo-agencies-for-local-business': '2026-10-18',
   '/saas-seo-agency': '2026-10-18',
   '/ecommerce-seo-agency': '2026-10-18',
   '/local-seo-agency': '2026-10-18',
@@ -68,6 +70,8 @@ const PAGES = [
   // Comparison pages. Refreshed quarterly; bump the lastmod above when the
   // list is actually re-checked, never on a deploy.
   '/best/seo-agencies-for-saas',
+  '/best/seo-agencies-for-ecommerce',
+  '/best/seo-agencies-for-local-business',
   '/saas-seo-agency',
   '/ecommerce-seo-agency',
   '/local-seo-agency',
