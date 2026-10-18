@@ -75,6 +75,31 @@ for f in pages:
     for m in re.findall(r'https://rankedtag\.com(/services[^"\'\s<]*)', html):
         fails.append(f"[canonical] {os.path.relpath(f, DIST)} still references {m}")
 
+# word floor: no indexable page ships under 1,000 words. Measured on the
+# whole body rather than <main>, because several older templates have no
+# <main> wrapper and measuring those returned zero.
+for f in pages:
+    h = open(f, encoding="utf-8", errors="ignore").read()
+    rel = "/" + os.path.relpath(f, DIST).replace("/index.html", "").replace("index.html", "")
+    rel = re.sub(r"/+$", "", rel) or "/"
+    if "noindex" in h or rel in ("/404", "/404.html"):
+        continue
+    body = re.sub(r"<style.*?</style>|<script.*?</script>|<svg.*?</svg>", "", h, flags=re.S)
+    body = re.sub(r"<head.*?</head>", "", body, flags=re.S)
+    words = len(" ".join(re.sub(r"<[^>]+>", " ", body).split()).split())
+    if words < 1000:
+        fails.append(f"[thin] {rel}: {words} words (floor 1,000)")
+
+# every JSON-LD block must parse. An invalid block is silently ignored by
+# search engines, which is the worst possible failure mode: it looks fine.
+for f in pages:
+    h = open(f, encoding="utf-8", errors="ignore").read()
+    for blk in re.findall(r'<script type="application/ld\+json">(.*?)</script>', h, re.S):
+        try:
+            json.loads(blk)
+        except Exception as e:
+            fails.append(f"[jsonld] {os.path.relpath(f, DIST)}: does not parse ({str(e)[:50]})")
+
 # click depth: every indexable page must be reachable from the homepage in
 # two clicks or fewer. This is the check that would have caught ten orphaned
 # pages shipped across phases 3, 4 and 7 — they built, verified and linked

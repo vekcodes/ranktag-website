@@ -51,8 +51,11 @@
 
 /* counter turns amber then red as a field approaches a real display limit */
 .ct-count { font-size: .75rem; color: var(--text-3); font-variant-numeric: tabular-nums; }
-.ct-count[data-state='warn'] { color: #c98a00; }
-.ct-count[data-state='over'] { color: var(--red, #FF3B14); }
+/* The design system already carries theme-aware tokens for both of these:
+   --warn and --accent-text remap on the paper theme. Hardcoding the dark-mode
+   values failed WCAG AA on the light canvas (2.6:1 and 3.1:1). */
+.ct-count[data-state='warn'] { color: var(--warn); }
+.ct-count[data-state='over'] { color: var(--accent-text, var(--red)); }
 
 .ct-row { display: flex; gap: var(--s-3); flex-wrap: wrap; align-items: center; }
 .ct-btn {

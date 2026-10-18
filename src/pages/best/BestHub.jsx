@@ -142,6 +142,67 @@ export default function BestHub() {
               </section>
 
               <section className="dg-section">
+                <h2 id="reading-any-list">How to read an agency list that is not this one</h2>
+                <p>
+                  Most of what follows applies to every comparison page you will read, including ours. The
+                  format is cheap to produce and expensive to produce honestly, which is why so much of it is
+                  decoration.
+                </p>
+                <p>
+                  <strong>Check who publishes it.</strong> A large share of the highest-ranking agency lists
+                  are written by agencies that appear near the top of them. That is not automatically
+                  disqualifying, and it is what we do here, but it should be stated on the page rather than
+                  discovered in a footer. If the publisher is not named, assume one of the entries owns it.
+                </p>
+                <p>
+                  <strong>Check whether the prices are sourced.</strong> Pricing is the single most copied
+                  and least verified detail in this genre. Figures circulate between lists for years after
+                  they stop being accurate, because nobody re-reads the agency’s own site. If a list shows a
+                  price for every entry, be suspicious rather than impressed: when we read 33 agency websites
+                  across three verticals, only nine published anything at all.
+                </p>
+                <p>
+                  <strong>Check for ratings nobody could have produced.</strong> Scores out of ten, star
+                  ratings and rank orders imply the publisher has worked with every agency listed. Almost
+                  none have. A list that cannot explain how its scores were derived has invented them, and
+                  the same applies to aggregateRating markup, which is worth checking in the page source.
+                </p>
+                <p>
+                  <strong>Check whether anyone is criticised.</strong> A genuinely useful comparison says who
+                  each agency does not suit, including the publisher. A list where every entry is excellent
+                  at everything has told you nothing, because the only decision it helps you make is to call
+                  whoever is at the top.
+                </p>
+                <p>
+                  <strong>Check the date, and whether it means anything.</strong> A year in the title is
+                  trivial to update. A stated review date with a description of what was actually re-checked
+                  is harder to fake and more useful. Ours says which date each agency’s website was read.
+                </p>
+              </section>
+
+              <section className="dg-section">
+                <h2 id="pricing-finding">What we learned reading 33 agency websites</h2>
+                <p>
+                  The most useful by-product of building these lists was not the lists. It was discovering
+                  how few agencies publish anything about cost, and how widely the ones that do differ.
+                </p>
+                <p>
+                  Nine of 33 published a figure. Among those, the monthly entry points spread roughly
+                  twelvefold, for work described in broadly similar language. Two firms broke the monthly
+                  retainer pattern entirely: one publishes a six-figure annual floor, another charges a
+                  percentage of revenue or funding. We have written that up properly, with each figure
+                  attributed, on <Link to="/seo-pricing">the SEO pricing page</Link>.
+                </p>
+                <p>
+                  The practical conclusion for a buyer is that comparing agencies on price is mostly not
+                  available to you, and attempting it with figures lifted from directories will mislead you.
+                  Comparing on scope is available: for this money, how many hours of whose time, producing
+                  what artefacts, measured how. Two proposals that look identical on price routinely differ
+                  by a factor of two on that question.
+                </p>
+              </section>
+
+              <section className="dg-section">
                 <h2 id="which-page">Looking for a partner rather than a shortlist?</h2>
                 <p>
                   These pages are for the stage where you are still deciding who to talk to. If you already

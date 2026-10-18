@@ -1,0 +1,21 @@
+
+/* ── What the review covers ──────────────────────────────────────────
+   Added because the page was 219 words, which is thin anywhere and odd
+   on the page where someone decides whether to trust us. */
+.apply-detail {
+  max-width: 72ch;
+  margin: clamp(3rem, 7vw, 5rem) auto 0;
+  padding-top: clamp(2rem, 5vw, 3rem);
+  border-top: 1px solid var(--rule);
+}
+.apply-detail h2 {
+  margin: clamp(2rem, 4vw, 2.75rem) 0 var(--s-4);
+  font-size: clamp(1.25rem, 2.4vw, 1.625rem);
+  line-height: 1.25;
+  color: var(--text-1);
+}
+.apply-detail h2:first-child { margin-top: 0; }
+.apply-detail p { margin: 0 0 var(--s-4); color: var(--text-2); line-height: 1.7; }
+.apply-detail ul { margin: 0 0 var(--s-5); padding-left: 1.1rem; display: grid; gap: var(--s-3); }
+.apply-detail li { color: var(--text-2); line-height: 1.65; }
+.apply-detail strong { color: var(--text-1); }

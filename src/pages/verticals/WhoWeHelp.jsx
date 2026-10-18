@@ -155,6 +155,56 @@ export default function WhoWeHelp() {
               </section>
 
               <section className="dg-section">
+                <h2 id="when-a-vertical">When a vertical earns its own page, and when it does not</h2>
+                <p>
+                  Six is a deliberate number rather than a stopping point we reached by accident. Vertical
+                  pages are easy to mass-produce and the temptation is obvious: twenty of them looks like
+                  coverage, ranks for twenty head terms, and costs a fortnight. It is also how a site becomes
+                  a collection of near-identical pages that Google consolidates and a buyer sees through in
+                  one paragraph.
+                </p>
+                <p>
+                  Our test is whether the vertical has a distinct structural problem we can describe
+                  specifically. Ecommerce has faceted navigation generating more URLs than the store has
+                  products. Local has a ranking factor nobody can optimise, because distance is fixed.
+                  Healthcare has content assessed against expert consensus rather than against the competing
+                  page. If we cannot name the problem without resorting to generalities, the vertical does
+                  not get a page, however attractive the search volume looks.
+                </p>
+                <p>
+                  The second test is whether the advice would differ. A page that recommends the same
+                  sequence of work as the page next to it is not a vertical page; it is the capability page
+                  with a different noun at the top. We check this mechanically before publishing, comparing
+                  the rendered sections across all six, and if a section is identical on two pages it gets
+                  rewritten or removed.
+                </p>
+                <p>
+                  There are verticals we have deliberately not built. Financial services, education,
+                  manufacturing and hospitality all have genuine search dynamics, and we could write
+                  plausible pages about each. We have not, because plausible is the problem: without real
+                  engagements behind them, those pages would be competent summaries of other people’s
+                  writing, which is precisely the thing this site exists not to produce.
+                </p>
+              </section>
+
+              <section className="dg-section">
+                <h2 id="shared-craft">What does not change between them</h2>
+                <p>
+                  The six playbooks differ in sequence and emphasis, not in craft. Every one of them rests on
+                  the same foundation: pages that can be crawled and indexed, a site that renders content
+                  server-side so AI crawlers can read it, an entity graph that resolves consistently, internal
+                  links that concentrate authority where it converts, and content with something true and
+                  specific in it.
+                </p>
+                <p>
+                  That shared layer is documented separately, without an audience attached, under{' '}
+                  <Link to="/what-we-do">what we do</Link>. It is written that way on purpose. The technical
+                  work on a clinic and on a catalogue is substantially the same work; what differs is which
+                  part of it is the constraint, and in what order it pays to fix things.
+                </p>
+              </section>
+
+              <section className="dg-section">
                 <h2 id="honest-note">Where our proof comes from</h2>
                 <p>
                   One engagement is measured, cross-checkable and ours to cite: sendr.ai, a B2B SaaS company
