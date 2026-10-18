@@ -57,6 +57,92 @@ export const SOURCES = {
 export const VERTICALS = [
   {
     slug: 'saas-seo-agency',
+    keyFacts: [
+      {
+        stat: '34.5%',
+        label: 'lower click-through rate at position one when an AI Overview is present, measured across 300,000 keywords',
+        source: 'ahrefsAio',
+      },
+      {
+        stat: '+115%',
+        label: 'AI visibility lift from citing sources, for pages starting around position five — where most SaaS sites sit',
+        source: 'geoStudy',
+      },
+      {
+        stat: '+41%',
+        label: 'lift from adding quotations, the single best-performing method tested across 10,000 queries',
+        source: 'geoStudy',
+      },
+      {
+        stat: '−10%',
+        label: 'visibility versus doing nothing at all, for keyword stuffing, tested live on Perplexity',
+        source: 'geoStudy',
+      },
+    ],
+
+    quote: {
+      text: 'GEO can boost visibility by up to 40% in generative engine responses.',
+      who: 'Aggarwal et al.',
+      role: 'GEO: Generative Engine Optimization, ACM SIGKDD 2024',
+      source: 'geoStudy',
+    },
+
+    comparisonTable: {
+      caption: 'Three surfaces your buyer uses, and what actually wins each one',
+      columns: ['', 'Classic SEO', 'AEO', 'GEO'],
+      rows: [
+        ['Where it shows', 'The ten blue links', 'Snippets, People Also Ask, AI Overviews', 'Inside ChatGPT, Perplexity, Gemini and Claude answers'],
+        ['What the buyer is doing', 'Scanning results to pick a page', 'Taking the answer at the top without scrolling', 'Asking for a shortlist before they open a search engine'],
+        ['What wins it', 'Relevance, authority, technical health', 'A self-contained answer in the first 40 to 60 words, plus schema', 'Corroborating third-party mentions and quotable, sourced claims'],
+        ['How it is measured', 'Rankings, impressions, clicks', 'Snippet and AI Overview ownership per query', 'Citation share across a fixed set of buying prompts'],
+        ['Typical first movement', 'Weeks 5 to 7 on realistic targets', '2 to 6 weeks if you already rank on page one', '30 to 45 days on retrieval-based engines'],
+        ['What it costs you to ignore', 'Gradual decline', 'The click, even when you rank first', 'The shortlist, with no analytics event to tell you'],
+      ],
+    },
+
+    timeline: [
+      ['Week 1', 'Founder review of the domain, the attribution model agreed in writing, and the first pass at the buying-query map.', 'You learn which of your money queries you are invisible for, and how your current reporting is crediting organic.'],
+      ['Month 1', 'Technical blockers cleared, comparison and alternatives pages briefed and shipping, tracked prompt set live across the major assistants.', 'Bottom-of-funnel pages start indexing. First movement on queries where you already had partial visibility.'],
+      ['Month 3', 'Category and problem-level content compounding, internal link topology carrying authority to the commercial pages, docs surface claimed.', 'First top-20 positions on realistic targets, and typically a first assistant citation somewhere in the tracked set.'],
+      ['Month 6', 'Defending what you have won, widening query coverage, refreshing the pages that decayed.', 'The compounding curve, reported as pipeline by landing page rather than as sessions.'],
+    ],
+
+    notFor: [
+      'Pre-product companies. If nobody is searching for the problem yet, SEO spends your runway writing about a category that does not exist. Find the language first.',
+      'Teams that need results inside eight weeks. Bottom-of-funnel pages can convert quickly, but if the business depends on organic in two months, paid is the honest answer.',
+      'Companies whose reporting cannot be changed. If the board judges every channel on last-click, a long-cycle programme will be cancelled in month four regardless of what it was doing.',
+      'Buyers who need a large bench. We cap at four founder reviews a month. For a programme needing several parallel workstreams, an agency with fifty strategists genuinely suits you better.',
+    ],
+
+    objections: [
+      [
+        'How will I know it is working before pipeline moves?',
+        'By agreeing the leading indicators before anything ships. Indexation of new pages, first page-one entries on realistic targets, movement on the tracked assistant prompts, and assisted-path volume from organic landing pages are all visible within weeks. Pipeline follows a quarter later by the nature of your sales cycle. If the early indicators are flat at week six, we say so rather than letting you discover it in month five.',
+      ],
+      [
+        'What if we pivot or reposition the category?',
+        'It happens, and it is survivable if the architecture was built for it. We map the problem language your buyers use today separately from the category language you want to own, precisely so a repositioning does not invalidate the whole content base. The problem-level pages keep working because the problem did not change. What needs rewriting is the category layer, which is the smaller half.',
+      ],
+      [
+        'What if you get busy with other clients?',
+        'Four founder reviews a month is a hard cap and it exists for this reason. You get the senior people who ran your audit, not an account manager relaying their notes. The trade is that we turn work down. If we cannot give your category the attention it needs, you get that answer within 48 hours of applying rather than finding out in month three.',
+      ],
+      [
+        'Why not hire a head of SEO in-house?',
+        'Eventually you probably should. The awkward part is the first year: the decisions that compound most are made early, and an in-house hire learning category SEO on your live domain is an expensive way to learn it. The usual shape is specialist help for the foundation and the first compounding cycle, then an in-house owner who inherits documented decisions rather than a mystery.',
+      ],
+    ],
+
+    relatedReading: {
+      comparisonPage: '/best/seo-agencies-for-saas',
+      capabilities: ['/what-we-do/seo', '/what-we-do/generative-engine-optimization', '/what-we-do/content-marketing'],
+      posts: [
+        ['/blog/why-nobody-knows-about-your-saas', 'Why nobody knows about your SaaS'],
+        ['/blog/predictable-inbound-lead-engine-saas', 'Building a predictable inbound lead engine'],
+      ],
+      tool: ['/competitor-analysis', 'Competitor Analysis'],
+    },
+
     ctaSub: 'Drop your domain. The founder runs the 52-check review personally and comes back within 48 hours with what your buying queries actually look like, even when the answer is that you do not need us yet.',
     engagementH2: 'What happens after you apply.',
     engagement: [
@@ -110,22 +196,27 @@ export const VERTICALS = [
     problems: [
       {
         h: 'Nobody searches for the category you are creating',
+        evidence: { source: 'geoStudy', note: 'The KDD 2024 study found optimisation helps lower-ranked pages most, which is where a new category always starts.' },
         p: 'If you are defining a new category, the head term has no volume because the words do not exist yet. Your buyers search the problem, their workaround, and the incumbent they want to escape. Most agencies run a keyword tool, see nothing, and conclude SEO will not work — when the job is owning the problem-shaped queries now and inheriting the category term later.',
       },
       {
         h: 'Your most valuable keywords look worthless in Ahrefs',
+        evidence: { source: 'ahrefsAio', note: 'Ahrefs’ 300,000-keyword study found AI Overviews hit informational queries hardest, which raises the relative value of buying-intent terms.' },
         p: '"[Competitor] alternatives" at 90 searches a month. "[Competitor] vs [competitor]" at 140. These are buyers with a shortlist and a budget, and they convert at rates top-of-funnel content never reaches. Volume-ranked keyword lists push them to the bottom of the backlog, which is why they are usually still available.',
       },
       {
         h: 'Your comparison pages are being written by other people',
+        evidence: { source: 'geoStudy', note: 'Citing sources lifted AI visibility by 115% for pages around position five, the band most comparison pages sit in.' },
         p: 'Search your own brand plus "alternatives" and look at who owns page one: review aggregators monetising your name, affiliate listicles that have never used the product, and competitors\' own switch pages. Each is a page about you that you do not control, sitting between a buyer and your signup form.',
       },
       {
         h: 'A 90-day sales cycle makes SEO look like it is not working',
+        evidence: { source: 'ahrefsAio', note: 'With a 34.5% lower position-one CTR where AI Overviews appear, click-based measurement understates organic contribution further still.' },
         p: 'Last-click attribution credits the branded search at the end, and the organic page that started everything eight touches earlier shows up as nothing. SEO budgets get cut on that evidence constantly. The fix is modelling assisted paths before the engagement starts, not arguing about it in month five.',
       },
       {
         h: 'Your documentation outranks your marketing site',
+        evidence: { source: 'geoStudy', note: 'Quotation and statistic density were the strongest tested levers, and technical documentation is unusually rich in both.' },
         p: 'Product-led SaaS accumulates docs, changelogs and support articles that rank for buying-adjacent queries, and nobody owns them. They are thin on links to commercial pages, invisible in marketing reporting, and often on a subdomain sharing no authority back. The cheapest unclaimed surface area most SaaS companies have.',
       },
     ],
@@ -133,30 +224,45 @@ export const VERTICALS = [
     approach: [
       {
         h: 'Bottom of the funnel first, always',
+        when: 'Weeks 1–6',
+        who: 'Senior strategist writes the briefs, senior editor writes the pages',
+        deliverable: 'Comparison, alternatives, integration and pricing-intent pages, shipped weekly and interlinked to the signup path',
         p: 'Comparison pages, alternatives pages, integration pages and pricing-intent queries get built before a single top-of-funnel article. They convert from the week they index, which funds the patience the rest of the programme needs.',
         to: '/what-we-do/content-marketing',
         label: 'The content engine',
       },
       {
         h: 'Category architecture, not a keyword list',
+        when: 'Weeks 2–4, revisited quarterly',
+        who: 'Senior strategist, with your founder for 90 minutes a week',
+        deliverable: 'A two-layer map of problem language and category language, plus the internal link topology that carries authority between them',
         p: 'We map the problem language your buyers use today against the category language you want them to use in two years, and build the internal link topology that carries authority from one to the other as the market catches up.',
         to: '/what-we-do/seo',
         label: 'Full-stack SEO',
       },
       {
         h: 'The technical floor under a JavaScript marketing site',
+        when: 'Weeks 1–4',
+        who: 'Technical strategist, working in your stack or writing ticket-ready specs',
+        deliverable: 'Server-rendered content for AI crawlers, a validated schema graph, and a docs subdomain that passes authority back',
         p: 'Most SaaS marketing sites are client-rendered, which is survivable for Googlebot and fatal for the AI crawlers that do not execute JavaScript. Server-rendered content, a clean schema graph and a docs subdomain that passes authority back are prerequisites, not refinements.',
         to: '/what-we-do/technical-seo',
         label: 'Technical SEO',
       },
       {
         h: 'Being the shortlist, not just a result',
+        when: 'Month 2 onwards, continuous',
+        who: 'Strategist plus digital PR',
+        deliverable: 'A fixed set of buying prompts tracked monthly across ChatGPT, Perplexity, Gemini and Claude, with the corroborating mentions that move them',
         p: 'Buyers now ask an assistant for three vendors before they open a SERP. Getting named in that answer is a different discipline from ranking: it needs corroborating third-party mentions, machine-readable brand facts and claims structured to be quoted.',
         to: '/what-we-do/generative-engine-optimization',
         label: 'Generative engine optimisation',
       },
       {
         h: 'Reporting a founder can act on',
+        when: 'Agreed week 1, reported monthly',
+        who: 'Strategist, wired into your existing analytics and CRM',
+        deliverable: 'Signups, demos and pipeline by landing page, with assisted and first-touch paths modelled so a long cycle does not erase organic',
         p: 'Signups, demos and pipeline by landing page, with assisted paths modelled so a long cycle does not erase the organic contribution. Rankings and impressions are diagnostics, not the scoreboard.',
         to: '/what-we-do/ai-seo',
         label: 'AI SEO',
@@ -198,6 +304,22 @@ export const VERTICALS = [
       [
         'How do you measure SEO when our sales cycle is three months?',
         'By agreeing the measurement model before the work starts. We instrument first-touch and assisted paths, report pipeline by landing page rather than by session, and set the expectation that a page indexed in month one may not show revenue until month four. The alternative, judging SEO on last-click, reliably kills programmes that were working.',
+      ],
+      [
+        'Does ranking first still matter if an AI Overview sits above it?',
+        'It matters less on its own than it used to. Ahrefs studied 300,000 keywords and found the presence of an AI Overview correlated with a 34.5% lower click-through rate at position one. Ranking is still the prerequisite — the answer draws on indexed pages — but the goal shifts from being the top link to being the source the answer names.',
+      ],
+      [
+        'What actually makes an AI engine cite us?',
+        'Structure and corroboration more than domain strength. The KDD 2024 GEO study tested nine strategies across 10,000 queries and found adding quotations was the strongest single method at roughly 41%, with citing sources and adding statistics close behind. For a page already sitting around position five, citing sources lifted visibility by about 115%, which is the band most SaaS pages occupy.',
+      ],
+      [
+        'Will keyword-stuffing our pages help with AI search?',
+        'No, and it measurably hurts. In the same study, keyword stuffing performed about 10% worse than the unoptimised original when tested live on Perplexity. It is the one tested method that left pages less visible than doing nothing. Density tactics that were marginal for Google are actively counterproductive for retrieval-based engines.',
+      ],
+      [
+        'We rank well already. What is left to do?',
+        'Usually three things. Converting that ranking into citation share on the assistants your buyers actually use, which is a different discipline from ranking. Claiming the comparison and alternatives queries that third parties currently own about you. And fixing the attribution model, because strong rankings with last-click reporting still produce a business case that looks weak at board level.',
       ],
     ],
 
@@ -488,6 +610,99 @@ export const VERTICALS = [
 
   {
     slug: 'local-seo-agency',
+    keyFacts: [
+      {
+        stat: '96%',
+        label: 'of consumers read online business reviews at least sometimes — only 4% say they never do',
+        source: 'brightlocal2025',
+      },
+      {
+        stat: '74%',
+        label: 'consult two or more review websites before deciding, so consistency across sources matters as much as volume',
+        source: 'brightlocal2025',
+      },
+      {
+        stat: '93%',
+        label: 'expect a business to respond to their review, making owner responses an operational requirement rather than a nicety',
+        source: 'brightlocal2025',
+      },
+      {
+        stat: '42%',
+        label: 'now trust reviews as much as a personal recommendation, down from 79% in 2020 — trust is falling, so quality beats quantity',
+        source: 'brightlocal2025',
+      },
+      {
+        stat: '48%',
+        label: 'read the AI-written review summary first, and 18% would decide on that summary alone',
+        source: 'brightlocal2025',
+      },
+    ],
+
+    quote: {
+      text: 'Local results are mainly based on relevance, distance, and popularity.',
+      who: 'Google',
+      role: 'Google Business Profile Help, on how local ranking is determined',
+      source: 'googleLocalRanking',
+    },
+
+    comparisonTable: {
+      caption: 'Why a national SEO playbook underperforms on a local business',
+      columns: ['', 'National SEO', 'Local SEO'],
+      rows: [
+        ['The query behind it', 'Informational or commercial, location irrelevant', 'Commercial with a place attached, often implicit'],
+        ['The asset that ranks', 'A page on your website', 'Your Google Business Profile, above the organic results'],
+        ['What drives position', 'Authority, content, technical health', 'Relevance, distance and prominence, per Google'],
+        ['What you can change', 'Nearly everything', 'Relevance and prominence only — distance is fixed'],
+        ['How position is reported', 'One number per keyword', 'A grid across the service area, because it varies by postcode'],
+        ['Reviews', 'Reputational, indirect', 'A direct ranking input through prominence'],
+        ['Typical first movement', 'Weeks 5 to 7', 'Days to weeks, because the profile is re-evaluated quickly'],
+        ['The common failure', 'Targeting volume over intent', 'Optimising the website and ignoring the profile'],
+      ],
+    },
+
+    timeline: [
+      ['Week 1', 'Founder review of the site and the Google Business Profile together, baseline rank grid across the real service area, citation audit.', 'You see where your visibility actually falls off, which is usually much closer to home than expected.'],
+      ['Month 1', 'Profile corrected: categories, services, attributes, hours and photos against the queries you want. Review ask built into a process you already run.', 'Map Pack movement is often visible here, because the profile is re-evaluated far faster than a website.'],
+      ['Month 3', 'Citation inconsistencies resolved across the sources that matter, duplicates claimed or removed, location architecture decided and the defensible pages built.', 'Prominence starts to firm up. Review velocity becomes steady rather than arriving in bursts.'],
+      ['Month 6', 'Widening the radius where it is winnable, defending the terms you hold, and the organic layer for areas the Map Pack will not reach.', 'A measurably larger area of coverage on the grid, rather than one number that moved.'],
+    ],
+
+    notFor: [
+      'Businesses without a physical location or a defined service area. If there is no geography attached to your buyers, this is national SEO and the playbook is different.',
+      'Anyone expecting to rank in towns far from where they operate. Distance is a ranking factor you cannot change, and we will say so rather than sell you twelve city pages.',
+      'Businesses that cannot sustain a review ask. Review velocity is central to prominence, and no agency can generate genuine reviews on your behalf.',
+      'Buyers who need deep Google Business Profile suspension or spam-dispute work. Specialists on our local shortlist do far more of that than we do.',
+    ],
+
+    objections: [
+      [
+        'How will I know it is working, when rankings differ by postcode?',
+        'With a grid, not a number. We sample positions across your actual service area before anything changes, so there is a real before-picture, and repeat it as work lands. That shows whether your visibility radius is growing rather than whether one measurement near your office moved. Alongside it: calls and form fills attributed to location, and profile interactions from Google’s own reporting.',
+      ],
+      [
+        'What if we move premises or open a second location?',
+        'Both are manageable and both need handling deliberately. A move means updating the profile and every citation that carries the old address, in a sequence, because inconsistent data during the change is what causes problems. A second location means deciding whether it gets its own profile and its own page, which it usually should, and making sure the two do not compete for the same queries.',
+      ],
+      [
+        'What if you get busy with other clients?',
+        'Four founder reviews a month is the cap. You work with the senior people who ran your audit rather than an account manager, and the trade is that we take on less. If your service area needs more attention than we can give it, the honest answer comes within 48 hours of applying, not in month three.',
+      ],
+      [
+        'Why not just do this ourselves?',
+        'A lot of local SEO genuinely is self-serviceable, and we will tell you when it is. Claiming and completing the profile, asking customers for reviews, and replying to them are all things an owner can do better than an agency, because they know the customers. Where help pays is the architectural decisions: which areas deserve a page, how to resolve citation conflicts across aggregators, and what to do when the radius stops growing.',
+      ],
+    ],
+
+    relatedReading: {
+      comparisonPage: '/best/seo-agencies-for-local-business',
+      capabilities: ['/what-we-do/technical-seo', '/what-we-do/answer-engine-optimization', '/what-we-do/content-marketing'],
+      posts: [
+        ['/blog/why-business-invisible-online', 'Why your business is invisible online'],
+        ['/blog/steady-stream-of-customers', 'Building a steady stream of customers'],
+      ],
+      tool: ['/domain-authority-checker', 'Domain Authority Checker'],
+    },
+
     ctaSub: 'Drop your domain and your business name. The founder reviews the site and the Google Business Profile together and comes back within 48 hours, even when the answer is that your radius will not stretch that far.',
     engagementH2: 'What happens after you send your profile.',
     engagement: [
@@ -532,33 +747,39 @@ export const VERTICALS = [
       'A local SEO agency works two surfaces at once: the Map Pack, which ranks on relevance, distance and prominence and is driven mainly by your Google Business Profile, reviews and citations; and your website, where city and service pages compete in ordinary organic results. The two reinforce each other and need different work.',
 
     intro: [
-      'Local search is the one vertical where your website is not the main asset. For most commercial queries the Map Pack sits above every organic result, and what ranks in it is your Google Business Profile, not your home page. A business can rank third organically and get almost no calls.',
+      'Local search is the one vertical where your website is not the main asset. For most commercial queries the Map Pack sits above every organic result, and what ranks in it is your Google Business Profile, not your home page. A business can rank third organically and still get no calls.',
       'Distance makes it relative, too. There is no single position to report: you rank differently from one postcode to the next, and an agency showing you one number is showing you the one measured nearest your office.',
     ],
 
     problems: [
       {
         h: 'The Map Pack is the result, and your site is not in it',
+        evidence: { source: 'googleLocalRanking', note: 'Google states local results are based mainly on relevance, distance and popularity — only one of which lives on your website.' },
         p: 'Relevance, distance and prominence decide those three slots. Relevance comes from categories, services and profile content; prominence from reviews, citations and web presence; distance from the searcher, which you cannot change. Site-only SEO moves neither of the first two, which is why campaigns that ignore the profile stall.',
       },
       {
         h: 'Your rankings are different in every postcode',
+        evidence: { source: 'googleLocalRanking', note: 'Google defines distance as how far each business is from the searcher, which is why a single reported position is meaningless.' },
         p: 'Local results are computed from where the searcher is standing, so a single reported position is meaningless. You need a grid of measurements across your actual service area to see where you win, where you fade, and how far your radius really extends. Most reporting hides this, and it is usually the most actionable data available.',
       },
       {
         h: 'Inconsistent citations are quietly capping prominence',
+        evidence: { source: 'brightlocal2025', note: 'BrightLocal found 74% of consumers consult two or more review sites, so conflicting business details are seen rather than hidden.' },
         p: 'An old suite number on one directory, a dead phone on another, a pre-rebrand name on a third. Each is trivial; together they make your business harder to resolve as one entity, and entity confidence feeds prominence. Unglamorous, slow, and one of the few local levers with a predictable effect.',
       },
       {
         h: 'Reviews stopped, and so did the ranking',
+        evidence: { source: 'brightlocal2025', note: 'Only 29% of consumers wrote a review last year though 96% are open to it, and 93% expect a response when they do.' },
         p: 'A business with 200 reviews, none in the last year, looks less current than one with 60 that arrive weekly. Review velocity, recency, whether owners reply, and whether the text mentions the service and the area all feed the picture. Most businesses have no mechanism for asking, so volume arrives in bursts and then dies.',
       },
       {
         h: 'Your city pages are the same page with the town name swapped',
+        evidence: { source: 'googleLocalRanking', note: 'Google ties relevance to how well a profile and its content match the search, not to how many place names a site repeats.' },
         p: 'Twelve pages identical but for a place name are the oldest trick in local SEO and the most reliably ignored. A page earns its place with something true about serving that area: real work done there, the actual travel radius, locally specific constraints, genuine references. If you cannot write that, you need fewer pages, not more.',
       },
       {
         h: 'Service-area businesses are modelled wrong',
+        evidence: { source: 'googleLocalRanking', note: 'Google’s own guidance separates the address a business shows from the areas it declares it serves.' },
         p: 'A plumber covering eight towns from a van is not a shop, and the architecture differs: how the profile hides the address, which areas are declared, and whether the site is organised by service or by location. Getting this backwards either buries your main service pages or spreads you thinly across towns you will never rank in.',
       },
     ],
@@ -566,30 +787,45 @@ export const VERTICALS = [
     approach: [
       {
         h: 'The Google Business Profile, treated as a ranking asset',
+        when: 'Weeks 1–3',
+        who: 'Senior strategist, on your Google account with us as a manager',
+        deliverable: 'Categories, services, attributes, products, hours, booking links and posts, each chosen against a named query',
         p: 'Primary and secondary categories, services, attributes, products, photos, hours, booking links and posts, each chosen against the queries you actually want. It is the single highest-leverage surface in local search and it sits outside your website entirely, which is why it is not covered by ordinary',
         to: '/what-we-do/seo',
         label: 'full-stack SEO',
       },
       {
         h: 'Grid-based rank measurement across the service area',
+        when: 'Baseline week 1, then monthly',
+        who: 'Strategist',
+        deliverable: 'A geographic grid of sampled positions covering the real service area, so coverage is visible rather than a single number',
         p: 'Positions sampled across a geographic grid rather than a single point, so you can see the real shape of your visibility and whether work is extending it. This is the local equivalent of the reporting discipline in',
         to: '/what-we-do/ai-seo',
         label: 'AI SEO',
       },
       {
         h: 'Citation consistency and entity clean-up',
+        when: 'Weeks 2–12, aggregators lag',
+        who: 'Strategist with your office manager for source-of-truth details',
+        deliverable: 'One canonical name, address and phone applied across the sources that matter, with duplicates claimed or removed',
         p: 'One canonical name, address and phone, corrected across the directories and aggregators that matter, with duplicates claimed or removed. It is entity work: making every source agree about who you are, the same discipline that underpins',
         to: '/what-we-do/generative-engine-optimization',
         label: 'generative engine optimisation',
       },
       {
         h: 'A review engine, not a review campaign',
+        when: 'Live by week 4, compounding after',
+        who: 'Built by us, run by your team — the ask has to come from you',
+        deliverable: 'A repeatable ask at the right point in your existing process, plus response templates that read like a person wrote them',
         p: 'A repeatable ask at the right moment in your own process, so velocity is steady rather than bursty, plus owner responses that read like a person. Reviews also feed the content that answer surfaces quote, which is the concern of',
         to: '/what-we-do/answer-engine-optimization',
         label: 'answer engine optimisation',
       },
       {
         h: 'Location architecture you can actually defend',
+        when: 'Month 2 onwards',
+        who: 'Strategist decides the shape, senior editor writes the pages',
+        deliverable: 'A decision on which areas earn a page and which belong to a service page, and content with something genuinely local in it',
         p: 'A decision about which areas deserve a page, which belong to a service page instead, and how the two interlink, followed by content with something genuinely local in it. Thin location pages are a liability, which makes this a',
         to: '/what-we-do/content-marketing',
         label: 'content problem',
@@ -631,6 +867,22 @@ export const VERTICALS = [
       [
         'Do you have local SEO case studies?',
         'Not yet, and we will not present someone else’s. Our one measured result is sendr.ai in B2B SaaS: zero to 1.05M impressions in six months. The entity, schema and measurement discipline transfers; local results do not exist until we have produced them. If a vertical-specific reference is a requirement for you, we are not the right agency today.',
+      ],
+      [
+        'How much do reviews really affect local rankings?',
+        'They feed prominence, one of the three factors Google names. The consumer side is better measured: BrightLocal’s 2025 survey of 1,026 US adults found only 4% never read reviews, 74% consult two or more review sites, and 93% expect a response when they leave one. Recency and owner responses do more work than raw count.',
+      ],
+      [
+        'Are consumers still influenced by reviews as much as they were?',
+        'Less than they were, which changes the tactic. BrightLocal found 42% now trust reviews as much as a personal recommendation, down from 79% in 2020. The implication is not to stop asking, it is that volume alone stopped working. Specific, recent, replied-to reviews carry the weight that a large stale pile no longer does.',
+      ],
+      [
+        'Do AI review summaries change anything?',
+        'They are becoming the first thing many people read. In BrightLocal’s 2025 data, 48% read the AI-written review summary first and 18% would decide on that summary alone. Because those summaries are generated from your review text, what customers actually write about — the service, the area, the specifics — now shapes the first impression more than your star average.',
+      ],
+      [
+        'Can we rank in a town we are not based in?',
+        'Sometimes organically, rarely in the Map Pack. Google states that local results are based mainly on relevance, distance and popularity, and distance is the one you cannot change. For areas beyond a realistic radius, the honest target is the organic result rather than the three-pack. An agency promising Map Pack coverage across a wide area regardless of your address is not being straight.',
       ],
     ],
 
