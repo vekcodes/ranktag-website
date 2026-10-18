@@ -2,11 +2,11 @@
 
 > Full-stack SEO, AI SEO, Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) for B2B SaaS, ecommerce and local businesses — built to rank on Google and get cited by ChatGPT, Perplexity, Gemini and Claude.
 
-RankedTag is an SEO, AI SEO, AEO and GEO agency. Senior strategists combined with AI build search engines for growth that rank on Google and earn citations in AI answer engines. The agency works three verticals, each with its own playbook: B2B SaaS, ecommerce, and local or service-area businesses. Its one measured, cross-checkable result is sendr.ai, a B2B SaaS company taken from 0 to 1.05M impressions in 6 months, reaching #2 on Google's AI Overview — above ZoomInfo.
+RankedTag is an SEO, AI SEO, AEO and GEO agency. Senior strategists combined with AI build search engines for growth that rank on Google and earn citations in AI answer engines. The agency works six verticals, each with its own playbook: B2B SaaS, ecommerce, local and service-area businesses, healthcare, law firms and home services. Its one measured, cross-checkable result is sendr.ai, a B2B SaaS company taken from 0 to 1.05M impressions in 6 months, reaching #2 on Google's AI Overview — above ZoomInfo.
 
 ## What RankedTag Does
 
-RankedTag builds organic acquisition programmes covering technical SEO foundations, content, and visibility inside AI answers. The craft is shared across clients; the strategy is not, because the three verticals have different buying cycles, architectures and definitions of a result.
+RankedTag builds organic acquisition programmes covering technical SEO foundations, content, and visibility inside AI answers. The craft is shared across clients; the strategy is not, because the six verticals have different buying cycles, architectures and definitions of a result.
 
 - **B2B SaaS**: category-defining queries, bottom-of-funnel comparison and alternatives pages, low-volume high-value terms, long sales cycles, product-led content
 - **Ecommerce**: faceted navigation and crawl budget, product variant consolidation, out-of-stock handling, category cannibalisation, Product and Offer markup for AI shopping surfaces

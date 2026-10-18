@@ -27,7 +27,7 @@ const HOME_FAQ = [
   ['How is this different from a regular SEO agency?', 'Three things. (1) We optimize for ChatGPT, Claude, Perplexity and Gemini citations alongside Google. Most agencies are not even tracking that yet. (2) We use AI to compress the work that is grunt, so we ship in days what a regular team ships in months. (3) The pipeline lives on your infrastructure when we are done. You keep the prompts and workflows.'],
   ['When do we see results?', 'Pipeline live by week 2. First indexed pages by week 3. First top-20 rankings around weeks 5 to 7. First LLM citation typically inside 30 to 45 days. Compounding traffic curve hits in months 3 to 6. Sendr.ai hit 1.05M impressions and 7.43k clicks in 6 months on Google Search Console.'],
   ['Do you guarantee #1 rankings?', 'No. Anyone who does is lying. We aim for measurable lift in organic impressions and at least one LLM citation inside the first 90 days. That is testable. Sendr.ai is the proof we have shipped this before.'],
-  ['What kind of company is this for?', 'Three verticals: B2B SaaS, ecommerce, and local or service-area businesses. Across all three the fit test is the same — you already have something people search for, and at least one founder can give 90 minutes a week to strategy. Bad fit: pre-product, and categories with no search demand yet.'],
+  ['What kind of company is this for?', 'Six verticals: B2B SaaS, ecommerce, local and service-area businesses, healthcare, law firms and home services. Across all of them the fit test is the same — you already have something people search for, and at least one founder can give 90 minutes a week to strategy. Bad fit: pre-product, and categories with no search demand yet.'],
   ['Can we just hire a freelancer?', 'Sure. The version a freelancer ships will be: 8 articles, no schema, no GEO optimization, no inbound automation, no citation tracking, no senior strategy oversight. Same hours, a quarter of the surface area.'],
   ['How much does it cost?', 'We share pricing once we have looked at your domain and confirmed it is a fit. Different stage, different vertical, different scope. Apply above and the founder will reply with a real number inside 48 hours.'],
 ];
@@ -81,7 +81,7 @@ const HOME_FAQ_VIEW = [
   ["Do you guarantee #1 rankings?",
    "No. Anyone who does is lying. We aim for measurable lift in organic impressions and at least one LLM citation inside the first 90 days. That is testable. Sendr.ai is the proof we have shipped this before."],
   ["What kind of company is this for?",
-   "Three verticals: B2B SaaS, ecommerce, and local or service-area businesses. Across all three the fit test is the same — you already have something people search for, and at least one founder can give 90 minutes a week to strategy. Bad fit: pre-product, and categories with no search demand yet."],
+   "Six verticals: B2B SaaS, ecommerce, local and service-area businesses, healthcare, law firms and home services. Across all of them the fit test is the same — you already have something people search for, and at least one founder can give 90 minutes a week to strategy. Bad fit: pre-product, and categories with no search demand yet."],
   ["Can we just hire a freelancer?",
    "Sure. The version a freelancer ships will be: 8 articles, no schema, no GEO optimization, no inbound automation, no citation tracking, no senior strategy oversight. Same hours, a quarter of the surface area. We would pick us. We are biased."],
   ["How much does it cost?",

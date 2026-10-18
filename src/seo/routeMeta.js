@@ -49,7 +49,7 @@ export const TOOL_META = {
   ...SERVICE_META,
   ...VERTICAL_META,
   '/who-we-help': { ...WHO_WE_HELP_META, ogImage: `${SITE}/og/who-we-help.png`,
-    ogImageAlt: 'The three verticals RankedTag works' },
+    ogImageAlt: 'The six verticals RankedTag works' },
   ...Object.fromEntries(
     EXPLAINERS.map((e) => [
       `/${e.slug}`,
