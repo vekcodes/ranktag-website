@@ -1,0 +1,127 @@
+/* =====================================================================
+   CLIENT-SIDE TOOLS — schema generator, llms.txt generator, SERP preview
+   These three run entirely in the browser: no API, no serverless route, no
+   data leaves the page. Layered on ToolPage.css for the hero and report
+   shell; only the pieces unique to a build-something tool live here.
+   ===================================================================== */
+
+.ct-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--grid-gap);
+  align-items: start;
+}
+
+/* ── Form side ──────────────────────────────────────────────────────── */
+.ct-panel {
+  border: 1px solid var(--rule);
+  padding: var(--s-6);
+  background: var(--surface-1, transparent);
+}
+.ct-panel-h {
+  margin: 0 0 var(--s-5);
+  font-size: .75rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-weight: 400;
+}
+
+.ct-field { display: grid; gap: var(--s-2); margin-bottom: var(--s-5); }
+.ct-field:last-child { margin-bottom: 0; }
+.ct-label { font-size: .875rem; color: var(--text-2); }
+.ct-hint { font-size: .75rem; color: var(--text-3); line-height: 1.5; }
+
+.ct-input,
+.ct-textarea,
+.ct-select {
+  width: 100%;
+  padding: .7rem .85rem;
+  border: 1px solid var(--rule);
+  background: transparent;
+  color: var(--text-1);
+  font: inherit;
+  font-size: .9375rem;
+  border-radius: 2px;
+}
+.ct-textarea { min-height: 6rem; resize: vertical; line-height: 1.55; }
+.ct-input:focus-visible,
+.ct-textarea:focus-visible,
+.ct-select:focus-visible { outline: 2px solid var(--peri); outline-offset: 1px; }
+
+/* counter turns amber then red as a field approaches a real display limit */
+.ct-count { font-size: .75rem; color: var(--text-3); font-variant-numeric: tabular-nums; }
+.ct-count[data-state='warn'] { color: #c98a00; }
+.ct-count[data-state='over'] { color: var(--red, #FF3B14); }
+
+.ct-row { display: flex; gap: var(--s-3); flex-wrap: wrap; align-items: center; }
+.ct-btn {
+  padding: .6rem 1rem;
+  border: 1px solid var(--rule);
+  background: transparent;
+  color: var(--text-1);
+  font: inherit;
+  font-size: .875rem;
+  cursor: pointer;
+  border-radius: 2px;
+}
+.ct-btn:hover { border-color: var(--peri); color: var(--peri); }
+.ct-btn-primary { border-color: var(--peri); color: var(--peri); }
+.ct-btn[aria-pressed='true'] { border-color: var(--peri); color: var(--peri); }
+
+/* ── Output side ────────────────────────────────────────────────────── */
+.ct-output {
+  border: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  min-height: 22rem;
+}
+.ct-output-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-4) var(--s-5);
+  border-bottom: 1px solid var(--rule);
+}
+.ct-code {
+  margin: 0;
+  padding: var(--s-5);
+  overflow: auto;
+  flex: 1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .8125rem;
+  line-height: 1.6;
+  color: var(--text-2);
+  white-space: pre;
+  tab-size: 2;
+}
+.ct-status { font-size: .8125rem; color: var(--text-3); min-height: 1.4em; }
+
+/* ── SERP preview ───────────────────────────────────────────────────── */
+.ct-serp {
+  padding: var(--s-6);
+  border: 1px solid var(--rule);
+  background: #fff;
+  color: #202124;
+}
+.ct-serp[data-view='mobile'] { max-width: 24rem; }
+.ct-serp-crumb { font-size: .75rem; color: #4d5156; line-height: 1.4; }
+.ct-serp-title {
+  margin: .2rem 0 .15rem;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  color: #1a0dab;
+  font-weight: 400;
+}
+.ct-serp[data-view='mobile'] .ct-serp-title { font-size: 1.0625rem; }
+.ct-serp-desc { font-size: .875rem; line-height: 1.58; color: #4d5156; margin: 0; }
+.ct-serp-note { margin-top: var(--s-4); font-size: .75rem; color: var(--text-3); }
+
+/* ── Supporting prose ───────────────────────────────────────────────── */
+.ct-section { padding-block: clamp(3rem, 6vw, 5rem); }
+
+@media (max-width: 900px) {
+  .ct-grid { grid-template-columns: 1fr; }
+  .ct-serp[data-view='mobile'] { max-width: none; }
+}

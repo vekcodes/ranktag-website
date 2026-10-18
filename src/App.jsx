@@ -77,6 +77,12 @@ export const routes = [
       { path: 'audit', element: <ApplyRedirect /> },
       { path: 'technical-audit', element: <ApplyRedirect /> },
 
+      // Free tools. The three below are fully client-side: no API route, no
+      // data leaves the page, which keeps them inside the Hobby plan.
+      { path: 'schema-generator', lazy: lazyRoute(() => import('./pages/tools/SchemaGenerator.jsx')) },
+      { path: 'llms-txt-generator', lazy: lazyRoute(() => import('./pages/tools/LlmsTxtGenerator.jsx')) },
+      { path: 'serp-preview-tool', lazy: lazyRoute(() => import('./pages/tools/SerpPreview.jsx')) },
+
       // Free tools (static copy pre-rendered; interactive layer hydrates client-side).
       { path: 'domain-authority-checker', lazy: lazyRoute(() => import('./pages/BacklinkChecker.jsx')) },
       { path: 'keyword-density-checker', lazy: lazyRoute(() => import('./pages/DensityDashboard.jsx')) },

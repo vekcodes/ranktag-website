@@ -76,6 +76,30 @@ export const TOOL_META = {
       },
     ])
   ),
+  '/schema-generator': {
+    title: 'Schema Markup Generator: Free JSON-LD Builder',
+    description:
+      'Free schema markup generator for Organization, LocalBusiness, Service, Product and FAQPage. Valid JSON-LD, empty properties dropped. Runs in your browser.',
+    canonical: '{SITE}/schema-generator'.replace('{SITE}', SITE),
+    ogImage: `${SITE}/og/schema-generator.png`,
+    ogImageAlt: 'Free JSON-LD schema generator from RankedTag',
+  },
+  '/llms-txt-generator': {
+    title: 'llms.txt Generator: Build Your AI Summary File',
+    description:
+      'Free llms.txt generator. Build the Markdown summary some AI tools look for, with curated links. Honest about what the file does and does not do.',
+    canonical: '{SITE}/llms-txt-generator'.replace('{SITE}', SITE),
+    ogImage: `${SITE}/og/llms-txt-generator.png`,
+    ogImageAlt: 'Free llms.txt generator from RankedTag',
+  },
+  '/serp-preview-tool': {
+    title: 'SERP Preview Tool: Google Title and Description',
+    description:
+      'Free SERP preview tool. See how your title tag and meta description render in Google, with truncation estimated by pixel width rather than character count.',
+    canonical: '{SITE}/serp-preview-tool'.replace('{SITE}', SITE),
+    ogImage: `${SITE}/og/serp-preview-tool.png`,
+    ogImageAlt: 'Free Google SERP preview tool from RankedTag',
+  },
   '/apply': {
     title: 'Apply for a Free Founder Review | RankedTag',
     description:

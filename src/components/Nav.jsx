@@ -2,8 +2,24 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SERVICES } from '../pages/whatWeDo/capabilitiesData.js';
 import { VERTICALS } from '../pages/verticals/verticalsData.js';
+import { EXPLAINERS } from '../pages/explainers/explainersData.js';
 
 const FREE_TOOLS = [
+  {
+    to: '/schema-generator',
+    label: 'Schema Generator',
+    desc: 'Organization, LocalBusiness, Service, Product, FAQ',
+  },
+  {
+    to: '/serp-preview-tool',
+    label: 'SERP Preview Tool',
+    desc: 'Pixel-width truncation, desktop and mobile',
+  },
+  {
+    to: '/llms-txt-generator',
+    label: 'llms.txt Generator',
+    desc: 'Build the AI summary file, honestly explained',
+  },
   {
     to: '/keyword-density-checker',
     label: 'Keyword Density Checker',
@@ -187,6 +203,17 @@ export default function Nav({ variant = 'home' }) {
               location.pathname === '/who-we-help' ||
               VERTICALS.some((v) => location.pathname === `/${v.slug}`)
             }
+            onNavigate={close}
+          />
+          <NavMenu
+            id="guides"
+            label="Guides"
+            items={EXPLAINERS.map((e) => ({ to: `/${e.slug}`, label: e.nav, desc: e.description }))}
+            footerItem={{ to: '/best', label: 'Agency shortlists →' }}
+            note="Comparisons and buyer guides. Sourced, dated, no fluff."
+            openId={openId}
+            setOpenId={setOpenId}
+            active={EXPLAINERS.some((e) => location.pathname === `/${e.slug}`)}
             onNavigate={close}
           />
           <Link to="/#how-it-works" className="nav-link" onClick={close}>How it works</Link>

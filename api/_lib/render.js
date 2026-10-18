@@ -345,18 +345,20 @@ ${services.map(([slug, label]) => `<a href="/what-we-do/${slug}">${label}</a>`).
 <div class="footer-col"><h4><span>002</span>Who we help</h4>
 <a href="/saas-seo-agency">B2B SaaS</a><a href="/ecommerce-seo-agency">Ecommerce</a><a href="/local-seo-agency">Local &amp; service-area</a>
 <a href="/who-we-help">All verticals →</a><a href="/best">Agency comparisons →</a></div>
-<div class="footer-col"><h4><span>003</span>Free tools</h4>
-<a href="/keyword-density-checker">Keyword Density Checker</a>
+<div class="footer-col"><h4><span>003</span>Guides</h4>
+<a href="/seo-vs-geo">SEO vs GEO</a><a href="/aeo-vs-geo">AEO vs GEO</a><a href="/ai-seo-vs-traditional-seo">AI SEO vs traditional SEO</a><a href="/seo-vs-ppc-for-saas">SEO vs PPC for SaaS</a><a href="/seo-pricing">SEO pricing</a><a href="/in-house-vs-seo-agency">In-house vs agency</a><a href="/how-to-choose-an-seo-agency">How to choose an agency</a></div>
+<div class="footer-col"><h4><span>004</span>Free tools</h4>
+<a href="/schema-generator">Schema Generator</a><a href="/serp-preview-tool">SERP Preview Tool</a><a href="/llms-txt-generator">llms.txt Generator</a><a href="/keyword-density-checker">Keyword Density Checker</a>
 <a href="/domain-authority-checker">Domain Authority Checker</a>
 <a href="/page-speed-checker">Page Speed Checker</a>
 <a href="/competitor-analysis">Competitor Analysis</a>
 <a href="/apply">Site Audit (Founder Review)</a></div>
-<div class="footer-col"><h4><span>004</span>The product</h4>
+<div class="footer-col"><h4><span>005</span>The product</h4>
 <a href="/#how-it-works">How it works</a>
 <a href="/case-study/sendr">Sendr.ai case study</a>
 <a href="/blog">Blog</a>
 <a href="/apply">Apply</a></div>
-<div class="footer-col"><h4><span>005</span>Company</h4>
+<div class="footer-col"><h4><span>006</span>Company</h4>
 <a href="mailto:hello@rankedtag.com">hello@rankedtag.com</a>
 <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a></div>
 </div>

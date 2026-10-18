@@ -9,8 +9,8 @@
     "legacy_redirects": 15,
     "endpoints": 8,
     "app_noindex": 1,
-    "total": 94,
-    "indexable_in_sitemap": 69,
+    "total": 97,
+    "indexable_in_sitemap": 72,
     "what_we_do_pages": 7,
     "vertical_pages": 6,
     "vertical_hub": 1,
@@ -773,6 +773,30 @@
       "indexable": false,
       "expected_status": 308,
       "note": "phase 6 - redirects to /best/ai-seo-agencies rather than duplicating the roster"
+    },
+    {
+      "url": "/schema-generator",
+      "kind": "tool",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 7 - client-side only"
+    },
+    {
+      "url": "/llms-txt-generator",
+      "kind": "tool",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 7 - client-side only"
+    },
+    {
+      "url": "/serp-preview-tool",
+      "kind": "tool",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 7 - client-side only"
     }
   ],
   "phases": {

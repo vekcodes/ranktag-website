@@ -75,6 +75,52 @@ for f in pages:
     for m in re.findall(r'https://rankedtag\.com(/services[^"\'\s<]*)', html):
         fails.append(f"[canonical] {os.path.relpath(f, DIST)} still references {m}")
 
+# click depth: every indexable page must be reachable from the homepage in
+# two clicks or fewer. This is the check that would have caught ten orphaned
+# pages shipped across phases 3, 4 and 7 — they built, verified and linked
+# nowhere, because nothing was looking.
+page_links = {}
+page_file = {}
+for f in pages:
+    rel = "/" + os.path.relpath(f, DIST).replace("/index.html", "").replace("index.html", "")
+    rel = re.sub(r"/+$", "", rel) or "/"
+    page_file[rel] = f
+    html_src = open(f, encoding="utf-8", errors="ignore").read()
+    hrefs = set()
+    for h in re.findall(r'href="(/[^"#?]*)"', html_src):
+        if re.search(r"\.\w{2,5}$", h):
+            continue
+        hrefs.add(re.sub(r"/+$", "", h) or "/")
+    page_links[rel] = hrefs
+
+depth = {"/": 0}
+frontier = {"/"}
+for level in range(1, 4):
+    nxt = set()
+    for r in frontier:
+        for l in page_links.get(r, ()):
+            if l not in depth:
+                depth[l] = level
+                nxt.add(l)
+    frontier = nxt
+
+for rel in sorted(page_links):
+    if rel in ("/404", "/404.html"):
+        continue
+    html_src = open(page_file[rel], encoding="utf-8", errors="ignore").read()
+    if "noindex" in html_src:
+        continue
+    # a page that canonicalises elsewhere is represented by its canonical
+    # (e.g. /llm-info.html -> /llm-info), so it is not an orphan
+    can = re.search(r'canonical" href="https://rankedtag\.com([^"]*)"', html_src)
+    if can and can.group(1).rstrip("/") != rel.rstrip("/"):
+        continue
+    d = depth.get(rel)
+    if d is None:
+        fails.append(f"[depth] {rel} is ORPHANED \u2014 not reachable from the homepage")
+    elif d > 2:
+        fails.append(f"[depth] {rel} is {d} clicks from the homepage (limit 2)")
+
 # heading order: exactly one h1 per page, no skipped levels (WCAG 1.3.1)
 for f in pages:
     h = open(f, encoding="utf-8", errors="ignore").read()

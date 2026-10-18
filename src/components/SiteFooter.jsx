@@ -1,5 +1,6 @@
 import { SERVICES } from '../pages/whatWeDo/capabilitiesData.js';
 import { VERTICALS } from '../pages/verticals/verticalsData.js';
+import { EXPLAINERS } from '../pages/explainers/explainersData.js';
 
 /**
  * Shared site footer. One definition replaces the copy-pasted <footer> blocks
@@ -39,7 +40,16 @@ export default function SiteFooter() {
             <a href="/best" className="link-wipe">Agency comparisons →</a>
           </div>
           <div className="footer-col">
-            <h4><span className="idx plain">003</span>Free tools</h4>
+            <h4><span className="idx plain">003</span>Guides</h4>
+            {EXPLAINERS.map((e) => (
+              <a key={e.slug} href={`/${e.slug}`} className="link-wipe">{e.nav}</a>
+            ))}
+          </div>
+          <div className="footer-col">
+            <h4><span className="idx plain">004</span>Free tools</h4>
+            <a href="/schema-generator" className="link-wipe">Schema Generator</a>
+            <a href="/serp-preview-tool" className="link-wipe">SERP Preview Tool</a>
+            <a href="/llms-txt-generator" className="link-wipe">llms.txt Generator</a>
             <a href="/keyword-density-checker" className="link-wipe">Keyword Density Checker</a>
             <a href="/domain-authority-checker" className="link-wipe">Domain Authority Checker</a>
             <a href="/page-speed-checker" className="link-wipe">Page Speed Checker</a>
@@ -47,14 +57,14 @@ export default function SiteFooter() {
             <a href="/apply" className="link-wipe">Site Audit (Founder Review)</a>
           </div>
           <div className="footer-col">
-            <h4><span className="idx plain">004</span>The product</h4>
+            <h4><span className="idx plain">005</span>The product</h4>
             <a href="/#how-it-works" className="link-wipe">How it works</a>
             <a href="/case-study/sendr" className="link-wipe">Sendr.ai case study</a>
             <a href="/blog" className="link-wipe">Blog</a>
             <a href="/apply" className="link-wipe">Apply</a>
           </div>
           <div className="footer-col">
-            <h4><span className="idx plain">005</span>Company</h4>
+            <h4><span className="idx plain">006</span>Company</h4>
             <a href="mailto:hello@rankedtag.com" className="link-wipe">hello@rankedtag.com</a>
             <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="link-wipe">LinkedIn</a>
           </div>
