@@ -95,6 +95,24 @@ function fixVisibleUrlText(html) {
   return { html: out, count: n };
 }
 
+// JSON-LD holds bare URL strings (significantLink, sameAs, url), not hrefs, so
+// it needs its own rewriter. Anchored on the full absolute URL and a closing
+// quote so a longer path can never be clipped by a shorter rule.
+function rewriteJsonLd(text) {
+  let out = text;
+  let n = 0;
+  for (const [from, to] of ORDERED) {
+    for (const prefix of [SITE, SITE_HTTP]) {
+      const re = new RegExp(`${(prefix + from).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?=["/?#])`, 'g');
+      out = out.replace(re, () => {
+        n += 1;
+        return SITE + to;
+      });
+    }
+  }
+  return { html: out, count: n };
+}
+
 // Strip nofollow (and the pointless noreferrer/_blank) from internal links only.
 function unNofollowInternal(html) {
   let n = 0;
@@ -117,7 +135,7 @@ function unNofollowInternal(html) {
 
 const sql = neon(connectionString());
 
-const rows = await sql`SELECT id, slug, content_html FROM posts WHERE content_html IS NOT NULL`;
+const rows = await sql`SELECT id, slug, content_html, custom_jsonld::text AS jsonld FROM posts WHERE content_html IS NOT NULL`;
 const published = await sql`SELECT count(*)::int AS n FROM posts WHERE status = 'published'`;
 
 console.log(`Connected. ${rows.length} posts with bodies, ${published[0].n} published.`);
@@ -169,8 +187,17 @@ for (const r of rows) {
   const a = rewritePaths(r.content_html);
   const t = fixVisibleUrlText(a.html);
   const b = unNofollowInternal(t.html);
-  if (b.html !== r.content_html) {
-    changes.push({ id: r.id, slug: r.slug, before: r.content_html, after: b.html, links: a.count + t.count, nofollow: b.count });
+  // Same path moves applied to the post's custom JSON-LD, where
+  // significantLink arrays reference the old URLs.
+  const j = r.jsonld ? rewriteJsonLd(r.jsonld) : { html: null, count: 0 };
+  const jsonldChanged = r.jsonld && j.html !== r.jsonld;
+  if (b.html !== r.content_html || jsonldChanged) {
+    changes.push({
+      id: r.id, slug: r.slug,
+      before: r.content_html, after: b.html,
+      beforeJsonld: r.jsonld, afterJsonld: jsonldChanged ? j.html : null,
+      links: a.count + t.count + j.count, nofollow: b.count,
+    });
   }
 }
 
@@ -190,11 +217,14 @@ if (!APPLY) {
 }
 
 const backup = `blog-bodies-backup-${new Date().toISOString().replace(/[:.]/g, '-')}.json`;
-writeFileSync(backup, JSON.stringify(changes.map(({ id, slug, before }) => ({ id, slug, before })), null, 2));
+writeFileSync(backup, JSON.stringify(changes.map(({ id, slug, before, beforeJsonld }) => ({ id, slug, before, beforeJsonld })), null, 2));
 console.log(`\nBackup written to ${backup}`);
 
 for (const c of changes) {
   await sql`UPDATE posts SET content_html = ${c.after} WHERE id = ${c.id}`;
-  console.log(`  updated ${c.slug}`);
+  if (c.afterJsonld) {
+    await sql`UPDATE posts SET custom_jsonld = ${c.afterJsonld}::jsonb WHERE id = ${c.id}`;
+  }
+  console.log(`  updated ${c.slug}${c.afterJsonld ? ' (+ jsonld)' : ''}`);
 }
 console.log(`\nDone. ${changes.length} posts updated. updated_at was left untouched so sitemap lastmod stays truthful.`);
