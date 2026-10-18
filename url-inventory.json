@@ -9,8 +9,8 @@
     "legacy_redirects": 15,
     "endpoints": 8,
     "app_noindex": 1,
-    "total": 82,
-    "indexable_in_sitemap": 58,
+    "total": 85,
+    "indexable_in_sitemap": 61,
     "what_we_do_pages": 7,
     "vertical_pages": 3,
     "vertical_hub": 1,
@@ -672,6 +672,30 @@
     },
     {
       "url": "/seo-vs-geo",
+      "kind": "explainer",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 3"
+    },
+    {
+      "url": "/seo-vs-ppc-for-saas",
+      "kind": "explainer",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 3"
+    },
+    {
+      "url": "/aeo-vs-geo",
+      "kind": "explainer",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 3"
+    },
+    {
+      "url": "/ai-seo-vs-traditional-seo",
       "kind": "explainer",
       "in_sitemap": true,
       "indexable": true,

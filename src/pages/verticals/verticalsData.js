@@ -52,6 +52,14 @@ export const SOURCES = {
     label: 'Google Search Central, AI features in Google Search',
     href: 'https://developers.google.com/search/docs/appearance/ai-features',
   },
+  googleAdRank: {
+    label: 'Google Ads Help, the ad auction and Ad Rank',
+    href: 'https://support.google.com/google-ads/answer/1704431',
+  },
+  googleAdsCost: {
+    label: 'Google Ads Help, how costs are calculated',
+    href: 'https://support.google.com/google-ads/answer/6297',
+  },
   geoStudy: {
     label: 'Aggarwal et al., GEO: Generative Engine Optimization, KDD 2024',
     href: 'https://arxiv.org/abs/2311.09735',
