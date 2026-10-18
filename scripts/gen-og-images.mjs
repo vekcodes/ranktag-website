@@ -102,6 +102,8 @@ const CARDS = [
   ['best-seo-agencies-for-saas', 'Shortlist · 2026', 'The best SaaS SEO agencies, honestly compared'],
   ['best-seo-agencies-for-ecommerce', 'Shortlist · 2026', 'The best ecommerce SEO agencies, honestly compared'],
   ['best-seo-agencies-for-local-business', 'Shortlist · 2026', 'The best local SEO agencies, honestly compared'],
+  ['best-ai-seo-agencies', 'Shortlist · 2026', 'The best AI SEO and GEO agencies, honestly compared'],
+  ['best-seo-agencies-uk', 'Shortlist · 2026', 'The best UK SEO agencies, honestly compared'],
   ['what-we-do', 'What we do', 'SEO, AI SEO, GEO and AEO, under one roof'],
   ['apply', 'Four slots a month', 'A free founder review of your domain'],
   ['what-we-do-seo', 'Capability · Full-stack SEO', 'Full-stack SEO that fills pipeline, not dashboards'],

@@ -91,6 +91,11 @@
       "source": "/technical-audit",
       "destination": "/apply",
       "permanent": true
+    },
+    {
+      "source": "/best/geo-agencies",
+      "destination": "/best/ai-seo-agencies",
+      "permanent": true
     }
   ],
   "rewrites": [

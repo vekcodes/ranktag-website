@@ -704,6 +704,438 @@ export const COMPARISONS = [
 
     related: ['seo-agencies-for-saas', 'seo-agencies-for-ecommerce'],
   },
+  {
+    slug: 'ai-seo-agencies',
+    path: '/best/ai-seo-agencies',
+    vertical: '/what-we-do/ai-seo',
+    verticalLabel: 'what we do on AI search',
+    nav: 'Best AI SEO agencies',
+    year: '2026',
+    updated: '2026-10-19',
+    verified: '19 October 2026',
+
+    title: 'Best AI SEO Agencies in 2026: 12 Compared',
+    description:
+      '12 agencies that genuinely position on AI search, checked on their own websites. Specialism, published pricing, who each suits and who it does not.',
+    eyebrow: 'SHORTLIST · AI SEARCH',
+    h1: 'The best AI SEO and GEO agencies in 2026, honestly compared.',
+
+    answer:
+      'Agencies positioning on AI search fall into three groups: GEO-first firms such as Siege Media, Omnius and Ten Speed; organic specialists that added AI visibility, including Omniscient Digital, Skale and Grow and Convert; and broader agencies with a named AI practice, such as Found and Rise at Seven.',
+
+    disclosure:
+      'RankedTag publishes this list and is on it. Every other agency here was checked on its own website on 19 October 2026 and included because it genuinely positions on AI search, not because it mentioned ChatGPT once. Nothing is paid, sponsored or affiliate-linked, and the list is alphabetical with no rank order.',
+
+    criteria: [
+      'The agency must position on AI search on its own website — a named GEO, AEO, AI SEO or AI visibility service, not a blog post about ChatGPT. Checked at source, not taken from another roundup.',
+      'Pricing appears only where the agency publishes it. Three of the twelve do. Everywhere else the cell reads "Not published" rather than repeating a figure from a directory.',
+      'No ratings, no scores, no rank order. We have not been a client of any of them, so a score would be invented. Sorted alphabetically.',
+      'Where an agency sells AI visibility inside a much larger media offering, the table says so, because it changes what you are buying.',
+      'No affiliate links, no referral fees, no paid placement.',
+    ],
+
+    columns: ['Agency', 'Best for', 'AI search positioning', 'Published pricing', 'Engagement'],
+
+    agencies: [
+      {
+        name: 'Breaking B2B',
+        url: 'https://www.breakingb2b.com/',
+        bestFor: 'B2B and SaaS buyers who want pricing up front',
+        specialism: 'Senior-led SEO, GEO and AEO, B2B and SaaS only',
+        pricing: 'Plans from $6,000/mo (published)',
+        engagement: 'Six or twelve month programmes (published)',
+        who: 'A senior-led consultancy fronted by Sam Dunning, positioned as "B2B SaaS SEO & AEO for revenue NOT vanity", with answer and generative engine optimisation listed alongside core SEO.',
+        strong: 'Transparency and seniority. One of very few on this list to publish both a starting price and a programme length, with the work sold as senior-led rather than routed through account managers.',
+        notFor: 'Anyone outside B2B and SaaS, which it states plainly, and organisations needing many parallel workstreams.',
+      },
+      {
+        name: 'Found',
+        url: 'https://www.found.co.uk/',
+        bestFor: 'Brands wanting AI visibility inside a full media offering',
+        specialism: 'Describes itself as "The AI-first Everysearch Agency"',
+        pricing: 'Not published',
+        engagement: 'Not published',
+        who: 'A London agency positioning entirely around AI-era search, with a named GEO and AI optimisation service described as putting a brand "front and centre in AI answers", alongside paid media, digital PR and CRO.',
+        strong: 'The positioning is structural rather than bolted on: brand optimisation for AI platforms is presented as a core offer, not a line item under SEO.',
+        notFor: 'Small budgets, and anyone wanting a narrow organic-only engagement rather than a media relationship.',
+      },
+      {
+        name: 'Grow and Convert',
+        url: 'https://www.growandconvert.com/',
+        bestFor: 'Teams who want conversions attributed per article',
+        specialism: '"Personalised GEO" — conversations, not keywords',
+        pricing: 'Not published',
+        engagement: 'Not published',
+        who: 'A content and SEO agency known for publishing its methodology openly, now framing its AI work as Personalised GEO built on teaching models the customers, pain points and scenarios that should trigger a recommendation.',
+        strong: 'A distinctive, clearly argued thesis rather than a rebranded SEO service, plus a free AI visibility tool included for clients.',
+        notFor: 'Companies whose problem is technical rather than editorial, or who need large parallel content volume.',
+      },
+      {
+        name: 'Omniscient Digital',
+        url: 'https://beomniscient.com/',
+        bestFor: 'Funded B2B software with a six-figure annual budget',
+        specialism: 'Organic growth across search and AI platforms, with named AEO',
+        pricing: 'Full-service engagements from $120,000/year (published)',
+        engagement: 'Not published',
+        who: 'An organic growth agency positioned on getting "B2B brands recommended across AI and search engines", covering SEO strategy, answer engine optimisation, programmatic and technical SEO, content and digital PR.',
+        strong: 'Breadth within organic plus unusual pricing transparency at this size. A published six-figure annual floor qualifies in both directions before anyone takes a call.',
+        notFor: 'Anyone whose annual budget sits below that published floor — which they have told you in advance, deliberately.',
+      },
+      {
+        name: 'Omnius',
+        url: 'https://www.omnius.so/',
+        bestFor: 'SaaS and fintech wanting an AI-first approach',
+        specialism: 'Calls itself an "AI-native SEO Agency"',
+        pricing: 'Not published',
+        engagement: 'Not published',
+        who: 'An agency working across B2B SEO, generative and answer engine optimisation, programmatic and entity SEO, stating it partners only with companies in the SaaS and fintech verticals.',
+        strong: 'Entity and AI-search work as the organising idea rather than an add-on, with a narrow vertical focus that keeps the playbook specific.',
+        notFor: 'Companies outside SaaS, fintech and AI, which they decline openly.',
+      },
+      {
+        name: 'Powered by Search',
+        url: 'https://www.poweredbysearch.com/',
+        bestFor: 'B2B SaaS running paid and GEO together',
+        specialism: 'Positions as "The B2B Paid Ads and GEO Agency"',
+        pricing: 'Not published',
+        engagement: 'Not published',
+        who: 'A long-running B2B SaaS agency that now leads with paid media and generative engine optimisation together, building demand generation systems and stating it has helped 200+ B2B companies.',
+        strong: 'Treating paid and AI visibility as one demand system rather than separate channels, with substantial depth in SaaS specifically.',
+        notFor: 'Buyers wanting organic search alone — the current positioning leads with paid.',
+      },
+      {
+        name: 'RankedTag',
+        url: '/',
+        isUs: true,
+        bestFor: 'Founders who want senior strategy at AI-accelerated speed',
+        specialism: 'Full-stack SEO, AI SEO, GEO and AEO as one programme',
+        pricing: 'Not published, scoped after a free review',
+        engagement: 'Not published',
+        who: 'Us. A small, senior-led team running technical SEO, content and AI-search visibility as a single programme, with the founder auditing every domain personally before an engagement starts.',
+        strong: 'Treating AI visibility as an extension of a working technical and content foundation rather than a separate retainer, and measuring it with a tracked prompt set rather than a slide about ChatGPT.',
+        notFor: 'Anyone needing a bench for parallel workstreams, or a vertical-specific reference before signing. We have one measured case study, sendr.ai in B2B SaaS, and we are small by design.',
+      },
+      {
+        name: 'Rise at Seven',
+        url: 'https://riseatseven.com/',
+        bestFor: 'Consumer brands wanting AI visibility and digital PR together',
+        specialism: 'Search-first content with a named AI Visibility and GEO service',
+        pricing: 'Not published',
+        engagement: 'Not published',
+        who: 'A search-first content marketing agency with offices in Manchester, London and New York, describing itself as organic media planners optimising content for SEO, social, PR and LLM search.',
+        strong: 'Digital PR and AI visibility in the same team, which matters because corroborating third-party coverage is one of the few reliable levers on assistant answers.',
+        notFor: 'B2B companies wanting a technical-first engagement — the client roster and campaign style lean strongly consumer.',
+      },
+      {
+        name: 'Siege Media',
+        url: 'https://www.siegemedia.com/',
+        bestFor: 'Established brands needing content and links at volume',
+        specialism: 'Positions as a full-service GEO agency',
+        pricing: 'Not published',
+        engagement: 'Not published',
+        who: 'A large content and GEO agency whose headline is making brands "the answer in search", working across eight industries with GEO, SEO consulting, digital PR and content production.',
+        strong: 'Content and link acquisition at a scale most AI-positioned agencies cannot match, which still underpins whether a model has anything to retrieve about you.',
+        notFor: 'Early-stage companies with narrow budgets, or anyone wanting a single-vertical specialist.',
+      },
+      {
+        name: 'Skale',
+        url: 'https://skale.so/',
+        bestFor: 'Funded SaaS reporting organic on MRR',
+        specialism: 'Runs GEO and SEO as one system, reports on new MRR',
+        pricing: 'Not published',
+        engagement: 'Not published',
+        who: 'A SaaS-only organic growth agency stating it provides bespoke SEO growth services exclusively for leading SaaS brands, running generative engine optimisation and SEO together.',
+        strong: 'Exclusive SaaS focus plus a commitment to revenue-level reporting, which forces engagement with attribution rather than traffic charts.',
+        notFor: 'Non-SaaS companies, and early teams without the tracking to support MRR-level reporting.',
+      },
+      {
+        name: 'Ten Speed',
+        url: 'https://tenspeed.io/',
+        bestFor: 'B2B brands wanting AEO and SEO run together',
+        specialism: '"Organic growth, built for AI search" — US-based AEO and SEO',
+        pricing: 'Not published',
+        engagement: 'Not published',
+        who: 'A US-based answer engine optimisation and SEO agency driving organic growth and pipeline for B2B companies, with industry pages spanning PLG and SaaS, fintech, healthcare and cybersecurity.',
+        strong: 'Running AEO and SEO as one engagement on the explicit reasoning that AI tools still draw on search results, which is the correct mechanical argument.',
+        notFor: 'Consumer brands, and companies wanting paid media in the same contract.',
+      },
+      {
+        name: 'Victorious',
+        url: 'https://victorious.com/',
+        bestFor: 'Brands wanting an SEO-only agency with AEO as a core pillar',
+        specialism: '"Strategies engineered for AI visibility", AEO as a service pillar',
+        pricing: 'Not a price, but it recommends budgeting at least $6,000/mo (published)',
+        engagement: 'Recommends a 12-month campaign (stated as advice, not a minimum)',
+        who: 'An SEO-only agency operating since 2013, with four service pillars covering SEO, answer engine optimisation, content and technical SEO, and named clients including large consumer and technology brands.',
+        strong: 'Singular focus on search rather than a wider media mix, with answer engine optimisation treated as a first-class pillar rather than an add-on.',
+        notFor: 'Smaller budgets — the published budget guidance sits at six thousand dollars a month and upwards.',
+      },
+    ],
+
+    howToChoose: [
+      [
+        'Ask them to show you citation tracking for an existing client, live',
+        'Not a screenshot. Open ChatGPT or Perplexity on the call and run the buying question for that client’s category. Whether the client appears, and whether the agency can explain why or why not, tells you more than any deck. An agency without a tracked prompt set is not measuring the thing it is selling.',
+      ],
+      [
+        'Ask what they stopped doing in the last year',
+        'Research on live generative engines found keyword stuffing performed worse than making no changes at all. An agency genuinely current will name tactics they abandoned and why. One that only adds services and never retires any is accumulating a menu rather than a method.',
+      ],
+      [
+        'Ask whether they are selling AI-specific markup',
+        'Google states plainly that no additional markup or special optimisation is required to appear in AI Overviews or AI Mode. If a proposal includes an AI schema implementation as a line item, you are being charged for a file that does nothing.',
+      ],
+      [
+        'Ask how AI work connects to the technical foundation',
+        'Most AI crawlers do not execute JavaScript. If your site renders client-side, it is effectively invisible to them no matter how quotable the copy is. An agency proposing GEO without first checking how your pages render has skipped the prerequisite.',
+      ],
+      [
+        'Ask what happens if you already rank first',
+        'The research found the leading methods reduced visibility for sources already at position one, while roughly doubling it around position five. An agency that claims uniform gains regardless of your starting position has not read the work it is citing.',
+      ],
+      [
+        'Ask for the measurement cadence in writing',
+        'Which prompts, which engines, how often, and reported how. Citation share is the one genuinely new reporting line in this discipline. If it is absent from the proposed monthly report, nobody is measuring the outcome the engagement was sold on.',
+      ],
+    ],
+
+    faqs: [
+      [
+        'Who are the best AI SEO agencies in 2026?',
+        'There is no single best, and the useful split is by shape. GEO-first firms such as Siege Media, Omnius and Ten Speed lead with AI visibility. Organic specialists including Omniscient Digital, Skale, Grow and Convert and Breaking B2B added it to established practices. Broader agencies such as Found and Rise at Seven run it inside a larger media offering.',
+      ],
+      [
+        'What is the difference between an AI SEO agency and a normal SEO agency?',
+        'Less than most marketing suggests. The foundation is identical: crawlability, indexation, authority. What a genuine AI practice adds is content formatted to be quoted, deliberate entity consistency, corroborating third-party mentions, and a measurement system for citation share that has no Search Console equivalent. If an agency cannot describe that last part, the difference is branding.',
+      ],
+      [
+        'How much do AI SEO agencies charge?',
+        'Most do not publish. Of the twelve here, three do: Omniscient Digital states full-service engagements from $120,000 a year, Breaking B2B states plans from $6,000 a month, and Victorious publishes budget guidance of at least $6,000 a month. The rest quote after a call, and we have not estimated them.',
+      ],
+      [
+        'Do I need a separate agency for GEO?',
+        'Usually not, and a separate retainer often means paying twice for overlapping work. The editorial and technical foundations that earn a ranking are substantially the ones that earn a citation. What genuinely differs is measurement, which is a reporting line rather than a second programme.',
+      ],
+      [
+        'How do I know if an agency is actually doing AI SEO?',
+        'Ask for the tracked prompt set: which questions, which engines, measured how often, and what moved last quarter. Agencies doing this seriously have that answer immediately. Two further tests: whether they still recommend keyword density, which measured worse than doing nothing on a live engine, and whether they are selling AI-specific schema, which Google says is not required.',
+      ],
+      [
+        'Why is RankedTag on a list it publishes?',
+        'Because leaving ourselves off would be its own dishonesty, and a list that quietly steers you while claiming neutrality is worthless. Our entry states what we are not suited to, including that we are small by design and hold one measured case study. The disclosure sits above the table rather than in a footnote.',
+      ],
+      [
+        'Is AI SEO worth paying for yet?',
+        'It depends on where you start. Research presented at ACM SIGKDD found the gains concentrated on sources that were not already dominant, roughly doubling visibility for a page around position five while reducing it for pages already ranking first. If you are a challenger it is one of the few surfaces where that is an advantage. If you already dominate, be careful.',
+      ],
+      [
+        'How often is this list updated?',
+        'Quarterly. Every agency was checked on its own website on 19 October 2026. AI positioning is changing faster than anything else in this market, so if you find an entry that no longer matches an agency’s own site, tell us and it gets corrected.',
+      ],
+    ],
+
+    related: ['seo-agencies-for-saas', 'seo-agencies-uk'],
+  },
+  {
+    slug: 'seo-agencies-uk',
+    path: '/best/seo-agencies-uk',
+    vertical: '/who-we-help',
+    verticalLabel: 'the verticals we work in',
+    nav: 'Best UK SEO agencies',
+    year: '2026',
+    updated: '2026-10-19',
+    verified: '19 October 2026',
+
+    title: 'Best UK SEO Agencies in 2026: 9 Compared',
+    description:
+      'Nine UK SEO agencies compared for 2026, each checked on its own website: offices, specialism, AI search position, and who each one does not suit.',
+    eyebrow: 'SHORTLIST · UNITED KINGDOM',
+    h1: 'The best UK SEO agencies in 2026, honestly compared.',
+
+    answer:
+      'UK SEO agencies divide by shape rather than quality. Large media groups such as Brainlabs and Croud run search inside a wider offering. Specialists such as Builtvisible, Rise at Seven and JBH lead with organic, content or digital PR. Regional independents such as Embryo and Impression cover both.',
+
+    disclosure:
+      'RankedTag publishes this list and is on it. Every other agency was checked on its own website on 19 October 2026, and this list is shorter than most because we only included firms whose UK presence we could confirm at source. Nothing is paid, sponsored or affiliate-linked.',
+
+    criteria: [
+      'A UK presence confirmed on the agency’s own website, with an office address or an explicit statement of where it is based. Several agencies widely listed as "UK" in other roundups do not say so on their own sites, so they are not here.',
+      'Checked at source, not taken from another roundup. The UK listicles for this term are unusually self-referential — two of the highest-ranking ones are published by agencies that appear near the top of them.',
+      'Pricing appears only where published. None of the UK agencies in this set publish a rate, which is itself worth knowing before you plan a comparison.',
+      'No ratings, no scores, no rank order. We have not been a client of any of them. Sorted alphabetically.',
+      'Nine entries rather than a round ten or fifteen. We did not pad the list to a nicer number.',
+      'No affiliate links, no referral fees, no paid placement.',
+    ],
+
+    columns: ['Agency', 'Best for', 'Based', 'Specialism', 'Published pricing'],
+
+    agencies: [
+      {
+        name: 'Brainlabs',
+        url: 'https://www.brainlabsdigital.com/',
+        bestFor: 'Large brands running media and search together',
+        specialism: 'UK and international presence',
+        pricing: 'Not published, though it states it provides "fully loaded rate cards upfront"',
+        engagement: 'Full-service media with a named AI Visibility practice',
+        who: 'A full-service media agency describing itself as "the most agentic media agency", with a named AI Visibility practice covering SEO, digital PR and content strategy alongside paid media, analytics and creative.',
+        strong: 'Scale and measurement depth, including attribution and incrementality work that most SEO-only agencies cannot offer, plus a stated commitment to transparent rate cards.',
+        notFor: 'Companies wanting a small senior team, or organic search as a standalone engagement rather than part of a media relationship.',
+      },
+      {
+        name: 'Builtvisible',
+        url: 'https://builtvisible.com/',
+        bestFor: 'Brands wanting organic treated as a brand discipline',
+        specialism: 'UK',
+        pricing: 'Not published',
+        engagement: 'Specialist SEO, content and digital PR',
+        who: 'A specialist SEO, content and digital PR agency positioning at "the intersection of brand and performance marketing to drive organic growth", with strategy, campaign and consultancy offerings.',
+        strong: 'A genuinely organic-first specialism rather than search inside a media mix, with consultancy and in-housing work for organisations building capability internally.',
+        notFor: 'Companies wanting paid media in the same contract, or a purely technical engagement.',
+      },
+      {
+        name: 'Croud',
+        url: 'https://croud.com/',
+        bestFor: 'International campaigns needing local execution',
+        specialism: 'London and Shrewsbury, plus New York, Atlanta and Dubai',
+        pricing: 'Not published',
+        engagement: 'Independent global media, creative and data agency',
+        who: 'An independent global media, creative and data agency built around four product suites, supported by what it calls the Croudie network, described as an on-demand global team of 2,900 digital experts.',
+        strong: 'The Croudie model is a genuine structural difference: international and multilingual execution without the agency carrying that headcount permanently.',
+        notFor: 'Buyers who want a small, fixed, named team on their account rather than a flexible network.',
+      },
+      {
+        name: 'Embryo',
+        url: 'https://embryo.com/',
+        bestFor: 'Ambitious UK brands wanting one agency across channels',
+        specialism: 'Manchester',
+        pricing: 'Not published',
+        engagement: 'Independent full-service, with GEO and AEO listed',
+        who: 'A Manchester independent describing itself as a "growth partner for ambitious businesses", covering SEO, digital PR, content, paid social, PPC, affiliate and creative, with GEO and AEO among its named services and four proprietary tools.',
+        strong: 'Breadth under one independent roof, with consumer brand experience and proprietary tooling rather than reselling the standard stack.',
+        notFor: 'B2B or SaaS companies wanting a vertical specialist, given a client roster that leans strongly consumer and retail.',
+      },
+      {
+        name: 'Found',
+        url: 'https://www.found.co.uk/',
+        bestFor: 'Brands prioritising AI-era visibility',
+        specialism: 'London, plus New York',
+        pricing: 'Not published',
+        engagement: 'Positions as "The AI-first Everysearch Agency"',
+        who: 'A London agency positioned entirely around AI-era search, with a named GEO and AI optimisation service, alongside paid media, digital PR, content, data science and CRO.',
+        strong: 'AI visibility as structural positioning rather than a service line, which in this market is still unusual enough to be a genuine differentiator.',
+        notFor: 'Small budgets, and anyone wanting a narrow organic-only scope.',
+      },
+      {
+        name: 'Impression',
+        url: 'https://www.impressiondigital.com/',
+        bestFor: 'Mid-market brands wanting search, paid and data together',
+        specialism: 'Nottingham, London, Manchester, plus New York',
+        pricing: 'Not published',
+        engagement: 'Performance marketing across search, paid, PR and data',
+        who: 'A performance marketing agency across four offices, covering SEO consultancy, ecommerce, international and technical SEO, generative engine optimisation, paid media, digital PR, analytics and CRO, with ecommerce, B2B, SaaS and fintech among its sectors.',
+        strong: 'Genuine breadth with named B2B and SaaS sector practices, plus measurement and data-stack work that smaller specialists rarely carry.',
+        notFor: 'Companies wanting a boutique relationship, or a single-discipline engagement.',
+      },
+      {
+        name: 'JBH',
+        url: 'https://www.jbh.co.uk/',
+        bestFor: 'Brands whose bottleneck is coverage and links',
+        specialism: 'Manchester and London',
+        pricing: 'Not published',
+        engagement: 'Digital PR led, with SEO, CRO and GEO',
+        who: 'An outcome-focused digital PR agency working to increase coverage, backlinks and brand mentions, with SEO, CRO and GEO alongside, working with brands in the UK, US, Europe, Canada and Australia.',
+        strong: 'Digital PR as the core discipline rather than an upsell, which matters for both link acquisition and the corroborating mentions that shape AI answers.',
+        notFor: 'Companies whose problem is technical or architectural. It also states that "all our links are guaranteed", which is worth asking direct questions about before signing.',
+      },
+      {
+        name: 'RankedTag',
+        url: '/',
+        isUs: true,
+        bestFor: 'Founders wanting senior strategy at AI-accelerated speed',
+        specialism: 'Remote, UK-linked, working worldwide',
+        pricing: 'Not published, scoped after a free review',
+        engagement: 'Full-stack SEO, AI SEO, GEO and AEO as one programme',
+        who: 'Us. A small senior-led team running technical SEO, content and AI-search visibility as a single programme, with the founder auditing every domain personally before an engagement starts.',
+        strong: 'Senior judgement applied directly, with AI-search visibility treated as an extension of a working foundation rather than a separate retainer.',
+        notFor: 'Anyone needing a large UK team, an office to visit, or a procurement process requiring several comparable references. Every other agency on this list is substantially larger than we are, and for a brand needing that scale they are the better choice.',
+      },
+      {
+        name: 'Rise at Seven',
+        url: 'https://riseatseven.com/',
+        bestFor: 'Consumer brands wanting search-first creative campaigns',
+        specialism: 'Manchester, London and New York',
+        pricing: 'Not published',
+        engagement: 'Search-first content with AI Visibility and GEO',
+        who: 'A search-first content marketing agency describing its team as organic media planners creating and optimising content for SEO, social, PR and LLM search, with a named AI Visibility and GEO service.',
+        strong: 'Creative campaign thinking applied to search, with digital PR and AI visibility in the same team, and a client roster of well-known consumer brands.',
+        notFor: 'B2B and SaaS companies wanting a technical-first engagement, given how strongly the work leans consumer.',
+      },
+    ],
+
+    howToChoose: [
+      [
+        'Ask where the team actually sits',
+        'Several agencies marketed as UK operate substantially offshore, and several excellent ones are distributed by design. Neither is wrong, but you should know which you are buying, because it affects response times, meeting hours and who is on the call when something breaks.',
+      ],
+      [
+        'Ask whether search is the main business or a service line',
+        'In a media group, organic search competes internally for attention with larger paid budgets. That is manageable and sometimes advantageous, but if organic is your primary channel, ask directly how senior the search practice is within the agency.',
+      ],
+      [
+        'Ask about guaranteed links, if they are offered',
+        'A guarantee implies control over third-party editorial decisions. Ask exactly what is guaranteed, how it is achieved, and what happens if coverage does not materialise. Some answers are entirely legitimate; others describe paid placements that should be disclosed.',
+      ],
+      [
+        'Ask what they would do differently for a UK versus a US market',
+        'Search behaviour, SERP features and competitive density genuinely differ. An agency that treats the UK as a smaller America will target the wrong terms and misjudge competition, and the answer to this question surfaces that quickly.',
+      ],
+      [
+        'Ask for the named day-to-day team before signing',
+        'UK agencies at the larger end commonly pitch with senior strategists and deliver with executives. That is not inherently a problem if the executives are good and supervised, but you should know the arrangement in advance rather than discovering it in month two.',
+      ],
+      [
+        'Ask how they handle AI search, specifically',
+        'Most of the agencies here now list GEO or AI visibility. Ask which prompts they track, on which engines, how often, and what changed last quarter. The gap between agencies that can answer that immediately and agencies that cannot is the clearest signal available on this list.',
+      ],
+    ],
+
+    faqs: [
+      [
+        'Who are the best SEO agencies in the UK in 2026?',
+        'It depends what you need rather than which name ranks highest. Large media groups such as Brainlabs and Croud suit brands running search alongside substantial paid media. Specialists such as Builtvisible, Rise at Seven and JBH lead with organic, content or digital PR. Regional independents such as Embryo and Impression cover both at mid-market scale.',
+      ],
+      [
+        'How much do UK SEO agencies charge?',
+        'None of the nine agencies here publish a rate, which is itself useful to know before planning a comparison. Brainlabs states it provides fully loaded rate cards upfront but publishes no figures. In practice you will be quoted after a discovery call, so comparing on scope rather than price is the only workable approach.',
+      ],
+      [
+        'Why is this list shorter than other UK agency lists?',
+        'Because we only included agencies whose UK presence we could confirm on their own website. Several firms that appear on other UK lists do not state where they are based, and we were not willing to assert it. Nine entries is what survived that test, and we did not pad it to a rounder number.',
+      ],
+      [
+        'Should I use a London agency or a regional one?',
+        'Location matters less than it did, and the strongest UK independents are increasingly outside London. What matters more is whether the team is in a compatible timezone, whether you need in-person meetings, and whether the agency has sector experience. Regional agencies often give you more senior attention for the same budget.',
+      ],
+      [
+        'Do UK agencies understand AI search yet?',
+        'Most of this list now lists GEO or AI visibility as a named service, and two position on it centrally. The claim is easy to make, so test it: ask which prompts they track, on which engines, and what changed in their approach last quarter. The quality of that answer separates this list more than anything else does.',
+      ],
+      [
+        'What about agencies that guarantee links?',
+        'Ask precise questions before signing. A guarantee implies control over independent editorial decisions, which nobody has. Some agencies mean a volume commitment delivered through legitimate outreach; others mean paid placements. Both exist and only one of them is what most buyers think they are getting.',
+      ],
+      [
+        'Why is RankedTag on a list it publishes?',
+        'Because omitting ourselves would be a different dishonesty, and a list that steers you while claiming neutrality is worthless. Our entry says plainly that every other agency here is substantially larger than we are, and that for a brand needing that scale they are the better choice. The disclosure sits above the table.',
+      ],
+      [
+        'How often is this list updated?',
+        'Quarterly. Every agency was checked on its own website on 19 October 2026. If you find an entry that no longer matches an agency’s own site, or you think a UK agency belongs here and we missed it, tell us and we will check it at source.',
+      ],
+    ],
+
+    related: ['ai-seo-agencies', 'seo-agencies-for-saas'],
+  },
 ];
 
 export const COMPARISON_BY_SLUG = Object.fromEntries(COMPARISONS.map((c) => [c.slug, c]));

@@ -9,12 +9,12 @@
     "legacy_redirects": 15,
     "endpoints": 8,
     "app_noindex": 1,
-    "total": 91,
-    "indexable_in_sitemap": 67,
+    "total": 94,
+    "indexable_in_sitemap": 69,
     "what_we_do_pages": 7,
     "vertical_pages": 6,
     "vertical_hub": 1,
-    "comparison_pages": 3
+    "comparison_pages": 5
   },
   "known_gaps": [
     "OPEN: 33 published blog posts carry 108 in-body links to /services* which now 308 to /what-we-do*. Bodies live in the PRODUCTION Neon DB; the credentials supplied point at a dev branch containing one 'test' row. Unfixable until the production DATABASE_URL is supplied.",
@@ -749,6 +749,30 @@
       "indexable": true,
       "expected_status": 200,
       "note": "phase 5"
+    },
+    {
+      "url": "/best/ai-seo-agencies",
+      "kind": "comparison-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 6"
+    },
+    {
+      "url": "/best/seo-agencies-uk",
+      "kind": "comparison-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 6"
+    },
+    {
+      "url": "/best/geo-agencies",
+      "kind": "legacy-redirect",
+      "in_sitemap": false,
+      "indexable": false,
+      "expected_status": 308,
+      "note": "phase 6 - redirects to /best/ai-seo-agencies rather than duplicating the roster"
     }
   ],
   "phases": {
