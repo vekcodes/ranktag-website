@@ -32,7 +32,15 @@ function comparisonJsonLd(c) {
       mainEntityOfPage: { '@type': 'WebPage', '@id': url },
       datePublished: c.updated,
       dateModified: c.updated,
-      author: { '@type': 'Organization', name: 'RankedTag', url: `${SITE}/` },
+      // The same Person node the Organization graph declares (#founder), so the
+      // byline resolves to one entity across the site rather than two.
+      author: {
+        '@type': 'Person',
+        '@id': `${SITE}/#founder`,
+        name: 'Bhushan Raj Shakya',
+        jobTitle: 'Founder, RankedTag',
+        sameAs: ['https://www.linkedin.com/in/bhushan-raj-shakya-9835a025b/'],
+      },
       publisher: { '@type': 'Organization', name: 'RankedTag', url: `${SITE}/` },
       inLanguage: 'en',
       // The list is an ItemList of real organisations. No aggregateRating and
@@ -122,6 +130,18 @@ export default function ComparisonPage() {
               <p className="best-vertical-link">
                 Already decided what you need and just looking for a partner? Here is{' '}
                 <Link to={c.vertical} className="link-wipe">{c.verticalLabel}</Link>.
+              </p>
+              <p className="best-byline">
+                Researched and written by{' '}
+                <a
+                  href="https://www.linkedin.com/in/bhushan-raj-shakya-9835a025b/"
+                  className="link-wipe"
+                  rel="noopener me"
+                  target="_blank"
+                >
+                  Bhushan Raj Shakya
+                </a>
+                , founder of RankedTag.
               </p>
               <p className="best-updated">
                 Last reviewed{' '}
