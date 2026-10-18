@@ -8,7 +8,7 @@
 // Pure data only — this module is imported by the Vite config at build time, so
 // it must not pull in React, CSS, or any browser globals.
 import { SERVICES, SERVICES_HUB_META, serviceUrl } from '../pages/whatWeDo/capabilitiesData.js';
-import { VERTICALS, verticalUrl } from '../pages/verticals/verticalsData.js';
+import { VERTICALS, verticalUrl, WHO_WE_HELP_META } from '../pages/verticals/verticalsData.js';
 
 // One head entry per service page, derived from the same data that renders the
 // pages — the SSG head rewrite and the hydrated SPA can never drift apart.
@@ -33,6 +33,7 @@ const VERTICAL_META = Object.fromEntries(
 export const TOOL_META = {
   ...SERVICE_META,
   ...VERTICAL_META,
+  '/who-we-help': WHO_WE_HELP_META,
   '/apply': {
     title: 'Apply for a Free Founder Review of Your SaaS | RankedTag',
     description:

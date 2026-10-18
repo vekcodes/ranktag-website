@@ -142,7 +142,264 @@ export const VERTICALS = [
 
     related: ['ecommerce-seo-agency', 'local-seo-agency'],
   },
+
+  {
+    slug: 'ecommerce-seo-agency',
+    nav: 'Ecommerce',
+    navDesc: 'Catalogue architecture, facets, variants and product schema at scale',
+    // Head term: "ecommerce seo agency". Secondary: "ecommerce seo services",
+    // "seo agency for ecommerce", "shopify seo agency", "ecommerce seo company".
+    title: 'Ecommerce SEO Agency: Catalogue-Scale Search',
+    description:
+      'Ecommerce SEO agency: faceted navigation, variant duplication, out-of-stock handling, category cannibalisation and product schema for AI shopping surfaces.',
+    eyebrow: 'WHO WE HELP · ECOMMERCE',
+    h1: 'An ecommerce SEO agency that treats your catalogue as the product.',
+    audienceName: 'Ecommerce and direct-to-consumer retailers',
+    problemsEyebrow: 'WHERE CATALOGUE SEO BREAKS',
+    approachH2: 'The ecommerce playbook, in the order it pays.',
+    faqH: 'Ecommerce SEO, asked and answered.',
+
+    answer:
+      'An ecommerce SEO agency works at catalogue scale: controlling which faceted navigation URLs are crawlable, stopping product variants and category pages competing with each other, handling out-of-stock and discontinued products without losing their equity, and marking up products so they qualify for shopping and AI answer surfaces.',
+
+    intro: [
+      'Ecommerce SEO is an architecture problem that happens to involve content. A 4,000-product catalogue with colour, size, price and brand filters can generate hundreds of thousands of crawlable URLs, almost all of them near-duplicates. Google will happily spend your crawl budget on them, discover your genuinely important category pages late, and refresh them slowly. No amount of blog content fixes that.',
+      'So the work starts at the template and the URL layer, where one decision applies to ten thousand pages at once, and only then moves to the copy on the pages that matter.',
+    ],
+
+    problems: [
+      {
+        h: 'Faceted navigation is generating URLs faster than Google can crawl them',
+        p: 'Four filters with ten values each, combinable and order-independent, is tens of thousands of URLs from a single category. Most stores expose all of them, then wonder why new products take three weeks to index. The fix is a deliberate policy per facet: which combinations are indexable because people search them, which are crawlable but not indexable, and which are blocked outright.',
+      },
+      {
+        h: 'Your product variants are competing with each other',
+        p: 'The same shoe in seven colours, published as seven URLs with near-identical copy, splits the ranking signals seven ways and lets Google pick a winner on its own. Sometimes it picks the one that is out of stock. Canonical strategy, variant consolidation and which attributes genuinely deserve their own URL are decisions that change revenue, not hygiene tasks.',
+      },
+      {
+        h: 'Out-of-stock pages quietly destroy accumulated equity',
+        p: 'A product that has earned links and rankings over two years gets discontinued, and the platform 404s it, redirects it to the homepage, or leaves a live page with a dead buy button. All three waste the asset. Seasonal lines returning next quarter, permanent discontinuations and temporary stockouts each need a different answer, and most stores apply one rule to all three.',
+      },
+      {
+        h: 'Your category pages are cannibalising each other',
+        p: '"Running shoes", "mens running shoes", "running trainers" and a landing page built for a paid campaign all target the same intent with overlapping copy. Google consolidates, picks one, and it is rarely the one you optimised. Deciding which pages own which intent, then merging or differentiating the rest, usually recovers more than any new content would.',
+      },
+      {
+        h: 'Crawl budget is spent on the wrong half of the catalogue',
+        p: 'Log files on a large store routinely show Googlebot spending most of its requests on filter permutations, paginated depth, internal search results and parameter noise, while bestsellers go weeks between crawls. Until that ratio is fixed, every content and merchandising change takes longer to register than it should.',
+      },
+      {
+        h: 'Your products are invisible to AI shopping surfaces',
+        p: 'Assistants that recommend products read structured data: price, availability, currency, GTIN, condition, review counts, return policy. Incomplete or stale Product and Offer markup means you are omitted from answers that your competitors appear in, and the omission is silent. It is also one of the few places where a small retailer can be chosen on data quality rather than domain authority.',
+      },
+    ],
+
+    approach: [
+      {
+        h: 'A facet and parameter policy, written down',
+        p: 'Every filter gets an explicit decision: indexable, crawlable-not-indexable, or blocked, driven by whether real people search that combination. Then canonicals, robots rules and internal linking are made to agree with it, because conflicting signals are worse than either choice alone. That is template-level work, which is',
+        to: '/what-we-do/technical-seo',
+        label: 'technical SEO',
+      },
+      {
+        h: 'Variant and canonical consolidation',
+        p: 'We decide which attributes deserve a URL and which belong on one page behind a selector, then consolidate the rest so ranking signals stop splitting. Done once at the template, it applies across the whole catalogue, which is why it usually outperforms months of',
+        to: '/what-we-do/content-marketing',
+        label: 'content work',
+      },
+      {
+        h: 'Category pages that are worth ranking',
+        p: 'Most category pages are a grid and nothing else. The ones that win carry genuine buying guidance above or below the grid, internal links to the sub-intents they should own, and copy that answers the comparison question the shopper actually has. That is where the',
+        to: '/what-we-do/seo',
+        label: 'full-stack programme',
+      },
+      {
+        h: 'Product and Offer markup built for answer surfaces',
+        p: 'Complete, accurate, automatically maintained structured data: price, availability, shipping, returns, reviews and identifiers. It is the entry ticket for rich results today and for assistant-driven shopping answers now being built, which is the territory of',
+        to: '/what-we-do/answer-engine-optimization',
+        label: 'answer engine optimisation',
+      },
+      {
+        h: 'Being named when a shopper asks an assistant',
+        p: 'Shoppers increasingly ask for a recommendation before they visit a store. Appearing in that answer depends on corroborating third-party mentions, clean product data and claims a model can quote, which is the work of',
+        to: '/what-we-do/generative-engine-optimization',
+        label: 'generative engine optimisation',
+      },
+    ],
+
+    // No verified ecommerce result yet. The proof section does not render.
+    proof: false,
+
+    faqs: [
+      [
+        'What does an ecommerce SEO agency do?',
+        'It works on the architecture that governs thousands of pages at once: which faceted URLs are crawlable, how product variants are consolidated, how out-of-stock products are handled, which category page owns which intent, and whether product markup is complete enough for rich results. Content matters, but on a catalogue the template decisions move far more revenue.',
+      ],
+      [
+        'How should faceted navigation be handled for SEO?',
+        'Decide per facet rather than globally. Combinations people genuinely search, such as brand plus category, usually deserve indexable pages with their own copy. Combinations that only produce near-duplicates should be crawlable but not indexable, or blocked entirely. Then make canonicals, robots directives and internal links agree, because mixed signals cost more than either decision.',
+      ],
+      [
+        'What should we do with out-of-stock product pages?',
+        'It depends on why it is out of stock. Temporary stockouts keep the page live with availability marked correctly in schema and alternatives offered. Seasonal products returning later stay live rather than being redirected. Permanent discontinuations redirect to the closest equivalent product or the parent category, never the homepage, so the accumulated links keep working.',
+      ],
+      [
+        'Do product variants need separate URLs?',
+        'Only when people search for them. Colour and size usually do not deserve their own URLs and split ranking signals when they get them, so they belong on one page behind a selector with a single canonical. Attributes with genuine standalone demand, such as capacity on a phone, can justify separate pages, provided each has its own differentiated content.',
+      ],
+      [
+        'How long does ecommerce SEO take to show results?',
+        'Technical and architectural fixes often show first, because they change how a large number of existing pages are crawled and consolidated rather than waiting on new content to earn authority. Category and buying-guide work follows the ordinary curve of several months. On a large catalogue the first measurable change is usually how quickly new products get indexed.',
+      ],
+      [
+        'Is Shopify bad for SEO?',
+        'No, but it has known constraints you design around rather than fight: a forced /collections/ and /products/ URL structure, product pages reachable from multiple collection paths, and limited control over how filters generate URLs. These are manageable with the right canonical and internal-linking approach. The platform is rarely the reason a store is not ranking.',
+      ],
+      [
+        'How much does an ecommerce SEO agency cost?',
+        'We do not publish a rate, because a 300-product store and a 40,000-SKU catalogue with four filter dimensions are not the same job. Apply for the free founder review and you get a scoped figure within 48 hours, after someone has looked at your actual catalogue, your facet behaviour and your crawl data.',
+      ],
+      [
+        'Do you have ecommerce case studies?',
+        'Not yet, and we will not borrow one. Our one measured, cross-checkable result is sendr.ai in B2B SaaS: zero to 1.05M impressions in six months. The technical craft on this page transfers directly; the ecommerce results do not exist until we have them. If you need a vertical-specific reference before signing, we are not the right choice today.',
+      ],
+    ],
+
+    related: ['saas-seo-agency', 'local-seo-agency'],
+  },
+
+  {
+    slug: 'local-seo-agency',
+    nav: 'Local & service-area',
+    navDesc: 'Google Business Profile, the Map Pack, citations and city architecture',
+    // Head term: "local seo agency". Secondary: "local seo services",
+    // "local seo company", "seo agency for small business".
+    title: 'Local SEO Agency: Map Pack and Near-Me Search',
+    description:
+      'Local SEO agency: Google Business Profile, Map Pack ranking, citation consistency, review velocity and the city versus service-area page architecture that works.',
+    eyebrow: 'WHO WE HELP · LOCAL & SERVICE-AREA',
+    h1: 'A local SEO agency that works the Map Pack, not just the website.',
+    audienceName: 'Local and service-area businesses',
+    problemsEyebrow: 'WHY LOCAL RANKING IS ITS OWN GAME',
+    approachH2: 'The local playbook, in the order it pays.',
+    faqH: 'Local SEO, asked and answered.',
+
+    answer:
+      'A local SEO agency works two surfaces at once: the Map Pack, which ranks on relevance, distance and prominence and is driven mainly by your Google Business Profile, reviews and citations; and your website, where city and service pages compete in ordinary organic results. The two reinforce each other and need different work.',
+
+    intro: [
+      'Local search is the one vertical where your website is not the main asset. For a large share of commercial queries the Map Pack sits above every organic result, and what ranks in it is your Google Business Profile, not your home page. A business can rank third organically and get almost no calls because it is absent from the three results above.',
+      'Distance also makes the whole thing relative. There is no single position to report: you rank differently from one postcode to the next, and an agency that shows you one number is showing you the one measured nearest your office.',
+    ],
+
+    problems: [
+      {
+        h: 'The Map Pack is the result, and your site is not in it',
+        p: 'Relevance, distance and prominence decide those three slots. Relevance comes from categories, services and profile content; prominence from reviews, citations and genuine web presence; distance from the searcher, which you cannot change. Site-only SEO, however good, moves none of the first two, which is why local campaigns that ignore the profile stall.',
+      },
+      {
+        h: 'Your rankings are different in every postcode',
+        p: 'Local results are computed from where the searcher is standing, so a single reported position is meaningless. You need a grid of measurements across your actual service area to see where you win, where you fade, and how far your radius really extends. Most reporting hides this, and it is usually the most actionable data available.',
+      },
+      {
+        h: 'Inconsistent citations are quietly capping prominence',
+        p: 'An old suite number on one directory, a disconnected phone on another, a pre-rebrand name on a third. Each is trivial; together they make your business harder to resolve as a single entity, and entity confidence is part of prominence. Cleaning them is unglamorous, slow, and one of the few local levers with a predictable effect.',
+      },
+      {
+        h: 'Reviews stopped, and so did the ranking',
+        p: 'A business with 200 reviews, none in the last year, looks less current than one with 60 that arrive weekly. Review velocity, recency, whether owners reply, and whether the text mentions the service and the area all feed the picture. Most businesses have no mechanism for asking, so volume arrives in bursts and then dies.',
+      },
+      {
+        h: 'Your city pages are the same page with the town name swapped',
+        p: 'Twelve pages identical but for a place name are the oldest trick in local SEO and the most reliably ignored. A page earns its place with something true about serving that area: real work done there, the actual travel radius, locally specific constraints, genuine references. If you cannot write that, you need fewer pages, not more.',
+      },
+      {
+        h: 'Service-area businesses are modelled wrong',
+        p: 'A plumber covering eight towns from a van is not a shop, and the architecture differs: how the profile hides the address, which areas are declared, and whether the site is organised by service or by location. Getting this backwards either buries your main service pages or spreads you thinly across towns you will never rank in.',
+      },
+    ],
+
+    approach: [
+      {
+        h: 'The Google Business Profile, treated as a ranking asset',
+        p: 'Primary and secondary categories, services, attributes, products, photos, hours, booking links and posts, each chosen against the queries you actually want. It is the single highest-leverage surface in local search and it sits outside your website entirely, which is why it is not covered by ordinary',
+        to: '/what-we-do/seo',
+        label: 'full-stack SEO',
+      },
+      {
+        h: 'Grid-based rank measurement across the service area',
+        p: 'Positions sampled across a geographic grid rather than a single point, so you can see the real shape of your visibility and whether work is extending it. This is the local equivalent of the reporting discipline in',
+        to: '/what-we-do/ai-seo',
+        label: 'AI SEO',
+      },
+      {
+        h: 'Citation consistency and entity clean-up',
+        p: 'One canonical name, address and phone, corrected across the directories and aggregators that matter, with duplicates claimed or removed. It is entity work: making every source agree about who you are, the same discipline that underpins',
+        to: '/what-we-do/generative-engine-optimization',
+        label: 'generative engine optimisation',
+      },
+      {
+        h: 'A review engine, not a review campaign',
+        p: 'A repeatable ask at the right moment in your own process, so velocity is steady rather than bursty, plus owner responses that read like a person. Reviews also feed the content that answer surfaces quote, which is the concern of',
+        to: '/what-we-do/answer-engine-optimization',
+        label: 'answer engine optimisation',
+      },
+      {
+        h: 'Location architecture you can actually defend',
+        p: 'A decision about which areas deserve a page, which belong to a service page instead, and how the two interlink, followed by content with something genuinely local in it. Thin location pages are a liability, which makes this a',
+        to: '/what-we-do/content-marketing',
+        label: 'content problem',
+      },
+    ],
+
+    // No verified local result yet. The proof section does not render.
+    proof: false,
+
+    faqs: [
+      [
+        'What does a local SEO agency do?',
+        'Two jobs at once. It optimises your Google Business Profile, reviews and citations to rank in the Map Pack, and it builds the city, service and service-area pages that compete in ordinary organic results. The two reinforce each other, which is why doing only the website is the most common reason local campaigns underperform.',
+      ],
+      [
+        'How does Google decide Map Pack rankings?',
+        'Google names three factors: relevance, how well your profile matches the query; distance, how far you are from the searcher or the area they named; and prominence, how well known and well referenced your business is, drawn from reviews, citations, links and general web presence. Distance is fixed, so the work goes into relevance and prominence.',
+      ],
+      [
+        'How long does local SEO take to work?',
+        'Profile and category corrections can move Map Pack position within weeks, because the profile is re-evaluated quickly. Citation clean-up is slower, since aggregators update on their own schedules. Review velocity compounds over months. Location-page work follows ordinary organic timelines. Local is generally faster to show movement than national SEO, and the early movement is usually profile-driven.',
+      ],
+      [
+        'Do we need separate pages for every town we serve?',
+        'Only for towns where you can say something true and specific: work done there, travel time, local requirements, named references. A page that is identical to eleven others but for the place name adds no value and risks being treated as thin. For the rest, one well-built service page covering the area outperforms a dozen hollow ones.',
+      ],
+      [
+        'How important are reviews for local rankings?',
+        'They feed prominence, and recency matters as much as count. A steady weekly trickle signals a currently active business more convincingly than a large number that stopped arriving a year ago. Owner responses, and review text that mentions the service and the area, both help. The practical work is building a repeatable ask into your process.',
+      ],
+      [
+        'What is a citation and do they still matter?',
+        'A citation is any mention of your business name, address and phone on another site, such as a directory or an industry listing. They matter less than a decade ago as a ranking push and more as a consistency check: conflicting details make your business harder to resolve as one entity, which caps prominence. Correct them, then stop chasing volume.',
+      ],
+      [
+        'How much does a local SEO agency cost?',
+        'We do not publish a rate, because one location in one town and a service-area business covering twelve are different engagements. Apply for the free founder review and you get a scoped figure within 48 hours, after someone has looked at your profile, your citation spread and how your visibility actually falls off across the area.',
+      ],
+      [
+        'Do you have local SEO case studies?',
+        'Not yet, and we will not present someone else’s. Our one measured result is sendr.ai in B2B SaaS: zero to 1.05M impressions in six months. The entity, schema and measurement discipline transfers; local results do not exist until we have produced them. If a vertical-specific reference is a requirement for you, we are not the right agency today.',
+      ],
+    ],
+
+    related: ['saas-seo-agency', 'ecommerce-seo-agency'],
+  },
 ];
+
+export const WHO_WE_HELP_META = {
+  title: 'Who We Help: SaaS, Ecommerce and Local SEO',
+  description:
+    'RankedTag works three verticals: B2B SaaS, ecommerce and local or service-area businesses. Each gets its own playbook, because the search problems are not the same.',
+  canonical: `${SITE}/who-we-help`,
+};
 
 export const VERTICAL_BY_SLUG = Object.fromEntries(VERTICALS.map((v) => [v.slug, v]));
 

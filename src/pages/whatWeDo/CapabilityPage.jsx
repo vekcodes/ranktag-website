@@ -8,6 +8,7 @@ import useScrollReveal from '../../hooks/useScrollReveal.js';
 import JsonLd from '../../components/JsonLd.jsx';
 import { breadcrumb, faqPage, ORG_ID, SITE } from '../../lib/schema.js';
 import { SERVICE_BY_SLUG, SERVICES } from './capabilitiesData.js';
+import { VERTICALS } from '../verticals/verticalsData.js';
 import '../Home.css';
 import './WhatWeDo.css';
 
@@ -276,6 +277,29 @@ export default function CapabilityPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ── Where this capability lands, per vertical ─────────── */}
+        <section className="svc-related ruled" data-reveal>
+          <div className="container">
+            <span className="eyebrow bracket">WHAT THIS LOOKS LIKE FOR YOU</span>
+            <p className="lead svc-verticals-lead">
+              The craft on this page is the same whoever you sell to. What changes is which part of it
+              matters most, and in what order.
+            </p>
+            <ol className="svc-rows svc-rows-compact" data-reveal-children>
+              {VERTICALS.map((v, i) => (
+                <li key={v.slug}>
+                  <Link to={`/${v.slug}`} className="svc-row ar-parent">
+                    <span className="svc-row-num" aria-hidden="true">{String(i + 1).padStart(3, '0')}</span>
+                    <span className="svc-row-h">{v.nav}</span>
+                    <p className="svc-row-desc">{v.navDesc}</p>
+                    <span className="svc-row-go">See the playbook <span className="ar">→</span></span>
+                  </Link>
+                </li>
+              ))}
+            </ol>
           </div>
         </section>
 

@@ -282,3 +282,10 @@
    its own top hairline, which would double up on a `ruled` section. */
 .svc-prose .dg-article{border-top:0;padding-top:0}
 .svc-prose .dg-section:first-child{padding-top:0}
+
+/* Lead line above the vertical links on a capability page. Matches .lead but
+   constrained so it does not run the full grid width above a compact list. */
+.svc-verticals-lead {
+  max-width: 56ch;
+  margin: 0 0 clamp(1.5rem, 3vw, 2.5rem);
+}

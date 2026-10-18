@@ -40,6 +40,7 @@ export const routes = [
       // root level (slugs in src/pages/verticals/verticalsData.js). A vertical
       // only gets a route once its page is finished; an unfinished one must
       // 404, never render thin.
+      { path: 'who-we-help', lazy: lazyRoute(() => import('./pages/verticals/WhoWeHelp.jsx')) },
       ...VERTICALS.map((v) => ({
         path: v.slug,
         lazy: lazyRoute(() => import('./pages/verticals/VerticalPage.jsx')),

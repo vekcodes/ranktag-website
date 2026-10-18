@@ -314,6 +314,7 @@ function nav() {
 <a class="logo" href="/" aria-label="RankedTag home"><img src="/rankedtag-logo-light.svg" alt="RankedTag" width="106" height="28"/></a>
 <div class="nav-links">
 <a href="/what-we-do">What we do</a>
+<a href="/who-we-help">Who we help</a>
 <a href="/#how-it-works">How it works</a>
 <a href="/case-study/sendr">Sendr.ai story</a>
 <a href="/blog" aria-current="page">Blog</a>
@@ -341,18 +342,21 @@ function footer() {
 <div class="footer-col"><h4><span>001</span>What we do</h4>
 ${services.map(([slug, label]) => `<a href="/what-we-do/${slug}">${label}</a>`).join('')}
 <a href="/what-we-do">All capabilities →</a></div>
-<div class="footer-col"><h4><span>002</span>Free tools</h4>
+<div class="footer-col"><h4><span>002</span>Who we help</h4>
+<a href="/saas-seo-agency">B2B SaaS</a><a href="/ecommerce-seo-agency">Ecommerce</a><a href="/local-seo-agency">Local &amp; service-area</a>
+<a href="/who-we-help">All verticals →</a></div>
+<div class="footer-col"><h4><span>003</span>Free tools</h4>
 <a href="/keyword-density-checker">Keyword Density Checker</a>
 <a href="/domain-authority-checker">Domain Authority Checker</a>
 <a href="/page-speed-checker">Page Speed Checker</a>
 <a href="/competitor-analysis">Competitor Analysis</a>
 <a href="/apply">Site Audit (Founder Review)</a></div>
-<div class="footer-col"><h4><span>003</span>The product</h4>
+<div class="footer-col"><h4><span>004</span>The product</h4>
 <a href="/#how-it-works">How it works</a>
 <a href="/case-study/sendr">Sendr.ai case study</a>
 <a href="/blog">Blog</a>
 <a href="/apply">Apply</a></div>
-<div class="footer-col"><h4><span>004</span>Company</h4>
+<div class="footer-col"><h4><span>005</span>Company</h4>
 <a href="mailto:hello@rankedtag.com">hello@rankedtag.com</a>
 <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a></div>
 </div>

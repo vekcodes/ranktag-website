@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SERVICES } from '../pages/whatWeDo/capabilitiesData.js';
+import { VERTICALS } from '../pages/verticals/verticalsData.js';
 
 const FREE_TOOLS = [
   {
@@ -138,6 +139,14 @@ export default function Nav({ variant = 'home' }) {
     desc: s.navDesc,
   }));
 
+  // Verticals sit in their own menu because they answer a different question
+  // from the capabilities: who this is for, not what the work is.
+  const verticalItems = VERTICALS.map((v) => ({
+    to: `/${v.slug}`,
+    label: v.nav,
+    desc: v.navDesc,
+  }));
+
   return (
     <nav
       className={`nav${scrolled ? ' scrolled' : ''}${open ? ' menu-open' : ''}${openId ? ' mega-open' : ''}`}
@@ -164,6 +173,20 @@ export default function Nav({ variant = 'home' }) {
             openId={openId}
             setOpenId={setOpenId}
             active={location.pathname.startsWith('/what-we-do')}
+            onNavigate={close}
+          />
+          <NavMenu
+            id="who-we-help"
+            label="Who we help"
+            items={verticalItems}
+            footerItem={{ to: '/who-we-help', label: 'All three verticals →' }}
+            note="Three verticals, three playbooks."
+            openId={openId}
+            setOpenId={setOpenId}
+            active={
+              location.pathname === '/who-we-help' ||
+              VERTICALS.some((v) => location.pathname === `/${v.slug}`)
+            }
             onNavigate={close}
           />
           <Link to="/#how-it-works" className="nav-link" onClick={close}>How it works</Link>
