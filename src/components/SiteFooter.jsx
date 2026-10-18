@@ -36,6 +36,7 @@ export default function SiteFooter() {
               <a key={v.slug} href={`/${v.slug}`} className="link-wipe">{v.nav}</a>
             ))}
             <a href="/who-we-help" className="link-wipe">All verticals →</a>
+            <a href="/best" className="link-wipe">Agency comparisons →</a>
           </div>
           <div className="footer-col">
             <h4><span className="idx plain">003</span>Free tools</h4>

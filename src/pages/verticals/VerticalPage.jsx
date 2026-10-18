@@ -136,7 +136,7 @@ export default function VerticalPage() {
         <section className="problem svc-problem ruled" data-reveal>
           <div className="container grid12">
             <div className="col-4 problem-aside">
-              <span className="eyebrow bracket">{v.problemsEyebrow}</span>
+              <h2 className="eyebrow bracket problem-h2">{v.problemsEyebrow}</h2>
             </div>
             <ol className="col-7 start-6 problem-list" data-reveal-children>
               {v.problems.map((p, i) => (
@@ -212,10 +212,10 @@ export default function VerticalPage() {
           <div className="container">
             <div className="section-head">
               <span className="eyebrow" data-num="003">HOW AN ENGAGEMENT WORKS</span>
-              <h2 className="h-2">What happens after you apply.</h2>
+              <h2 className="h-2">{v.engagementH2}</h2>
             </div>
             <ol className="svc-timeline" data-reveal-children>
-              {ENGAGEMENT.map(([h, p], i) => (
+              {v.engagement.map(([h, p], i) => (
                 <li className="svc-tl-step" key={h}>
                   <span className="svc-tl-marker" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
                   <div className="svc-tl-body">
@@ -312,10 +312,7 @@ export default function VerticalPage() {
               Four founder slots a month.<br />
               <span className="ser">One is yours if it fits.</span>
             </h2>
-            <p className="final-sub">
-              Drop your domain. The founder runs the 52-check review personally and replies within 48 hours,
-              with a real opinion, even when the answer is no.
-            </p>
+            <p className="final-sub">{v.ctaSub}</p>
             <div className="final-cta-btns">
               <Link to="/apply" className="btn btn-primary btn-lg ar-parent">
                 Apply for a free founder review <span className="ar-ne">↗</span>
@@ -329,26 +326,3 @@ export default function VerticalPage() {
     </>
   );
 }
-
-// Shared across verticals: the engagement model is the same whoever you sell
-// to. Pricing is deliberately absent — we scope after the review, and a number
-// invented before anyone has seen the domain would be a lie with a currency
-// symbol in front of it.
-const ENGAGEMENT = [
-  [
-    'The free founder review',
-    'You send a domain. The founder runs the 52-check audit personally — technical foundation, content, the queries your buyers actually use, the conversion path — and replies within 48 hours with a verdict rather than a brochure.',
-  ],
-  [
-    'Scope and price, after the review',
-    'We do not publish a rate card, because the honest number depends on what the review finds. You get a scoped proposal with the work, the sequence and the figure, once there is enough information for that figure to mean something.',
-  ],
-  [
-    'Build, in the order that compounds',
-    'Technical blockers first, because they cap everything above them. Then the commercial pages that convert soonest. Then the engine that feeds them. Shipped in weekly batches, every piece reviewed by a human before it publishes.',
-  ],
-  [
-    'Handover, not hostage-taking',
-    'The prompts, workflows and editorial checklists run on your infrastructure and stay there. A retainer should continue because it is working, not because stopping it would break your content operation.',
-  ],
-];

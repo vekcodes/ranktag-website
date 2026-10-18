@@ -64,6 +64,7 @@ function comparisonJsonLd(c) {
     },
     breadcrumb([
       { name: 'Home', item: `${SITE}/` },
+      { name: 'Best', item: `${SITE}/best` },
       { name: c.nav, item: url },
     ]),
     faqPage(c.faqs, { id: `${url}#faq` }),
@@ -113,6 +114,8 @@ export default function ComparisonPage() {
             <div className="col-12 svc-hero-top">
               <nav className="svc-crumb" aria-label="Breadcrumb">
                 <Link to="/" className="link-wipe">Home</Link>
+                <span aria-hidden="true">/</span>
+                <Link to="/best" className="link-wipe">Best</Link>
                 <span aria-hidden="true">/</span>
                 <span aria-current="page">{c.nav}</span>
               </nav>

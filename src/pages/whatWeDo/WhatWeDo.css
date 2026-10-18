@@ -289,3 +289,7 @@
   max-width: 56ch;
   margin: 0 0 clamp(1.5rem, 3vw, 2.5rem);
 }
+
+/* The pain-point section's label is a real <h2> for heading order; it keeps
+   the eyebrow's visual treatment, so nothing moves on screen. */
+.problem-h2 { margin: 0; font-weight: inherit; }

@@ -149,7 +149,7 @@ export default function Apply() {
 
             <div className="apply-success">
               <div className="apply-success-mark">✓</div>
-              <h3>Application received.</h3>
+              <h2>Application received.</h2>
               <p>
                 The founder will personally review your domain, run a quick competitive scan, and DM you on LinkedIn inside 48 hours. Even if we are not the right fit, you will hear back with what we would do.
               </p>
@@ -162,17 +162,17 @@ export default function Apply() {
           <div className="apply-bullets">
             <div className="apply-bullet">
               <div className="apply-bullet-num">01</div>
-              <h4>Reviewed by a human</h4>
+              <h3>Reviewed by a human</h3>
               <p>Not a chatbot. Not an SDR. The founder reads every application and runs a real scan of your domain.</p>
             </div>
             <div className="apply-bullet">
               <div className="apply-bullet-num">02</div>
-              <h4>Reply on LinkedIn in 48h</h4>
+              <h3>Reply on LinkedIn in 48h</h3>
               <p>You get a real reply on LinkedIn. With a real opinion. Even if it is a no, it will be useful.</p>
             </div>
             <div className="apply-bullet">
               <div className="apply-bullet-num">03</div>
-              <h4>Only four a month</h4>
+              <h3>Only four a month</h3>
               <p>Senior strategists do not scale like ad spend. When the slots are full, you wait until next month.</p>
             </div>
           </div>

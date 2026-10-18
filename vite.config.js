@@ -97,6 +97,7 @@ export default defineConfig(({ isSsrBuild }) => ({
         '/apply',
         '/case-study/sendr',
         '/who-we-help',
+        '/best',
         ...COMPARISONS.map((c) => c.path),
         ...VERTICALS.map((v) => `/${v.slug}`),
         '/what-we-do',

@@ -133,7 +133,7 @@ export default function CapabilityPage() {
         <section className="problem svc-problem ruled" data-reveal>
           <div className="container grid12">
             <div className="col-4 problem-aside">
-              <span className="eyebrow bracket">WHY THIS KEEPS FAILING IN-HOUSE</span>
+              <h2 className="eyebrow bracket problem-h2">WHY THIS KEEPS FAILING IN-HOUSE</h2>
             </div>
             <ol className="col-7 start-6 problem-list" data-reveal-children>
               {svc.pains.map((pain, i) => (

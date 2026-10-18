@@ -344,7 +344,7 @@ ${services.map(([slug, label]) => `<a href="/what-we-do/${slug}">${label}</a>`).
 <a href="/what-we-do">All capabilities →</a></div>
 <div class="footer-col"><h4><span>002</span>Who we help</h4>
 <a href="/saas-seo-agency">B2B SaaS</a><a href="/ecommerce-seo-agency">Ecommerce</a><a href="/local-seo-agency">Local &amp; service-area</a>
-<a href="/who-we-help">All verticals →</a></div>
+<a href="/who-we-help">All verticals →</a><a href="/best">Agency comparisons →</a></div>
 <div class="footer-col"><h4><span>003</span>Free tools</h4>
 <a href="/keyword-density-checker">Keyword Density Checker</a>
 <a href="/domain-authority-checker">Domain Authority Checker</a>

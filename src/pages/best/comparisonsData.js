@@ -37,7 +37,7 @@ export const COMPARISONS = [
 
     title: 'Best SaaS SEO Agencies in 2026: 11 Compared',
     description:
-      '11 real B2B SaaS SEO agencies compared for 2026: specialism, published pricing and engagement terms, who each one suits and who it does not. Updated October 2026.',
+      '11 real B2B SaaS SEO agencies compared for 2026: specialism, published pricing, who each one suits and who it does not. Reviewed October 2026.',
     eyebrow: 'SHORTLIST · B2B SAAS',
     h1: 'The best SaaS SEO agencies in 2026, honestly compared.',
 
@@ -491,7 +491,7 @@ export const COMPARISONS = [
 
     title: 'Best Local SEO Agencies in 2026: 11 Compared',
     description:
-      '11 real local SEO agencies and companies compared for 2026: Google Business Profile depth, published pricing, who each suits and who it does not. Checked at source.',
+      '11 real local SEO agencies compared for 2026: Google Business Profile depth, published pricing, who each suits and who it does not. Checked at source.',
     eyebrow: 'SHORTLIST · LOCAL & SERVICE-AREA',
     h1: 'The best local SEO agencies in 2026, honestly compared.',
 
@@ -709,3 +709,11 @@ export const COMPARISONS = [
 export const COMPARISON_BY_SLUG = Object.fromEntries(COMPARISONS.map((c) => [c.slug, c]));
 
 export const comparisonUrl = (slug) => `${SITE}/best/${slug}`;
+
+/** The /best hub. Lives here so routeMeta.js can import it without pulling in React. */
+export const BEST_HUB_META = {
+  title: 'Best SEO Agencies: Honest Shortlists by Vertical',
+  description:
+    'Researched shortlists of real SEO agencies by vertical, with published pricing only where it exists and no invented ratings. We publish these and are on them.',
+  canonical: `${SITE}/best`,
+};

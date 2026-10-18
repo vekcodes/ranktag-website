@@ -75,6 +75,42 @@ for f in pages:
     for m in re.findall(r'https://rankedtag\.com(/services[^"\'\s<]*)', html):
         fails.append(f"[canonical] {os.path.relpath(f, DIST)} still references {m}")
 
+# heading order: exactly one h1 per page, no skipped levels (WCAG 1.3.1)
+for f in pages:
+    h = open(f, encoding="utf-8", errors="ignore").read()
+    mm = re.search(r"<main.*?</main>", h, re.S)
+    if not mm: continue
+    body = re.sub(r"<script.*?</script>|<style.*?</style>", "", mm.group(0), flags=re.S)
+    hs = [int(x) for x in re.findall(r"<h([1-6])[ >]", body)]
+    rel = os.path.relpath(f, DIST)
+    if hs.count(1) != 1:
+        fails.append(f"[a11y] {rel}: {hs.count(1)} h1 elements")
+    prev = hs[0] if hs else 1
+    for lv in hs[1:]:
+        if lv > prev + 1:
+            fails.append(f"[a11y] {rel}: heading jumps h{prev} -> h{lv}")
+            break
+        prev = lv
+
+# FAQ schema must be backed by visible copy on the page
+import html as _html
+for f in pages:
+    h = open(f, encoding="utf-8", errors="ignore").read()
+    qs = [_html.unescape(x) for x in re.findall(r'"@type":"Question","name":"(.*?)"', h)]
+    if not qs: continue
+    body = re.sub(r"<script.*?</script>|<style.*?</style>", "", h, flags=re.S)
+    txt = _html.unescape(" ".join(re.sub(r"<[^>]+>", " ", body).split()))
+    for q in qs:
+        if q not in txt:
+            fails.append(f"[faq] {os.path.relpath(f, DIST)}: schema question not visible: {q[:60]}")
+
+# fabricated rating markup must never appear in JSON-LD
+for f in pages:
+    h = open(f, encoding="utf-8", errors="ignore").read()
+    for block in re.findall(r'<script type="application/ld\+json">(.*?)</script>', h, re.S):
+        if "aggregateRating" in block or "ratingValue" in block:
+            fails.append(f"[rating] {os.path.relpath(f, DIST)}: rating markup in JSON-LD")
+
 # 5: sitemap vs routes
 src = open(os.path.join(ROOT, "api/sitemap.js")).read()
 sm_urls = set()

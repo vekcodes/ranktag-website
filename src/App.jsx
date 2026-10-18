@@ -43,6 +43,7 @@ export const routes = [
       // 404, never render thin.
       // Comparison pages — shortlist intent, a different job from the
       // vertical sales pages. One route per researched list.
+      { path: 'best', lazy: lazyRoute(() => import('./pages/best/BestHub.jsx')) },
       ...COMPARISONS.map((c) => ({
         path: `best/${c.slug}`,
         lazy: lazyRoute(() => import('./pages/best/ComparisonPage.jsx')),

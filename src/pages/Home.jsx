@@ -72,7 +72,7 @@ const HOME_JSONLD = [
 // The visible FAQ copy. Two answers intentionally differ from HOME_FAQ
 // above (which feeds the FAQPage schema), so the two are kept separate.
 const HOME_FAQ_VIEW = [
-  ["\"Are we just paying for ChatGPT to write our articles?\"",
+  ["Are we just paying for ChatGPT to write our articles?",
    "No. Claude does the keyword research and the first-pass draft. A senior writer rewrites it, fact-checks it, and adds the angle. Nothing ships without a human review. The unfair advantage is the combination, not any single piece."],
   ["How is this different from a regular SEO agency?",
    "Three things. (1) We optimize for ChatGPT, Claude, Perplexity and Gemini citations alongside Google. Most agencies are not even tracking that yet. (2) We use AI to compress the work that is grunt, so we ship in days what a regular team ships in months. (3) The pipeline lives on your infrastructure when we are done. You keep the prompts and workflows."],

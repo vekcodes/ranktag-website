@@ -85,12 +85,12 @@
     {
       "source": "/audit",
       "destination": "/apply",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/technical-audit",
       "destination": "/apply",
-      "permanent": false
+      "permanent": true
     }
   ],
   "rewrites": [

@@ -22,6 +22,30 @@ export { SITE };
 export const VERTICALS = [
   {
     slug: 'saas-seo-agency',
+    ctaSub: 'Drop your domain. The founder runs the 52-check review personally and comes back within 48 hours with what your buying queries actually look like, even when the answer is that you do not need us yet.',
+    engagementH2: 'What happens after you apply.',
+    engagement: [
+      [
+        'The free founder review',
+        'You send a domain. The founder goes through it personally: which buying queries you rank for versus which ones close, whether your comparison and alternatives pages exist or are being written about you by someone else, how your docs subdomain is handling authority, and what your reporting currently credits organic with. A verdict within 48 hours.',
+      ],
+      [
+        'Agree the measurement model before anything ships',
+        'For a three-month cycle this comes first, not last. We agree how first-touch and assisted paths will be attributed, which leading indicators you will judge months one and two on, and what the programme is allowed to be measured against in month six. Skipping this is how working SEO programmes get cancelled.',
+      ],
+      [
+        'Scope and price, after the review',
+        'No rate card, because the honest number depends on whether you are fixing a foundation, building a category or defending one. You get a scoped proposal with the work, the sequence and the figure once there is enough information for that figure to mean something.',
+      ],
+      [
+        'Bottom of the funnel first, then the engine',
+        'Comparison, alternatives, integration and pricing-intent pages ship before any top-of-funnel content, because they convert from the week they index and they fund the patience the rest needs. Weekly batches, every piece reviewed by a human before it publishes.',
+      ],
+      [
+        'Handover, not hostage-taking',
+        'The prompts, workflows and editorial checklists run on your infrastructure and stay there. A retainer should continue because it is working, not because stopping it would break your content operation.',
+      ],
+    ],
     comparison: '/best/seo-agencies-for-saas',
     comparisonLabel: 'the 11 best SaaS SEO agencies',
     nav: 'B2B SaaS',
@@ -30,7 +54,7 @@ export const VERTICALS = [
     // "seo agency for saas", "saas seo services", "saas seo company".
     title: 'SaaS SEO Agency: Pipeline, Not Sessions',
     description:
-      'SaaS SEO agency for B2B founders: category pages, comparison and alternatives pages, product-led content. Measured on signups and pipeline. Proof: 0 to 1.05M impressions.',
+      'SaaS SEO agency for B2B founders: category pages, comparison and alternatives pages, product-led content. Measured on signups and pipeline, not sessions.',
     eyebrow: 'WHO WE HELP · B2B SAAS',
     h1: 'A SaaS SEO agency for founders who need pipeline, not sessions.',
     audienceName: 'B2B SaaS companies',
@@ -147,6 +171,30 @@ export const VERTICALS = [
 
   {
     slug: 'ecommerce-seo-agency',
+    ctaSub: 'Drop your domain. The founder runs the 52-check review personally and comes back within 48 hours with what your facets, variants and product markup are really doing, even when the answer is no.',
+    engagementH2: 'What happens after you send a domain.',
+    engagement: [
+      [
+        'The free founder review',
+        'You send a domain. The founder goes through the catalogue personally: how many crawlable URLs your filters are capable of generating, which variants are splitting signals, what happens to a discontinued product today, which category pages are competing with each other, and whether your Product and Offer markup survives a stock change. A verdict within 48 hours.',
+      ],
+      [
+        'Read the logs before proposing anything',
+        'Crawl budget on a catalogue is an empirical question. Before we scope the work we want to see where Googlebot is actually spending its requests, because a plan written without that is a plan written from assumptions. If logs are not available, we say so and scope around it rather than pretending.',
+      ],
+      [
+        'Scope and price, after the review',
+        'No rate card. A 300-product store and a 40,000-SKU catalogue with four filter dimensions are not the same job, and quoting before seeing the facet behaviour would be guesswork with a currency symbol on it. You get the work, the sequence and the figure once the review is done.',
+      ],
+      [
+        'Template decisions first, pages second',
+        'Facet and parameter policy, canonical and variant consolidation, out-of-stock rules and automated product markup come before any content work, because each one of those decisions applies to thousands of URLs at once. Category and buying-guide content follows, once the architecture underneath it is worth ranking.',
+      ],
+      [
+        'Handover, not hostage-taking',
+        'The facet policy, the redirect rules and the schema templates are documented and live in your stack. If you replatform in two years, the decisions travel with you instead of leaving with us.',
+      ],
+    ],
     comparison: '/best/seo-agencies-for-ecommerce',
     comparisonLabel: 'the 11 best ecommerce SEO agencies',
     nav: 'Ecommerce',
@@ -274,6 +322,30 @@ export const VERTICALS = [
 
   {
     slug: 'local-seo-agency',
+    ctaSub: 'Drop your domain and your business name. The founder reviews the site and the Google Business Profile together and comes back within 48 hours, even when the answer is that your radius will not stretch that far.',
+    engagementH2: 'What happens after you send your profile.',
+    engagement: [
+      [
+        'The free founder review',
+        'You send a domain and your business name. The founder checks the website and the Google Business Profile together: categories and services against the queries you want, citation consistency across the sources that matter, review velocity and recency, and whether your location pages say anything true about the areas they name. A verdict within 48 hours.',
+      ],
+      [
+        'Baseline the grid before changing anything',
+        'We sample positions across your actual service area rather than a single point, so there is a real before-picture. Without it there is no way to tell whether work extended your visibility radius or simply moved one number that was measured next to your office.',
+      ],
+      [
+        'Scope and price, after the review',
+        'No rate card. One location in one town and a service-area business covering twelve are different engagements, and so is a business that needs citation cleanup versus one that needs a review mechanism. You get the work, the sequence and the figure once the review is done.',
+      ],
+      [
+        'Profile and entity first, pages second',
+        'Categories, services and profile content, then citation consistency, then a review ask built into a process you already run. Location pages come last and only for areas where something true can be said about them, because thin location pages are a liability rather than coverage.',
+      ],
+      [
+        'You keep the keys, throughout',
+        'The Google Business Profile stays on your Google account with us added as a manager, never the reverse. It is your most valuable local asset and no agency should be able to leave with it, including us.',
+      ],
+    ],
     comparison: '/best/seo-agencies-for-local-business',
     comparisonLabel: 'the 11 best local SEO agencies',
     nav: 'Local & service-area',
@@ -282,7 +354,7 @@ export const VERTICALS = [
     // "local seo company", "seo agency for small business".
     title: 'Local SEO Agency: Map Pack and Near-Me Search',
     description:
-      'Local SEO agency: Google Business Profile, Map Pack ranking, citation consistency, review velocity and the city versus service-area page architecture that works.',
+      'Local SEO agency: Google Business Profile, Map Pack ranking, citations, review velocity and the city versus service-area page architecture that actually works.',
     eyebrow: 'WHO WE HELP · LOCAL & SERVICE-AREA',
     h1: 'A local SEO agency that works the Map Pack, not just the website.',
     audienceName: 'Local and service-area businesses',
@@ -403,7 +475,7 @@ export const VERTICALS = [
 export const WHO_WE_HELP_META = {
   title: 'Who We Help: SaaS, Ecommerce and Local SEO',
   description:
-    'RankedTag works three verticals: B2B SaaS, ecommerce and local or service-area businesses. Each gets its own playbook, because the search problems are not the same.',
+    'RankedTag works three verticals: B2B SaaS, ecommerce, and local or service-area businesses. Each gets its own playbook, because the problems are not the same.',
   canonical: `${SITE}/who-we-help`,
 };
 

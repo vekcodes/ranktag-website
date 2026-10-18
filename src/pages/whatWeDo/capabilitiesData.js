@@ -323,7 +323,7 @@ export const SERVICE_BY_SLUG = Object.fromEntries(SERVICES.map((s) => [s.slug, s
 export const SERVICES_HUB_META = {
   title: 'What We Do: SEO, AI SEO, GEO, AEO and Content',
   description:
-    'Full-stack SEO, AI SEO, GEO, AEO, technical SEO and content: six capabilities, one compounding search engine. Proof: sendr.ai, 0 to 1.05M impressions in 6 months.',
+    'Full-stack SEO, AI SEO, GEO, AEO, technical SEO and content: six capabilities, one compounding search engine. Proof: sendr.ai, 0 to 1.05M impressions.',
   canonical: `${SITE}/what-we-do`,
 };
 
