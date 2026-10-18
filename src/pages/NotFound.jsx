@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { VERTICALS } from './verticals/verticalsData.js';
 import Nav from '../components/Nav.jsx';
 import usePageMeta from '../hooks/usePageMeta.js';
 
@@ -52,6 +53,18 @@ export default function NotFound() {
           <a href="/blog" className="btn btn-outline btn-lg ar-parent">
             Read the blog <span className="ar-ne">↗</span>
           </a>
+        </div>
+
+        <div className="nf-tools">
+          <p className="nf-tools-label">Or start with what you do</p>
+          <div className="nf-tools-row">
+            {VERTICALS.map((v) => (
+              <Link key={v.slug} to={`/${v.slug}`} className="nf-tool link-wipe">
+                {v.nav}
+              </Link>
+            ))}
+            <Link to="/best" className="nf-tool link-wipe">Agency comparisons</Link>
+          </div>
         </div>
 
         <div className="nf-tools">
