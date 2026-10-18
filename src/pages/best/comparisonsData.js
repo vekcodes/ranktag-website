@@ -27,6 +27,8 @@ export { SITE };
 export const COMPARISONS = [
   {
     slug: 'seo-agencies-for-saas',
+    vertical: '/saas-seo-agency',
+    verticalLabel: 'what we do for B2B SaaS',
     path: '/best/seo-agencies-for-saas',
     nav: 'Best SaaS SEO agencies',
     year: '2026',
@@ -252,6 +254,8 @@ export const COMPARISONS = [
 
   {
     slug: 'seo-agencies-for-ecommerce',
+    vertical: '/ecommerce-seo-agency',
+    verticalLabel: 'what we do for ecommerce',
     path: '/best/seo-agencies-for-ecommerce',
     nav: 'Best ecommerce SEO agencies',
     year: '2026',
@@ -477,6 +481,8 @@ export const COMPARISONS = [
 
   {
     slug: 'seo-agencies-for-local-business',
+    vertical: '/local-seo-agency',
+    verticalLabel: 'what we do for local businesses',
     path: '/best/seo-agencies-for-local-business',
     nav: 'Best local SEO agencies',
     year: '2026',

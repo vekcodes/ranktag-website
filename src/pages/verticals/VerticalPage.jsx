@@ -228,6 +228,27 @@ export default function VerticalPage() {
           </div>
         </section>
 
+        {/* ── The shortlist page for this vertical ────────────── */}
+        {/* Different intent from this page, so it gets its own link rather
+            than being buried: a buyer still building a shortlist is not ready
+            for a sales page, and sending them to one wastes the visit. */}
+        <section className="svc-prose ruled" data-reveal>
+          <div className="container">
+            <article className="dg-article">
+              <section className="dg-section">
+                <h2 id="still-comparing">Still building a shortlist?</h2>
+                <p>
+                  Then this page is the wrong one, and we would rather say so. We publish a researched
+                  comparison of {v.comparisonLabel}, including this one, with published pricing where it
+                  exists, what each is strongest at, and who each does not suit. We are on it, positioned
+                  where we honestly belong rather than at the top.{' '}
+                  <Link to={v.comparison} className="link-wipe">Read the comparison</Link>.
+                </p>
+              </section>
+            </article>
+          </div>
+        </section>
+
         {/* ── FAQ ──────────────────────────────────────────────────────── */}
         <section className="faq-section ruled" data-reveal>
           <div className="container grid12">

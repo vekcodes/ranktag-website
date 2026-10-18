@@ -119,6 +119,10 @@ export default function ComparisonPage() {
             <div className="col-7 svc-hero-dek">
               <p className="svc-dek">{c.answer}</p>
               {/* Visible dateModified. Also in the Article schema above. */}
+              <p className="best-vertical-link">
+                Already decided what you need and just looking for a partner? Here is{' '}
+                <Link to={c.vertical} className="link-wipe">{c.verticalLabel}</Link>.
+              </p>
               <p className="best-updated">
                 Last reviewed{' '}
                 <time dateTime={c.updated}>{c.verified}</time>. Every agency checked on its own

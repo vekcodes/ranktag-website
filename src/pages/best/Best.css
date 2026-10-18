@@ -136,3 +136,12 @@
   .best-profile-num { padding-top: 0; }
   .best-disclosure { padding: var(--s-5); }
 }
+
+/* Link out to the matching vertical sales page. Sits under the answer
+   paragraph because a reader who has already decided should not have to
+   scroll a 2,700-word comparison to find us. */
+.best-vertical-link {
+  margin-top: var(--s-5);
+  color: var(--text-2);
+  line-height: 1.65;
+}

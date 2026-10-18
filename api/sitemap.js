@@ -22,6 +22,8 @@ const STATIC_LASTMOD = '2026-07-11';
 // back into the constant when the whole set moves at once.
 const PAGE_LASTMOD = {
   '/': '2026-10-18',
+  '/apply': '2026-10-18',
+  '/llm-info': '2026-10-18',
   '/who-we-help': '2026-10-18',
   '/best/seo-agencies-for-saas': '2026-10-18',
   '/best/seo-agencies-for-ecommerce': '2026-10-18',

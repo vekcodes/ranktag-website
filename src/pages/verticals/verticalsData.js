@@ -22,6 +22,8 @@ export { SITE };
 export const VERTICALS = [
   {
     slug: 'saas-seo-agency',
+    comparison: '/best/seo-agencies-for-saas',
+    comparisonLabel: 'the 11 best SaaS SEO agencies',
     nav: 'B2B SaaS',
     navDesc: 'Category creation, bottom-of-funnel pages and pipeline you can attribute',
     // Head term: "saas seo agency". Secondary: "b2b saas seo agency",
@@ -145,6 +147,8 @@ export const VERTICALS = [
 
   {
     slug: 'ecommerce-seo-agency',
+    comparison: '/best/seo-agencies-for-ecommerce',
+    comparisonLabel: 'the 11 best ecommerce SEO agencies',
     nav: 'Ecommerce',
     navDesc: 'Catalogue architecture, facets, variants and product schema at scale',
     // Head term: "ecommerce seo agency". Secondary: "ecommerce seo services",
@@ -270,6 +274,8 @@ export const VERTICALS = [
 
   {
     slug: 'local-seo-agency',
+    comparison: '/best/seo-agencies-for-local-business',
+    comparisonLabel: 'the 11 best local SEO agencies',
     nav: 'Local & service-area',
     navDesc: 'Google Business Profile, the Map Pack, citations and city architecture',
     // Head term: "local seo agency". Secondary: "local seo services",
