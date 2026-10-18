@@ -99,6 +99,39 @@ export default function DensityGuide() {
           </p>
         </section>
 
+        {/* "word density" and "word density checker" are the synonym half of
+            this page's search demand, and the page had no text for either.
+            One section, cross-referenced to the phrase-density H3 below
+            rather than repeating it, and no separate URL: a near-duplicate
+            tool page for a synonym is a doorway page. */}
+        <section className="dg-section">
+          <h2 id="word-density-vs-keyword-density">Word density vs keyword density</h2>
+          <p>
+            Word density and keyword density measure the same thing at different widths. Word density
+            usually means how often a single word appears as a percentage of the total word count. Keyword
+            density usually means the same calculation applied to the term you are actually targeting,
+            which is often a phrase of two, three or four words. The arithmetic is identical. Only the unit
+            being counted changes.
+          </p>
+          <p>
+            This tool is both a word density checker and a keyword density checker, because it reports
+            every width at once: single words first, then two, three and four word phrases, each with its
+            count and percentage. That matters more than the naming, because the two readings answer
+            different questions. Single word density tells you what the page is made of. Phrase density
+            tells you what the page is about.
+          </p>
+          <p>
+            A worked example. On a page targeting "running shoes for flat feet", the word "shoes" might run
+            at 2.1% while the full phrase sits at 0.3%. Nothing is wrong there: the individual words are
+            spread across every variation of the topic, which is exactly how natural writing behaves. What
+            would be wrong is the reverse, where the exact phrase approaches the density of its own
+            component words, because that only happens when a writer has been pasting the phrase in rather
+            than covering the subject. See{' '}
+            <a href="#single-vs-phrase-density">single-keyword density vs. phrase density</a> below for how
+            to read the two together.
+          </p>
+        </section>
+
         <section className="dg-section">
           <h2 id="keyword-density-formula">Keyword density formula</h2>
           <p>The keyword density formula is:</p>
@@ -219,7 +252,7 @@ export default function DensityGuide() {
               a direct answer. So use this tool to make sure your topic is obvious and your phrasing is
               clean — then optimize for <em>being quoted</em>, not for hitting a percentage. That shift
               from ranking to being cited is exactly what{' '}
-              <Link to="/">generative engine optimization</Link> is about.
+              <Link to="/services/generative-engine-optimization">generative engine optimization</Link> is about.
             </p>
           </div>
         </section>
@@ -230,7 +263,10 @@ export default function DensityGuide() {
           <p>
             Drop in a top-ranking competitor's URL to instantly see which keywords and phrases they
             emphasize. It's the fastest way to reverse-engineer the topical focus of a page that's
-            already winning, so you can match its coverage and then go deeper.
+            already winning, so you can match its coverage and then go deeper. To compare several pages at
+            once rather than one at a time, the{' '}
+            <Link to="/competitor-analysis">competitor analysis tool</Link> scores your page against up to
+            five rivals and returns the keyword gaps between them.
           </p>
           <h3 id="pre-publish-checks">Pre-publish content checks</h3>
           <p>
@@ -250,6 +286,14 @@ export default function DensityGuide() {
             <li>Cover the <em>related concepts</em> a topic implies — breadth beats repetition.</li>
             <li>Re-check after editing; small rewrites shift distribution more than you'd expect.</li>
           </ul>
+          <p>
+            Density is the last check in an on-page pass, not the first. Before it come the things that
+            decide whether the page is readable at all by a crawler or a model: a crawlable URL, a clean
+            heading outline, valid schema and the internal links that give the page context. That
+            foundation is what our{' '}
+            <Link to="/services/technical-seo">technical SEO service</Link> covers, and it is the reason a
+            well-written page can sit at a perfect density and still never be indexed.
+          </p>
         </section>
 
         <section className="dg-section">

@@ -334,6 +334,12 @@ export default function Home() {
             <div>
               <h2 className="h-2" data-reveal-lines>Every layer of modern search,<br /><span className="accent">under one roof.</span></h2>
               <p className="lead">Google rankings, AI Overviews, ChatGPT citations, answer boxes — they are not separate channels, they are one surface with six disciplines. Buy them separately or as the full engine. Either way, the same proof stands behind all of them.</p>
+              {/* The hub needs an in-body link from the page with the most
+                  authority, not just a nav entry: nav links repeat on every
+                  page and carry little context, and /services had none. */}
+              <Link to="/services" className="case-readmore link-wipe ar-parent">
+                Compare all six services <span className="ar">→</span>
+              </Link>
             </div>
           </div>
         </div>

@@ -22,7 +22,7 @@ const COMP_JSONLD = [
     name: 'RankedTag SEO Competitor Analysis Tool',
     url: COMP_URL,
     description:
-      'Free SEO competitor analysis tool. Compare your site against competitors with side-by-side scoring, keyword-gap analysis and actionable insights — no login required.',
+      'Free SEO competitor analysis tool. Compare your page against up to five competitors with side-by-side scoring of on-page content, keyword-gap analysis and prioritized insights. No login required.',
     featureList: [
       'Side-by-side competitor scoring',
       'Keyword-gap analysis',
@@ -92,10 +92,14 @@ export default function CompetitorAnalysis() {
               <span className="ser">Your page against theirs,</span><br />
               <span className="accent">side by side, free.</span>
             </h1>
+            {/* Direct answer, extractable on its own: what the tool compares,
+                on which signals, and the limit it does not cross. Answer
+                engines lift this paragraph; buyers read it and self-select. */}
             <p>
-              Paste your page and up to five competitor URLs. We fetch each one, score them on the same
-              on-page signals, and surface the keyword gaps between you — then turn the differences into a
-              prioritized list of what to fix first.
+              This tool compares the on-page content of your page against up to five competitor pages. It
+              scores each one on keyword optimization, prominence, distribution, semantic coverage,
+              readability and structure, then lists the terms your competitors use that you do not. It
+              compares content, not search rankings.
             </p>
 
             <CompetitorInput onAnalyze={handleAnalyze} loading={loading} />

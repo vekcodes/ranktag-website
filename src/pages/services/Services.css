@@ -276,3 +276,9 @@
 
 /* ── Related services ─────────────────────────────────────────────── */
 .svc-related{padding-top:0}
+
+/* ── Prose hub ────────────────────────────────────────────────────────
+   The hub's own content, below the catalog rows. The guide article draws
+   its own top hairline, which would double up on a `ruled` section. */
+.svc-prose .dg-article{border-top:0;padding-top:0}
+.svc-prose .dg-section:first-child{padding-top:0}

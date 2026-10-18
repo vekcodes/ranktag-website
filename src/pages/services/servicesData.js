@@ -17,9 +17,9 @@ export const SERVICES = [
     nav: 'B2B SaaS SEO',
     navDesc: 'Full-stack SEO built for SaaS pipeline, not traffic',
     // Money keyword: "B2B SaaS SEO agency"
-    title: 'B2B SaaS SEO Agency — Pipeline, Not Traffic | RankedTag',
+    title: 'B2B SaaS SEO Agency: Pipeline, Not Traffic',
     description:
-      'B2B SaaS SEO agency that took sendr.ai 0→1.05M impressions in 6 months. Senior strategists + AI velocity. Technical, content and authority — built for pipeline.',
+      'B2B SaaS SEO agency that took sendr.ai 0→1.05M impressions in 6 months. Senior strategists + AI velocity. Technical, content and authority, built for pipeline.',
     eyebrow: 'SERVICE · B2B SAAS SEO',
     h1: 'B2B SaaS SEO that fills pipeline, not dashboards.',
     dek: 'Most SEO agencies sell traffic. Traffic does not pay your AWS bill. We build the full stack — technical foundations, keyword strategy, content engine, internal authority — measured on signups, demos and pipeline. It is the exact system that took sendr.ai from zero to 1.05M impressions and #2 in Google\'s AI Overview, above ZoomInfo.',
@@ -67,9 +67,9 @@ export const SERVICES = [
     nav: 'AI SEO',
     navDesc: 'Rank in Google AI Overviews and AI-powered search',
     // Money keyword: "AI SEO agency" / "AI SEO services"
-    title: 'AI SEO Agency — Rank in Google AI Overviews | RankedTag',
+    title: 'AI SEO Agency: Rank in Google AI Overviews',
     description:
-      'AI SEO services that get B2B SaaS ranked in Google AI Overviews and cited by AI search. We put sendr.ai at #2 in the AI Overview — above ZoomInfo.',
+      'AI SEO services that get B2B SaaS ranked in Google AI Overviews and cited by AI search. We put sendr.ai at #2 in the AI Overview, above ZoomInfo.',
     eyebrow: 'SERVICE · AI SEO',
     h1: 'AI SEO: own the answer, not just the ranking.',
     dek: 'Google now answers the query before anyone scrolls to your blue link. AI SEO is how you become that answer. We restructure your content, entities and schema so AI Overviews cite you — the way sendr.ai sits at #2 for its category-defining query, six places above ZoomInfo.',
@@ -117,7 +117,7 @@ export const SERVICES = [
     nav: 'Generative Engine Optimization',
     navDesc: 'Get cited by ChatGPT, Perplexity, Gemini & Claude',
     // Money keyword: "generative engine optimization agency" / "GEO agency"
-    title: 'Generative Engine Optimization (GEO) Agency | RankedTag',
+    title: 'Generative Engine Optimization (GEO) Agency for SaaS',
     description:
       'GEO agency for B2B SaaS: get cited and recommended by ChatGPT, Perplexity, Gemini and Claude. Proof-led and founder-reviewed. First citation in 30–45 days.',
     eyebrow: 'SERVICE · GEO',
@@ -167,9 +167,9 @@ export const SERVICES = [
     nav: 'Answer Engine Optimization',
     navDesc: 'Win featured snippets, PAA and AI answer boxes',
     // Money keyword: "answer engine optimization services" / "AEO agency"
-    title: 'Answer Engine Optimization (AEO) Services | RankedTag',
+    title: 'Answer Engine Optimization (AEO) Services for SaaS',
     description:
-      'AEO services for B2B SaaS: structure your content to win featured snippets, People Also Ask and Google AI Overviews — and become the answer buyers see first.',
+      'AEO services for B2B SaaS: structure your content to win featured snippets, People Also Ask and Google AI Overviews, and become the answer buyers see first.',
     eyebrow: 'SERVICE · AEO',
     h1: 'Answer Engine Optimization: be the answer buyers see first.',
     dek: 'Every high-intent query now resolves to an answer box — a featured snippet, a People-Also-Ask card, an AI Overview. AEO is the craft of formatting truth so machines pick your version of it. Structured questions, direct answers, schema that binds it together.',
@@ -217,9 +217,9 @@ export const SERVICES = [
     nav: 'Technical SEO',
     navDesc: 'Crawlability, Core Web Vitals, schema — the 52-check stack',
     // Money keyword: "technical SEO agency" / "technical SEO services"
-    title: 'Technical SEO Services & Audit for B2B SaaS | RankedTag',
+    title: 'Technical SEO Services and Audit for B2B SaaS',
     description:
-      'Technical SEO for SaaS: crawlability, Core Web Vitals, schema graphs, internal links and AI-crawler readiness — the 52-check foundation content needs to rank.',
+      'Technical SEO for SaaS: crawlability, Core Web Vitals, schema graphs, internal links and AI-crawler readiness: the 52-check foundation content needs to rank.',
     eyebrow: 'SERVICE · TECHNICAL SEO',
     h1: 'Technical SEO: the foundation your content deserves.',
     dek: 'Great content on a broken foundation is money on fire. Slow templates, orphaned pages, mangled schema, AI crawlers bounced at the door — every one of them silently caps how far your rankings can go. We run the 52-check technical stack first, so everything shipped after it compounds.',
@@ -259,7 +259,7 @@ export const SERVICES = [
       ['How does technical SEO affect AI search visibility?', 'AI crawlers are less forgiving than Googlebot: most do not execute JavaScript, respect robots.txt strictly, and rely heavily on structured data to understand entities. Server-rendered content, a clean schema graph and correct bot access are prerequisites for being cited by ChatGPT, Perplexity or Google\'s AI Overviews.'],
       ['How fast will we see results from technical fixes?', 'Crawl and indexation fixes show in Search Console within days to weeks. Core Web Vitals improvements need a 28-day field-data window to register. Rankings respond as recrawling propagates — typically visible lift inside 4 to 8 weeks on affected templates.'],
     ],
-    tools: ['/page-speed-checker', '/domain-authority-checker'],
+    tools: ['/page-speed-checker', '/domain-authority-checker', '/competitor-analysis'],
     related: ['b2b-saas-seo', 'ai-seo', 'answer-engine-optimization'],
   },
   {
@@ -267,7 +267,7 @@ export const SERVICES = [
     nav: 'SEO Content Engine',
     navDesc: 'Senior-written, AI-accelerated content that ranks & converts',
     // Money keyword: "SaaS content marketing agency"
-    title: 'SaaS Content Marketing Agency — SEO Content | RankedTag',
+    title: 'SaaS Content Marketing Agency: The SEO Content Engine',
     description:
       'SaaS content marketing that ranks and converts: senior strategists pick the fights, Claude compresses research, editors ship weekly. Built to be cited by AI.',
     eyebrow: 'SERVICE · CONTENT ENGINE',
@@ -318,9 +318,9 @@ export const SERVICE_BY_SLUG = Object.fromEntries(SERVICES.map((s) => [s.slug, s
 
 /** Hub-page + shared meta (imported by routeMeta.js so build-time head rewrite works). */
 export const SERVICES_HUB_META = {
-  title: 'SEO, AI SEO, GEO & AEO Services for B2B SaaS | RankedTag',
+  title: 'SEO, AI SEO, GEO and AEO Services for B2B SaaS',
   description:
-    'B2B SaaS SEO, AI SEO, GEO, AEO, technical SEO and content — six services, one inbound engine. Proof: sendr.ai, 0 to 1.05M impressions in 6 months.',
+    'B2B SaaS SEO, AI SEO, GEO, AEO, technical SEO and content: six services, one inbound engine. Proof: sendr.ai, 0 to 1.05M impressions in 6 months.',
   canonical: `${SITE}/services`,
 };
 

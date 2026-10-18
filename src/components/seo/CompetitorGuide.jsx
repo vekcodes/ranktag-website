@@ -39,6 +39,10 @@ export const CA_FAQ = [
     "No. It compares on-page content rather than search positions. It fetches your page and each competitor page and scores them on keyword distribution, keyword prominence, semantic coverage, readability and content structure, so you can see why a competing page may read as more relevant for a topic. For live position tracking you need a dedicated rank tracker.",
   ],
   [
+    'How many competitors can I compare at once?',
+    'Five. You paste your own page plus up to five competitor URLs in a single run, and every page is fetched and scored on the same six signals so the comparison is like for like. Running the same page against a different set of five is free, so a wider field is just a second run.',
+  ],
+  [
     'How do I analyze competitors in AI search?',
     'Run your key questions through AI Overviews, ChatGPT and Perplexity, note which competitor domains get cited, and compare their pages to yours. The ones cited usually have clearer, more quotable, more authoritative content on the topic.',
   ],
@@ -81,6 +85,73 @@ export default function CompetitorGuide() {
           </p>
         </section>
 
+        {/* The honest-scope section. The tool surfaces for rank-tracking
+            queries it cannot serve, so the limitation is named up front
+            rather than discovered after a wasted run. The weights are read
+            from api/_lib/scoring.js and must be updated with it. */}
+        <section className="dg-section">
+          <h2 id="what-this-tool-measures">Competitor check: what this tool measures, and what it does not</h2>
+          <p>
+            A competitor check here is a content comparison. The tool fetches your page and each competitor
+            page live, extracts the text, and scores all of them on the same six signals. Nothing is
+            estimated and nothing is modelled: every number comes from the words on the page we just
+            fetched. These are the six signals and the weight each one carries in the overall score.
+          </p>
+          <table className="dg-table">
+            <thead>
+              <tr>
+                <th scope="col">Signal</th>
+                <th scope="col">Weight</th>
+                <th scope="col">What it actually checks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Keyword optimization</td>
+                <td>25%</td>
+                <td>Whether your main term sits in the natural 0.8% to 2.5% density band, how many of the next four support it, and whether anything crosses 3.5%, the point where a term reads as stuffed.</td>
+              </tr>
+              <tr>
+                <td>Content structure</td>
+                <td>20%</td>
+                <td>Length, paragraph count, paragraphs running past 150 words, and whether the page has real headings to break it up.</td>
+              </tr>
+              <tr>
+                <td>Readability</td>
+                <td>20%</td>
+                <td>A Flesch reading ease score, with deductions for long sentences, heavy passive voice and a high share of difficult words.</td>
+              </tr>
+              <tr>
+                <td>Keyword prominence</td>
+                <td>15%</td>
+                <td>Whether your top five terms appear in the first 15% of the page, in the opening paragraph, and again in the closing 15%.</td>
+              </tr>
+              <tr>
+                <td>Semantic coverage</td>
+                <td>10%</td>
+                <td>How many distinct one, two and three word terms the page uses, as a proxy for covering a topic rather than repeating a phrase.</td>
+              </tr>
+              <tr>
+                <td>Keyword distribution</td>
+                <td>10%</td>
+                <td>Whether your leading terms run through the page or sit in one corner of it, measured across ten equal slices of the text, with a deduction for slices that never mention the topic.</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            <strong>What it does not do, stated plainly:</strong> it does not track search positions, it holds
+            no SERP data, and it cannot tell you which keywords a competitor ranks for. It does not read
+            backlink profiles, estimate traffic or report ad spend. If you need live position tracking you
+            need a dedicated rank tracker, and no amount of content scoring substitutes for one.
+          </p>
+          <p>
+            That boundary is the useful part. On-page content is the half of the gap you can close this week
+            without a budget, which is why it is the half this tool measures. Pair it with a{' '}
+            <Link to="/domain-authority-checker">domain authority check</Link> when you need to know whether
+            you are losing on content or on authority, because the fix is completely different in each case.
+          </p>
+        </section>
+
         <section className="dg-section">
           <h2 id="how-to-run-competitor-analysis">How to run a free competitor analysis (step-by-step)</h2>
           <ol className="dg-steps">
@@ -118,6 +189,43 @@ export default function CompetitorGuide() {
             <Link to="/domain-authority-checker">domain authority check</Link> for competitor strength and a{' '}
             <Link to="/keyword-density-checker">keyword density check</Link> to see exactly what a rival page
             emphasizes.
+          </p>
+        </section>
+
+        <section className="dg-section">
+          <h2 id="compare-side-by-side">How to compare competitors side by side without fooling yourself</h2>
+          <p>
+            A side by side comparison is only worth the time if the pages are genuinely comparable. Four
+            rules keep the output honest:
+          </p>
+          <ul className="dg-list">
+            <li>
+              <strong>Compare one intent at a time.</strong> Put your pricing page against their pricing page,
+              your guide against their guide. A product page scored against a 3,000 word tutorial will always
+              look thin, and the gap it reports is a format difference rather than a weakness.
+            </li>
+            <li>
+              <strong>Pick the pages that actually rank.</strong> Search your target term, take the URLs that
+              appear, and compare those. Your real competitors in search are whoever occupies the results for
+              your topic, which is often not the companies your sales team names.
+            </li>
+            <li>
+              <strong>Read the benchmark as a range, not a target.</strong> The competitor average is the mean
+              of the pages you chose. Five strong pages produce a demanding benchmark and five weak ones
+              produce a flattering benchmark, so the useful question is which specific competitor beats you on
+              which specific signal.
+            </li>
+            <li>
+              <strong>Treat the keyword gap list as questions, not instructions.</strong> A term three rivals
+              use and you do not is evidence that readers expect the subtopic, not an invitation to paste the
+              word in. Cover the idea properly and the term arrives on its own.
+            </li>
+          </ul>
+          <p>
+            Work through the radar first for the shape of the gap, then the comparison table for the exact
+            margin, then the keyword gap list for the specifics. If your scores are level and you are still
+            being outranked, the difference is not on the page: it is authority, and the answer is links and
+            topical depth rather than another revision.
           </p>
         </section>
 
@@ -171,10 +279,48 @@ export default function CompetitorGuide() {
               The competitors winning AI citations are usually the ones whose content is easiest for a model to
               lift a clean answer from, not necessarily the ones with the biggest backlink profiles. Closing
               that gap — being the source AI engines quote — is what{' '}
-              <Link to="/">generative engine optimization</Link> is about, and it's where the next competitive
+              <Link to="/services/generative-engine-optimization">generative engine optimization</Link> is about, and it's where the next competitive
               advantage is being won.
             </p>
           </div>
+        </section>
+
+        <section className="dg-section">
+          <h2 id="free-competitor-audit">A free competitor audit you can repeat every quarter</h2>
+          <p>
+            Competitor analysis is worth more as a habit than as a one-off. This is the loop, and it takes
+            about twenty minutes a quarter per page that matters:
+          </p>
+          <ol className="dg-steps">
+            <li>
+              <strong>Fix the page set.</strong> Choose your five most commercially important pages and, for
+              each, the competitor URLs currently ranking for its target term. Keep the list in a document so
+              every later run is comparable.
+            </li>
+            <li>
+              <strong>Run the comparison.</strong> One run per page, up to five competitors each. Record your
+              score, the competitor average and the number of keyword gaps.
+            </li>
+            <li>
+              <strong>Diagnose one level deeper.</strong> Where a page scores badly on keyword optimization or
+              distribution, open it in the{' '}
+              <Link to="/keyword-density-checker">keyword density checker</Link> to see which terms are
+              actually carrying the page and which are crowding it out.
+            </li>
+            <li>
+              <strong>Fix, then re-run.</strong> Ship the revision, re-run the same comparison, and keep the
+              before and after. Over a year that record tells you which changes moved anything, which is the
+              question most SEO reporting never answers.
+            </li>
+          </ol>
+          <p>
+            The loop is deliberately small because the alternative is an audit nobody repeats. If you would
+            rather see it run at full depth on a live domain, the{' '}
+            <Link to="/case-study/sendr">sendr.ai case study</Link> shows the same diagnosis applied across a
+            whole site over six months, and{' '}
+            <Link to="/services/b2b-saas-seo">our B2B SaaS SEO service</Link> is this loop run weekly by
+            people who do it for a living.
+          </p>
         </section>
 
         <section className="dg-section">

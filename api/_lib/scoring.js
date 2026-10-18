@@ -33,26 +33,63 @@ function gradeOf(score) {
   return 'F';
 }
 
+/**
+ * Whether the page's leading terms sit at a natural density.
+ *
+ * Judged on the terms that actually carry the page: the primary term, then
+ * how many of the next four are present at a meaningful level. The previous
+ * version required ten of the top thirty terms to clear 0.8% each, which on a
+ * 1,700 word page means 136 occurrences of just ten words. No page of real
+ * prose can reach that, so long-form content was scored 20 to 40 however well
+ * it was written, while a 200 word page scored 100. Same bands as before
+ * (DENSITY), applied where they mean something.
+ */
 function scoreKeywordOptimization(keywords, totalWords) {
   const grams = keywords['1gram'] || [];
   if (!grams.length || totalWords === 0) {
     return { name: 'Keyword Optimization', score: 0, details: {} };
   }
-  const n = grams.length;
-  const stuffed = grams.filter((k) => k.density > DENSITY.stuffed_above).length;
-  const inIdeal = grams.filter((k) => k.density >= DENSITY.ideal_min && k.density <= DENSITY.ideal_max).length;
-  const maxDensity = grams[0]?.density || 0;
 
-  const idealRatio = n > 0 ? inIdeal / Math.min(n, 10) : 0;
-  let score = idealRatio * 100;
-  if (stuffed > 0) score -= stuffed * 18;
+  // Ordered from the top down so an over-stuffed primary term is caught
+  // before the under-density interpolation, which would otherwise read a 40%
+  // density as "far above the floor" and award full marks. Over the stuffing
+  // threshold the score slopes rather than falling off a cliff: a reference
+  // page whose subject sits at 3.9% is not the same as one at 15%.
+  const primary = grams[0]?.density || 0;
+  let base;
+  if (primary > 5) base = 15;
+  else if (primary > DENSITY.stuffed_above) base = 60 - ((primary - DENSITY.stuffed_above) / 1.5) * 40;
+  else if (primary > DENSITY.ideal_max) base = 80;
+  else if (primary >= DENSITY.ideal_min) base = 100;
+  else if (primary >= 0.4) base = 70 + ((primary - 0.4) / (DENSITY.ideal_min - 0.4)) * 20;
+  else if (primary >= 0.2) base = 50;
+  else base = 30;
+
+  // Supporting terms: the topic should be carried by more than one word.
+  const supporting = grams.slice(1, 5);
+  const present = supporting.filter((k) => k.density >= 0.3).length;
+  const supportScore = supporting.length ? (present / supporting.length) * 100 : base;
+
+  let score = base * 0.75 + supportScore * 0.25;
+
+  // Counted after the primary, which `base` already accounts for: penalising
+  // it twice turned one slightly-over term into a failing page.
+  const stuffedOthers = grams.slice(1).filter((k) => k.density > DENSITY.stuffed_above).length;
+  const stuffed = grams.filter((k) => k.density > DENSITY.stuffed_above).length;
+  const maxDensity = primary;
+  if (stuffedOthers > 0) score -= stuffedOthers * 18;
   if (maxDensity > 5.0) score -= (maxDensity - 5.0) * 10;
-  if (n < 3 && totalWords > 200) score -= 20;
+  if (grams.length < 3 && totalWords > 200) score -= 20;
 
   return {
     name: 'Keyword Optimization',
     score: r(clamp(score)),
-    details: { stuffed, ideal_range: inIdeal, max_density: maxDensity },
+    details: {
+      primary_term: grams[0]?.keyword || null,
+      primary_density: maxDensity,
+      supporting_terms_present: present,
+      stuffed,
+    },
   };
 }
 
@@ -169,26 +206,43 @@ function scoreSemanticCoverage(keywords, totalWords) {
   };
 }
 
+/**
+ * How evenly the leading terms are spread through the page.
+ *
+ * Measured over ten equal slices of the text rather than over markup blocks.
+ * Block counting made the score an artefact of how a page is marked up: one
+ * <div> wrapping everything scored differently from the same prose in forty
+ * <p> tags, and the per-empty-block penalty (-5 each) drove any page with
+ * many short blocks to zero. Slices are markup-independent, so the number
+ * answers the question it claims to: does the topic run through the page, or
+ * sit in one corner of it.
+ */
+const DISTRIBUTION_SEGMENTS = 10;
+
 function scoreKeywordDistribution(keywords, text) {
   const grams = keywords['1gram'] || [];
   if (!grams.length || !(text || '').trim()) {
     return { name: 'Keyword Distribution', score: 0, details: {} };
   }
-  const blocks = (text || '').split(/\n\s*\n/).map((b) => b.trim()).filter(Boolean);
-  if (blocks.length <= 1) {
-    return { name: 'Keyword Distribution', score: 70, details: { blocks: 1, note: 'single_block' } };
+  const words = (text || '').toLowerCase().split(/\s+/).filter(Boolean);
+  // Below ~6 words a slice, evenness is noise rather than signal.
+  if (words.length < DISTRIBUTION_SEGMENTS * 6) {
+    return { name: 'Keyword Distribution', score: 70, details: { segments: 1, note: 'too_short' } };
   }
 
-  const top3 = grams.slice(0, 3).map((k) => k.keyword);
-  const blockHits = blocks.map((b) => {
-    const lower = b.toLowerCase();
-    return top3.reduce((sum, kw) => sum + (lower.split(kw).length - 1), 0);
-  });
-  const totalHits = blockHits.reduce((s, n) => s + n, 0);
-  if (totalHits === 0) return { name: 'Keyword Distribution', score: 50, details: {} };
+  const size = Math.ceil(words.length / DISTRIBUTION_SEGMENTS);
+  const segments = [];
+  for (let i = 0; i < words.length; i += size) segments.push(words.slice(i, i + size).join(' '));
 
-  const expected = totalHits / blocks.length;
-  const variance = blockHits.reduce((s, h) => s + (h - expected) ** 2, 0) / blocks.length;
+  const top3 = grams.slice(0, 3).map((k) => k.keyword.toLowerCase());
+  const hits = segments.map((seg) => top3.reduce((sum, kw) => sum + (seg.split(kw).length - 1), 0));
+  const totalHits = hits.reduce((s, n) => s + n, 0);
+  if (totalHits === 0) {
+    return { name: 'Keyword Distribution', score: 50, details: { segments: segments.length } };
+  }
+
+  const expected = totalHits / segments.length;
+  const variance = hits.reduce((s, h) => s + (h - expected) ** 2, 0) / segments.length;
   const cv = Math.sqrt(variance) / Math.max(expected, 0.01);
 
   let score;
@@ -198,13 +252,19 @@ function scoreKeywordDistribution(keywords, text) {
   else if (cv < 2.5) score = 40;
   else score = 20;
 
-  const emptyBlocks = blockHits.filter((h) => h === 0).length;
-  if (emptyBlocks > 0) score -= emptyBlocks * 5;
+  // Proportional, and capped: a third of the page never mentioning the topic
+  // is worth a deduction, not an automatic zero.
+  const emptySegments = hits.filter((h) => h === 0).length;
+  score -= Math.round((emptySegments / segments.length) * 30);
 
   return {
     name: 'Keyword Distribution',
     score: r(clamp(score)),
-    details: { blocks: blocks.length, cv: Math.round(cv * 100) / 100, empty_blocks: emptyBlocks },
+    details: {
+      segments: segments.length,
+      cv: Math.round(cv * 100) / 100,
+      empty_segments: emptySegments,
+    },
   };
 }
 

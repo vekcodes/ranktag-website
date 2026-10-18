@@ -219,7 +219,7 @@ export default function PageSpeedGuide() {
               So fast, technically sound pages don't earn AI citations by being fast, but slow, broken ones
               can quietly exclude themselves. Speed is table stakes for discoverability; content and authority
               earn the citation — which is what{' '}
-              <Link to="/">generative engine optimization</Link> is about.
+              <Link to="/services/generative-engine-optimization">generative engine optimization</Link> is about.
             </p>
           </div>
         </section>

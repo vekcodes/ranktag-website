@@ -241,7 +241,7 @@ export default function DomainAuthorityGuide() {
               So treat authority as one input into AI visibility, not the lever. To get cited by AI
               engines, pair a healthy backlink profile with clear, well-structured, genuinely
               authoritative content on the topics you want to own. Building that kind of citation-worthy
-              presence is what <Link to="/">generative engine optimization</Link> is about.
+              presence is what <Link to="/services/generative-engine-optimization">generative engine optimization</Link> is about.
             </p>
           </div>
         </section>

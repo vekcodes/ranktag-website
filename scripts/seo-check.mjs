@@ -9,7 +9,7 @@
 //   - a canonical that is an absolute URL
 //   - og:image asset actually ships in dist/ (URL path -> local file) and,
 //     when readable, is roughly landscape ~1.91:1 (1200x630)
-//   - title 50-60 chars, description 140-160 chars (soft WARN)
+//   - title 35-60 chars, description 140-160 chars (soft WARN)
 //
 // Note: /blog and /blog/:slug are SSR (not in dist) and are validated at
 // request time by their own renderer; this covers the static surface.
@@ -113,7 +113,12 @@ for (const file of files) {
   const t = html.match(/<title>([\s\S]*?)<\/title>/);
   if (t) {
     const len = decode(t[1].trim()).length;
-    if (len < 50 || len > 60) warn(`${rel}: title ${len} chars (want 50-60)`);
+    // Lower bound is 35, not 50. The static pages deliberately carry no
+    // "| RankedTag" suffix (same reasoning as api/_lib/render.js): the brand
+    // cost 12 characters of every title on a site with no brand demand, and
+    // Google prints the site name beside the title anyway. A tight 45-char
+    // keyword title is correct here; under 35 is a stub, over 60 truncates.
+    if (len < 35 || len > 60) warn(`${rel}: title ${len} chars (want 35-60)`);
   }
   const d = html.match(/<meta name="description" content="([^"]*)"/);
   if (d) {

@@ -165,6 +165,9 @@ export default function CaseStudySendr() {
                     Real strategists ran the SWOT, found the keyword gaps the giants
                     ignored, and chose the category-defining queries worth winning.
                     Every brief was approved by a human before a word was written.
+                    The first pass of that gap analysis is the same comparison our
+                    free <Link to="/competitor-analysis">competitor analysis tool</Link>{' '}
+                    runs, scored on the same on-page signals.
                   </p>
                 </div>
               </li>

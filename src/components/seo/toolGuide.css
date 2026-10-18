@@ -327,3 +327,37 @@
     padding:22px 20px;
   }
 }
+
+/* ── Comparison table ─────────────────────────────────────────────────
+   Used where a list would lose the structure: one row per scored signal,
+   its weight and what it checks. Scrolls rather than squashing on a phone. */
+.dg-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:var(--s-5);
+  font-size:var(--fs-small);
+  line-height:1.6;
+}
+.dg-table th,
+.dg-table td{
+  text-align:left;
+  vertical-align:top;
+  padding:var(--s-3) var(--s-4) var(--s-3) 0;
+  border-bottom:1px solid var(--line);
+}
+.dg-table thead th{
+  font-family:var(--font-mono);
+  font-size:var(--fs-micro);
+  letter-spacing:var(--track-micro);
+  text-transform:uppercase;
+  color:var(--text-4);
+  font-weight:500;
+  white-space:nowrap;
+}
+.dg-table tbody td:first-child{color:var(--text-1);font-weight:600;white-space:nowrap}
+.dg-table tbody td:nth-child(2){color:var(--peri);font-family:var(--font-mono);white-space:nowrap}
+.dg-table tbody td:last-child{color:var(--text-3)}
+@media (max-width:640px){
+  .dg-table{display:block;overflow-x:auto;white-space:normal}
+  .dg-table tbody td:first-child{white-space:normal}
+}

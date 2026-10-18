@@ -4,10 +4,34 @@ import SiteFooter from '../../components/SiteFooter.jsx';
 import usePageMeta from '../../hooks/usePageMeta.js';
 import useScrollReveal from '../../hooks/useScrollReveal.js';
 import JsonLd from '../../components/JsonLd.jsx';
-import { breadcrumb, ORG_ID, SITE } from '../../lib/schema.js';
+import { breadcrumb, faqPage, ORG_ID, SITE } from '../../lib/schema.js';
+import ToolFaq from '../../components/seo/ToolFaq.jsx';
+import '../../components/seo/toolGuide.css';
 import { SERVICES, SERVICES_HUB_META } from './servicesData.js';
 import '../Home.css';
 import './Services.css';
+
+// Answered so the first sentence stands alone: these are the questions the hub
+// has to settle before a visitor picks a child page, and the first sentence of
+// each is what an answer engine can lift without the rest of the page.
+const HUB_FAQ = [
+  [
+    'Which SEO service should a B2B SaaS start with?',
+    'Start with technical SEO if your pages are not being indexed, and with B2B SaaS SEO if they are. Indexation is the gate: content, AEO and GEO all assume search engines can crawl, read and store your pages, so a crawl or schema problem makes every other service slower and more expensive. Once the foundation is sound, the order that compounds fastest is content first, then AEO and GEO on top of the pages content produced.',
+  ],
+  [
+    'What is the difference between AI SEO, AEO and GEO?',
+    'They target three different surfaces. AI SEO covers visibility across Google AI Overviews and AI-driven search as a whole. AEO is narrower: winning the answer slot itself, which means featured snippets, People Also Ask and AI answer boxes. GEO is about being cited and recommended inside assistant answers from ChatGPT, Perplexity, Gemini and Claude, where there is no ranked list of links at all. The underlying work overlaps, which is why most engagements buy more than one.',
+  ],
+  [
+    'Can I buy one service on its own?',
+    'Yes. Each of the six is scoped and priced to run on its own, and plenty of engagements start as a single discipline. They compound when combined, because technical work makes content indexable and content gives AEO and GEO something to cite, but none of them depends on buying the others first.',
+  ],
+  [
+    'How much do these services cost?',
+    'Pricing is shared after the founder review, because a seed-stage SaaS and a $2M MRR SaaS need different scopes. Apply with your domain, the founder runs the 52-check audit, and you get a real number within 48 hours rather than a sales sequence.',
+  ],
+];
 
 // /services hub — the crawlable index of every service page. An ItemList node
 // tells Google (and answer engines) these six URLs form one catalog owned by #org.
@@ -36,6 +60,7 @@ const HUB_JSONLD = [
     { name: 'Home', item: `${SITE}/` },
     { name: 'Services', item: `${SITE}/services` },
   ]),
+  faqPage(HUB_FAQ, { isPartOf: `${SITE}/services#webpage` }),
 ];
 
 export default function Services() {
@@ -65,11 +90,18 @@ export default function Services() {
             </div>
 
             <div className="col-6 svc-hero-dek">
+              {/* Direct answer first, narrative second. An answer engine asked
+                  "what does RankedTag do" can lift this paragraph whole. */}
               <p className="svc-dek">
-                Six disciplines, one inbound engine. Senior strategists pick the fights, Claude compresses the
-                research, editors ship weekly — and every page is built to rank on Google <em>and</em> get cited
-                by ChatGPT, Perplexity, Gemini and Claude. Proof: sendr.ai, 0 → 1.05M impressions in 6 months,
-                #2 in Google's AI Overview above ZoomInfo.
+                RankedTag runs six services for B2B SaaS companies: B2B SaaS SEO, AI SEO, generative engine
+                optimization, answer engine optimization, technical SEO and SaaS content marketing. Buy one on
+                its own or buy the whole engine. Every page we ship is built twice over, to rank in Google
+                <em> and</em> to be quotable by ChatGPT, Perplexity, Gemini and Claude.
+              </p>
+              <p className="svc-dek">
+                Senior strategists pick the fights, Claude compresses the research, editors ship weekly.
+                Proof: sendr.ai, 0 to 1.05M impressions in 6 months, #2 in Google's AI Overview above
+                ZoomInfo.
               </p>
             </div>
             <div className="col-5 start-8 svc-hero-cta">
@@ -95,6 +127,102 @@ export default function Services() {
                 </li>
               ))}
             </ol>
+          </div>
+        </section>
+
+        {/* Prose hub. The index above is the catalog; this is the page's own
+            content, the thing that lets /services rank for the category term
+            instead of competing with its own six children on 257 words. Every
+            service is linked here in context, with its own name as the anchor
+            text, because that is where a crawler picks up what the target page
+            is about. */}
+        <section className="svc-prose ruled" data-reveal>
+          <div className="container">
+            <article className="dg-article">
+              <section className="dg-section">
+                <h2 id="which-service">Which service do you actually need?</h2>
+                <p>
+                  Most SaaS teams arrive knowing something is wrong with their search presence and not which
+                  of the six fixes it. The short version: find the first thing that is broken and start there.
+                  Each description below says who it is for, not what it includes.
+                </p>
+                <p>
+                  <strong>Pages are not getting indexed, or the site is slow and the schema is a mess.</strong>{' '}
+                  Start with <Link to="/services/technical-seo">technical SEO</Link>. Crawlability, Core Web
+                  Vitals, the schema graph, internal links and AI-crawler access are the 52-check foundation we
+                  run on every domain before a word of content ships. A page Google cannot crawl cannot rank,
+                  and a page an AI crawler is blocked from cannot be cited, however good the writing is.
+                </p>
+                <p>
+                  <strong>The foundation is fine but there is nothing on the site worth ranking.</strong>{' '}
+                  Start with <Link to="/services/saas-content-marketing">SaaS content marketing</Link>. Senior
+                  strategists pick the targets, Claude compresses the research, and a senior writer rewrites
+                  every draft. The output is the comparison, alternative, integration and use-case pages your
+                  buyers actually search for, not another round of "top 10 tools" that Google collapses into
+                  one answer.
+                </p>
+                <p>
+                  <strong>You want the whole engine, measured on pipeline.</strong> That is{' '}
+                  <Link to="/services/b2b-saas-seo">B2B SaaS SEO</Link>: technical foundation, ICP-first
+                  keyword architecture, the content engine, entity and authority work, and instrumentation
+                  that routes form fills into your CRM. It is the same stack that took sendr.ai from zero to
+                  1.05M impressions in six months.
+                </p>
+                <p>
+                  <strong>You rank on Google, but the AI Overview above your result names someone else.</strong>{' '}
+                  That is <Link to="/services/ai-seo">AI SEO</Link>. The ten blue links are being pushed down
+                  the page by an answer most of your buyers read instead, and the sources it draws on are not
+                  always the pages ranking beneath it.
+                </p>
+                <p>
+                  <strong>You want the answer slot itself.</strong> That is{' '}
+                  <Link to="/services/answer-engine-optimization">answer engine optimization</Link>: featured
+                  snippets, People Also Ask and the AI answer boxes, won by structuring a page so the answer
+                  to a specific question is self-contained, unambiguous and sitting exactly where an extractor
+                  looks for it.
+                </p>
+                <p>
+                  <strong>Buyers ask ChatGPT for a shortlist and you are not on it.</strong> That is{' '}
+                  <Link to="/services/generative-engine-optimization">generative engine optimization</Link>,
+                  the discipline of being cited and recommended inside assistant answers rather than ranked in
+                  a list of links. There is no analytics event for the deals lost here, which is why most
+                  teams find out late.
+                </p>
+              </section>
+
+              <section className="dg-section">
+                <h2 id="how-they-fit">How the six services fit together</h2>
+                <p>
+                  They are one engine sold in parts, and the parts have an order. Technical work makes a page
+                  reachable. Content gives search engines and models something worth storing. AEO and GEO
+                  decide whether that stored page is the one quoted back to a buyer. Running them out of order
+                  is the most common way SaaS teams waste a year: GEO work on a site whose pages are not
+                  indexed changes nothing, because a model can only cite what it can retrieve.
+                </p>
+                <p>
+                  That is also why the engagements that compound fastest buy more than one discipline. The
+                  same restructured page can rank in Google, win a featured snippet and be the passage
+                  ChatGPT lifts, so the third asset costs a fraction of the first. You can still buy any one
+                  service on its own, and plenty of engagements start that way.
+                </p>
+                <p>
+                  If you would rather see the method before you talk to anyone, the four free tools run the
+                  first diagnostic for you: the{' '}
+                  <Link to="/competitor-analysis">competitor analysis tool</Link> compares your page against
+                  up to five rivals, the{' '}
+                  <Link to="/keyword-density-checker">keyword density checker</Link> shows what a page is
+                  actually about, the{' '}
+                  <Link to="/domain-authority-checker">domain authority checker</Link> benchmarks the gap, and
+                  the <Link to="/page-speed-checker">page speed checker</Link> covers the performance half of
+                  the technical audit. No account, no API key.
+                </p>
+              </section>
+
+              <section className="dg-section">
+                <h2 id="services-faq">Frequently asked questions</h2>
+                <ToolFaq items={HUB_FAQ} />
+              </section>
+            </article>
           </div>
         </section>
 
