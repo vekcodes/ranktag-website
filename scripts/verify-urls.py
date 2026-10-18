@@ -96,7 +96,18 @@ for f in pages:
 import html as _html
 for f in pages:
     h = open(f, encoding="utf-8", errors="ignore").read()
-    qs = [_html.unescape(x) for x in re.findall(r'"@type":"Question","name":"(.*?)"', h)]
+    qs = []
+    for blk in re.findall(r'<script type="application/ld\+json">(.*?)</script>', h, re.S):
+        try:
+            data = json.loads(blk)
+        except Exception:
+            fails.append(f"[schema] {os.path.relpath(f, DIST)}: JSON-LD block does not parse")
+            continue
+        for node in (data if isinstance(data, list) else [data]):
+            if isinstance(node, dict) and node.get("@type") == "FAQPage":
+                for q in node.get("mainEntity", []):
+                    if isinstance(q, dict) and q.get("name"):
+                        qs.append(_html.unescape(q["name"]))
     if not qs: continue
     body = re.sub(r"<script.*?</script>|<style.*?</style>", "", h, flags=re.S)
     txt = _html.unescape(" ".join(re.sub(r"<[^>]+>", " ", body).split()))

@@ -60,6 +60,10 @@ export const SOURCES = {
     label: 'Google Ads Help, how costs are calculated',
     href: 'https://support.google.com/google-ads/answer/6297',
   },
+  rankedtagAgencyScan: {
+    label: 'RankedTag, prices read from 33 agency websites, 18–19 October 2026',
+    href: '/best',
+  },
   geoStudy: {
     label: 'Aggarwal et al., GEO: Generative Engine Optimization, KDD 2024',
     href: 'https://arxiv.org/abs/2311.09735',

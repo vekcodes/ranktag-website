@@ -665,6 +665,502 @@ export const EXPLAINERS = [
       verticals: false,
     },
   },
+  {
+    slug: 'seo-pricing',
+    nav: 'SEO pricing',
+    year: '2026',
+    updated: '2026-10-19',
+    verified: '19 October 2026',
+
+    title: 'SEO Pricing in 2026: What Agencies Publish',
+    description:
+      'Nine agencies that publish their prices, checked on their own sites. What the figures are, what drives them, and why most agencies will not quote before a call.',
+    eyebrow: 'GUIDE · WHAT IT COSTS',
+    h1: 'SEO pricing in 2026: what agencies actually publish.',
+
+    answer:
+      'Most SEO agencies do not publish prices. Of those that do, published entry points range from roughly $499 to $6,000 a month, with one firm quoting $120,000 a year and another charging a percentage of revenue. The spread reflects scope and company size far more than quality.',
+
+    intro: [
+      'Almost every page about SEO pricing quotes the same industry averages, and those averages trace back to a small number of surveys that are hard to verify and harder to apply to your situation. We have taken a different approach here: rather than cite a benchmark, we went and read what agencies publish on their own websites, and reproduced it with the source attached.',
+      'This is a smaller sample than a survey and a more reliable one. Every figure below was on the agency’s own site on 19 October 2026. Nothing is estimated, and where an agency publishes guidance rather than a price, the table says so.',
+    ],
+
+    comparisonTable: {
+      caption: 'Published prices, read from each agency’s own website',
+      columns: ['Agency', 'What they publish', 'Model'],
+      rows: [
+        ['Whitespark', 'SEO services $499 to $1,999 per month', 'Tiered, narrow scope, local specialism'],
+        ['1Digital Agency', 'Local, national and onsite tiers from $899 to $5,999 per month', 'Tiered by scope'],
+        ['SeoProfy', 'From $1,600 per month', 'Custom after an audit'],
+        ['WebFX', 'SEO services starting at $2,900 per month', 'Published floor, custom above it'],
+        ['Searchbloom', 'SEO from $3,000 per month; ads management from $2,000', 'Published floor per service'],
+        ['Breaking B2B', 'Plans from $6,000 per month, six or twelve month programmes', 'Published floor with a stated term'],
+        ['Victorious', 'Recommends budgeting at least $6,000 per month', 'Guidance, not a rate — stated as advice'],
+        ['Omniscient Digital', 'Full-service engagements from $120,000 per year', 'Annual floor'],
+        ['SimpleTiger', 'Packages start at 5% of revenue or funding', 'Percentage of revenue or funding'],
+      ],
+    },
+
+    keyFacts: [
+      {
+        stat: '9 of 33',
+        label: 'agencies we researched across three verticals publish any price at all on their own website',
+        source: 'rankedtagAgencyScan',
+      },
+      {
+        stat: '$499–$6,000',
+        label: 'the range of published monthly entry points, before the outliers that price annually or by percentage',
+        source: 'rankedtagAgencyScan',
+      },
+      {
+        stat: '12×',
+        label: 'difference between the lowest and highest published monthly floor, for work described in similar language',
+        source: 'rankedtagAgencyScan',
+      },
+      {
+        stat: '2 models',
+        label: 'break the monthly-retainer pattern entirely: one annual floor, one percentage of revenue or funding',
+        source: 'rankedtagAgencyScan',
+      },
+    ],
+
+    quote: {
+      text: 'even if your competition bids higher than you, you can still win a higher position.',
+      who: 'Google',
+      role: 'Google Ads Help — the same principle applies to agency spend: more money is not the mechanism',
+      source: 'googleAdRank',
+    },
+
+    body: [
+      {
+        id: 'why-so-few',
+        h: 'Why so few agencies publish anything',
+        p: [
+          'Two reasons, one defensible and one not. The defensible one is that SEO scope genuinely varies enormously. Fixing a crawl problem on a sixty-page site and building topical authority in a contested category are different amounts of work, and a single number covering both would mislead everyone.',
+          'The less defensible reason is that an unpublished price lets the number move with the buyer. If an agency learns your funding stage before it learns your technical situation, you should at least notice that the discovery call collected those facts in that order.',
+          'The practical consequence is that you cannot comparison-shop on price, and attempting to usually produces a worse decision than comparing on scope. Which is why the table above is useful mainly as a sense of range, not as a shortlist.',
+        ],
+      },
+      {
+        id: 'what-drives-it',
+        h: 'What actually drives the number',
+        p: [
+          '**The state of the foundation.** A site with crawl and indexation problems needs technical work before content work has any leverage. That is a defined, finite job, and it is often the largest single line in a first quarter.',
+          '**Competitive density.** Winning a query that three well-funded companies are actively defending costs more than winning one nobody has noticed. This is the variable buyers most consistently underestimate.',
+          '**Content volume and seniority.** The gap between a junior writer producing eight pieces a month and a senior strategist approving every brief is most of the price difference between two agencies describing the same service.',
+          '**Scale of the surface.** A forty-thousand-SKU catalogue, a multi-location service business and a twelve-page SaaS site are not comparable amounts of work even when the strategy is identical.',
+          '**Whether implementation is included.** Agencies that hand over recommendations cost less than agencies that ship the changes. The cheaper one is only cheaper if you have the engineering capacity to act on it.',
+        ],
+      },
+      {
+        id: 'models',
+        h: 'The pricing models, and what each one is really saying',
+        p: [
+          '**Monthly retainer** is the default. It suits ongoing work and it is the easiest to compare. Its weakness is that it has no natural end, which is why so many retainers outlive their usefulness.',
+          '**Published floor with a stated term**, like six or twelve month programmes, is the most honest version of the retainer. It admits that SEO does not produce in eight weeks and asks you to commit to the horizon that makes the work sensible.',
+          '**Annual pricing** filters hard, deliberately. Publishing a six-figure annual floor tells most of the market not to call, which saves everyone a conversation.',
+          '**Percentage of revenue or funding** is the most unusual model in the set. It scales with the company rather than with hours, which aligns incentives neatly and requires you to disclose figures you may not want to share during scoping.',
+          '**Project pricing** suits a defined job with an end: an audit, a migration, a technical remediation. If what you need is finite, paying for it monthly is the wrong shape.',
+        ],
+      },
+      {
+        id: 'cheap',
+        h: 'What the bottom of the market actually buys',
+        p: [
+          'There is a real floor below which the economics stop working, and it is worth understanding rather than moralising about. A few hundred pounds or dollars a month buys a small number of hours. Those hours can be genuinely well spent on a narrow job — citation cleanup for a local business is a good example, and one agency in the table prices exactly that way, honestly.',
+          'What the same budget cannot buy is strategy, implementation and content simultaneously. When an agency offers all three at that price, the arithmetic only works if the work is templated and largely unsupervised, which is how sites end up with forty thin pages and a ranking report that looks busy.',
+          'The question to ask is not whether a price is low, but what it is narrow about. A cheap, honest, narrow scope is a perfectly good purchase. A cheap, broad scope is arithmetic that does not close.',
+        ],
+      },
+      {
+        id: 'ours',
+        h: 'What we charge, and why it is not on this page',
+        p: [
+          'We do not publish a rate, and it would be dishonest to write a page like this without saying so plainly. Several agencies in the table above do publish, and that is a real advantage they hold over us: it respects your time and it filters before the call.',
+          'Our reasoning is that the honest number depends on what the review finds, and we would rather give you a scoped figure in 48 hours than a range wide enough to be meaningless. You can judge whether that is a good reason or a convenient one. We think the published-price agencies have the better of the argument more often than we would like.',
+          'What we will commit to in public: the review is free, the reply comes within 48 hours, the figure arrives with the work and the sequence attached, and you will not be sold a retainer for a job that is actually a project.',
+        ],
+      },
+    ],
+
+    faqs: [
+      [
+        'How much does SEO cost per month in 2026?',
+        'Among agencies that publish anything, monthly entry points run from roughly $499 to $6,000, with the lower end buying a narrow scope rather than a full programme. Two firms price outside that pattern entirely: one publishes a $120,000 annual floor, another charges 5% of revenue or funding. Most agencies publish nothing and quote after a call.',
+      ],
+      [
+        'Why will not agencies tell me their prices?',
+        'Partly because scope genuinely varies: a crawl fix on a small site and authority building in a contested category are different jobs. Partly because an unpublished price can move with the buyer. Both are real. The useful signal is the order of questions on a discovery call — if funding stage comes before technical situation, note it.',
+      ],
+      [
+        'Is a cheap SEO agency always bad?',
+        'No, but a cheap agency offering everything usually is. A low price buys a small number of hours, which can be spent well on a narrow job such as citation cleanup or a focused audit. The arithmetic only breaks when strategy, implementation and content are all promised at that level, because the only way to deliver it is templated and unsupervised work.',
+      ],
+      [
+        'Should I pay monthly or by project?',
+        'By project when the job is finite — an audit, a migration, a technical remediation. Monthly when the work is genuinely ongoing, such as a content engine or continuing authority building. Paying a retainer for a finite job is the most common overspend in this market, and it persists because nobody renegotiates a retainer that is quietly working.',
+      ],
+      [
+        'What should be included in an SEO retainer?',
+        'At minimum: who specifically does the work and how much of their time you have, what ships each month rather than what is "worked on", how success is measured and from when, and what you keep if the engagement ends. The last of those is the one most often missing and the one that decides whether you bought an asset or rented a service.',
+      ],
+      [
+        'Is SEO cheaper than hiring in-house?',
+        'For the first year, usually, because the cost is a known monthly figure rather than a salary plus employer costs plus tooling plus the ramp time of someone learning your situation. Past the first year the comparison narrows, and for a large enough site in-house ownership generally wins. The sensible shape is often specialist help first, in-house ownership once the foundation is built.',
+      ],
+      [
+        'How long should I commit for?',
+        'Long enough for the work to be judged fairly, which is usually two to three quarters, and no longer than you can exit. One agency in our sample publishes six or twelve month programmes, which is at least honest about the horizon. Be wary of a twelve-month lock with no break clause and no stated monthly deliverables.',
+      ],
+      [
+        'Does a higher price mean better results?',
+        'It means more hours, more seniority, or more competitive ambition — not automatically better outcomes. The 12× spread between the lowest and highest published floors in our sample is mostly scope, not quality. What correlates better with results is whether the agency can name who does the work, what ships, and how it will be measured before you sign.',
+      ],
+      [
+        'How was this pricing data collected?',
+        'By reading each agency’s own website on 19 October 2026, as part of researching our three agency shortlists. Of 33 agencies reviewed across SaaS, ecommerce and local, nine publish a figure. Nothing here is taken from a benchmark report or a directory, because those go stale and are frequently copied between sites without verification.',
+      ],
+    ],
+
+    relatedReading: {
+      capabilities: ['/what-we-do/seo', '/what-we-do/technical-seo', '/what-we-do/content-marketing'],
+      posts: [
+        ['/blog/stop-wasting-money-on-agencies-avoid-bad-hires', 'How to stop wasting money on agencies'],
+        ['/blog/is-your-seo-agency-working', 'How to tell whether your SEO agency is working'],
+      ],
+      tool: ['/domain-authority-checker', 'Domain Authority Checker'],
+      verticals: false,
+      shortlists: true,
+    },
+  },
+  {
+    slug: 'in-house-vs-seo-agency',
+    nav: 'In-house vs agency',
+    year: '2026',
+    updated: '2026-10-19',
+    verified: '19 October 2026',
+
+    title: 'In-House SEO vs Agency in 2026: How to Decide',
+    description:
+      'The real comparison is not salary against retainer. It is ramp time, breadth of skill, and who owns the decisions once the foundation is built.',
+    eyebrow: 'GUIDE · THE BUILD-OR-BUY DECISION',
+    h1: 'In-house SEO vs an agency in 2026: which one your situation rewards.',
+
+    answer:
+      'An agency buys breadth and speed without ramp time. An in-house hire buys context and continuity, and costs more than the salary once employer overheads, tooling and ramp are counted. The decision usually turns on whether your SEO work is still foundational or already operational.',
+
+    intro: [
+      'The comparison is nearly always framed as a salary against a retainer, which is the least useful way to look at it. One of those numbers is incomplete and the other buys a different shape of thing.',
+      'We are not going to quote a salary figure here. The surveys that circulate are inconsistent, rarely verifiable at source, and vary so much by market and seniority that a single number would mislead more than it informs. What follows is the structure of the decision instead, which transfers to whatever the salary actually is where you are.',
+    ],
+
+    comparisonTable: {
+      caption: 'What each option actually buys',
+      columns: ['', 'In-house hire', 'Agency'],
+      rows: [
+        ['Breadth of skill', 'One person’s strengths', 'Technical, content and authority in one contract'],
+        ['Ramp time', 'Months, learning your product and market', 'Days, though they learn your context slowly'],
+        ['Context', 'Deep, and improves continuously', 'Shallow, and resets if the account team changes'],
+        ['True cost', 'Salary plus employer costs, tools, training, management', 'The retainer, plus your time managing it'],
+        ['Capacity ceiling', 'One person’s week', 'Scales up, and down, with notice'],
+        ['Key-person risk', 'High — they can leave', 'Moderate — the contract can end, but so can the knowledge'],
+        ['Implementation', 'Still needs engineering time', 'Some ship changes, some only recommend'],
+        ['Best suited to', 'Operating a built foundation', 'Building the foundation, or a step change'],
+      ],
+    },
+
+    keyFacts: [
+      {
+        stat: '$499–$6,000',
+        label: 'published monthly entry points across the agencies that publish anything, read from their own sites',
+        source: 'rankedtagAgencyScan',
+      },
+      {
+        stat: '9 of 33',
+        label: 'agencies publish a price at all, so comparing an agency against a salary usually means comparing against a quote',
+        source: 'rankedtagAgencyScan',
+      },
+      {
+        stat: '34.5%',
+        label: 'lower click-through rate at position one where an AI Overview appears — the skill set keeps moving, which raises the cost of a single hire keeping up',
+        source: 'ahrefsAio',
+      },
+      {
+        stat: '−10%',
+        label: 'visibility for keyword stuffing versus doing nothing — an example of received wisdom that is now actively wrong',
+        source: 'geoStudy',
+      },
+    ],
+
+    quote: {
+      text: 'There are no additional requirements to appear in AI Overviews or AI Mode, nor other special optimizations necessary.',
+      who: 'Google',
+      role: 'Search Central — useful when assessing whether a candidate or agency is selling a mechanism that exists',
+      source: 'googleAiFeatures',
+    },
+
+    body: [
+      {
+        id: 'true-cost',
+        h: 'The in-house cost nobody puts in the comparison',
+        p: [
+          'A salary is the start of the number, not the number. On top of it sit employer taxes and pension contributions, recruitment cost, software the person needs on day one, training to keep them current, the management time of whoever they report to, and the cost of the desk they occupy in whatever form your company pays for that.',
+          'Then there is ramp. A strong SEO hire is not productive in week one. They are learning your product, your buyers, your stack and your politics, and the technical ones are usually learning your codebase as well. Three to six months before meaningful output is normal and should be budgeted as part of the first-year cost.',
+          'And there is the capacity ceiling, which is the part that surprises people. One person covers one person’s week. SEO needs technical diagnosis, content strategy, editorial production and authority building, and the number of individuals genuinely strong at all four is very small. Most in-house hires are excellent at one or two and need help with the rest, which means the agency question returns anyway, in narrower form.',
+        ],
+      },
+      {
+        id: 'agency-cost',
+        h: 'The agency costs nobody puts in either',
+        p: [
+          'The retainer is not the whole figure on this side either. Managing an agency takes real time from someone senior: briefing, reviewing, chasing, and translating between the agency and your engineering team. Budget a half-day a week and you will be close.',
+          'There is also the implementation gap. Some agencies ship changes directly; many deliver recommendations that then sit in your engineering backlog. A cheaper agency that only recommends is not cheaper if the work never lands — it is just a slower way of producing a document. Ask directly which one you are buying.',
+          'And context resets. An agency learns your situation slower than an employee does, and if the account team changes, some of that learning leaves. The mitigation is documentation, which is worth asking about explicitly rather than assuming.',
+        ],
+      },
+      {
+        id: 'which-when',
+        h: 'The question that actually decides it',
+        p: [
+          'Ask whether your SEO work right now is foundational or operational.',
+          '**Foundational** means the big decisions have not been made: the architecture, the facet policy, the category map, the measurement model, the technical remediation. These are made once, early, and getting them wrong is expensive to undo. They benefit from people who have made them many times before, which argues for specialist help regardless of whether you also hire.',
+          '**Operational** means the decisions exist and the work is now execution and maintenance: shipping content against a map, keeping technical health, refreshing what decays, reporting. This is where in-house ownership wins clearly. It is cheaper over time, the context compounds, and the work benefits from someone who is in your product every day.',
+          'The sequence that wastes least, for most companies, is specialist help through the foundational phase, with documentation as a deliverable, then an in-house owner who inherits decisions rather than archaeology.',
+        ],
+      },
+      {
+        id: 'both',
+        h: 'The hybrid that usually works best',
+        p: [
+          'An in-house owner plus specialist support is the most common mature arrangement, and it works because it splits along the natural seam. The internal person owns strategy, priorities, stakeholder management and institutional memory. The external team supplies the depth that is uneconomic to hire — technical diagnosis, content production at volume, digital PR — and the perspective of having seen the same problem elsewhere.',
+          'It fails in one predictable way: when the internal owner is junior and the agency effectively sets strategy while nobody internally can evaluate it. If you hire one person, hire the one who can judge the work, not the one who can produce the most of it.',
+        ],
+      },
+      {
+        id: 'moving-target',
+        h: 'One argument that has got stronger recently',
+        p: [
+          'The skill set has moved faster in the last two years than in the decade before. Ahrefs measured a 34.5% lower position-one click-through rate where an AI Overview appears. Research presented at ACM SIGKDD found that keyword density — a tactic many practitioners still carry — performed about 10% worse than making no changes at all on a live engine.',
+          'That raises the cost of a single person keeping current. Staying genuinely up to date is a meaningful part of a working week, and an individual absorbs that cost alone while an agency amortises it across clients. It is not a decisive argument, but it is a real one, and it has strengthened rather than weakened.',
+          'The counter-argument is just as real: an agency that is not keeping current is worse than an employee who is, and you cannot tell which you have from a pitch. Ask both the same question about what changed in the last six months and compare the specificity of the answers.',
+        ],
+      },
+    ],
+
+    faqs: [
+      [
+        'Is it cheaper to hire in-house or use an SEO agency?',
+        'For the first year an agency is usually cheaper in practice, because the in-house figure is salary plus employer costs, tooling, recruitment, management time and three to six months of ramp before meaningful output. Past the first year, and especially on a large site, in-house ownership tends to win on cost. The crossover depends on your scale.',
+      ],
+      [
+        'What does an in-house SEO actually cost beyond salary?',
+        'Employer taxes and pension, recruitment, software from day one, training to stay current, and the management time of whoever they report to. The largest hidden cost is ramp: three to six months learning your product, buyers and stack before output is meaningful. We have not quoted a salary figure because published surveys vary too much by market to be useful.',
+      ],
+      [
+        'When should we hire our first in-house SEO?',
+        'When the foundational decisions have been made and the work has become execution and maintenance. Hiring before that means paying someone to learn, on your live site, decisions that are expensive to get wrong. Hiring after it means they inherit a working system and spend their time operating it, which is what an in-house person is genuinely better at than an agency.',
+      ],
+      [
+        'Can one person do all of SEO?',
+        'Rarely well. The job spans technical diagnosis, content strategy, editorial production and authority building, and very few individuals are genuinely strong across all four. Most in-house hires are excellent at one or two. That is not a criticism of the hire; it means the support question returns in narrower form rather than disappearing.',
+      ],
+      [
+        'Should we use an agency and an in-house person at the same time?',
+        'It is the most common mature arrangement and usually the best one. The internal owner holds strategy, priorities and institutional memory; the agency supplies depth that is uneconomic to hire. The failure mode is a junior internal owner who cannot evaluate the agency’s work, so if you hire one person, hire the one who can judge the work.',
+      ],
+      [
+        'How do I compare an agency quote to a salary fairly?',
+        'Build both as fully loaded annual figures over two years, not one. On the in-house side add employer costs, tools, recruitment, management time and a ramp period with little output. On the agency side add your own management time and whether implementation is included or lands in your engineering backlog. The two-year view usually changes the answer.',
+      ],
+      [
+        'What if our agency is not keeping up with AI search?',
+        'Test it rather than assume it. Ask what changed in their approach in the last six months and listen for specifics: a tracked prompt set, a named study, a tactic they stopped using. An agency that cannot answer concretely is charging you for currency it does not have, and that is a genuine argument for bringing the work in-house.',
+      ],
+      [
+        'Does an agency keep the knowledge if we end the contract?',
+        'Only if you made that a deliverable. Ask at the outset what you keep: the documented decisions, the briefs, the keyword and intent map, the workflows. An engagement that ends with you holding only the published pages has given you an asset but not the system that produced it, which makes the next transition more expensive than it needed to be.',
+      ],
+    ],
+
+    relatedReading: {
+      capabilities: ['/what-we-do/seo', '/what-we-do/technical-seo', '/what-we-do/ai-seo'],
+      posts: [
+        ['/blog/stop-wasting-money-on-agencies-avoid-bad-hires', 'How to stop wasting money on agencies and bad hires'],
+        ['/blog/scale-business-without-hiring-big-team', 'Scaling without hiring a big team'],
+      ],
+      tool: ['/competitor-analysis', 'Competitor Analysis'],
+      verticals: false,
+      shortlists: true,
+    },
+  },
+  {
+    slug: 'how-to-choose-an-seo-agency',
+    nav: 'How to choose an SEO agency',
+    year: '2026',
+    updated: '2026-10-19',
+    verified: '19 October 2026',
+
+    title: 'How to Choose an SEO Agency in 2026',
+    description:
+      'The contract terms that matter, the red flags that are actually diagnostic, and how to run a selection process that survives the first bad month.',
+    eyebrow: 'GUIDE · RUNNING THE SELECTION',
+    h1: 'How to choose an SEO agency in 2026, without relying on the pitch.',
+
+    answer:
+      'Judge an SEO agency on three things a pitch cannot fake: who specifically does the work, what ships each month rather than what is worked on, and what you keep if the engagement ends. Everything else, including case studies and rankings claims, is easier to present than to substantiate.',
+
+    intro: [
+      'Most advice on this topic is a list of questions to ask on a call. Those are useful and we have published a set of them on each of our agency shortlists. This page is about the part that comes after: how to structure the engagement so that a good agency can do good work and a bad one becomes obvious quickly.',
+      'The premise is that you will not reliably identify the right agency from a pitch. Pitches are a selected sample of an agency’s best outcomes presented by their best communicator. A better strategy is to assume you might be wrong and design the arrangement so that being wrong is cheap and quick to discover.',
+    ],
+
+    comparisonTable: {
+      caption: 'What to agree before you sign, and what it protects you from',
+      columns: ['Term', 'What to insist on', 'What it protects against'],
+      rows: [
+        ['Named people', 'Who does the work, and how much of their week you have', 'Senior pitch, junior delivery'],
+        ['Monthly deliverables', 'What ships, not what is "worked on"', 'Retainers that produce activity reports'],
+        ['Leading indicators', 'Metrics you will see by week six, agreed in writing', 'A six-month wait before anyone can judge it'],
+        ['Attribution model', 'How organic is credited across your sales cycle', 'Last-click quietly killing a working programme'],
+        ['Implementation', 'Whether they ship changes or hand over specs', 'Recommendations dying in an engineering backlog'],
+        ['Break clause', 'A defined exit, with notice', 'A twelve-month lock on a bad fit'],
+        ['What you keep', 'Pages, briefs, maps, workflows, documentation', 'Paying twice to rebuild your own system'],
+        ['Profile and account access', 'Everything in your accounts, agency added as a manager', 'Losing an asset when the relationship ends'],
+      ],
+    },
+
+    keyFacts: [
+      {
+        stat: '9 of 33',
+        label: 'agencies we reviewed publish any price on their own website, so most shortlists cannot be compared on cost',
+        source: 'rankedtagAgencyScan',
+      },
+      {
+        stat: '12×',
+        label: 'spread between the lowest and highest published monthly floor, for work described in similar language',
+        source: 'rankedtagAgencyScan',
+      },
+      {
+        stat: '−10%',
+        label: 'visibility for keyword stuffing versus doing nothing — a useful test of whether an agency is current',
+        source: 'geoStudy',
+      },
+      {
+        stat: 'No extra markup',
+        label: 'is required for Google’s AI features, so an agency selling AI-specific schema is selling a file',
+        source: 'googleAiFeatures',
+      },
+    ],
+
+    quote: {
+      text: 'There are no additional requirements to appear in AI Overviews or AI Mode, nor other special optimizations necessary.',
+      who: 'Google',
+      role: 'Search Central — worth quoting back to anyone selling an AI-specific optimisation package',
+      source: 'googleAiFeatures',
+    },
+
+    body: [
+      {
+        id: 'red-flags',
+        h: 'Red flags that are genuinely diagnostic',
+        p: [
+          '**A guarantee of rankings.** Nobody controls the ranking systems. A guarantee is either meaningless, scoped to terms nobody searches, or a sign the agency intends to manufacture the result in a way you would not sanction.',
+          '**No named practitioner.** If you cannot establish who will choose your targets and approve your briefs, you are buying capacity rather than judgement, and you will get the capacity.',
+          '**Deliverables measured in hours or tasks.** "Twenty hours of SEO" tells you nothing about what arrives. Agencies that cannot describe their output as shipped artefacts usually do not ship many.',
+          '**An AI-specific package with its own markup.** Google states plainly that no additional markup or special optimisation is required for its AI features. Charging for an AI schema implementation is charging for a file that does nothing.',
+          '**Keyword density in the proposal.** Research on live generative engines found this performed about 10% worse than making no changes at all. Its presence in a 2026 proposal is a direct signal about how current the thinking is.',
+          '**Reluctance to name a failed engagement.** Every agency has them. One that cannot name one is either very new or managing you.',
+        ],
+      },
+      {
+        id: 'case-studies',
+        h: 'How to read a case study properly',
+        p: [
+          'Three questions turn a case study from decoration into evidence. What was the starting position? A jump from nothing to modest traffic on a new domain is a different achievement from the same jump on an established one. Over what period? Percentage gains without a timeframe are unfalsifiable. And what else changed? Agencies rarely mention the funding round, the product launch or the rebrand that ran concurrently.',
+          'Then ask whether you can speak to the client. Not every reference is available and that is legitimate, but an agency that has none available at all across a whole roster is telling you something.',
+          'Finally, check whether the result is verifiable from outside. Impressions and clicks come from Search Console and cannot be independently checked, which is exactly why an agency claiming them should be comfortable showing the account on a call rather than a screenshot in a deck.',
+        ],
+      },
+      {
+        id: 'process',
+        h: 'Structuring the selection so being wrong is cheap',
+        p: [
+          'Start with a paid, scoped first piece of work rather than a retainer. An audit, a technical remediation, a content pilot — something finite with a defined output. You learn more about an agency from one delivered project than from three pitches, and the cost of discovering a mismatch is bounded.',
+          'Agree the leading indicators before anything starts, in writing, with dates. Indexation movement, first page-one entries, crawl distribution, a first assistant citation — whatever fits the work. The point is to have something falsifiable at week six, because the alternative is six months of mutual optimism.',
+          'Settle the attribution model before the first invoice, not during the first awkward review. If your business judges channels on last click, say so immediately, and make the agency tell you how organic will be credited across your cycle. Programmes that were working get cancelled over this more often than over performance.',
+          'And write down what you keep. The pages are obvious. The briefs, the intent map, the facet policy, the documented decisions and the workflows are the part that determines whether your next agency or your first in-house hire starts from a system or from archaeology.',
+        ],
+      },
+      {
+        id: 'size',
+        h: 'Matching agency size to your situation',
+        p: [
+          'A large agency buys you capacity, parallel workstreams and cover when someone leaves. It costs you seniority per hour and usually means the people who pitched are not the people who deliver. If your constraint is volume and coordination across channels, this is the right trade.',
+          'A small senior team buys you the opposite: the people who assessed your site are the people who work on it, and decisions get made quickly. It costs you capacity and resilience. If your constraint is judgement on a small number of important decisions, this is the right trade.',
+          'We are the second kind, which is a real limitation and not a humblebrag. If a procurement process requires three comparable references and a bench of twenty, we will not clear it, and the agencies on our shortlists that can are genuinely better suited to that situation.',
+        ],
+      },
+      {
+        id: 'comparing',
+        h: 'Why comparing on price mostly fails',
+        p: [
+          'Of the 33 agencies we read across three verticals, nine publish any price at all, and the published monthly floors spread roughly twelvefold for work described in similar language. That spread is mostly scope — whether implementation is included, how senior the people are, how competitive the category — rather than margin.',
+          'The practical consequence is that comparing two quotes is comparing two scopes that have been described to you in marketing language. The more useful comparison is: for this money, how many hours of whose time, producing what artefacts, measured how. Two proposals that look the same on price frequently differ by a factor of two on that question.',
+        ],
+      },
+    ],
+
+    faqs: [
+      [
+        'What questions should I ask an SEO agency before hiring?',
+        'The three that are hardest to fake: who specifically chooses targets and approves briefs and how much of their week you get, what ships each month as an artefact rather than an activity, and what you keep if the engagement ends. We publish a fuller set of call questions on each of our agency shortlists, including some deliberately awkward ones.',
+      ],
+      [
+        'What are the biggest red flags when choosing an SEO agency?',
+        'A guarantee of rankings, no named practitioner, deliverables measured in hours rather than artefacts, an AI package selling its own markup when Google states none is required, keyword density appearing in a 2026 proposal, and an inability to name a single engagement that did not work.',
+      ],
+      [
+        'How do I know if an SEO agency is any good before committing?',
+        'Buy something small and finite first: an audit, a technical remediation, a content pilot. One delivered project tells you more than three pitches, and the cost of discovering a mismatch is bounded. Then judge the work against leading indicators you agreed in writing before it started.',
+      ],
+      [
+        'Should I choose a large agency or a small one?',
+        'Match it to your constraint. A large agency buys capacity, parallel workstreams and resilience, at the cost of seniority per hour and usually a gap between who pitches and who delivers. A small senior team buys judgement and speed of decision, at the cost of capacity. Neither is better; they fail in opposite directions.',
+      ],
+      [
+        'How long should an SEO contract be?',
+        'Long enough to be judged fairly, which is usually two to three quarters, with a defined exit. Be wary of a twelve-month lock with no break clause and no stated monthly deliverables, because that combination removes every mechanism you have for holding the work to account.',
+      ],
+      [
+        'How can I tell if an agency is current on AI search?',
+        'Ask what changed in their approach in the last six months and listen for specifics: a tracked prompt set, a named study, a tactic they stopped using and why. Two useful tests: whether they still recommend keyword density, which measured about 10% worse than doing nothing on a live engine, and whether they are selling AI-specific markup, which Google states is not required.',
+      ],
+      [
+        'What should I keep when an engagement ends?',
+        'Everything that constitutes the system, not just its output. The published pages, yes, but also the briefs, the keyword and intent map, the documented technical decisions, the workflows and any accounts, which should be yours with the agency added as a manager rather than the reverse. Agree this at the start, because it is unwinnable at the end.',
+      ],
+      [
+        'Are agency case studies trustworthy?',
+        'Treat them as claims rather than evidence until you have asked three questions: what was the starting position, over what period, and what else changed at the same time. Search Console figures cannot be verified from outside, so an agency claiming them should be comfortable showing the account on a call rather than a screenshot in a deck.',
+      ],
+      [
+        'Should I pick the agency with the best rankings for "SEO agency"?',
+        'It is weak evidence either way. Ranking for that term is a specific, extremely competitive project that has little to do with whether a firm is good at your category, and plenty of strong agencies deliberately do not compete for it. Judge the work they describe and the terms they will agree to, not their own position on one query.',
+      ],
+    ],
+
+    relatedReading: {
+      capabilities: ['/what-we-do/seo', '/what-we-do/technical-seo', '/what-we-do/content-marketing'],
+      posts: [
+        ['/blog/stop-wasting-money-on-agencies-avoid-bad-hires', 'How to stop wasting money on agencies'],
+        ['/blog/is-your-seo-agency-working', 'How to tell whether your SEO agency is working'],
+      ],
+      tool: ['/competitor-analysis', 'Competitor Analysis'],
+      verticals: false,
+      shortlists: true,
+    },
+  },
 ];
 
 export const EXPLAINER_BY_SLUG = Object.fromEntries(EXPLAINERS.map((e) => [e.slug, e]));

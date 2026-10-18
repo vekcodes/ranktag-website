@@ -53,8 +53,13 @@ function verticalJsonLd(v) {
 function Cite({ id }) {
   const src = SOURCES[id];
   if (!src) return null;
+  const external = /^https?:/.test(src.href);
   return (
-    <a className="cite" href={src.href} rel="noopener nofollow" target="_blank">
+    <a
+      className="cite"
+      href={src.href}
+      {...(external ? { rel: 'noopener nofollow', target: '_blank' } : {})}
+    >
       {src.label}
     </a>
   );

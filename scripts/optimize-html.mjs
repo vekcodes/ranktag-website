@@ -33,6 +33,7 @@ const ROUTE_MODULES = [
   [/^best$/, 'src/pages/best/BestHub.jsx'],
   [/^best\/.+$/, 'src/pages/best/ComparisonPage.jsx'],
   [/^[a-z-]+-vs-[a-z-]+$/, 'src/pages/explainers/ExplainerPage.jsx'],
+  [/^(seo-pricing|how-to-choose-an-seo-agency)$/, 'src/pages/explainers/ExplainerPage.jsx'],
   [/^who-we-help$/, 'src/pages/verticals/WhoWeHelp.jsx'],
   [/^[a-z-]+-seo-agency$/, 'src/pages/verticals/VerticalPage.jsx'],
   [/^what-we-do$/, 'src/pages/whatWeDo/WhatWeDo.jsx'],

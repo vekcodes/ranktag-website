@@ -9,6 +9,7 @@ import JsonLd from '../../components/JsonLd.jsx';
 import { breadcrumb, faqPage, SITE } from '../../lib/schema.js';
 import { EXPLAINER_BY_SLUG, SOURCES } from './explainersData.js';
 import { VERTICALS } from '../verticals/verticalsData.js';
+import { COMPARISONS } from '../best/comparisonsData.js';
 import '../Home.css';
 import '../whatWeDo/WhatWeDo.css';
 import '../best/Best.css';
@@ -21,8 +22,13 @@ import '../verticals/verticals.css';
 function Cite({ id }) {
   const src = SOURCES[id];
   if (!src) return null;
+  const external = /^https?:/.test(src.href);
   return (
-    <a className="cite" href={src.href} rel="noopener nofollow" target="_blank">
+    <a
+      className="cite"
+      href={src.href}
+      {...(external ? { rel: 'noopener nofollow', target: '_blank' } : {})}
+    >
       {src.label}
     </a>
   );
@@ -294,6 +300,18 @@ export default function ExplainerPage() {
                   ))}
                 </ul>
               </div>
+              {e.relatedReading.shortlists && (
+                <div>
+                  <h3>Agency shortlists</h3>
+                  <ul>
+                    {COMPARISONS.map((c) => (
+                      <li key={c.slug}>
+                        <Link to={c.path} className="link-wipe">{c.nav}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               {e.relatedReading.verticals && (
                 <div>
                   <h3>Applied to your vertical</h3>

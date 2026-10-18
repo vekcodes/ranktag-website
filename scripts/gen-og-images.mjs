@@ -111,6 +111,9 @@ const CARDS = [
   ['seo-vs-ppc-for-saas', 'Explainer · 2026', 'SEO vs PPC for SaaS: which your runway affords'],
   ['aeo-vs-geo', 'Explainer · 2026', 'AEO vs GEO: the difference is the surface'],
   ['ai-seo-vs-traditional-seo', 'Explainer · 2026', 'AI SEO vs traditional SEO: what changes in the work'],
+  ['seo-pricing', 'Guide · 2026', 'SEO pricing: what agencies actually publish'],
+  ['in-house-vs-seo-agency', 'Guide · 2026', 'In-house SEO vs an agency: how to decide'],
+  ['how-to-choose-an-seo-agency', 'Guide · 2026', 'How to choose an SEO agency without relying on the pitch'],
 ];
 
 try {

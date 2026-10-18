@@ -29,6 +29,9 @@ const PAGE_LASTMOD = {
   '/seo-vs-ppc-for-saas': '2026-10-19',
   '/aeo-vs-geo': '2026-10-19',
   '/ai-seo-vs-traditional-seo': '2026-10-19',
+  '/seo-pricing': '2026-10-19',
+  '/in-house-vs-seo-agency': '2026-10-19',
+  '/how-to-choose-an-seo-agency': '2026-10-19',
   '/best': '2026-10-18',
   '/best/seo-agencies-for-saas': '2026-10-18',
   '/best/seo-agencies-for-ecommerce': '2026-10-18',
@@ -78,6 +81,9 @@ const PAGES = [
   '/seo-vs-ppc-for-saas',
   '/aeo-vs-geo',
   '/ai-seo-vs-traditional-seo',
+  '/seo-pricing',
+  '/in-house-vs-seo-agency',
+  '/how-to-choose-an-seo-agency',
   // Comparison pages. Refreshed quarterly; bump the lastmod above when the
   // list is actually re-checked, never on a deploy.
   '/best',
