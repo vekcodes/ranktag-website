@@ -239,9 +239,8 @@ export default function VerticalPage() {
                 <h2 id="still-comparing">Still building a shortlist?</h2>
                 <p>
                   Then this page is the wrong one, and we would rather say so. We publish a researched
-                  comparison of {v.comparisonLabel}, including this one, with published pricing where it
-                  exists, what each is strongest at, and who each does not suit. We are on it, positioned
-                  where we honestly belong rather than at the top.{' '}
+                  comparison of {v.comparisonLabel}, with published pricing where it exists and who each
+                  one does not suit. We are on it, positioned where we honestly belong.{' '}
                   <Link to={v.comparison} className="link-wipe">Read the comparison</Link>.
                 </p>
               </section>

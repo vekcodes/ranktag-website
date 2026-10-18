@@ -27,19 +27,19 @@ export const VERTICALS = [
     engagement: [
       [
         'The free founder review',
-        'You send a domain. The founder goes through it personally: which buying queries you rank for versus which ones close, whether your comparison and alternatives pages exist or are being written about you by someone else, how your docs subdomain is handling authority, and what your reporting currently credits organic with. A verdict within 48 hours.',
+        'You send a domain. The founder goes through it personally: which buying queries you rank for versus which ones close, whether your comparison and alternatives pages exist or are being written about you by someone else, and what your reporting currently credits organic with. A verdict within 48 hours.',
       ],
       [
         'Agree the measurement model before anything ships',
-        'For a three-month cycle this comes first, not last. We agree how first-touch and assisted paths will be attributed, which leading indicators you will judge months one and two on, and what the programme is allowed to be measured against in month six. Skipping this is how working SEO programmes get cancelled.',
+        'For a three-month cycle this comes first, not last. We agree how assisted paths are attributed and which leading indicators months one and two are judged on. Skipping this is how working SEO programmes get cancelled.',
       ],
       [
         'Scope and price, after the review',
-        'No rate card, because the honest number depends on whether you are fixing a foundation, building a category or defending one. You get a scoped proposal with the work, the sequence and the figure once there is enough information for that figure to mean something.',
+        'No rate card, because the honest number depends on whether you are fixing a foundation, building a category or defending one. You get the work, the sequence and the figure once there is enough information for that figure to mean something.',
       ],
       [
         'Bottom of the funnel first, then the engine',
-        'Comparison, alternatives, integration and pricing-intent pages ship before any top-of-funnel content, because they convert from the week they index and they fund the patience the rest needs. Weekly batches, every piece reviewed by a human before it publishes.',
+        'Comparison, alternatives and pricing-intent pages ship before any top-of-funnel content, because they convert from the week they index and fund the patience the rest needs. Weekly batches, every piece human-reviewed.',
       ],
       [
         'Handover, not hostage-taking',
@@ -68,30 +68,30 @@ export const VERTICALS = [
       'A SaaS SEO agency builds organic acquisition around a long, multi-touch buying cycle: category pages that explain what you are, comparison and alternatives pages that catch buyers already building a shortlist, and product-led content that converts trials. It is measured on signups, demos and pipeline, not on sessions or keyword counts.',
 
     intro: [
-      'Most SEO retainers fail SaaS companies for the same structural reason: they are priced and reported on traffic, and SaaS does not buy traffic. A 70-searches-a-month comparison query from a buyer with budget approved is worth more than forty thousand monthly searches of category education. An agency that cannot tell those two apart will spend your year on the second one.',
-      'We work the other way round. The queries that close come first, the engine that feeds them comes second, and everything is reported against signups and pipeline rather than a rankings PDF.',
+      'Most SEO retainers fail SaaS companies for one structural reason: they are priced and reported on traffic, and SaaS does not buy traffic. A 70-searches-a-month comparison query from a buyer with budget approved beats forty thousand monthly searches of category education. An agency that cannot tell those apart will spend your year on the second.',
+      'We work the other way round. The queries that close come first, the engine that feeds them second, and everything is reported against signups and pipeline.',
     ],
 
     problems: [
       {
         h: 'Nobody searches for the category you are creating',
-        p: 'If you are defining a new category, the head term has no volume because the words do not exist yet. Your buyers search the problem, their current workaround, and the incumbent they are trying to escape. Most agencies run a keyword tool, see nothing, and conclude SEO will not work for you — when the real job is owning the problem-shaped queries now and inheriting the category term when it arrives.',
+        p: 'If you are defining a new category, the head term has no volume because the words do not exist yet. Your buyers search the problem, their workaround, and the incumbent they want to escape. Most agencies run a keyword tool, see nothing, and conclude SEO will not work — when the job is owning the problem-shaped queries now and inheriting the category term later.',
       },
       {
         h: 'Your most valuable keywords look worthless in Ahrefs',
-        p: '"[Competitor] alternatives" at 90 searches a month. "[Competitor] vs [competitor]" at 140. "[Category] pricing" at 50. These are buyers with a shortlist and a budget, and they convert at rates top-of-funnel content never reaches. Volume-ranked keyword lists push them to the bottom of the backlog, which is exactly why they are usually still available.',
+        p: '"[Competitor] alternatives" at 90 searches a month. "[Competitor] vs [competitor]" at 140. These are buyers with a shortlist and a budget, and they convert at rates top-of-funnel content never reaches. Volume-ranked keyword lists push them to the bottom of the backlog, which is why they are usually still available.',
       },
       {
         h: 'Your comparison pages are being written by other people',
-        p: 'Search your own brand plus "alternatives" and look at who owns page one: review aggregators monetising your name, affiliate listicles that have never used the product, and your competitors\' own switch pages. Every one of those is a page about you that you do not control, sitting between a buyer and your signup form.',
+        p: 'Search your own brand plus "alternatives" and look at who owns page one: review aggregators monetising your name, affiliate listicles that have never used the product, and competitors\' own switch pages. Each is a page about you that you do not control, sitting between a buyer and your signup form.',
       },
       {
         h: 'A 90-day sales cycle makes SEO look like it is not working',
-        p: 'Last-click attribution hands the credit to the branded search or the demo request at the end, and the organic page that started the whole thing eight touches earlier shows up as nothing. SEO budgets get cut on that evidence constantly. The fix is modelling assisted and first-touch paths before the engagement starts, not arguing about it in month five.',
+        p: 'Last-click attribution credits the branded search at the end, and the organic page that started everything eight touches earlier shows up as nothing. SEO budgets get cut on that evidence constantly. The fix is modelling assisted paths before the engagement starts, not arguing about it in month five.',
       },
       {
         h: 'Your documentation outranks your marketing site',
-        p: 'Product-led SaaS accumulates docs, changelogs, API references and support articles that rank for real buying-adjacent queries, and nobody owns them. They are usually thin on internal links to commercial pages, invisible to the marketing team\'s reporting, and sitting on a subdomain that shares none of its authority back. It is the cheapest unclaimed surface area most SaaS companies have.',
+        p: 'Product-led SaaS accumulates docs, changelogs and support articles that rank for buying-adjacent queries, and nobody owns them. They are thin on links to commercial pages, invisible in marketing reporting, and often on a subdomain sharing no authority back. The cheapest unclaimed surface area most SaaS companies have.',
       },
     ],
 
@@ -176,19 +176,19 @@ export const VERTICALS = [
     engagement: [
       [
         'The free founder review',
-        'You send a domain. The founder goes through the catalogue personally: how many crawlable URLs your filters are capable of generating, which variants are splitting signals, what happens to a discontinued product today, which category pages are competing with each other, and whether your Product and Offer markup survives a stock change. A verdict within 48 hours.',
+        'You send a domain. The founder goes through the catalogue personally: how many crawlable URLs your filters can generate, which variants are splitting signals, what happens to a discontinued product today, and whether your product markup survives a stock change. A verdict within 48 hours.',
       ],
       [
         'Read the logs before proposing anything',
-        'Crawl budget on a catalogue is an empirical question. Before we scope the work we want to see where Googlebot is actually spending its requests, because a plan written without that is a plan written from assumptions. If logs are not available, we say so and scope around it rather than pretending.',
+        'Crawl budget on a catalogue is an empirical question. Before scoping we want to see where Googlebot actually spends its requests, because a plan written without that is written from assumptions. If logs are unavailable we say so and scope around it.',
       ],
       [
         'Scope and price, after the review',
-        'No rate card. A 300-product store and a 40,000-SKU catalogue with four filter dimensions are not the same job, and quoting before seeing the facet behaviour would be guesswork with a currency symbol on it. You get the work, the sequence and the figure once the review is done.',
+        'No rate card. A 300-product store and a 40,000-SKU catalogue with four filter dimensions are not the same job, and quoting before seeing the facet behaviour is guesswork with a currency symbol on it.',
       ],
       [
         'Template decisions first, pages second',
-        'Facet and parameter policy, canonical and variant consolidation, out-of-stock rules and automated product markup come before any content work, because each one of those decisions applies to thousands of URLs at once. Category and buying-guide content follows, once the architecture underneath it is worth ranking.',
+        'Facet policy, variant consolidation, out-of-stock rules and automated product markup come before any content work, because each decision applies to thousands of URLs at once. Content follows, once the architecture under it is worth ranking.',
       ],
       [
         'Handover, not hostage-taking',
@@ -215,8 +215,8 @@ export const VERTICALS = [
       'An ecommerce SEO agency works at catalogue scale: controlling which faceted navigation URLs are crawlable, stopping product variants and category pages competing with each other, handling out-of-stock and discontinued products without losing their equity, and marking up products so they qualify for shopping and AI answer surfaces.',
 
     intro: [
-      'Ecommerce SEO is an architecture problem that happens to involve content. A 4,000-product catalogue with colour, size, price and brand filters can generate hundreds of thousands of crawlable URLs, almost all of them near-duplicates. Google will happily spend your crawl budget on them, discover your genuinely important category pages late, and refresh them slowly. No amount of blog content fixes that.',
-      'So the work starts at the template and the URL layer, where one decision applies to ten thousand pages at once, and only then moves to the copy on the pages that matter.',
+      'Ecommerce SEO is an architecture problem that happens to involve content. A 4,000-product catalogue with colour, size, price and brand filters can generate hundreds of thousands of crawlable URLs, almost all near-duplicates. Google will spend your crawl budget on them and reach the category pages that matter late. No amount of blog content fixes that.',
+      'So the work starts at the template and URL layer, where one decision applies to ten thousand pages at once.',
     ],
 
     problems: [
@@ -327,19 +327,19 @@ export const VERTICALS = [
     engagement: [
       [
         'The free founder review',
-        'You send a domain and your business name. The founder checks the website and the Google Business Profile together: categories and services against the queries you want, citation consistency across the sources that matter, review velocity and recency, and whether your location pages say anything true about the areas they name. A verdict within 48 hours.',
+        'You send a domain and your business name. The founder checks the website and the Google Business Profile together: categories against the queries you want, citation consistency, review velocity, and whether your location pages say anything true about the areas they name. A verdict within 48 hours.',
       ],
       [
         'Baseline the grid before changing anything',
-        'We sample positions across your actual service area rather than a single point, so there is a real before-picture. Without it there is no way to tell whether work extended your visibility radius or simply moved one number that was measured next to your office.',
+        'We sample positions across your actual service area rather than a single point, so there is a real before-picture. Without it, there is no way to tell whether work extended your radius or just moved one number measured next to your office.',
       ],
       [
         'Scope and price, after the review',
-        'No rate card. One location in one town and a service-area business covering twelve are different engagements, and so is a business that needs citation cleanup versus one that needs a review mechanism. You get the work, the sequence and the figure once the review is done.',
+        'No rate card. One location in one town and a service-area business covering twelve are different engagements, and so is citation cleanup versus building a review mechanism.',
       ],
       [
         'Profile and entity first, pages second',
-        'Categories, services and profile content, then citation consistency, then a review ask built into a process you already run. Location pages come last and only for areas where something true can be said about them, because thin location pages are a liability rather than coverage.',
+        'Categories, services and profile content, then citation consistency, then a review ask built into a process you already run. Location pages come last, and only where something true can be said about the area.',
       ],
       [
         'You keep the keys, throughout',
@@ -366,14 +366,14 @@ export const VERTICALS = [
       'A local SEO agency works two surfaces at once: the Map Pack, which ranks on relevance, distance and prominence and is driven mainly by your Google Business Profile, reviews and citations; and your website, where city and service pages compete in ordinary organic results. The two reinforce each other and need different work.',
 
     intro: [
-      'Local search is the one vertical where your website is not the main asset. For a large share of commercial queries the Map Pack sits above every organic result, and what ranks in it is your Google Business Profile, not your home page. A business can rank third organically and get almost no calls because it is absent from the three results above.',
-      'Distance also makes the whole thing relative. There is no single position to report: you rank differently from one postcode to the next, and an agency that shows you one number is showing you the one measured nearest your office.',
+      'Local search is the one vertical where your website is not the main asset. For most commercial queries the Map Pack sits above every organic result, and what ranks in it is your Google Business Profile, not your home page. A business can rank third organically and get almost no calls.',
+      'Distance makes it relative, too. There is no single position to report: you rank differently from one postcode to the next, and an agency showing you one number is showing you the one measured nearest your office.',
     ],
 
     problems: [
       {
         h: 'The Map Pack is the result, and your site is not in it',
-        p: 'Relevance, distance and prominence decide those three slots. Relevance comes from categories, services and profile content; prominence from reviews, citations and genuine web presence; distance from the searcher, which you cannot change. Site-only SEO, however good, moves none of the first two, which is why local campaigns that ignore the profile stall.',
+        p: 'Relevance, distance and prominence decide those three slots. Relevance comes from categories, services and profile content; prominence from reviews, citations and web presence; distance from the searcher, which you cannot change. Site-only SEO moves neither of the first two, which is why campaigns that ignore the profile stall.',
       },
       {
         h: 'Your rankings are different in every postcode',
@@ -381,7 +381,7 @@ export const VERTICALS = [
       },
       {
         h: 'Inconsistent citations are quietly capping prominence',
-        p: 'An old suite number on one directory, a disconnected phone on another, a pre-rebrand name on a third. Each is trivial; together they make your business harder to resolve as a single entity, and entity confidence is part of prominence. Cleaning them is unglamorous, slow, and one of the few local levers with a predictable effect.',
+        p: 'An old suite number on one directory, a dead phone on another, a pre-rebrand name on a third. Each is trivial; together they make your business harder to resolve as one entity, and entity confidence feeds prominence. Unglamorous, slow, and one of the few local levers with a predictable effect.',
       },
       {
         h: 'Reviews stopped, and so did the ranking',
