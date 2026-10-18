@@ -1,6 +1,7 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import Layout from './Layout.jsx';
 import Home from './pages/Home.jsx';
+import { VERTICALS } from './pages/verticals/verticalsData.js';
 
 // react-router's `lazy` expects a module exposing a named `Component`. Our pages
 // default-export their component, so this adapter wraps a dynamic import into the
@@ -34,6 +35,15 @@ export const routes = [
 
       // Standalone, indexable case study (pre-rendered).
       { path: 'case-study/sendr', lazy: lazyRoute(() => import('./pages/CaseStudySendr.jsx')) },
+
+      // Vertical pages — commercial head-term pages, one per vertical, at
+      // root level (slugs in src/pages/verticals/verticalsData.js). A vertical
+      // only gets a route once its page is finished; an unfinished one must
+      // 404, never render thin.
+      ...VERTICALS.map((v) => ({
+        path: v.slug,
+        lazy: lazyRoute(() => import('./pages/verticals/VerticalPage.jsx')),
+      })),
 
       // What we do — capability hub + one template-driven page per capability
       // (all pre-rendered; the concrete slugs live in

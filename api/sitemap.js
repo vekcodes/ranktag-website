@@ -22,6 +22,7 @@ const STATIC_LASTMOD = '2026-07-11';
 // back into the constant when the whole set moves at once.
 const PAGE_LASTMOD = {
   '/': '2026-10-18',
+  '/saas-seo-agency': '2026-10-18',
   '/what-we-do': '2026-10-18',
   '/what-we-do/seo': '2026-10-18',
   '/what-we-do/ai-seo': '2026-10-18',
@@ -57,6 +58,9 @@ const CAPABILITIES = [
 const PAGES = [
   '/',
   '/apply',
+  // Vertical pages. Added one at a time, each only once its page is finished
+  // and live — a sitemap entry for an unfinished page is a soft 404 invitation.
+  '/saas-seo-agency',
   '/case-study/sendr',
   '/llm-info',
   '/blog',

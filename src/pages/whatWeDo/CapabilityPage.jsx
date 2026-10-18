@@ -28,7 +28,6 @@ function serviceJsonLd(svc) {
       url,
       provider: { '@id': ORG_ID },
       areaServed: { '@type': 'Place', name: 'Worldwide' },
-      audience: { '@type': 'BusinessAudience', name: 'B2B SaaS companies' },
       mainEntityOfPage: { '@type': 'WebPage', '@id': url },
       inLanguage: 'en',
     },
@@ -115,7 +114,7 @@ export default function CapabilityPage() {
               <ul className="hero-benefits svc-hero-benefits">
                 <li><span className="b-check">✓</span> founder reviews every domain personally</li>
                 <li><span className="b-check">✓</span> reply within 48 hours</li>
-                <li><span className="b-check">✓</span> only 4 SaaS taken per month</li>
+                <li><span className="b-check">✓</span> four reviews taken a month</li>
               </ul>
             </div>
             <div className="col-5 start-8 svc-hero-cta">

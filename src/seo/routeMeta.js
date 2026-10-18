@@ -8,6 +8,7 @@
 // Pure data only — this module is imported by the Vite config at build time, so
 // it must not pull in React, CSS, or any browser globals.
 import { SERVICES, SERVICES_HUB_META, serviceUrl } from '../pages/whatWeDo/capabilitiesData.js';
+import { VERTICALS, verticalUrl } from '../pages/verticals/verticalsData.js';
 
 // One head entry per service page, derived from the same data that renders the
 // pages — the SSG head rewrite and the hydrated SPA can never drift apart.
@@ -19,8 +20,19 @@ const SERVICE_META = Object.fromEntries([
   ]),
 ]);
 
+// One head entry per vertical page. Without these the SSG head rewrite falls
+// back to the homepage defaults and bakes a canonical of "/" into every
+// vertical page — which would hand Google a duplicate of the homepage.
+const VERTICAL_META = Object.fromEntries(
+  VERTICALS.map((v) => [
+    `/${v.slug}`,
+    { title: `${v.title} | RankedTag`, description: v.description, canonical: verticalUrl(v.slug) },
+  ])
+);
+
 export const TOOL_META = {
   ...SERVICE_META,
+  ...VERTICAL_META,
   '/apply': {
     title: 'Apply for a Free Founder Review of Your SaaS | RankedTag',
     description:
