@@ -1,0 +1,227 @@
+/* =====================================================================
+   VERTICAL PAGES — the evidence layer
+   Layered on WhatWeDo.css (hero, prose, FAQ, section rhythm) and Best.css
+   (the comparison table, reused wholesale). Only the pieces unique to a
+   vertical page live here: the stat strip, citations, the step metadata,
+   the timeline, the no-proof panel and the reading grid.
+
+   Every block below sets explicit sizing on the elements that would
+   otherwise resize when the webfont swaps, because these sections sit
+   high on the page where a shift is most expensive.
+   ===================================================================== */
+
+/* ── Citation link, shared by stat cards, problems and the quotation ──
+   Small but never below 12px, and it carries its own underline so it
+   does not rely on colour alone to read as a link (WCAG 1.4.1). */
+.cite {
+  display: inline-block;
+  margin-top: var(--s-2);
+  font-size: .75rem;
+  line-height: 1.5;
+  color: var(--text-3);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+.cite:hover,
+.cite:focus-visible { color: var(--peri); }
+
+/* ── Key facts strip ────────────────────────────────────────────────── */
+.vp-facts { padding-block: clamp(3rem, 6vw, 5rem); }
+.vp-facts-h { display: block; margin: 0 0 clamp(1.5rem, 3vw, 2.5rem); font-weight: inherit; }
+
+.vp-fact-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0;
+  border: 1px solid var(--rule);
+}
+.vp-fact {
+  display: flex;
+  flex-direction: column;
+  padding: var(--s-6);
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  min-height: 13rem;
+}
+.vp-fact-stat {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1.05;
+  color: var(--text-1);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.02em;
+}
+.vp-fact-label {
+  margin: var(--s-3) 0 auto;
+  font-size: .9375rem;
+  line-height: 1.55;
+  color: var(--text-2);
+}
+
+/* ── Cited reference under a problem ────────────────────────────────── */
+.vp-evidence {
+  margin-top: var(--s-3);
+  padding-left: var(--s-4);
+  border-left: 2px solid var(--peri);
+  font-size: .875rem;
+  line-height: 1.6;
+  color: var(--text-3);
+}
+.vp-evidence .cite { margin-top: var(--s-1); }
+
+/* ── When / who / deliverable under a playbook step ─────────────────── */
+.vp-step-meta {
+  margin: var(--s-4) 0 0;
+  display: grid;
+  gap: var(--s-2);
+  border-top: 1px solid var(--rule);
+  padding-top: var(--s-4);
+}
+.vp-step-meta > div {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: var(--s-3);
+}
+.vp-step-meta dt {
+  font-size: .6875rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  padding-top: .15rem;
+}
+.vp-step-meta dd { margin: 0; font-size: .9375rem; line-height: 1.55; color: var(--text-2); }
+
+/* ── Comparison table: inherits .best-table, widened first column ────── */
+.vp-table tbody th { width: 13rem; }
+
+/* ── Expert quotation ───────────────────────────────────────────────── */
+.vp-quote-section { padding-block: clamp(3rem, 7vw, 6rem); }
+.vp-quote { margin: 0; max-width: 60ch; }
+.vp-quote blockquote { margin: 0; border-left: 3px solid var(--peri); padding-left: var(--s-6); }
+.vp-quote blockquote p {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+  line-height: 1.4;
+  color: var(--text-1);
+}
+.vp-quote figcaption {
+  margin-top: var(--s-5);
+  padding-left: calc(var(--s-6) + 3px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+}
+.vp-quote-who { color: var(--text-1); font-size: .9375rem; }
+.vp-quote-role { color: var(--text-3); font-size: .875rem; }
+
+/* ── No-proof panel ─────────────────────────────────────────────────── */
+.vp-noproof { padding-block: clamp(3rem, 6vw, 5rem); }
+.vp-noproof-panel {
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--peri);
+  padding: var(--s-7);
+  max-width: 78ch;
+}
+.vp-noproof-panel .eyebrow { display: block; margin-bottom: var(--s-4); }
+.vp-noproof-panel p { margin: 0 0 var(--s-4); color: var(--text-2); line-height: 1.7; }
+
+/* ── Timeline: horizontal stepped on desktop, vertical on mobile ────── */
+.vp-timeline {
+  list-style: none;
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--rule);
+}
+.vp-tl-step {
+  padding: var(--s-6) var(--s-5) var(--s-6) 0;
+  border-right: 1px solid var(--rule);
+  position: relative;
+  min-height: 17rem;
+}
+.vp-tl-step:last-child { border-right: 0; }
+/* the node on the rule above each step */
+.vp-tl-step::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  background: var(--peri);
+  border-radius: 50%;
+}
+.vp-tl-when {
+  display: block;
+  font-size: .75rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--peri);
+  margin-bottom: var(--s-4);
+}
+.vp-tl-delivered { margin: 0 0 var(--s-4); color: var(--text-1); line-height: 1.6; font-size: .9375rem; }
+.vp-tl-realistic { margin: 0; color: var(--text-3); line-height: 1.6; font-size: .875rem; }
+
+/* ── Disqualifiers ──────────────────────────────────────────────────── */
+.vp-notfor-list {
+  list-style: none;
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: var(--grid-gap);
+}
+.vp-notfor-list li {
+  padding: var(--s-6);
+  border: 1px solid var(--rule);
+  color: var(--text-2);
+  line-height: 1.65;
+}
+
+/* ── Related reading ────────────────────────────────────────────────── */
+.vp-reading { padding-block: clamp(3rem, 6vw, 5rem); }
+.vp-reading-grid {
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: var(--grid-gap);
+}
+.vp-reading-grid h3 {
+  margin: 0 0 var(--s-3);
+  font-size: .75rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-weight: 400;
+}
+.vp-reading-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-2); }
+.vp-reading-grid a { color: var(--text-2); line-height: 1.5; text-transform: capitalize; }
+.vp-reading-grid a:hover,
+.vp-reading-grid a:focus-visible { color: var(--peri); }
+
+/* ── Responsive ─────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .vp-timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .vp-tl-step { min-height: 0; }
+  .vp-tl-step:nth-child(2n) { border-right: 0; }
+}
+@media (max-width: 640px) {
+  .vp-fact-grid { grid-template-columns: 1fr; }
+  .vp-fact { min-height: 0; border-right: 0; }
+  .vp-timeline { grid-template-columns: 1fr; border-top: 0; }
+  .vp-tl-step {
+    border-right: 0;
+    border-left: 1px solid var(--rule);
+    padding: var(--s-5) 0 var(--s-5) var(--s-5);
+  }
+  .vp-tl-step::before { top: var(--s-5); left: -5px; }
+  .vp-step-meta > div { grid-template-columns: 1fr; gap: var(--s-1); }
+  .vp-noproof-panel { padding: var(--s-5); }
+  .vp-quote blockquote { padding-left: var(--s-5); }
+  .vp-quote figcaption { padding-left: calc(var(--s-5) + 3px); }
+}

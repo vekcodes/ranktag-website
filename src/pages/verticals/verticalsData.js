@@ -19,6 +19,41 @@ import { SITE } from '../whatWeDo/capabilitiesData.js';
 
 export { SITE };
 
+
+// Every figure cited on a vertical page resolves to one of these. A stat with
+// no entry here does not ship. Checked at source on 18 October 2026; the
+// `checked` date is what the page displays, not a publication date we guessed.
+export const SOURCES = {
+  baymardProductPage: {
+    label: 'Baymard Institute, Product Page UX benchmark',
+    href: 'https://baymard.com/research/product-page',
+  },
+  googleFacets: {
+    label: 'Google Search Central, faceted navigation',
+    href: 'https://developers.google.com/search/docs/crawling-indexing/crawling-managing-faceted-navigation',
+  },
+  googleProductSchema: {
+    label: 'Google Search Central, product structured data',
+    href: 'https://developers.google.com/search/docs/appearance/structured-data/product',
+  },
+  googleLocalRanking: {
+    label: 'Google Business Profile Help',
+    href: 'https://support.google.com/business/answer/7091',
+  },
+  brightlocal2025: {
+    label: 'BrightLocal Local Consumer Review Survey 2025 (n=1,026 US adults)',
+    href: 'https://www.brightlocal.com/research/local-consumer-review-survey-2025/',
+  },
+  ahrefsAio: {
+    label: 'Ahrefs, 300,000-keyword study, April 2025',
+    href: 'https://ahrefs.com/blog/ai-overviews-reduce-clicks/',
+  },
+  geoStudy: {
+    label: 'Aggarwal et al., GEO: Generative Engine Optimization, KDD 2024',
+    href: 'https://arxiv.org/abs/2311.09735',
+  },
+};
+
 export const VERTICALS = [
   {
     slug: 'saas-seo-agency',
@@ -171,6 +206,100 @@ export const VERTICALS = [
 
   {
     slug: 'ecommerce-seo-agency',
+    // ── evidence layer ────────────────────────────────────────────────
+    keyFacts: [
+      {
+        stat: '51%',
+        label: 'of ecommerce sites have "mediocre" or worse product page UX, across 344 benchmarked US and European retailers',
+        source: 'baymardProductPage',
+      },
+      {
+        stat: '1,300+',
+        label: 'distinct product page usability issues recorded in moderated testing for that benchmark',
+        source: 'baymardProductPage',
+      },
+      {
+        stat: 'Infinite',
+        label: 'URL spaces that parameter-based faceted navigation can generate, in Google’s own words, harming the site',
+        source: 'googleFacets',
+      },
+      {
+        stat: '34.5%',
+        label: 'lower click-through rate at position one when an AI Overview is present, across 300,000 keywords',
+        source: 'ahrefsAio',
+      },
+      {
+        stat: '+115%',
+        label: 'AI visibility lift from citing sources, for pages starting around position five',
+        source: 'geoStudy',
+      },
+    ],
+
+    quote: {
+      text: 'if crawling is spent on useless URLs, the crawlers have less time to spend on new, useful URLs.',
+      who: 'Google Search Central',
+      role: 'official documentation on faceted navigation',
+      source: 'googleFacets',
+    },
+
+    comparisonTable: {
+      caption: 'What changes when the agency has worked a catalogue before',
+      columns: ['Capability', 'Generalist SEO agency', 'Ecommerce specialist'],
+      rows: [
+        ['Faceted navigation', 'Blanket noindex, or left alone', 'Per-facet policy driven by actual search demand'],
+        ['Product variants', 'Treated as separate pages', 'Consolidated unless the attribute has its own demand'],
+        ['Out-of-stock products', 'One rule for every case', 'Different handling for temporary, seasonal and discontinued'],
+        ['Crawl budget', 'Discussed in theory', 'Measured from server logs before any plan is written'],
+        ['Category pages', 'More content added', 'Intent assigned per page, the rest merged or removed'],
+        ['Product schema', 'Added once at launch', 'Generated from the feed so it survives a price change'],
+        ['Reporting', 'Sessions and rankings', 'Revenue by category, plus indexation rate for new SKUs'],
+        ['Replatforming', 'Not offered', 'Redirect map and recovery plan built before migration'],
+      ],
+    },
+
+    timeline: [
+      ['Week 1', 'Crawl of the full catalogue, server log sample, facet and parameter inventory, variant and canonical audit.', 'You see the real size of the indexable surface, which is usually several times what anyone expected.'],
+      ['Month 1', 'Facet policy agreed and shipped, canonical and variant consolidation live, out-of-stock rules implemented, product schema wired to the feed.', 'Crawl distribution starts shifting towards pages that matter. New products begin indexing faster.'],
+      ['Month 3', 'Category intent map applied: pages merged, differentiated or removed. Buying-guide content shipping weekly against the mapped gaps.', 'Consolidated category pages start to recover positions they were splitting between them.'],
+      ['Month 6', 'Authority and citation work on the categories that convert, refreshed product markup, measurement on revenue by category.', 'The compounding curve, if the architecture work landed. This is where catalogue SEO pays or does not.'],
+    ],
+
+    notFor: [
+      'Stores with fewer than about 50 products. The architectural work that makes this valuable barely exists at that size, and you would be paying for a specialism you do not need.',
+      'Anyone who needs the store rebuilt or replatformed. We do not build or migrate stores. Several agencies on our ecommerce shortlist do, and that is a better fit.',
+      'Retailers whose growth is decided on Amazon and retail media rather than their own domain. Organic search on your own site is not the lever there.',
+      'Buyers who need an ecommerce reference before signing. Our one measured result is B2B SaaS. That is a fair requirement and today we would not meet it.',
+    ],
+
+    objections: [
+      [
+        'How will I know it is actually working before revenue moves?',
+        'Because the leading indicators move first and we agree them up front. Indexation rate for new products, the share of crawl requests hitting commercial pages rather than filter permutations, and the count of category pages competing for the same intent are all measurable within weeks. Revenue by category follows. If those three are flat at week six, something is wrong and we say so rather than waiting for month four to have the conversation.',
+      ],
+      [
+        'What happens if we replatform halfway through?',
+        'The work is documented so it travels. Facet policy, canonical rules, out-of-stock handling and schema templates are written down as decisions, not left as undocumented config in one platform. We do not run migrations ourselves, so you would bring in a build partner, and we would supply the redirect map and the pre- and post-migration crawl comparison. Replatforming without that is where stores lose years of accumulated links.',
+      ],
+      [
+        'What if you get busy with other clients?',
+        'Four founder reviews a month is the cap, and it exists for this reason. We are a small senior team by design, which means you get the people who did the audit rather than an account manager relaying their notes. It also means we turn work down. If we cannot give a catalogue the attention it needs, the honest answer at the review stage is no, and you get that answer in 48 hours rather than discovering it in month three.',
+      ],
+      [
+        'Why not just hire someone in-house?',
+        'For a large catalogue, often you should, eventually. The problem is the first year: the architectural decisions that matter most are made once, early, and getting them wrong is expensive to undo. An in-house hire learning facet policy on your live store is a costly way to learn it. The sensible shape is usually specialist help for the foundation and the first compounding cycle, then an in-house owner to run it, with the documentation handed over so they inherit decisions rather than guesswork.',
+      ],
+    ],
+
+    relatedReading: {
+      comparisonPage: '/best/seo-agencies-for-ecommerce',
+      capabilities: ['/what-we-do/technical-seo', '/what-we-do/content-marketing', '/what-we-do/answer-engine-optimization'],
+      posts: [
+        ['/blog/website-traffic-but-no-sales-why', 'Website traffic but no sales: where the leak usually is'],
+        ['/blog/why-website-visitors-leave', 'Why website visitors leave before they buy'],
+      ],
+      tool: ['/page-speed-checker', 'Page Speed Checker'],
+    },
+
     ctaSub: 'Drop your domain. The founder runs the 52-check review personally and comes back within 48 hours with what your facets, variants and product markup are really doing, even when the answer is no.',
     engagementH2: 'What happens after you send a domain.',
     engagement: [
@@ -222,26 +351,32 @@ export const VERTICALS = [
     problems: [
       {
         h: 'Faceted navigation is generating URLs faster than Google can crawl them',
+        evidence: { source: 'googleFacets', note: 'Google attributes the problem to URL-parameter filtering, which it says can generate infinite URL spaces.' },
         p: 'Four filters with ten values each, combinable and order-independent, is tens of thousands of URLs from a single category. Most stores expose all of them, then wonder why new products take three weeks to index. The fix is a deliberate policy per facet: which combinations are indexable because people search them, which are crawlable but not indexable, and which are blocked outright.',
       },
       {
         h: 'Your product variants are competing with each other',
+        evidence: { source: 'googleProductSchema', note: 'Google’s product documentation treats variants as a distinct markup case, not as separate products.' },
         p: 'The same shoe in seven colours, published as seven URLs with near-identical copy, splits the ranking signals seven ways and lets Google pick a winner on its own. Sometimes it picks the one that is out of stock. Canonical strategy, variant consolidation and which attributes genuinely deserve their own URL are decisions that change revenue, not hygiene tasks.',
       },
       {
         h: 'Out-of-stock pages quietly destroy accumulated equity',
+        evidence: { source: 'googleProductSchema', note: 'Availability is a product property Google reads; marking it correctly is the difference between a stale listing and an honest one.' },
         p: 'A product that has earned links and rankings over two years gets discontinued, and the platform 404s it, redirects it to the homepage, or leaves a live page with a dead buy button. All three waste the asset. Seasonal lines returning next quarter, permanent discontinuations and temporary stockouts each need a different answer, and most stores apply one rule to all three.',
       },
       {
         h: 'Your category pages are cannibalising each other',
+        evidence: { source: 'baymardProductPage', note: 'Baymard found 51% of 344 benchmarked retailers have mediocre or worse product page UX, the layer category pages feed into.' },
         p: '"Running shoes", "mens running shoes", "running trainers" and a landing page built for a paid campaign all target the same intent with overlapping copy. Google consolidates, picks one, and it is rarely the one you optimised. Deciding which pages own which intent, then merging or differentiating the rest, usually recovers more than any new content would.',
       },
       {
         h: 'Crawl budget is spent on the wrong half of the catalogue',
+        evidence: { source: 'googleFacets', note: 'Google: crawling spent on useless URLs leaves less time for new, useful ones.' },
         p: 'Log files on a large store routinely show Googlebot spending most of its requests on filter permutations, paginated depth, internal search results and parameter noise, while bestsellers go weeks between crawls. Until that ratio is fixed, every content and merchandising change takes longer to register than it should.',
       },
       {
         h: 'Your products are invisible to AI shopping surfaces',
+        evidence: { source: 'ahrefsAio', note: 'Ahrefs measured a 34.5% lower position-one CTR where an AI Overview appears, across 300,000 keywords.' },
         p: 'Assistants that recommend products read structured data: price, availability, currency, GTIN, condition, review counts, return policy. Incomplete or stale Product and Offer markup means you are omitted from answers that your competitors appear in, and the omission is silent. It is also one of the few places where a small retailer can be chosen on data quality rather than domain authority.',
       },
     ],
@@ -249,30 +384,45 @@ export const VERTICALS = [
     approach: [
       {
         h: 'A facet and parameter policy, written down',
+        when: 'Weeks 1–3',
+        who: 'Senior technical strategist, with your developer for the ship',
+        deliverable: 'A written policy, one line per facet, plus the robots, canonical and internal-link changes that enforce it',
         p: 'Every filter gets an explicit decision: indexable, crawlable-not-indexable, or blocked, driven by whether real people search that combination. Then canonicals, robots rules and internal linking are made to agree with it, because conflicting signals are worse than either choice alone. That is template-level work, which is',
         to: '/what-we-do/technical-seo',
         label: 'technical SEO',
       },
       {
         h: 'Variant and canonical consolidation',
+        when: 'Weeks 2–6',
+        who: 'Technical strategist, implemented in your template layer',
+        deliverable: 'A variant decision table and the canonical rules, applied catalogue-wide rather than page by page',
         p: 'We decide which attributes deserve a URL and which belong on one page behind a selector, then consolidate the rest so ranking signals stop splitting. Done once at the template, it applies across the whole catalogue, which is why it usually outperforms months of',
         to: '/what-we-do/content-marketing',
         label: 'content work',
       },
       {
         h: 'Category pages that are worth ranking',
+        when: 'Month 2 onwards, weekly',
+        who: 'Senior editor, briefs approved by a strategist',
+        deliverable: 'An intent map naming which page owns which query, then merged, differentiated or removed pages and the buying guidance that goes above the grid',
         p: 'Most category pages are a grid and nothing else. The ones that win carry genuine buying guidance above or below the grid, internal links to the sub-intents they should own, and copy that answers the comparison question the shopper actually has. That is where the',
         to: '/what-we-do/seo',
         label: 'full-stack programme',
       },
       {
         h: 'Product and Offer markup built for answer surfaces',
+        when: 'Weeks 3–8',
+        who: 'Technical strategist with whoever owns the product feed',
+        deliverable: 'Feed-generated structured data that stays accurate through price and stock changes, validated against Google’s rich result tests',
         p: 'Complete, accurate, automatically maintained structured data: price, availability, shipping, returns, reviews and identifiers. It is the entry ticket for rich results today and for assistant-driven shopping answers now being built, which is the territory of',
         to: '/what-we-do/answer-engine-optimization',
         label: 'answer engine optimisation',
       },
       {
         h: 'Being named when a shopper asks an assistant',
+        when: 'Month 2 onwards, continuous',
+        who: 'Strategist plus digital PR',
+        deliverable: 'A tracked set of buying prompts, measured monthly across the major assistants, with the corroborating mentions that move them',
         p: 'Shoppers increasingly ask for a recommendation before they visit a store. Appearing in that answer depends on corroborating third-party mentions, clean product data and claims a model can quote, which is the work of',
         to: '/what-we-do/generative-engine-optimization',
         label: 'generative engine optimisation',
@@ -314,6 +464,22 @@ export const VERTICALS = [
       [
         'Do you have ecommerce case studies?',
         'Not yet, and we will not borrow one. Our one measured, cross-checkable result is sendr.ai in B2B SaaS: zero to 1.05M impressions in six months. The technical craft on this page transfers directly; the ecommerce results do not exist until we have them. If you need a vertical-specific reference before signing, we are not the right choice today.',
+      ],
+      [
+        'How many crawlable URLs can faceted navigation actually create?',
+        'More than most teams believe. Google states that parameter-based faceted navigation "can generate infinite URL spaces which harms the website", because filters combine and reorder freely. Four filters with ten values each is already tens of thousands of combinations from one category. The practical question is never how many exist, but which ones real people search for, because those are the only ones worth letting Google index.',
+      ],
+      [
+        'Does product schema still matter if we already rank well?',
+        'Yes, and increasingly for a different reason. Rich results were the original payoff; the current one is eligibility for assistant-driven shopping answers, which read structured data rather than page copy. Google notes that "the more properties you can add, the more enhancements your page can be eligible for". The catch is accuracy: markup generated once at launch goes stale on the first price change, which is why it has to come from the feed.',
+      ],
+      [
+        'How much does AI search actually affect ecommerce traffic?',
+        'Enough to change how you measure. Ahrefs studied 300,000 keywords and found the presence of an AI Overview correlated with a 34.5% lower click-through rate at position one. For ecommerce that pressure lands hardest on research and comparison queries rather than on branded or transactional ones, which is an argument for strengthening the commercial pages rather than abandoning informational content.',
+      ],
+      [
+        'Is our product page experience really an SEO problem?',
+        'It becomes one. Baymard benchmarked 344 US and European retailers and found 51% have "mediocre" or worse product page UX, with more than 1,300 distinct usability issues recorded in testing. Those issues show up in engagement and return-to-SERP behaviour long before they show up in a crawl report, and they cap what any amount of ranking work can convert.',
       ],
     ],
 

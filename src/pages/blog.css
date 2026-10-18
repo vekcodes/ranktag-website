@@ -293,7 +293,7 @@ a.blogx-card:hover::before{color:var(--accent-text)}
 .blogx-prose .prose-table::-webkit-scrollbar-thumb{
   background:var(--line-strong);border-radius:999px;
 }
-.blogx-prose .prose-table::-webkit-scrollbar-track{background:transparent}}
+.blogx-prose .prose-table::-webkit-scrollbar-track{background:transparent}
 .blogx-prose table{
   width:100%;
   min-width:32rem;
@@ -331,6 +331,7 @@ a.blogx-card:hover::before{color:var(--accent-text)}
   .blogx-prose table{min-width:0;font-size:.9375rem}
   .blogx-prose th,.blogx-prose td{padding:.7em .8em}
   .blogx-prose th{font-size:.625rem}
+}
 
 /* FAQ accordion (bottom of a post) — native <details> */
 .blogx-faq{margin:var(--s-20) 0 0}

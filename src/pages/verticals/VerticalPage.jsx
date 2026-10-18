@@ -7,9 +7,10 @@ import usePageMeta from '../../hooks/usePageMeta.js';
 import useScrollReveal from '../../hooks/useScrollReveal.js';
 import JsonLd from '../../components/JsonLd.jsx';
 import { breadcrumb, faqPage, ORG_ID, SITE } from '../../lib/schema.js';
-import { VERTICAL_BY_SLUG } from './verticalsData.js';
+import { VERTICAL_BY_SLUG, SOURCES } from './verticalsData.js';
 import '../Home.css';
 import '../whatWeDo/WhatWeDo.css';
+import './verticals.css';
 
 // One template renders every vertical page (/saas-seo-agency etc) from
 // verticalsData.js. These are commercial head-term pages, so the structure is
@@ -43,6 +44,20 @@ function verticalJsonLd(v) {
     ]),
     faqPage(v.faqs, { id: `${url}#faq` }),
   ];
+}
+
+// Every cited figure renders through this, so a statistic can never appear
+// on the page without a visible, linked source. The brief's rule — if it
+// cannot be verified it does not ship — is enforced by the data shape: a
+// `source` key that is not in SOURCES renders nothing at all.
+function Cite({ id }) {
+  const src = SOURCES[id];
+  if (!src) return null;
+  return (
+    <a className="cite" href={src.href} rel="noopener nofollow" target="_blank">
+      {src.label}
+    </a>
+  );
 }
 
 export default function VerticalPage() {
@@ -121,6 +136,24 @@ export default function VerticalPage() {
           </div>
         </section>
 
+        {/* ── Key facts: sourced, dated, visible on the page ────── */}
+        {v.keyFacts && (
+          <section className="vp-facts ruled" data-reveal>
+            <div className="container">
+              <h2 className="eyebrow bracket vp-facts-h">THE NUMBERS THAT SHAPE THIS WORK</h2>
+              <ol className="vp-fact-grid" data-reveal-children>
+                {v.keyFacts.map((f) => (
+                  <li className="vp-fact" key={f.label.slice(0, 40)}>
+                    <strong className="vp-fact-stat">{f.stat}</strong>
+                    <p className="vp-fact-label">{f.label}</p>
+                    <Cite id={f.source} />
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
+        )}
+
         {/* ── Intro prose ──────────────────────────────────────────────── */}
         <section className="svc-prose ruled" data-reveal>
           <div className="container">
@@ -145,6 +178,11 @@ export default function VerticalPage() {
                   <div className="problem-body">
                     <h3>{p.h}</h3>
                     <p>{p.p}</p>
+                    {p.evidence && (
+                      <p className="vp-evidence">
+                        {p.evidence.note} <Cite id={p.evidence.source} />
+                      </p>
+                    )}
                   </div>
                 </li>
               ))}
@@ -168,11 +206,64 @@ export default function VerticalPage() {
                     {a.p}{' '}
                     <Link to={a.to} className="link-wipe">{a.label}</Link>.
                   </p>
+                  {a.when && (
+                    <dl className="vp-step-meta">
+                      <div><dt>When</dt><dd>{a.when}</dd></div>
+                      <div><dt>Who</dt><dd>{a.who}</dd></div>
+                      <div><dt>Deliverable</dt><dd>{a.deliverable}</dd></div>
+                    </dl>
+                  )}
                 </li>
               ))}
             </ol>
           </div>
         </section>
+
+        {/* Comparison table: machine-extractable, and the element an answer
+             engine can lift whole. */}
+        {v.comparisonTable && (
+          <section className="vp-table-section ruled" data-reveal>
+            <div className="container">
+              <div className="section-head">
+                <span className="eyebrow" data-num="002">SIDE BY SIDE</span>
+                <h2 className="h-2">{v.comparisonTable.caption}</h2>
+              </div>
+              <div className="best-table-scroll" tabIndex="0" role="region" aria-label={v.comparisonTable.caption}>
+                <table className="best-table vp-table">
+                  <thead>
+                    <tr>{v.comparisonTable.columns.map((c) => <th key={c} scope="col">{c}</th>)}</tr>
+                  </thead>
+                  <tbody>
+                    {v.comparisonTable.rows.map((row) => (
+                      <tr key={row[0]}>
+                        <th scope="row">{row[0]}</th>
+                        {row.slice(1).map((cell, n) => <td key={n}>{cell}</td>)}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* One verified quotation, under 25 words, linked to its origin. */}
+        {v.quote && (
+          <section className="vp-quote-section ruled" data-reveal>
+            <div className="container">
+              <figure className="vp-quote">
+                <blockquote cite={SOURCES[v.quote.source]?.href}>
+                  <p>{v.quote.text}</p>
+                </blockquote>
+                <figcaption>
+                  <span className="vp-quote-who">{v.quote.who}</span>
+                  <span className="vp-quote-role">{v.quote.role}</span>
+                  <Cite id={v.quote.source} />
+                </figcaption>
+              </figure>
+            </div>
+          </section>
+        )}
 
         {/* ── Proof. Rendered ONLY where we hold a verified in-vertical
              result. Never a placeholder, never an adjacent-vertical number
@@ -203,6 +294,62 @@ export default function VerticalPage() {
               <Link to="/case-study/sendr" className="case-readmore link-wipe ar-parent">
                 Read the full sendr.ai case study <span className="ar">→</span>
               </Link>
+            </div>
+          </section>
+        )}
+
+        {/* Where no in-vertical result exists, the page says so in the slot
+             where proof would sit, rather than leaving a silent gap. */}
+        {!v.proof && (
+          <section className="vp-noproof ruled" data-reveal>
+            <div className="container">
+              <aside className="vp-noproof-panel">
+                <span className="eyebrow bracket">WHAT WE CANNOT SHOW YOU</span>
+                <p>
+                  We have no {v.nav.toLowerCase()} case study. Our one measured, cross-checkable result is
+                  sendr.ai, a B2B SaaS company taken from zero to 1.05M organic impressions and 7,430 clicks
+                  in six months, and to the #2 position in Google&rsquo;s AI Overview for its category query,
+                  above ZoomInfo. That is a different vertical and we are not going to present it as though
+                  it were this one.
+                </p>
+                <p>
+                  The method on this page is argued from craft and from published evidence, with every figure
+                  above linked to its source. If a vertical-specific reference is a requirement for you, that
+                  is a fair requirement, and today we would not meet it.
+                </p>
+                <Link to="/case-study/sendr" className="case-readmore link-wipe ar-parent">
+                  Read the sendr.ai case study anyway <span className="ar">→</span>
+                </Link>
+              </aside>
+            </div>
+          </section>
+        )}
+
+        {/* Delivery timeline: what lands when, and what is realistic to see. */}
+        {v.timeline && (
+          <section className="vp-timeline-section ruled" data-reveal>
+            <div className="container">
+              <div className="section-head">
+                <span className="eyebrow" data-num="003">WHAT LANDS WHEN</span>
+                <div>
+                  <h2 className="h-2">The first six months, honestly.</h2>
+                  <p className="lead">
+                    What is delivered at each point, and what it is realistic to see. These assume the
+                    technical work is not sitting in your engineering queue.
+                  </p>
+                </div>
+              </div>
+              <ol className="vp-timeline" data-reveal-children>
+                {v.timeline.map(([when, delivered, realistic]) => (
+                  <li className="vp-tl-step" key={when}>
+                    <span className="vp-tl-when">{when}</span>
+                    <div className="vp-tl-body">
+                      <p className="vp-tl-delivered">{delivered}</p>
+                      <p className="vp-tl-realistic">{realistic}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
             </div>
           </section>
         )}
@@ -248,6 +395,51 @@ export default function VerticalPage() {
           </div>
         </section>
 
+        {/* Disqualifiers. Converts better than another benefits list, and it
+             is the kind of candid passage an answer engine quotes. */}
+        {v.notFor && (
+          <section className="vp-notfor ruled" data-reveal>
+            <div className="container">
+              <div className="section-head">
+                <span className="eyebrow" data-num="004">WHO THIS IS NOT FOR</span>
+                <div>
+                  <h2 className="h-2">Four reasons to walk away.</h2>
+                  <p className="lead">
+                    Written plainly, because a wasted discovery call costs us both more than an honest
+                    paragraph does.
+                  </p>
+                </div>
+              </div>
+              <ul className="vp-notfor-list" data-reveal-children>
+                {v.notFor.map((x) => (
+                  <li key={x.slice(0, 40)}>{x}</li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
+
+        {/* The four objections a buyer actually has. */}
+        {v.objections && (
+          <section className="svc-deliver ruled" data-reveal>
+            <div className="container">
+              <div className="section-head">
+                <span className="eyebrow" data-num="005">THE AWKWARD QUESTIONS</span>
+                <h2 className="h-2">What you are probably thinking.</h2>
+              </div>
+              <ol className="svc-deliver-list" data-reveal-children>
+                {v.objections.map(([q, a], i) => (
+                  <li className="svc-deliver-row" key={q}>
+                    <span className="svc-deliver-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                    <h3>{q}</h3>
+                    <p>{a}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
+        )}
+
         {/* ── FAQ ──────────────────────────────────────────────────────── */}
         <section className="faq-section ruled" data-reveal>
           <div className="container grid12">
@@ -281,6 +473,46 @@ export default function VerticalPage() {
             </div>
           </div>
         </section>
+
+        {/* Related reading: the matching shortlist, the capability pages this
+             draws on, two posts and the tool that fits. */}
+        {v.relatedReading && (
+          <section className="vp-reading ruled" data-reveal>
+            <div className="container">
+              <span className="eyebrow bracket">RELATED READING</span>
+              <div className="vp-reading-grid">
+                <div>
+                  <h3>Still comparing agencies</h3>
+                  <Link to={v.relatedReading.comparisonPage} className="link-wipe">
+                    {v.comparisonLabel}
+                  </Link>
+                </div>
+                <div>
+                  <h3>The craft behind this</h3>
+                  <ul>
+                    {v.relatedReading.capabilities.map((c) => (
+                      <li key={c}>
+                        <Link to={c} className="link-wipe">{c.replace('/what-we-do/', '').replace(/-/g, ' ')}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3>From the blog</h3>
+                  <ul>
+                    {v.relatedReading.posts.map(([href, label]) => (
+                      <li key={href}><a href={href} className="link-wipe">{label}</a></li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3>Run it yourself</h3>
+                  <Link to={v.relatedReading.tool[0]} className="link-wipe">{v.relatedReading.tool[1]}</Link>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* ── Other verticals (only those already live) ────────────────── */}
         {related.length > 0 && (
