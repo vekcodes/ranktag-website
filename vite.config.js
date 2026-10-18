@@ -99,6 +99,7 @@ export default defineConfig(({ isSsrBuild }) => ({
         '/case-study/sendr',
         '/who-we-help',
         ...EXPLAINERS.map((e) => `/${e.slug}`),
+        '/glossary',
         '/best',
         ...COMPARISONS.map((c) => c.path),
         ...VERTICALS.map((v) => `/${v.slug}`),

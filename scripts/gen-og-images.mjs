@@ -99,6 +99,7 @@ const CARDS = [
   ['home-services-seo-agency', 'Who we help · Home services', 'Home services SEO that works the radius, not the keyword list'],
   ['who-we-help', 'Who we help', 'Three verticals, three playbooks'],
   ['best', 'Shortlists · updated quarterly', 'Agency shortlists we publish, bias included'],
+  ['glossary', 'Glossary', 'Fifteen SEO and AI search terms, defined properly'],
   ['best-seo-agencies-for-saas', 'Shortlist · 2026', 'The best SaaS SEO agencies, honestly compared'],
   ['best-seo-agencies-for-ecommerce', 'Shortlist · 2026', 'The best ecommerce SEO agencies, honestly compared'],
   ['best-seo-agencies-for-local-business', 'Shortlist · 2026', 'The best local SEO agencies, honestly compared'],

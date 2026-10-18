@@ -33,6 +33,7 @@ const PAGE_LASTMOD = {
   '/in-house-vs-seo-agency': '2026-10-19',
   '/how-to-choose-an-seo-agency': '2026-10-19',
   '/best': '2026-10-18',
+  '/glossary': '2026-10-19',
   '/best/seo-agencies-for-saas': '2026-10-18',
   '/best/seo-agencies-for-ecommerce': '2026-10-18',
   '/best/seo-agencies-for-local-business': '2026-10-18',
@@ -95,6 +96,7 @@ const PAGES = [
   // Comparison pages. Refreshed quarterly; bump the lastmod above when the
   // list is actually re-checked, never on a deploy.
   '/best',
+  '/glossary',
   '/best/seo-agencies-for-saas',
   '/best/seo-agencies-for-ecommerce',
   '/best/seo-agencies-for-local-business',

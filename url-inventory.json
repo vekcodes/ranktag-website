@@ -9,8 +9,8 @@
     "legacy_redirects": 15,
     "endpoints": 8,
     "app_noindex": 1,
-    "total": 97,
-    "indexable_in_sitemap": 72,
+    "total": 98,
+    "indexable_in_sitemap": 73,
     "what_we_do_pages": 7,
     "vertical_pages": 6,
     "vertical_hub": 1,
@@ -797,6 +797,14 @@
       "indexable": true,
       "expected_status": 200,
       "note": "phase 7 - client-side only"
+    },
+    {
+      "url": "/glossary",
+      "kind": "glossary",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 8"
     }
   ],
   "phases": {

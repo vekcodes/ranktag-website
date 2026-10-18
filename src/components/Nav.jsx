@@ -209,7 +209,7 @@ export default function Nav({ variant = 'home' }) {
             id="guides"
             label="Guides"
             items={EXPLAINERS.map((e) => ({ to: `/${e.slug}`, label: e.nav, desc: e.description }))}
-            footerItem={{ to: '/best', label: 'Agency shortlists →' }}
+            footerItem={{ to: '/glossary', label: 'Glossary →' }}
             note="Comparisons and buyer guides. Sourced, dated, no fluff."
             openId={openId}
             setOpenId={setOpenId}

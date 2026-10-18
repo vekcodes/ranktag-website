@@ -30,6 +30,7 @@ const dist = path.resolve(process.cwd(), 'dist');
 const ROUTE_MODULES = [
   [/^apply$/, 'src/pages/Apply.jsx'],
   [/^case-study\/sendr$/, 'src/pages/CaseStudySendr.jsx'],
+  [/^glossary$/, 'src/pages/glossary/Glossary.jsx'],
   [/^best$/, 'src/pages/best/BestHub.jsx'],
   [/^best\/.+$/, 'src/pages/best/ComparisonPage.jsx'],
   [/^[a-z-]+-vs-[a-z-]+$/, 'src/pages/explainers/ExplainerPage.jsx'],

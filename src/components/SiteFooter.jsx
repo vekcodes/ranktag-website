@@ -44,6 +44,7 @@ export default function SiteFooter() {
             {EXPLAINERS.map((e) => (
               <a key={e.slug} href={`/${e.slug}`} className="link-wipe">{e.nav}</a>
             ))}
+            <a href="/glossary" className="link-wipe">Glossary</a>
           </div>
           <div className="footer-col">
             <h4><span className="idx plain">004</span>Free tools</h4>

@@ -346,7 +346,7 @@ ${services.map(([slug, label]) => `<a href="/what-we-do/${slug}">${label}</a>`).
 <a href="/saas-seo-agency">B2B SaaS</a><a href="/ecommerce-seo-agency">Ecommerce</a><a href="/local-seo-agency">Local &amp; service-area</a>
 <a href="/who-we-help">All verticals →</a><a href="/best">Agency comparisons →</a></div>
 <div class="footer-col"><h4><span>003</span>Guides</h4>
-<a href="/seo-vs-geo">SEO vs GEO</a><a href="/aeo-vs-geo">AEO vs GEO</a><a href="/ai-seo-vs-traditional-seo">AI SEO vs traditional SEO</a><a href="/seo-vs-ppc-for-saas">SEO vs PPC for SaaS</a><a href="/seo-pricing">SEO pricing</a><a href="/in-house-vs-seo-agency">In-house vs agency</a><a href="/how-to-choose-an-seo-agency">How to choose an agency</a></div>
+<a href="/seo-vs-geo">SEO vs GEO</a><a href="/aeo-vs-geo">AEO vs GEO</a><a href="/ai-seo-vs-traditional-seo">AI SEO vs traditional SEO</a><a href="/seo-vs-ppc-for-saas">SEO vs PPC for SaaS</a><a href="/seo-pricing">SEO pricing</a><a href="/in-house-vs-seo-agency">In-house vs agency</a><a href="/how-to-choose-an-seo-agency">How to choose an agency</a><a href="/glossary">Glossary</a></div>
 <div class="footer-col"><h4><span>004</span>Free tools</h4>
 <a href="/schema-generator">Schema Generator</a><a href="/serp-preview-tool">SERP Preview Tool</a><a href="/llms-txt-generator">llms.txt Generator</a><a href="/keyword-density-checker">Keyword Density Checker</a>
 <a href="/domain-authority-checker">Domain Authority Checker</a>
