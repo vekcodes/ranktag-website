@@ -48,6 +48,10 @@ export const SOURCES = {
     label: 'Ahrefs, 300,000-keyword study, April 2025',
     href: 'https://ahrefs.com/blog/ai-overviews-reduce-clicks/',
   },
+  googleAiFeatures: {
+    label: 'Google Search Central, AI features in Google Search',
+    href: 'https://developers.google.com/search/docs/appearance/ai-features',
+  },
   geoStudy: {
     label: 'Aggarwal et al., GEO: Generative Engine Optimization, KDD 2024',
     href: 'https://arxiv.org/abs/2311.09735',

@@ -225,3 +225,18 @@
   .vp-quote blockquote { padding-left: var(--s-5); }
   .vp-quote figcaption { padding-left: calc(var(--s-5) + 3px); }
 }
+
+/* Visually hidden, still announced by assistive tech. Used for the empty
+   corner cell of a comparison table, which needs an accessible name but no
+   visible label. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

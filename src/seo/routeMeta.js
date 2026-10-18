@@ -10,6 +10,7 @@
 import { SERVICES, SERVICES_HUB_META, serviceUrl, SITE } from '../pages/whatWeDo/capabilitiesData.js';
 import { VERTICALS, verticalUrl, WHO_WE_HELP_META } from '../pages/verticals/verticalsData.js';
 import { COMPARISONS, comparisonUrl, BEST_HUB_META } from '../pages/best/comparisonsData.js';
+import { EXPLAINERS, explainerUrl } from '../pages/explainers/explainersData.js';
 
 // One head entry per service page, derived from the same data that renders the
 // pages — the SSG head rewrite and the hydrated SPA can never drift apart.
@@ -49,6 +50,18 @@ export const TOOL_META = {
   ...VERTICAL_META,
   '/who-we-help': { ...WHO_WE_HELP_META, ogImage: `${SITE}/og/who-we-help.png`,
     ogImageAlt: 'The three verticals RankedTag works' },
+  ...Object.fromEntries(
+    EXPLAINERS.map((e) => [
+      `/${e.slug}`,
+      {
+        title: `${e.title} | RankedTag`,
+        description: e.description,
+        canonical: explainerUrl(e.slug),
+        ogImage: `${SITE}/og/${e.slug}.png`,
+        ogImageAlt: e.nav,
+      },
+    ])
+  ),
   '/best': { ...BEST_HUB_META, ogImage: `${SITE}/og/best.png`,
     ogImageAlt: 'Agency shortlists published by RankedTag' },
   ...Object.fromEntries(

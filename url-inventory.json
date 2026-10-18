@@ -9,8 +9,8 @@
     "legacy_redirects": 15,
     "endpoints": 8,
     "app_noindex": 1,
-    "total": 81,
-    "indexable_in_sitemap": 57,
+    "total": 82,
+    "indexable_in_sitemap": 58,
     "what_we_do_pages": 7,
     "vertical_pages": 3,
     "vertical_hub": 1,
@@ -669,6 +669,14 @@
       "indexable": true,
       "expected_status": 200,
       "note": "phase 6 polish"
+    },
+    {
+      "url": "/seo-vs-geo",
+      "kind": "explainer",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 3"
     }
   ],
   "phases": {

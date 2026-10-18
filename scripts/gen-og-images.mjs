@@ -107,6 +107,7 @@ const CARDS = [
   ['what-we-do-answer-engine-optimization', 'Capability · AEO', 'Be the answer buyers see first'],
   ['what-we-do-technical-seo', 'Capability · Technical SEO', 'The foundation your content deserves'],
   ['what-we-do-content-marketing', 'Capability · Content engine', 'A content engine that outships teams 10x its size'],
+  ['seo-vs-geo', 'Explainer · 2026', 'SEO vs GEO: what actually changes'],
 ];
 
 try {

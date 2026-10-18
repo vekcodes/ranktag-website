@@ -3,6 +3,7 @@ import Layout from './Layout.jsx';
 import Home from './pages/Home.jsx';
 import { VERTICALS } from './pages/verticals/verticalsData.js';
 import { COMPARISONS } from './pages/best/comparisonsData.js';
+import { EXPLAINERS } from './pages/explainers/explainersData.js';
 
 // react-router's `lazy` expects a module exposing a named `Component`. Our pages
 // default-export their component, so this adapter wraps a dynamic import into the
@@ -47,6 +48,13 @@ export const routes = [
       ...COMPARISONS.map((c) => ({
         path: `best/${c.slug}`,
         lazy: lazyRoute(() => import('./pages/best/ComparisonPage.jsx')),
+      })),
+
+      // Comparison explainers — expertise pages at root level, one route
+      // each, same pattern as the vertical pages.
+      ...EXPLAINERS.map((e) => ({
+        path: e.slug,
+        lazy: lazyRoute(() => import('./pages/explainers/ExplainerPage.jsx')),
       })),
 
       { path: 'who-we-help', lazy: lazyRoute(() => import('./pages/verticals/WhoWeHelp.jsx')) },

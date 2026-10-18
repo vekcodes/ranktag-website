@@ -5,6 +5,7 @@ import { ORG_WEBSITE_JSONLD } from './src/seo/orgGraph.js';
 import { SERVICES } from './src/pages/whatWeDo/capabilitiesData.js';
 import { VERTICALS } from './src/pages/verticals/verticalsData.js';
 import { COMPARISONS } from './src/pages/best/comparisonsData.js';
+import { EXPLAINERS } from './src/pages/explainers/explainersData.js';
 
 // Inject the site-wide Organization + WebSite JSON-LD into index.html at build
 // time from the single shared source (src/seo/orgGraph.js). vite-react-ssg builds
@@ -97,6 +98,7 @@ export default defineConfig(({ isSsrBuild }) => ({
         '/apply',
         '/case-study/sendr',
         '/who-we-help',
+        ...EXPLAINERS.map((e) => `/${e.slug}`),
         '/best',
         ...COMPARISONS.map((c) => c.path),
         ...VERTICALS.map((v) => `/${v.slug}`),
