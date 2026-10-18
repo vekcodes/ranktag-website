@@ -53,6 +53,10 @@
 }
 .gl-body p { margin: 0 0 var(--s-4); color: var(--text-2); line-height: 1.7; max-width: 72ch; }
 .gl-links { margin-top: var(--s-4) !important; font-size: .875rem; }
+/* these inherit --text-2 from .gl-body p and read as plain text otherwise */
+.gl-links a { color: var(--peri); }
+.gl-links a:hover,
+.gl-links a:focus-visible { color: var(--peri-hover, var(--peri)); }
 
 @media (max-width: 640px) {
   .gl-entry { grid-template-columns: 1fr; gap: var(--s-2); }
