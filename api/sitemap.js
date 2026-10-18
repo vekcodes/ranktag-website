@@ -13,6 +13,34 @@ import { SITE_URL } from './_lib/blog.js';
 // index uses the latest post's date instead; posts carry their own lastmod.)
 const STATIC_LASTMOD = '2026-07-11';
 
+// Pages edited since then, dated individually. One shared constant was fine
+// while every marketing page changed together; now a release touches some and
+// not others, and bumping the constant would claim freshness for pages that
+// have not moved. Google treats a <lastmod> it can disprove as noise and
+// starts discounting the whole file, so an over-claimed date costs more than
+// a stale one. Add a line here when you materially edit a page; drop lines
+// back into the constant when the whole set moves at once.
+const PAGE_LASTMOD = {
+  '/': '2026-10-18',
+  '/services': '2026-10-18',
+  '/services/b2b-saas-seo': '2026-10-18',
+  '/services/ai-seo': '2026-10-18',
+  '/services/generative-engine-optimization': '2026-10-18',
+  '/services/answer-engine-optimization': '2026-10-18',
+  '/services/technical-seo': '2026-10-18',
+  '/services/saas-content-marketing': '2026-10-18',
+  '/case-study/sendr': '2026-10-18',
+  '/competitor-analysis': '2026-10-18',
+  '/keyword-density-checker': '2026-10-18',
+  '/domain-authority-checker': '2026-10-18',
+  '/page-speed-checker': '2026-10-18',
+};
+
+const lastmodFor = (loc) => PAGE_LASTMOD[loc] || STATIC_LASTMOD;
+
+// A child sitemap's own <lastmod> is the newest thing inside it.
+const newest = (dates) => dates.slice().sort().pop();
+
 // Marketing pages, split by kind so each lands in the right child sitemap.
 // No <priority> or <changefreq>: Google has stated publicly it ignores both,
 // and a signal nobody reads is just weight in the file.
@@ -84,7 +112,7 @@ export default async function handler(req, res) {
   const which = new URL(req.url, 'http://x').pathname.replace(/^\/|\.xml$/g, '');
 
   if (which === 'sitemap-services') {
-    return send(res, urlset(SERVICES.map((loc) => ({ loc: SITE_URL + loc, lastmod: STATIC_LASTMOD }))));
+    return send(res, urlset(SERVICES.map((loc) => ({ loc: SITE_URL + loc, lastmod: lastmodFor(loc) }))));
   }
 
   if (which === 'sitemap-posts') {
@@ -104,7 +132,7 @@ export default async function handler(req, res) {
   if (which === 'sitemap-pages') {
     return send(res, urlset(PAGES.map((loc) => ({
       loc: SITE_URL + loc,
-      lastmod: loc === '/blog' ? blogLastmod : STATIC_LASTMOD,
+      lastmod: loc === '/blog' ? blogLastmod : lastmodFor(loc),
     }))));
   }
 
@@ -114,8 +142,8 @@ export default async function handler(req, res) {
     : STATIC_LASTMOD;
   const children = [
     { loc: `${SITE_URL}/sitemap-posts.xml`, lastmod: postsLastmod },
-    { loc: `${SITE_URL}/sitemap-services.xml`, lastmod: STATIC_LASTMOD },
-    { loc: `${SITE_URL}/sitemap-pages.xml`, lastmod: blogLastmod },
+    { loc: `${SITE_URL}/sitemap-services.xml`, lastmod: newest(SERVICES.map(lastmodFor)) },
+    { loc: `${SITE_URL}/sitemap-pages.xml`, lastmod: newest([blogLastmod, ...PAGES.map(lastmodFor)]) },
   ];
   send(
     res,
