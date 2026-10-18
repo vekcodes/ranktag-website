@@ -157,7 +157,7 @@ export default function Nav({ variant = 'home' }) {
         <Link to="/" className="nav-logo" onClick={close} aria-label="RankedTag home">
           <img
             src="/rankedtag-logo-light.svg"
-            alt="RankedTag — SEO, AI SEO & GEO agency for B2B SaaS"
+            alt="RankedTag — SEO, AI SEO, AEO and GEO agency"
             width="106"
             height="28"
           />

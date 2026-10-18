@@ -383,7 +383,7 @@ export default function CaseStudySendr() {
               Want the same engine pointed at your category?
             </h2>
             <p className="cs-cta-sub">
-              We take 4 SaaS founders a month. Drop your URL and the founder runs a
+              We take four founders a month. Drop your URL and the founder runs a
               real audit, then replies on LinkedIn within 48 hours — even if it is a
               no.
             </p>

@@ -16,8 +16,8 @@ import './WhatWeDo.css';
 // each is what an answer engine can lift without the rest of the page.
 const HUB_FAQ = [
   [
-    'Which SEO service should a B2B SaaS start with?',
-    'Start with technical SEO if your pages are not being indexed, and with B2B SaaS SEO if they are. Indexation is the gate: content, AEO and GEO all assume search engines can crawl, read and store your pages, so a crawl or schema problem makes every other service slower and more expensive. Once the foundation is sound, the order that compounds fastest is content first, then AEO and GEO on top of the pages content produced.',
+    'Which capability should we start with?',
+    'Start with technical SEO if your pages are not being indexed, and with full-stack SEO if they are. Indexation is the gate: content, AEO and GEO all assume search engines can crawl, read and store your pages, so a crawl or schema problem makes every other service slower and more expensive. Once the foundation is sound, the order that compounds fastest is content first, then AEO and GEO on top of the pages content produced.',
   ],
   [
     'What is the difference between AI SEO, AEO and GEO?',
@@ -29,7 +29,7 @@ const HUB_FAQ = [
   ],
   [
     'How much do these capabilities cost?',
-    'Pricing is shared after the founder review, because a seed-stage SaaS and a $2M MRR SaaS need different scopes. Apply with your domain, the founder runs the 52-check audit, and you get a real number within 48 hours rather than a sales sequence.',
+    'Pricing is shared after the founder review, because a six-page local business and a 40,000-SKU catalogue need different scopes. Apply with your domain, the founder runs the 52-check audit, and you get a real number within 48 hours rather than a sales sequence.',
   ],
 ];
 
@@ -243,7 +243,7 @@ export default function WhatWeDo() {
               <div className="svc-proof-stat"><strong data-countup="1500">1.05M</strong><span>organic impressions · 6 months</span></div>
               <div className="svc-proof-stat"><strong data-countup="1400">7.43k</strong><span>clicks · same window</span></div>
               <div className="svc-proof-stat"><strong>#2</strong><span>Google AI Overview · above ZoomInfo</span></div>
-              <div className="svc-proof-stat"><strong data-countup="1200">4</strong><span>SaaS founders taken per month</span></div>
+              <div className="svc-proof-stat"><strong data-countup="1200">4</strong><span>founder reviews taken per month</span></div>
             </div>
             <Link to="/case-study/sendr" className="case-readmore link-wipe ar-parent">
               Read the full sendr.ai case study <span className="ar">→</span>

@@ -30,7 +30,7 @@ def default_card():
     mark = mark.resize((s, s), Image.LANCZOS)
     img.paste(mark, ((W - s) // 2, 96), mark)
     center_text(d, 320, "RankedTag", font("georgiab.ttf", 78), INK)
-    center_text(d, 430, "SEO · AI SEO · AEO · GEO for B2B SaaS", font("segoeui.ttf", 33), MUTED)
+    center_text(d, 430, "SEO · AI SEO · AEO · GEO", font("segoeui.ttf", 33), MUTED)
     # red accent rule
     d.rectangle([(W / 2 - 70, 412), (W / 2 + 70, 416)], fill=RED)
     img.save("public/og/default.png")

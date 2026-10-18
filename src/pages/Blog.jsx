@@ -9,7 +9,7 @@ import './blog.css';
 const BLOG_JSONLD = [
   blogCollection({
     description:
-      'SEO, generative engine optimization, and inbound growth for B2B SaaS founders.',
+      'SEO, generative engine optimization, and inbound growth for founders.',
   }),
   breadcrumb([
     { name: 'Home', item: `${SITE}/` },
@@ -22,9 +22,9 @@ const BLOG_JSONLD = [
 // fallback for local `vite` dev and client navigation.
 export default function Blog() {
   usePageMeta({
-    title: 'Blog · RankedTag — SEO & Inbound for B2B SaaS',
+    title: 'Blog · RankedTag — SEO and Inbound Growth',
     description:
-      'Field notes on SEO, generative engine optimization (GEO), and building inbound engines that generate qualified pipeline for B2B SaaS.',
+      'Field notes on SEO, generative engine optimization (GEO), and building inbound engines that generate qualified pipeline.',
     canonical: 'https://rankedtag.com/blog',
     jsonLd: BLOG_JSONLD,
   });
@@ -147,7 +147,7 @@ export default function Blog() {
           <EmptyState
             icon="✍️"
             title="No posts yet — the engine's warming up"
-            body="We're writing the first deep-dives on SEO and generative engine optimization for B2B SaaS. Check back shortly, or get a head start with a free founder review."
+            body="We're writing the first deep-dives on SEO and generative engine optimization. Check back shortly, or get a head start with a free founder review."
           />
         )}
 
@@ -170,7 +170,7 @@ export default function Blog() {
 
       <section className="blogx-cta">
         <div className="container">
-          <h2>Want this engine pointed at your SaaS?</h2>
+          <h2>Want this engine pointed at your site?</h2>
           <p>0 → 1.05M organic impressions in 6 months for Sendr.ai. Get a free founder-level review of your inbound.</p>
           <Link to="/apply" className="btn btn-primary btn-lg">
             Apply for a free review <span className="ar">↗</span>

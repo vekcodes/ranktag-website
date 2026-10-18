@@ -126,7 +126,7 @@ export default function PageSpeed() {
             <input
               type="text"
               className="url-input"
-              placeholder="yoursaas.com"
+              placeholder="yourdomain.com"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               spellCheck={false}

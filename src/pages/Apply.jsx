@@ -18,7 +18,7 @@ const APPLY_JSONLD = [
     url: 'https://rankedtag.com/apply',
     name: 'Apply for a Founder Review | RankedTag',
     description:
-      'Apply for a free founder-reviewed SEO, AI SEO and GEO audit of your B2B SaaS. Four founders a month; a real reply on LinkedIn within 48 hours.',
+      'Apply for a free founder-reviewed SEO, AI SEO and GEO audit of your site. Four founders a month; a real reply on LinkedIn within 48 hours.',
     isPartOf: { '@id': 'https://rankedtag.com/#website' },
     about: { '@id': 'https://rankedtag.com/#org' },
     inLanguage: 'en',
@@ -80,12 +80,12 @@ export default function Apply() {
           <div className="apply-page-head">
             <span className="eyebrow bracket apply-page-eyebrow">APPLY · founder-reviewed, not auto-routed</span>
             <h1 className="apply-page-h">
-              Tell us about your SaaS.
+              Tell us about your business.
               <br />
               <span className="ser">We read every one.</span>
             </h1>
             <p className="apply-page-sub">
-              We take 4 SaaS founders a month. That is it. Drop your details below. The
+              We take four founders a month. That is it. Drop your details below. The
               founder reads every application personally and replies on LinkedIn within
               48 hours, even if it is a no.
             </p>
@@ -100,17 +100,17 @@ export default function Apply() {
                 </label>
                 <label className="apply-field">
                   <span className="apply-label">Work email</span>
-                  <input type="email" name="email" required placeholder="alex@yoursaas.com" />
+                  <input type="email" name="email" required placeholder="alex@yourdomain.com" />
                 </label>
               </div>
               <div className="apply-row">
                 <label className="apply-field">
-                  <span className="apply-label">SaaS website</span>
+                  <span className="apply-label">Website</span>
                   <input
                     type="text"
                     name="website"
                     required
-                    placeholder="https://yoursaas.com"
+                    placeholder="https://yourdomain.com"
                     value={website}
                     onChange={(e) => setWebsite(e.target.value)}
                   />
@@ -121,7 +121,7 @@ export default function Apply() {
                 </label>
               </div>
               <label className="apply-field">
-                <span className="apply-label">What stage is your SaaS at? Who is it for?</span>
+                <span className="apply-label">What stage are you at? Who do you sell to?</span>
                 <textarea
                   name="message"
                   rows={3}
@@ -172,7 +172,7 @@ export default function Apply() {
             </div>
             <div className="apply-bullet">
               <div className="apply-bullet-num">03</div>
-              <h4>Only 4 SaaS a month</h4>
+              <h4>Only four a month</h4>
               <p>Senior strategists do not scale like ad spend. When the slots are full, you wait until next month.</p>
             </div>
           </div>

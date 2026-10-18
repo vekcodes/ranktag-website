@@ -131,7 +131,7 @@ export default function BacklinkChecker() {
             <input
               type="text"
               className="url-input"
-              placeholder="yoursaas.com"
+              placeholder="yourdomain.com"
               value={domain}
               onChange={(e) => setDomain(e.target.value)}
               spellCheck={false}

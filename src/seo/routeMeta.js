@@ -42,9 +42,9 @@ export const TOOL_META = {
     ])
   ),
   '/apply': {
-    title: 'Apply for a Free Founder Review of Your SaaS | RankedTag',
+    title: 'Apply for a Free Founder Review | RankedTag',
     description:
-      'Apply for a free, founder-reviewed SEO, AI SEO and GEO audit of your B2B SaaS. We take four founders a month and reply on LinkedIn within 48 hours.',
+      'Apply for a free, founder-reviewed SEO, AI SEO and GEO audit of your site. We take four founders a month and reply on LinkedIn within 48 hours.',
     canonical: 'https://rankedtag.com/apply',
   },
   '/keyword-density-checker': {

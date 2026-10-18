@@ -40,7 +40,7 @@ export default async function handler(req, res) {
 <rss version="2.0"><channel>
 <title>${SITE_NAME} Blog</title>
 <link>${SITE_URL}/blog</link>
-<description>SEO, GEO &amp; inbound growth for B2B SaaS founders.</description>
+<description>SEO, GEO and inbound growth for founders.</description>
 <language>en-us</language>
 ${items}
 </channel></rss>`);

@@ -21,7 +21,7 @@ export default function SiteFooter() {
             <a href="/" className="nav-logo" aria-label="RankedTag home">
               <img src="/rankedtag-logo-light.svg" alt="RankedTag" width="121" height="32" />
             </a>
-            <p className="footer-blurb">The Inbound Engine for SaaS founders who would rather build product than babysit an agency. Built with senior humans, Claude, and N8N.</p>
+            <p className="footer-blurb">The inbound engine for founders who would rather run the business than babysit an agency. Built with senior humans, Claude, and N8N.</p>
           </div>
           <div className="footer-col">
             <h4><span className="idx plain">001</span>What we do</h4>

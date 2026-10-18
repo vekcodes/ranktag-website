@@ -8,7 +8,7 @@ import { wrapProseTables } from '../../src/lib/proseTables.js';
 
 // Default social-image alt, kept identical to index.html's so every route's
 // social-tag set matches.
-const DEFAULT_OG_ALT = 'RankedTag — SEO, AI SEO, AEO & GEO agency for B2B SaaS';
+const DEFAULT_OG_ALT = 'RankedTag — SEO, AI SEO, AEO and GEO agency';
 
 const CSS = `
 @font-face{font-family:'Space Grotesk';font-style:normal;font-weight:300 700;font-display:swap;src:url('/fonts/space-grotesk.woff2') format('woff2')}
@@ -337,7 +337,7 @@ function footer() {
 <div class="footer-grid">
 <div class="footer-brand">
 <a href="/" aria-label="RankedTag home"><img src="/rankedtag-logo-light.svg" alt="RankedTag" width="121" height="32"/></a>
-<p class="footer-blurb">The Inbound Engine for SaaS founders who would rather build product than babysit an agency. Built with senior humans, Claude, and N8N.</p>
+<p class="footer-blurb">The inbound engine for founders who would rather run the business than babysit an agency. Built with senior humans, Claude, and N8N.</p>
 </div>
 <div class="footer-col"><h4><span>001</span>What we do</h4>
 ${services.map(([slug, label]) => `<a href="/what-we-do/${slug}">${label}</a>`).join('')}
@@ -370,7 +370,7 @@ ${services.map(([slug, label]) => `<a href="/what-we-do/${slug}">${label}</a>`).
 
 function leadCta() {
   return `<div class="lead-cta">
-<h3>Want this engine pointed at your SaaS?</h3>
+<h3>Want this engine pointed at your site?</h3>
 <p>We took Sendr.ai from 0 to 1.05M organic impressions in 6 months. Get a free founder-level review of your inbound.</p>
 <a href="/apply">Apply for a free review →</a></div>`;
 }
@@ -491,7 +491,7 @@ ${lead.cover_image_url
   const body = `<div class="wrap-wide">
 <div class="idx-head">
 <h1>The RankedTag Blog</h1>
-<p>Field notes on SEO, generative engine optimization, and building inbound engines for B2B SaaS.</p>
+<p>Field notes on SEO, generative engine optimization, and building inbound engines that compound.</p>
 </div>
 ${posts.length
     ? `${leadHtml}<div class="bento">${rest.map(tile).join('')}</div>`
@@ -507,7 +507,7 @@ ${posts.length
       name: `${SITE_NAME} Blog`,
       url: `${SITE_URL}/blog`,
       description:
-        'SEO, generative engine optimization (GEO), and inbound growth for B2B SaaS founders.',
+        'SEO, generative engine optimization (GEO), and inbound growth for founders.',
       publisher: {
         '@type': 'Organization',
         '@id': `${SITE_URL}/#org`,
@@ -543,9 +543,9 @@ ${posts.length
   ];
 
   return shell({
-    title: `${SITE_NAME} Blog — SEO, GEO & Inbound Growth for B2B SaaS`,
+    title: `${SITE_NAME} Blog — SEO, GEO and Inbound Growth`,
     description:
-      'Field notes on SEO, generative engine optimization (GEO), and building inbound engines that earn AI citations and qualified pipeline for B2B SaaS founders.',
+      'Field notes on SEO, generative engine optimization (GEO), and building inbound engines that earn AI citations and qualified pipeline.',
     canonical: `${SITE_URL}/blog`,
     ...(opts.tag ? { robots: 'noindex, follow' } : {}),
     ogImage: `${SITE_URL}/rankedtag-logo.png`,
