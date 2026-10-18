@@ -22,3 +22,8 @@ Google and AI signups/
 # Row backups written by scripts/fix-blog-service-links.mjs — real post content,
 # not source. Keep them locally, never commit them.
 blog-bodies-backup-*.json
+
+# Service-account credentials pasted here for transfer into Vercel env vars.
+# Never commit: contains a Google private key.
+vercel-gsc-env.txt
+*-gsc-env.txt
