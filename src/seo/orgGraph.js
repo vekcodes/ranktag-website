@@ -76,7 +76,7 @@ export const ORG_WEBSITE_JSONLD = {
               "@type": "Service",
               "name": "B2B SaaS SEO",
               "serviceType": "Search Engine Optimization",
-              "url": "https://rankedtag.com/what-we-do/saas-seo",
+              "url": "https://rankedtag.com/what-we-do/seo",
               "description": "Full-stack SEO for B2B SaaS: technical foundations, content engine and link strategy built to rank on Google and feed qualified pipeline.",
               "provider": { "@id": "https://rankedtag.com/#org" },
               "areaServed": { "@type": "Place", "name": "Worldwide" }
@@ -132,7 +132,7 @@ export const ORG_WEBSITE_JSONLD = {
               "@type": "Service",
               "name": "SEO Content Engine",
               "serviceType": "Content Marketing",
-              "url": "https://rankedtag.com/what-we-do/saas-content-marketing",
+              "url": "https://rankedtag.com/what-we-do/content-marketing",
               "description": "Senior-written, AI-accelerated SaaS content that ranks on Google and gets cited by LLMs — shipped weekly with schema and conversion paths.",
               "provider": { "@id": "https://rankedtag.com/#org" }
             }

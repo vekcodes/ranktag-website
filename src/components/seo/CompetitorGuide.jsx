@@ -318,7 +318,7 @@ export default function CompetitorGuide() {
             rather see it run at full depth on a live domain, the{' '}
             <Link to="/case-study/sendr">sendr.ai case study</Link> shows the same diagnosis applied across a
             whole site over six months, and{' '}
-            <Link to="/what-we-do/saas-seo">our B2B SaaS SEO service</Link> is this loop run weekly by
+            <Link to="/what-we-do/seo">our B2B SaaS SEO service</Link> is this loop run weekly by
             people who do it for a living.
           </p>
         </section>

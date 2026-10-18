@@ -105,7 +105,7 @@
       "in_sitemap": false,
       "indexable": false,
       "expected_status": 308,
-      "note": "moved in phase 1 -> /what-we-do/saas-seo"
+      "note": "moved in phase 1 -> /what-we-do/seo"
     },
     {
       "url": "/services/ai-seo",
@@ -145,7 +145,7 @@
       "in_sitemap": false,
       "indexable": false,
       "expected_status": 308,
-      "note": "moved in phase 1 -> /what-we-do/saas-content-marketing"
+      "note": "moved in phase 1 -> /what-we-do/content-marketing"
     },
     {
       "url": "/blog/why-website-visitors-leave",
@@ -556,7 +556,7 @@
       "note": "phase 1"
     },
     {
-      "url": "/what-we-do/saas-seo",
+      "url": "/what-we-do/seo",
       "kind": "capability-page",
       "in_sitemap": true,
       "indexable": true,
@@ -596,7 +596,7 @@
       "note": "phase 1"
     },
     {
-      "url": "/what-we-do/saas-content-marketing",
+      "url": "/what-we-do/content-marketing",
       "kind": "capability-page",
       "in_sitemap": true,
       "indexable": true,
@@ -605,6 +605,6 @@
     }
   ],
   "phases": {
-    "phase_1": "2026-10-18 /services -> /what-we-do, b2b-saas-seo -> saas-seo"
+    "phase_1": "2026-10-18 /services -> /what-we-do; b2b-saas-seo -> seo; saas-content-marketing -> content-marketing"
   }
 }

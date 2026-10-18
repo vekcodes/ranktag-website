@@ -15,7 +15,7 @@ export const SITE = 'https://rankedtag.com';
 
 export const SERVICES = [
   {
-    slug: 'saas-seo',
+    slug: 'seo',
     nav: 'Full-stack SEO',
     navDesc: 'Technical, content and authority in one compounding programme',
     // Money keyword: "full-stack SEO services" (vertical head terms live on the
@@ -63,7 +63,7 @@ export const SERVICES = [
       ['What kinds of business do you work with?', 'Three verticals, each with its own playbook: B2B SaaS, ecommerce, and local and service-area businesses. The technical and content craft on this page is shared across all three; the keyword strategy, the architecture and the measurement are not, which is why each vertical gets its own approach rather than a renamed template.'],
     ],
     tools: ['/competitor-analysis', '/domain-authority-checker'],
-    related: ['ai-seo', 'technical-seo', 'saas-content-marketing'],
+    related: ['ai-seo', 'technical-seo', 'content-marketing'],
   },
   {
     slug: 'ai-seo',
@@ -113,7 +113,7 @@ export const SERVICES = [
       ['How do you track AI search visibility?', 'We track your money queries across Google AI Overviews, ChatGPT, Perplexity, Gemini and Claude monthly — recording when you are cited, what for, and which page earned it. That citation share is reported next to Search Console data so you see the whole picture.'],
     ],
     tools: ['/competitor-analysis', '/page-speed-checker'],
-    related: ['generative-engine-optimization', 'answer-engine-optimization', 'saas-seo'],
+    related: ['generative-engine-optimization', 'answer-engine-optimization', 'seo'],
   },
   {
     slug: 'generative-engine-optimization',
@@ -163,7 +163,7 @@ export const SERVICES = [
       ['Is GEO worth it for a small brand?', 'Small brands benefit most. LLM answers are not pay-to-play and do not simply mirror domain authority — a precise, well-structured, corroborated source can out-cite an 8-figure incumbent. That is exactly how sendr.ai ended up above ZoomInfo.'],
     ],
     tools: ['/domain-authority-checker', '/competitor-analysis'],
-    related: ['ai-seo', 'answer-engine-optimization', 'saas-content-marketing'],
+    related: ['ai-seo', 'answer-engine-optimization', 'content-marketing'],
   },
   {
     slug: 'answer-engine-optimization',
@@ -263,13 +263,13 @@ export const SERVICES = [
       ['How fast will we see results from technical fixes?', 'Crawl and indexation fixes show in Search Console within days to weeks. Core Web Vitals improvements need a 28-day field-data window to register. Rankings respond as recrawling propagates — typically visible lift inside 4 to 8 weeks on affected templates.'],
     ],
     tools: ['/page-speed-checker', '/domain-authority-checker', '/competitor-analysis'],
-    related: ['saas-seo', 'ai-seo', 'answer-engine-optimization'],
+    related: ['seo', 'ai-seo', 'answer-engine-optimization'],
   },
   {
-    slug: 'saas-content-marketing',
+    slug: 'content-marketing',
     nav: 'SEO Content Engine',
     navDesc: 'Senior-written, AI-accelerated content that ranks & converts',
-    // Money keyword: "SaaS content marketing agency"
+    // Money keyword: "content marketing agency"
     title: 'Content Marketing Agency: The SEO Content Engine',
     description:
       'Content marketing that ranks and converts: senior strategists pick the fights, Claude compresses the research, editors ship weekly. Built to be cited by AI.',
@@ -313,7 +313,7 @@ export const SERVICES = [
       ['Who owns the content and the system when we stop?', 'You do — all of it. Every article is on your domain from day one, and the prompts, n8n workflows and editorial checklists are handed over on your infrastructure. We think retainers should be earned by results, not by holding your content ops hostage.'],
     ],
     tools: ['/keyword-density-checker', '/competitor-analysis'],
-    related: ['saas-seo', 'generative-engine-optimization', 'ai-seo'],
+    related: ['seo', 'generative-engine-optimization', 'ai-seo'],
   },
 ];
 

@@ -24,7 +24,7 @@
     },
     {
       "source": "/services/b2b-saas-seo",
-      "destination": "/what-we-do/saas-seo",
+      "destination": "/what-we-do/seo",
       "permanent": true
     },
     {
@@ -49,7 +49,7 @@
     },
     {
       "source": "/services/saas-content-marketing",
-      "destination": "/what-we-do/saas-content-marketing",
+      "destination": "/what-we-do/content-marketing",
       "permanent": true
     },
     {

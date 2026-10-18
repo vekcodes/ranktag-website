@@ -16,12 +16,12 @@ RankedTag builds inbound growth engines for B2B SaaS founders and marketing team
 
 Full details for every service live at [Services](https://rankedtag.com/what-we-do).
 
-- [B2B SaaS SEO](https://rankedtag.com/what-we-do/saas-seo): Full-stack search optimization — technical foundations, content engine, and link strategy built to rank on Google and feed qualified pipeline
+- [B2B SaaS SEO](https://rankedtag.com/what-we-do/seo): Full-stack search optimization — technical foundations, content engine, and link strategy built to rank on Google and feed qualified pipeline
 - [AI SEO](https://rankedtag.com/what-we-do/ai-seo): Optimization for AI-driven search surfaces, including Google AI Overviews and LLM-powered answers
 - [Answer Engine Optimization (AEO)](https://rankedtag.com/what-we-do/answer-engine-optimization): Structuring content and entities so a SaaS brand becomes the answer in AI Overviews, featured snippets, and answer engines
 - [Generative Engine Optimization (GEO)](https://rankedtag.com/what-we-do/generative-engine-optimization): Getting brands cited and recommended inside ChatGPT, Perplexity, Gemini, and Claude responses
 - [Technical SEO](https://rankedtag.com/what-we-do/technical-seo): 52-point technical foundation — crawlability, Core Web Vitals, schema graphs, internal linking, and AI-crawler readiness
-- [SEO Content Engine](https://rankedtag.com/what-we-do/saas-content-marketing): Senior-written, AI-accelerated SaaS content that ranks on Google and gets cited by LLMs, shipped weekly
+- [SEO Content Engine](https://rankedtag.com/what-we-do/content-marketing): Senior-written, AI-accelerated SaaS content that ranks on Google and gets cited by LLMs, shipped weekly
 
 ## Key Differentiators
 

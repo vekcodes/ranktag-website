@@ -155,7 +155,7 @@ export default function WhatWeDo() {
                 </p>
                 <p>
                   <strong>The foundation is fine but there is nothing on the site worth ranking.</strong>{' '}
-                  Start with <Link to="/what-we-do/saas-content-marketing">content marketing</Link>. Senior
+                  Start with <Link to="/what-we-do/content-marketing">content marketing</Link>. Senior
                   strategists pick the targets, Claude compresses the research, and a senior writer rewrites
                   every draft. The output is the comparison, alternatives, buying-guide and use-case pages your
                   buyers actually search for, not another round of "top 10 tools" that Google collapses into
@@ -163,7 +163,7 @@ export default function WhatWeDo() {
                 </p>
                 <p>
                   <strong>You want the whole engine, measured on revenue.</strong> That is{' '}
-                  <Link to="/what-we-do/saas-seo">full-stack SEO</Link>: technical foundation, intent-first
+                  <Link to="/what-we-do/seo">full-stack SEO</Link>: technical foundation, intent-first
                   keyword architecture, the content engine, entity and authority work, and instrumentation
                   that routes enquiries where your team already works. It is the same stack that took
                   sendr.ai from zero to 1.05M impressions in six months.

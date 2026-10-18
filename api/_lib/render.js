@@ -327,10 +327,10 @@ function nav() {
 // blog shell is the only footer not rendered from that component.
 function footer() {
   const services = [
-    ['saas-seo', 'Full-stack SEO'], ['ai-seo', 'AI SEO'],
+    ['seo', 'Full-stack SEO'], ['ai-seo', 'AI SEO'],
     ['generative-engine-optimization', 'Generative Engine Optimization'],
     ['answer-engine-optimization', 'Answer Engine Optimization'],
-    ['technical-seo', 'Technical SEO'], ['saas-content-marketing', 'SEO Content Engine'],
+    ['technical-seo', 'Technical SEO'], ['content-marketing', 'SEO Content Engine'],
   ];
   return `<footer class="footer"><div class="wrap-wide">
 <div class="footer-grid">
