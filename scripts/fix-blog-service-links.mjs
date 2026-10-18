@@ -10,6 +10,15 @@
 //      target="_blank" — i.e. the blog nofollows our own money pages. That
 //      predates the migration and is worth more than the redirect fix.
 //
+// ORDER OF OPERATIONS — READ THIS FIRST
+//   The blog is server-rendered from this database on every request, so the
+//   moment these bodies change, the LIVE site links to the new URLs. If the
+//   branch that creates /what-we-do/* has not been deployed yet, every one of
+//   those links is a live 404. Deploy first, confirm /what-we-do responds 200
+//   in production, and only then run this with --apply.
+//   The script enforces this below: it probes production and refuses to write
+//   until the destination URLs actually exist.
+//
 // SAFETY
 //   - Dry run by default. Nothing is written without --apply.
 //   - Prints a per-post diff summary before it touches anything.
@@ -51,13 +60,16 @@ const MOVES = {
 };
 
 const SITE = 'https://rankedtag.com';
+const SITE_HTTP = 'http://rankedtag.com';
 
 // Longest first, so /services/ai-seo is matched before bare /services.
 const ORDERED = Object.entries(MOVES).sort((a, b) => b[0].length - a[0].length);
 
 function rewritePaths(html) {
-  let out = html;
-  let n = 0;
+  // Upgrade our own http:// links first. They 301 to https, so an internal
+  // link written that way is a wasted hop for every crawler that follows it.
+  let out = html.split(`href="${SITE_HTTP}`).join(`href="${SITE}`);
+  let n = (html.match(/href="http:\/\/rankedtag\.com/g) || []).length;
   for (const [from, to] of ORDERED) {
     for (const variant of [`${SITE}${from}`, from]) {
       // Only inside href="..." — never touch prose that happens to say /services.
@@ -71,13 +83,27 @@ function rewritePaths(html) {
   return { html: out, count: n };
 }
 
+// Two posts render the URL as the link text. The href moved; the text has to
+// move with it, or the page shows a URL that no longer exists.
+function fixVisibleUrlText(html) {
+  let n = 0;
+  const out = html.replace(/rankedtag\.com\/services(\/[a-z-]+)?/g, (m, slug) => {
+    n += 1;
+    const path = slug ? (MOVES[`/services${slug}`] || `/what-we-do${slug}`) : '/what-we-do';
+    return `rankedtag.com${path}`;
+  });
+  return { html: out, count: n };
+}
+
 // Strip nofollow (and the pointless noreferrer/_blank) from internal links only.
 function unNofollowInternal(html) {
   let n = 0;
   const out = html.replace(/<a\s+([^>]*?)>/g, (tag, attrs) => {
     const href = attrs.match(/href="([^"]*)"/)?.[1] ?? '';
-    const internal = href.startsWith('/') || href.startsWith(SITE);
-    if (!internal || !/nofollow/.test(attrs)) return tag;
+    const internal = href.startsWith('/') || href.startsWith(SITE) || href.startsWith(SITE_HTTP);
+    // Query-string URLs (the blog's noindex ?tag= views) keep their nofollow.
+    const filtered = href.includes('?');
+    if (!internal || filtered || !/nofollow/.test(attrs)) return tag;
     n += 1;
     let a = attrs
       .replace(/\s*rel="[^"]*"/, '')
@@ -104,12 +130,47 @@ if (published[0].n < MIN_POSTS) {
   process.exit(1);
 }
 
+// Deploy gate. The destination URLs must already be live, because the blog is
+// rendered from this table on every request and a write here is instantly
+// visible. Learned the hard way: running this before the deploy put 94 live
+// 404s into 33 published posts.
+async function destinationsAreLive() {
+  const probes = [...new Set(Object.values(MOVES))];
+  const results = await Promise.all(
+    probes.map(async (path) => {
+      try {
+        const res = await fetch(`${SITE}${path}`, { redirect: 'follow' });
+        return { path, status: res.status };
+      } catch (e) {
+        return { path, status: 0, error: String(e) };
+      }
+    })
+  );
+  const dead = results.filter((r) => r.status !== 200);
+  return { dead, results };
+}
+
+if (APPLY) {
+  const { dead } = await destinationsAreLive();
+  if (dead.length) {
+    console.error('\nREFUSING TO WRITE. These destination URLs are not live yet:');
+    for (const d of dead) console.error(`  ${String(d.status).padStart(3)}  ${SITE}${d.path}`);
+    console.error(
+      '\nThe blog renders from this database on every request, so writing now would put\n' +
+        'live 404s into published posts. Deploy the branch first, then re-run.'
+    );
+    process.exit(1);
+  }
+  console.log('Deploy gate passed: every destination URL returns 200 in production.');
+}
+
 const changes = [];
 for (const r of rows) {
   const a = rewritePaths(r.content_html);
-  const b = unNofollowInternal(a.html);
+  const t = fixVisibleUrlText(a.html);
+  const b = unNofollowInternal(t.html);
   if (b.html !== r.content_html) {
-    changes.push({ id: r.id, slug: r.slug, before: r.content_html, after: b.html, links: a.count, nofollow: b.count });
+    changes.push({ id: r.id, slug: r.slug, before: r.content_html, after: b.html, links: a.count + t.count, nofollow: b.count });
   }
 }
 

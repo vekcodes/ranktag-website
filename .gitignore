@@ -18,3 +18,7 @@ htmlcov
 # Raw signup screenshots (customer records). The optimised, published
 # versions live in public/proof/ — regenerate with scripts/optimize-signups.py
 Google and AI signups/
+
+# Row backups written by scripts/fix-blog-service-links.mjs — real post content,
+# not source. Keep them locally, never commit them.
+blog-bodies-backup-*.json
