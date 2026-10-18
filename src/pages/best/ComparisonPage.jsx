@@ -10,6 +10,7 @@ import { breadcrumb, faqPage, SITE } from '../../lib/schema.js';
 import { COMPARISON_BY_SLUG } from './comparisonsData.js';
 import '../Home.css';
 import '../whatWeDo/WhatWeDo.css';
+import '../../components/seo/toolGuide.css';
 import './Best.css';
 
 // One template renders every /best/<slug> comparison page. These target

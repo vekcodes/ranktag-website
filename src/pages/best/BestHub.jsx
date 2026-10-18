@@ -8,6 +8,7 @@ import { breadcrumb, SITE } from '../../lib/schema.js';
 import { COMPARISONS, BEST_HUB_META } from './comparisonsData.js';
 import '../Home.css';
 import '../whatWeDo/WhatWeDo.css';
+import '../../components/seo/toolGuide.css';
 import './Best.css';
 
 // /best — the index for the comparison pages, and the page that explains the

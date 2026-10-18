@@ -8,6 +8,7 @@ import { breadcrumb, SITE } from '../../lib/schema.js';
 import { VERTICALS, WHO_WE_HELP_META } from './verticalsData.js';
 import '../Home.css';
 import '../whatWeDo/WhatWeDo.css';
+import '../../components/seo/toolGuide.css';
 
 // /who-we-help — the crawlable index of the vertical pages, and the page that
 // argues why they are separate pages at all. It carries its own prose rather

@@ -10,6 +10,8 @@ import { breadcrumb, faqPage, ORG_ID, SITE } from '../../lib/schema.js';
 import { VERTICAL_BY_SLUG, SOURCES } from './verticalsData.js';
 import '../Home.css';
 import '../whatWeDo/WhatWeDo.css';
+import '../../components/seo/toolGuide.css';
+import '../best/Best.css';
 import './verticals.css';
 
 // One template renders every vertical page (/saas-seo-agency etc) from

@@ -73,7 +73,12 @@
 .vp-evidence .cite { margin-top: var(--s-1); }
 
 /* ── When / who / deliverable under a playbook step ─────────────────── */
+/* .svc-deliver-row is a two-column grid whose first column is `auto` and
+   holds the row number. An extra child lands in that auto column, and this
+   block is wide enough to blow it open — which squeezed every heading into a
+   one-word-per-line sliver. It belongs in column two, under the copy. */
 .vp-step-meta {
+  grid-column: 2;
   margin: var(--s-4) 0 0;
   display: grid;
   gap: var(--s-2);

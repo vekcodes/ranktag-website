@@ -8,6 +8,7 @@ import JsonLd from '../../components/JsonLd.jsx';
 import { softwareTool, breadcrumb, faqPage, SITE } from '../../lib/schema.js';
 import { TOOL_META } from '../../seo/routeMeta.js';
 import '../ToolPage.css';
+import '../../components/seo/toolGuide.css';
 import './tools.css';
 
 // Five types, chosen because they cover most of what a business site actually

@@ -75,6 +75,29 @@ for f in pages:
     for m in re.findall(r'https://rankedtag\.com(/services[^"\'\s<]*)', html):
         fails.append(f"[canonical] {os.path.relpath(f, DIST)} still references {m}")
 
+# CSS ownership: if a page's markup uses a class, the stylesheet that defines
+# it must be imported by that page. Vite splits CSS per route chunk, so a
+# missing import renders the section unstyled rather than erroring. This
+# caught toolGuide.css missing from 8 pages and Best.css from the vertical
+# template, both of which shipped looking broken.
+SRC = os.path.join(os.path.dirname(DIST), "src")
+OWNERS = {
+    "dg-article": "components/seo/toolGuide.css",
+    "best-table": "pages/best/Best.css",
+    "vp-fact-grid": "pages/verticals/verticals.css",
+}
+for dirpath, _, names in os.walk(os.path.join(SRC, "pages")):
+    for n in names:
+        if not n.endswith(".jsx"):
+            continue
+        fp = os.path.join(dirpath, n)
+        src = open(fp, encoding="utf-8").read()
+        for cls, sheet in OWNERS.items():
+            if cls in src and os.path.basename(sheet) not in src:
+                fails.append(
+                    f"[css] {os.path.relpath(fp, SRC)} uses .{cls} but does not import {os.path.basename(sheet)}"
+                )
+
 # word floor: no indexable page ships under 1,000 words. Measured on the
 # whole body rather than <main>, because several older templates have no
 # <main> wrapper and measuring those returned zero.

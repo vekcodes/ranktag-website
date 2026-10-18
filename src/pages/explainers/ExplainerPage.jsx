@@ -12,6 +12,7 @@ import { VERTICALS } from '../verticals/verticalsData.js';
 import { COMPARISONS } from '../best/comparisonsData.js';
 import '../Home.css';
 import '../whatWeDo/WhatWeDo.css';
+import '../../components/seo/toolGuide.css';
 import '../best/Best.css';
 import '../verticals/verticals.css';
 

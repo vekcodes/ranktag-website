@@ -8,6 +8,7 @@ import JsonLd from '../../components/JsonLd.jsx';
 import { softwareTool, breadcrumb, faqPage, SITE } from '../../lib/schema.js';
 import { TOOL_META } from '../../seo/routeMeta.js';
 import '../ToolPage.css';
+import '../../components/seo/toolGuide.css';
 import './tools.css';
 
 // Google truncates by pixel width, not character count, which is why
