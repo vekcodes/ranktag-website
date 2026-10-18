@@ -380,25 +380,27 @@ export default function VerticalPage() {
           </div>
         </section>
 
-        {/* ── The shortlist page for this vertical ────────────── */}
-        {/* Different intent from this page, so it gets its own link rather
-            than being buried: a buyer still building a shortlist is not ready
-            for a sales page, and sending them to one wastes the visit. */}
-        <section className="svc-prose ruled" data-reveal>
-          <div className="container">
-            <article className="dg-article">
-              <section className="dg-section">
-                <h2 id="still-comparing">Still building a shortlist?</h2>
-                <p>
-                  Then this page is the wrong one, and we would rather say so. We publish a researched
-                  comparison of {v.comparisonLabel}, with published pricing where it exists and who each
-                  one does not suit. We are on it, positioned where we honestly belong.{' '}
-                  <Link to={v.comparison} className="link-wipe">Read the comparison</Link>.
-                </p>
-              </section>
-            </article>
-          </div>
-        </section>
+        {/* The shortlist page for this vertical. Different intent from this
+             page, so it gets its own link rather than being buried: a buyer
+             still building a shortlist is not ready for a sales page. Only
+             rendered where a matching /best page actually exists. */}
+        {v.comparison && (
+          <section className="svc-prose ruled" data-reveal>
+            <div className="container">
+              <article className="dg-article">
+                <section className="dg-section">
+                  <h2 id="still-comparing">Still building a shortlist?</h2>
+                  <p>
+                    Then this page is the wrong one, and we would rather say so. We publish a researched
+                    comparison of {v.comparisonLabel}, with published pricing where it exists and who each
+                    one does not suit. We are on it, positioned where we honestly belong.{' '}
+                    <Link to={v.comparison} className="link-wipe">Read the comparison</Link>.
+                  </p>
+                </section>
+              </article>
+            </div>
+          </section>
+        )}
 
         {/* Disqualifiers. Converts better than another benefits list, and it
              is the kind of candid passage an answer engine quotes. */}
@@ -486,12 +488,14 @@ export default function VerticalPage() {
             <div className="container">
               <span className="eyebrow bracket">RELATED READING</span>
               <div className="vp-reading-grid">
-                <div>
-                  <h3>Still comparing agencies</h3>
-                  <Link to={v.relatedReading.comparisonPage} className="link-wipe">
-                    {v.comparisonLabel}
-                  </Link>
-                </div>
+                {v.relatedReading.comparisonPage && (
+                  <div>
+                    <h3>Still comparing agencies</h3>
+                    <Link to={v.relatedReading.comparisonPage} className="link-wipe">
+                      {v.comparisonLabel}
+                    </Link>
+                  </div>
+                )}
                 <div>
                   <h3>The craft behind this</h3>
                   <ul>

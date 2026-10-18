@@ -63,16 +63,17 @@ export default function WhoWeHelp() {
             </div>
 
             <div className="col-10 svc-hero-head">
-              <span className="eyebrow bracket svc-eyebrow">WHO WE HELP · THREE VERTICALS</span>
-              <h1 className="svc-h1">Three verticals, three playbooks.</h1>
+              <span className="eyebrow bracket svc-eyebrow">WHO WE HELP · SIX VERTICALS</span>
+              <h1 className="svc-h1">Six verticals, six playbooks.</h1>
             </div>
 
             <div className="col-6 svc-hero-dek">
               <p className="svc-dek">
-                RankedTag works with B2B SaaS companies, ecommerce retailers, and local or service-area
-                businesses. The craft is shared; the strategy is not. Each vertical has a different buying
-                cycle, a different architecture problem and a different definition of a result, so each gets
-                its own approach rather than a renamed template.
+                RankedTag works with B2B SaaS companies, ecommerce retailers, local and service-area
+                businesses, healthcare providers, law firms and home services trades. The craft is shared;
+                the strategy is not. Each has a different buying cycle, a different architecture problem and
+                a different definition of a result, so each gets its own approach rather than a renamed
+                template.
               </p>
             </div>
             <div className="col-5 start-8 svc-hero-cta">
@@ -112,7 +113,7 @@ export default function WhoWeHelp() {
                   paragraph whether you have met it before.
                 </p>
                 <p>
-                  The three verticals below are genuinely different pieces of work. For{' '}
+                  The six verticals below are genuinely different pieces of work. For{' '}
                   <Link to="/saas-seo-agency">B2B SaaS</Link>, the hard part is economic: the queries worth
                   the most have almost no search volume, the category may not have a name yet, and a
                   three-month sales cycle makes last-click reporting erase the contribution of the page that
@@ -131,6 +132,16 @@ export default function WhoWeHelp() {
                   distance and prominence, driven by a Google Business Profile, reviews and citations. You can
                   rank well organically and still get no calls, and your position changes from one postcode to
                   the next, so there is no single number to report.
+                </p>
+                <p>
+                  Three more sit on top of that foundation with constraints of their own.{' '}
+                  <Link to="/healthcare-seo-agency">Healthcare</Link> is judged against expert consensus
+                  rather than against the competing page, which makes named clinical authorship the mechanism
+                  rather than a nicety. <Link to="/law-firm-seo-agency">Law firms</Link> are usually carrying
+                  a practice-area and location matrix that is quietly competing with itself, so the first
+                  deliverable is a list of pages to delete. <Link to="/home-services-seo-agency">Home
+                  services</Link> are capped by travel radius before anything else, and most of the job is
+                  won from a profile before anyone opens the website.
                 </p>
                 <p>
                   What carries across all three is the craft:{' '}

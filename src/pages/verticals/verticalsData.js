@@ -64,6 +64,14 @@ export const SOURCES = {
     label: 'RankedTag, prices read from 33 agency websites, 18–19 October 2026',
     href: '/best',
   },
+  googleHelpfulContent: {
+    label: 'Google Search Central, creating helpful, reliable, people-first content',
+    href: 'https://developers.google.com/search/docs/fundamentals/creating-helpful-content',
+  },
+  googleLocalServicesChecks: {
+    label: 'Google Ads Help, background checks for Local Services ads',
+    href: 'https://support.google.com/adwords/answer/6226575',
+  },
   geoStudy: {
     label: 'Aggarwal et al., GEO: Generative Engine Optimization, KDD 2024',
     href: 'https://arxiv.org/abs/2311.09735',
@@ -625,6 +633,806 @@ export const VERTICALS = [
   },
 
   {
+    slug: 'healthcare-seo-agency',
+    nav: 'Healthcare',
+    navDesc: 'YMYL credibility, clinician authorship and multi-provider architecture',
+    title: 'Healthcare SEO Agency: Built for YMYL Scrutiny',
+    description:
+      'Healthcare SEO agency: clinician authorship, YMYL credibility, provider and location architecture, and the review and tracking constraints the sector carries.',
+    eyebrow: 'WHO WE HELP · HEALTHCARE',
+    h1: 'A healthcare SEO agency that treats credibility as the ranking problem.',
+    audienceName: 'Healthcare providers, clinics and health technology companies',
+    problemsEyebrow: 'WHY HEALTHCARE SEO IS HARDER',
+    approachH2: 'The healthcare playbook, in the order it pays.',
+    engagementH2: 'What happens after you send a domain.',
+    faqH: 'Healthcare SEO, asked and answered.',
+    ctaSub:
+      'Drop your domain. The founder runs the review personally and comes back within 48 hours on where your credibility signals and provider architecture actually stand, even when the answer is no.',
+
+    answer:
+      'A healthcare SEO agency works under tighter constraints than most. Content sits in the category Google treats as highest risk, so authorship, accuracy and institutional credibility carry unusual weight. The architectural work is provider, service and location pages that do not compete with each other, and the measurement has to respect patient privacy rules.',
+
+    intro: [
+      'Healthcare is the clearest case of a vertical where the ranking problem is mostly a credibility problem. Google asks its quality raters to apply the highest scrutiny to content that could affect someone’s health, and the practical consequence is that an unattributed article written by a marketing agency competes badly against the same information published under a named clinician.',
+      'The second complication is structural. A practice with eleven clinicians across four sites has a page architecture problem before it has a content problem: provider pages, service pages and location pages all describe overlapping things, and left alone they compete with each other for the same searches.',
+    ],
+
+    keyFacts: [
+      {
+        stat: 'Trust first',
+        label: 'Google states that of the E-E-A-T aspects, "trust is most important" — the others exist to support it',
+        source: 'googleHelpfulContent',
+      },
+      {
+        stat: 'Highest bar',
+        label: 'for YMYL topics Google says content "must be highly accurate and consistent with established expert consensus"',
+        source: 'googleHelpfulContent',
+      },
+      {
+        stat: 'Not a factor',
+        label: 'Google is explicit that "E-E-A-T itself isn’t a specific ranking factor", so it cannot be bought or bolted on',
+        source: 'googleHelpfulContent',
+      },
+      {
+        stat: '34.5%',
+        label: 'lower click-through rate at position one where an AI Overview appears — health queries attract them heavily',
+        source: 'ahrefsAio',
+      },
+      {
+        stat: 'Relevance, distance, popularity',
+        label: 'the three factors Google names for local results, which decide whether a clinic appears in the Map Pack at all',
+        source: 'googleLocalRanking',
+      },
+    ],
+
+    quote: {
+      text: 'Of these aspects, trust is most important.',
+      who: 'Google',
+      role: 'Search Central, on E-E-A-T and content quality',
+      source: 'googleHelpfulContent',
+    },
+
+    comparisonTable: {
+      caption: 'What changes when the agency has worked under YMYL scrutiny',
+      columns: ['Capability', 'Generalist SEO agency', 'Healthcare specialist'],
+      rows: [
+        ['Authorship', 'A staff writer byline, or none', 'Named clinician, credentials, and a review date on the page'],
+        ['Medical accuracy', 'Checked against other articles', 'Checked against expert consensus, with a documented review step'],
+        ['Provider pages', 'Treated as team bios', 'Treated as entities, with structured data and consistent facts'],
+        ['Service vs condition pages', 'Both written, allowed to overlap', 'Intent assigned per page so they stop competing'],
+        ['Multi-location', 'One page per site, often duplicated', 'Location architecture with genuinely local substance'],
+        ['Analytics', 'Standard tracking, everywhere', 'Scoped to respect patient privacy obligations on clinical pages'],
+        ['Reviews', 'Volume campaigns', 'Compliance-aware process that does not solicit clinical detail'],
+        ['Reporting', 'Sessions and rankings', 'Appointment enquiries by service and location'],
+      ],
+    },
+
+    problems: [
+      {
+        h: 'Your content is judged against expert consensus, not against competitors',
+        p: 'Most verticals reward content that is better than the other results. Health content is assessed on whether it is accurate and consistent with what the field actually holds to be true. An article that is well-written, well-optimised and subtly out of date with current guidance is a liability rather than an asset.',
+        evidence: { source: 'googleHelpfulContent', note: 'Google states YMYL content "must be highly accurate and consistent with established expert consensus".' },
+      },
+      {
+        h: 'Nobody credible is named on the page',
+        p: 'Agency-written health content with no author, or a generic "editorial team" byline, is competing against pages published under a named clinician with verifiable credentials. The information may be identical. The credibility signal is not, and in this vertical that signal does most of the work.',
+        evidence: { source: 'googleHelpfulContent', note: 'Google names trust as the most important element of E-E-A-T, with experience, expertise and authoritativeness supporting it.' },
+      },
+      {
+        h: 'Your provider, service and location pages compete with each other',
+        p: 'A clinic with eleven clinicians, nine services and four sites has well over a hundred plausible page combinations and usually publishes a confused subset. Google consolidates, picks one, and it is rarely the one you optimised. This is an architecture decision, not a content volume problem.',
+        evidence: { source: 'googleLocalRanking', note: 'Google ties local relevance to how well a profile matches the search, which a set of near-identical pages actively muddies.' },
+      },
+      {
+        h: 'Patients search symptoms; you publish services',
+        p: 'The query that starts the journey describes a feeling, not a procedure. The page you have describes the procedure in clinical language. The gap between those two vocabularies is where most healthcare organic traffic is lost, and closing it is editorial work rather than technical work.',
+        evidence: { source: 'ahrefsAio', note: 'Symptom queries are informational, and Ahrefs found AI Overviews hit informational queries hardest with a 34.5% lower position-one CTR.' },
+      },
+      {
+        h: 'Privacy obligations constrain how you can measure and retarget',
+        p: 'Standard analytics and advertising tags behave differently when the page itself reveals something about a visitor’s health. Many practices either ignore this and accumulate risk, or over-correct and lose all visibility into what is working. Both are avoidable with a deliberate measurement design, decided before tags are deployed rather than after.',
+      },
+      {
+        h: 'AI answers now sit above health results',
+        p: 'Health is among the query types where an AI summary most often occupies the space above the organic results, which changes what a first-page position is worth. The defensible position is being the source such an answer draws on, which depends on the same credibility signals as ranking, expressed in a more extractable form.',
+        evidence: { source: 'ahrefsAio', note: 'Across 300,000 keywords, an AI Overview correlated with a 34.5% lower click-through rate at position one.' },
+      },
+    ],
+
+    approach: [
+      {
+        h: 'Authorship and review, built into the publishing process',
+        p: 'Every clinical page gets a named author with verifiable credentials, a documented review step and a visible review date. This is a workflow change before it is an SEO change, and it is the single highest-leverage thing a healthcare site can do, which is why it sits inside',
+        to: '/what-we-do/content-marketing',
+        label: 'the content engine',
+        when: 'Weeks 1–4',
+        who: 'Senior editor, with a named clinician from your side for review',
+        deliverable: 'An authorship and medical review workflow, author entity pages, and review metadata on every clinical page',
+      },
+      {
+        h: 'An entity graph your organisation actually matches',
+        p: 'Providers, locations and the organisation itself modelled as entities with consistent facts across your site, your profiles and third-party directories, so search engines and assistants resolve who you are without guessing. That is the structured data and consistency half of',
+        to: '/what-we-do/technical-seo',
+        label: 'technical SEO',
+        when: 'Weeks 2–6',
+        who: 'Technical strategist',
+        deliverable: 'An organisation, provider and location schema graph, plus a reconciled set of business facts across every source',
+      },
+      {
+        h: 'Page architecture decided before more content is written',
+        p: 'Which page owns the condition, which owns the treatment, which owns the location, and which should not exist. On a multi-site practice this usually means merging or removing pages rather than adding them, which is the part of',
+        to: '/what-we-do/seo',
+        label: 'full-stack SEO',
+        when: 'Weeks 3–8',
+        who: 'Senior strategist',
+        deliverable: 'An intent map covering every provider, service, condition and location page, with merge, differentiate or remove decided for each',
+      },
+      {
+        h: 'Symptom-language content that routes to the right service',
+        p: 'Pages written in the vocabulary patients actually use, answering the question first and connecting it to the relevant service and clinician. Answering plainly up front is also what makes a page quotable, which is the territory of',
+        to: '/what-we-do/answer-engine-optimization',
+        label: 'answer engine optimisation',
+        when: 'Month 2 onwards, weekly',
+        who: 'Senior editor, clinician-reviewed',
+        deliverable: 'Condition and symptom pages in patient language, each linked to the service page and provider it should convert to',
+      },
+      {
+        h: 'Measurement designed around privacy, not bolted on after',
+        p: 'What is tracked, on which pages, and what is deliberately not collected, agreed before deployment with whoever owns compliance on your side. We are not your legal advisers and will say so, but we will not quietly deploy tags on clinical pages either. The reporting that results is still tied to',
+        to: '/what-we-do/ai-seo',
+        label: 'AI SEO measurement',
+        when: 'Agreed week 1, live by week 4',
+        who: 'Technical strategist with your compliance owner',
+        deliverable: 'A documented measurement plan naming what is collected where, and appointment-enquiry reporting by service and location',
+      },
+    ],
+
+    proof: false,
+
+    timeline: [
+      ['Week 1', 'Founder review of the domain, credibility audit of clinical content, inventory of provider, service, condition and location pages, and a measurement scoping conversation with your compliance owner.', 'You see how many of your pages are competing with each other, which is usually more than expected.'],
+      ['Month 1', 'Authorship and review workflow live, author entities published, schema graph shipped, first architecture decisions applied.', 'Credibility signals land and consolidation begins. Early movement is usually on pages that stopped competing.'],
+      ['Month 3', 'Symptom-language content shipping weekly against the mapped gaps, location pages rebuilt where they earn it, profiles and directories reconciled.', 'Visibility on the patient-language queries that previously went to a health publisher instead of you.'],
+      ['Month 6', 'Defending the service and condition terms that convert, widening coverage, refreshing clinical content as guidance changes.', 'Compounding on the pages that carry both credibility and intent. Appointment enquiries reportable by service.'],
+    ],
+
+    notFor: [
+      'Organisations that cannot supply a clinician to review content. The authorship requirement is the mechanism, not a formality, and we will not ghostwrite clinical claims under an invented byline.',
+      'Anyone wanting volume content production on health topics without a review step. That is the fastest way to accumulate liability in the one vertical where accuracy is assessed directly.',
+      'Practices needing legal or compliance advice on patient privacy. We will design measurement conservatively and work with your compliance owner, but we are not your advisers on it.',
+      'Buyers who need a healthcare case study before signing. Our one measured result is B2B SaaS. That is a fair requirement and today we would not meet it.',
+    ],
+
+    engagement: [
+      [
+        'The free founder review',
+        'You send a domain. The founder goes through it personally: whether clinical pages carry named, credentialed authorship, how many of your provider, service and location pages are competing, how your organisation resolves as an entity across sources, and what is currently being tracked on clinical pages. A verdict within 48 hours.',
+      ],
+      [
+        'Agree the review workflow before any content is scoped',
+        'Who reviews clinical content, how long it takes them, and what the sign-off looks like. This governs the pace of everything downstream, and discovering in month two that no clinician has time is the most common way healthcare content programmes stall.',
+      ],
+      [
+        'Scope and price, after the review',
+        'No rate card. A single-site practice and an eleven-clinician group across four locations are different jobs, and the architecture work differs more than the content work does.',
+      ],
+      [
+        'Credibility and architecture first, volume last',
+        'Authorship, entity consistency and the intent map come before new pages, because publishing more content into a confused architecture makes the consolidation problem worse rather than better.',
+      ],
+      [
+        'Handover, not hostage-taking',
+        'The intent map, the authorship workflow, the schema templates and the measurement plan are documented and live with you. If your next agency or first in-house hire inherits anything, it should be decisions rather than archaeology.',
+      ],
+    ],
+
+    objections: [
+      [
+        'How will I know it is working before appointment enquiries move?',
+        'By agreeing leading indicators up front. Consolidation of competing pages, indexation of new condition content, movement on patient-language queries, and the share of clinical pages carrying named authorship are all measurable within weeks. Enquiries follow. If none of those have moved by week six, something is wrong and we say so rather than waiting for a quarterly review.',
+      ],
+      [
+        'Our clinicians have no time to review content. Can you work around it?',
+        'Not really, and we would rather say so before you sign. Named, credentialed review is the mechanism that makes healthcare content competitive, and inventing a byline is both dishonest and discoverable. What we can do is reduce the burden: tighter drafts, a structured review format, and batching so a clinician reviews several pieces in one sitting rather than being interrupted weekly.',
+      ],
+      [
+        'What about patient privacy and our analytics?',
+        'We design the measurement conservatively and we do not deploy tracking on clinical pages without your compliance owner agreeing what is collected. We are not your legal advisers on this and will not pretend otherwise. What we will not do is the common alternative, which is deploying standard tags everywhere and letting you discover the exposure later.',
+      ],
+      [
+        'Why not hire a healthcare marketing agency that does everything?',
+        'If you need paid media, brand and patient communications under one roof, you probably should. What a full-service healthcare agency rarely has is someone who will tell you that forty of your pages are competing with each other and should be merged. The architectural and credibility work is a specialist job, and it is usually the constraint.',
+      ],
+    ],
+
+    relatedReading: {
+      capabilities: ['/what-we-do/technical-seo', '/what-we-do/content-marketing', '/what-we-do/answer-engine-optimization'],
+      posts: [
+        ['/blog/why-business-invisible-online', 'Why your business is invisible online'],
+        ['/blog/find-customers-searching-for-your-product', 'Finding customers already searching for you'],
+      ],
+      tool: ['/competitor-analysis', 'Competitor Analysis'],
+    },
+
+    faqs: [
+      [
+        'What does a healthcare SEO agency do differently?',
+        'It treats credibility as the primary ranking problem rather than a finishing touch. That means named clinical authorship with verifiable credentials, a documented medical review step, content checked against expert consensus, and an entity graph that resolves your organisation, providers and locations consistently. The architectural work on competing provider and service pages usually matters more than publishing volume.',
+      ],
+      [
+        'Why is healthcare SEO harder than other industries?',
+        'Because the content sits in the category Google treats as highest risk. Its guidance states that content on topics affecting health must be highly accurate and consistent with established expert consensus, which is a stricter test than being better than the competing page. Add multi-provider, multi-location architecture and privacy constraints on measurement, and the job is genuinely different.',
+      ],
+      [
+        'Does E-E-A-T matter more for medical content?',
+        'The expectation is higher, yes. Google says that of the E-E-A-T aspects trust is most important, and that it applies extra weight on topics that could significantly affect health. It also states plainly that E-E-A-T itself is not a specific ranking factor, which matters: it cannot be bought, and anyone selling an E-E-A-T package is selling a concept rather than a mechanism.',
+      ],
+      [
+        'Do our articles need a doctor to write them?',
+        'They need a credentialed clinician to be genuinely accountable for the content, which in practice usually means a named reviewer rather than an author writing from scratch. A professional writer drafting and a clinician reviewing and signing is both realistic and legitimate. What does not work is an invented or generic byline, which is discoverable and undermines the signal it was meant to create.',
+      ],
+      [
+        'How should we handle pages for multiple providers and locations?',
+        'As an architecture decision made before more pages are written. Decide which page owns the condition, which owns the treatment, which owns the location, and which should not exist. For a multi-site practice this usually means merging or removing pages. Publishing more content into a confused structure reliably makes consolidation worse.',
+      ],
+      [
+        'Can we track conversions on clinical pages?',
+        'Carefully, and with your compliance owner involved in deciding what is collected where. Standard analytics and advertising tags behave differently when the page itself reveals something about a visitor. We design measurement conservatively and document it. We are not your legal advisers on patient privacy and will not act as them.',
+      ],
+      [
+        'How long does healthcare SEO take?',
+        'Consolidation of competing pages can show within weeks because it changes how existing content is evaluated rather than waiting for new pages to earn authority. Credibility signals compound over months. Condition and symptom content follows the ordinary curve. The pace is usually set by clinician review capacity rather than by anything technical.',
+      ],
+      [
+        'Do AI Overviews affect health searches more than others?',
+        'Health queries are heavily informational, and Ahrefs found across 300,000 keywords that an AI Overview correlated with a 34.5% lower click-through rate at position one, with informational queries absorbing most of the effect. The practical response is to make clinical content genuinely citable and to weight effort towards service and location pages that convert.',
+      ],
+      [
+        'Should we publish symptom content or stick to services?',
+        'Both, with a clear division. Symptom and condition content in patient language captures the query that starts the journey; service pages in clinical language convert it. The common failure is publishing only the second, which means a health publisher answers your patient’s first question and owns the relationship from there.',
+      ],
+      [
+        'Do you have healthcare case studies?',
+        'No, and we will not borrow one. Our single measured, cross-checkable result is sendr.ai in B2B SaaS. The credibility, entity and architecture craft transfers directly; healthcare results do not exist until we have produced them. If you need a sector reference before signing, that is reasonable, and today we would not meet it.',
+      ],
+    ],
+
+    related: ['saas-seo-agency', 'local-seo-agency'],
+  },
+  {
+    slug: 'law-firm-seo-agency',
+    nav: 'Law firms',
+    navDesc: 'Practice-area architecture, YMYL credibility and Map Pack competition',
+    title: 'Law Firm SEO Agency: Practice Areas First',
+    description:
+      'Law firm SEO agency: practice-area and location architecture without thin pages, YMYL credibility, Map Pack competition and advertising-rule constraints.',
+    eyebrow: 'WHO WE HELP · LAW FIRMS',
+    h1: 'A law firm SEO agency that will tell you which pages to delete.',
+    audienceName: 'Law firms and legal practices',
+    problemsEyebrow: 'WHY LEGAL SEO GOES WRONG',
+    approachH2: 'The legal playbook, in the order it pays.',
+    engagementH2: 'What happens after you send a domain.',
+    faqH: 'Law firm SEO, asked and answered.',
+    ctaSub:
+      'Drop your domain. The founder runs the review personally and comes back within 48 hours on how many of your practice-area pages are competing with each other, even when the answer is that you need fewer pages, not more.',
+
+    answer:
+      'A law firm SEO agency works on three fronts: a practice-area and location architecture that does not generate near-duplicate pages, credibility signals for content Google treats as high risk, and Map Pack visibility, which for most firms produces more enquiries than the organic results beneath it.',
+
+    intro: [
+      'Legal is the vertical where the standard agency playbook does the most damage. The instinct is to multiply practice areas by cities and publish the matrix, because it looks like coverage and it is easy to sell. What it produces is dozens of pages that differ by a place name, which Google consolidates, and which collectively make the site look thinner rather than larger.',
+      'The firms that win organic do fewer, better pages, hold the Map Pack in the areas they can realistically serve, and publish content a practising solicitor or attorney would put their name to. None of that is complicated. It is just slower to sell than a hundred-page matrix.',
+    ],
+
+    keyFacts: [
+      {
+        stat: 'Highest bar',
+        label: 'legal sits in the category Google says must be "highly accurate and consistent with established expert consensus"',
+        source: 'googleHelpfulContent',
+      },
+      {
+        stat: 'Trust first',
+        label: 'Google states that of the E-E-A-T aspects, "trust is most important" — which is the whole legal buying decision',
+        source: 'googleHelpfulContent',
+      },
+      {
+        stat: 'Relevance, distance, popularity',
+        label: 'the three factors Google names for local results, and distance is the one no firm can change',
+        source: 'googleLocalRanking',
+      },
+      {
+        stat: '74%',
+        label: 'of consumers consult two or more review sites before deciding, so inconsistent firm details are seen, not hidden',
+        source: 'brightlocal2025',
+      },
+      {
+        stat: '93%',
+        label: 'expect a response to their review — which for a law firm has to be handled without discussing the matter',
+        source: 'brightlocal2025',
+      },
+    ],
+
+    quote: {
+      text: 'Local results are mainly based on relevance, distance, and popularity.',
+      who: 'Google',
+      role: 'Google Business Profile Help, on how local ranking is determined',
+      source: 'googleLocalRanking',
+    },
+
+    comparisonTable: {
+      caption: 'The two approaches to legal SEO, and what each produces',
+      columns: ['Decision', 'The matrix approach', 'The architecture approach'],
+      rows: [
+        ['Page count', 'Practice areas multiplied by cities', 'One page per intent that can be genuinely served'],
+        ['City pages', 'One per town on the list', 'Only where real work, courts or presence justify it'],
+        ['What Google does with them', 'Consolidates and picks one, often not yours', 'Indexes them as distinct, because they are'],
+        ['Authorship', 'Agency-written, unattributed', 'Named practitioner, with credentials'],
+        ['Map Pack', 'Treated as a by-product', 'Treated as the primary asset for most enquiries'],
+        ['Reviews', 'Volume campaign', 'Steady process, responses that disclose nothing'],
+        ['Case results', 'Published as marketing claims', 'Handled within your jurisdiction’s advertising rules'],
+        ['Reporting', 'Rankings across a wide keyword list', 'Enquiries by practice area and by area served'],
+      ],
+    },
+
+    problems: [
+      {
+        h: 'The practice-area times location matrix is the default and it does not work',
+        p: 'Eight practice areas across twelve towns is ninety-six pages, and almost none of them can say anything true that the others do not. Google treats near-duplicates by consolidating them, so the usual result is that one page ranks, ninety-five dilute the site, and the firm concludes SEO does not work for legal.',
+        evidence: { source: 'googleLocalRanking', note: 'Google ties relevance to how well content matches the search, not to how many place names a site repeats.' },
+      },
+      {
+        h: 'Your content sits in the category judged most harshly',
+        p: 'Legal advice affects people’s financial stability and sometimes their liberty, which puts it squarely in the highest-scrutiny category. Content that is competent but unattributed competes badly against the same material published under a named practitioner with verifiable credentials and a jurisdiction.',
+        evidence: { source: 'googleHelpfulContent', note: 'Google asks for the highest accuracy on topics that could significantly affect financial stability or safety.' },
+      },
+      {
+        h: 'The Map Pack decides more enquiries than your website does',
+        p: 'For most searches that produce a client, three local results sit above every organic listing, and what ranks there is your Business Profile rather than your home page. Firms can rank second organically for their main practice area and still take almost no calls, because the decision was made in the three results above.',
+        evidence: { source: 'googleLocalRanking', note: 'Google states local results are based mainly on relevance, distance and popularity.' },
+      },
+      {
+        h: 'Reviews matter enormously and are awkward to ask for',
+        p: 'Legal clients arrive through one of the most trust-dependent decisions anyone makes, and most firms have a thin, stale review profile because asking feels inappropriate at the moment the matter concludes. The result is prominence capped by something that is a process problem rather than a marketing one.',
+        evidence: { source: 'brightlocal2025', note: 'BrightLocal found 93% expect a response to their review and 74% consult two or more review sites.' },
+      },
+      {
+        h: 'Advertising rules constrain what you can claim, and they vary',
+        p: 'What a firm may say about outcomes, specialisation and comparative quality differs by jurisdiction, and the constraints are real rather than decorative. Agencies without legal experience routinely draft case-result copy and superlative claims that a compliance partner then has to strip out, which wastes a content cycle.',
+      },
+      {
+        h: 'You are bidding against firms that can outspend you, in both channels',
+        p: 'Legal is among the most contested paid categories anywhere, and the same firms compete organically. That makes the winnable ground narrower and more specific: the practice-area and location combinations where you have genuine standing, rather than the ones with the most volume.',
+        evidence: { source: 'googleAdRank', note: 'Even in paid, Google states a lower bidder can outrank a higher one, because ad quality feeds Ad Rank.' },
+      },
+    ],
+
+    approach: [
+      {
+        h: 'Decide which pages should not exist',
+        p: 'The first deliverable is usually a list of pages to merge or remove. For a firm sitting on a city matrix this recovers more than any amount of new content, because it stops dozens of pages competing for the same intent. This is the consolidation half of',
+        to: '/what-we-do/seo',
+        label: 'full-stack SEO',
+        when: 'Weeks 1–4',
+        who: 'Senior strategist',
+        deliverable: 'An intent map covering every practice-area and location page, with merge, differentiate or remove decided for each, and the redirect map that implements it',
+      },
+      {
+        h: 'The Business Profile treated as the primary asset',
+        p: 'Categories, services, areas served, hours and photos chosen against the searches that actually produce enquiries, on your own Google account with us added as a manager. It sits outside your website entirely, which is why it is missed by ordinary',
+        to: '/what-we-do/technical-seo',
+        label: 'technical SEO',
+        when: 'Weeks 1–3',
+        who: 'Senior strategist, on your account',
+        deliverable: 'A corrected profile with categories and services mapped to named queries, plus a grid baseline of where you currently rank across the area',
+      },
+      {
+        h: 'Practitioner-authored content, within the rules',
+        p: 'Pages written or reviewed by a named practitioner with a stated jurisdiction, drafted so compliance does not have to strip them afterwards. Answering the question plainly up front is also what makes a page quotable, which is the concern of',
+        to: '/what-we-do/answer-engine-optimization',
+        label: 'answer engine optimisation',
+        when: 'Month 2 onwards, weekly',
+        who: 'Senior editor, with a named practitioner for review',
+        deliverable: 'Practice-area and question-led pages carrying named authorship, drafted against your jurisdiction’s advertising constraints',
+      },
+      {
+        h: 'A review process that fits how matters actually close',
+        p: 'A request built into the point in your process where it is appropriate, with response templates that acknowledge without discussing the matter. Reviews feed prominence, and prominence is half of what decides the Map Pack, which makes this part of the',
+        to: '/what-we-do/content-marketing',
+        label: 'content and communications work',
+        when: 'Live by week 4, compounding after',
+        who: 'Designed by us, run by your team',
+        deliverable: 'A review request built into your matter-closing process, plus response templates that disclose nothing',
+      },
+      {
+        h: 'Being named when someone asks an assistant for a solicitor',
+        p: 'Prospective clients increasingly ask for a shortlist before they search. Appearing in that answer depends on consistent firm facts across every source and corroborating third-party coverage, which is the work of',
+        to: '/what-we-do/generative-engine-optimization',
+        label: 'generative engine optimisation',
+        when: 'Month 2 onwards, continuous',
+        who: 'Strategist plus digital PR',
+        deliverable: 'A tracked set of prospective-client prompts, measured monthly, with the directory and coverage work that moves them',
+      },
+    ],
+
+    proof: false,
+
+    timeline: [
+      ['Week 1', 'Founder review of the site and Business Profile together, an audit of how many practice-area and location pages compete, and a baseline rank grid across the area you serve.', 'You find out how much of your site is working against itself. On a city matrix this is usually the bulk of it.'],
+      ['Month 1', 'Profile corrected and categories mapped to real queries, first consolidation decisions implemented with redirects, review process live.', 'Map Pack movement often lands here, because the profile is re-evaluated far faster than a website.'],
+      ['Month 3', 'Practice-area pages rebuilt with named authorship, location pages kept only where they earn it, citations reconciled across directories.', 'Consolidated pages recover positions they were previously splitting, and prominence starts to firm up.'],
+      ['Month 6', 'Widening into the practice-area and area combinations that are winnable, defending what is held, refreshing content as law changes.', 'Enquiries reportable by practice area and by area served, rather than a rankings list.'],
+    ],
+
+    notFor: [
+      'Firms that want a city page for every town in the county. We will tell you that costs you visibility rather than adding it, and if that is the engagement you want, we are the wrong agency.',
+      'Practices with no practitioner available to put their name to content. Named authorship is the mechanism in a high-scrutiny category, and we will not invent a byline.',
+      'Anyone needing advice on what their jurisdiction’s advertising rules permit. We draft conservatively and work with your compliance partner; we are not your adviser on the rules themselves.',
+      'Buyers who need a legal sector case study before signing. Our one measured result is B2B SaaS, and that is a fair requirement we do not currently meet.',
+    ],
+
+    engagement: [
+      [
+        'The free founder review',
+        'You send a domain and your firm name. The founder goes through the site and the Business Profile together: how many practice-area and location pages are competing, whether content carries named practitioner authorship, how your firm details reconcile across directories, and how far your Map Pack visibility actually reaches. A verdict within 48 hours.',
+      ],
+      [
+        'Baseline the grid before anything changes',
+        'Positions sampled across the area you genuinely serve, so there is a real before-picture. Without it there is no way to show whether work extended your reach or simply moved one number measured at your office address.',
+      ],
+      [
+        'Scope and price, after the review',
+        'No rate card. A single-office firm with three practice areas and a multi-office practice with twelve are different jobs, and the consolidation work differs more than the content work does.',
+      ],
+      [
+        'Consolidation first, publication last',
+        'Merging and removing competing pages comes before writing new ones, because adding content to a diluted architecture makes the problem worse. New pages follow once each one has an intent nothing else is claiming.',
+      ],
+      [
+        'You keep the profile and the decisions',
+        'The Business Profile stays on your account with us as a manager, never the reverse. The intent map, redirect map and review process are documented and stay with the firm.',
+      ],
+    ],
+
+    objections: [
+      [
+        'How will I know it is working before enquiries move?',
+        'Through the grid and the consolidation. Map Pack positions sampled across your area, the count of pages no longer competing for the same intent, indexation of rebuilt practice-area pages, and review velocity are all visible within weeks. Enquiries by practice area follow. If none of those have moved by week six, we tell you rather than waiting for a quarterly review to raise it.',
+      ],
+      [
+        'Our competitors have hundreds of city pages and they rank. Why should we not?',
+        'Check what is actually ranking before copying it. In most cases a handful of those pages carry the visibility and the rest contribute nothing, which is a different thing from the matrix working. Where a large page set does work, it is usually because each page carries genuinely local substance such as courts, cases or offices. If you can write that, build them; if you cannot, you are publishing duplicates.',
+      ],
+      [
+        'What if you are busy with other clients?',
+        'Four founder reviews a month is the cap, and you work with the senior people who ran the audit rather than an account manager. The trade is that we take on less. If your firm needs more capacity than we can give it, you get that answer within 48 hours of applying, not in month three.',
+      ],
+      [
+        'Why not use a legal marketing agency that knows the sector?',
+        'Often you should, and for paid media and brand in a sector this contested they are usually the better choice. What a legal-specialist agency less often does is tell you to delete eighty pages, because the page matrix is frequently the product being sold. If your firm’s problem is architecture rather than production, that is the constraint worth fixing first.',
+      ],
+    ],
+
+    relatedReading: {
+      capabilities: ['/what-we-do/seo', '/what-we-do/technical-seo', '/what-we-do/generative-engine-optimization'],
+      posts: [
+        ['/blog/why-business-invisible-online', 'Why your business is invisible online'],
+        ['/blog/why-competitors-grow-faster', 'Why competitors grow faster'],
+      ],
+      tool: ['/domain-authority-checker', 'Domain Authority Checker'],
+    },
+
+    faqs: [
+      [
+        'What does a law firm SEO agency actually do?',
+        'Three things, in order: fix a practice-area and location architecture that is usually generating near-duplicate pages, build credibility signals for content Google treats as high risk, and compete for the Map Pack, which produces more enquiries for most firms than the organic results below it. Content production comes after those, not instead of them.',
+      ],
+      [
+        'Should we build a page for every practice area in every city?',
+        'Almost never. Eight practice areas across twelve towns is ninety-six pages that mostly differ by a place name, and Google consolidates near-duplicates rather than ranking them all. Build a page where you can say something true and specific: an office, courts you appear in, matters you have handled there. For everywhere else, one well-built practice-area page serves better.',
+      ],
+      [
+        'Why is legal SEO so competitive?',
+        'Because the value of a single matter justifies sustained spend, so the same well-resourced firms compete in both paid and organic. That narrows the winnable ground rather than closing it. The realistic targets are the practice-area and area combinations where you have genuine standing, not the terms with the highest volume.',
+      ],
+      [
+        'How important is the Google Business Profile for a law firm?',
+        'For most enquiry-generating searches it is the primary asset, because three local results sit above every organic listing and what ranks there is your profile rather than your website. Google states local results are based mainly on relevance, distance and popularity. A firm can rank second organically and still take very few calls.',
+      ],
+      [
+        'How do we get client reviews without breaching confidentiality?',
+        'By asking at the right point in your process and replying in a way that discloses nothing. A response can acknowledge the review, thank the person and offer to continue offline without confirming any detail of the matter. The practical problem is usually that no one asks: BrightLocal found 93% of consumers expect a response, and most firms have a thin, stale profile.',
+      ],
+      [
+        'Can we publish case results?',
+        'It depends on your jurisdiction’s advertising rules, and they vary meaningfully. We draft conservatively and expect your compliance partner to have the final say, because an agency that writes outcome claims without checking wastes a content cycle when they are stripped. We will not advise you on what the rules permit; that is properly your call.',
+      ],
+      [
+        'Does E-E-A-T matter for legal content?',
+        'The expectation is higher than average, because legal content can significantly affect someone’s financial stability or liberty. Google says that of the E-E-A-T aspects trust is most important, while also stating plainly that E-E-A-T is not itself a ranking factor. Practically, that means named practitioner authorship with a stated jurisdiction, not an E-E-A-T package.',
+      ],
+      [
+        'How long does law firm SEO take to produce enquiries?',
+        'Profile work can move Map Pack position within weeks because it is re-evaluated quickly. Consolidating competing pages shows up over weeks to a couple of months as Google re-evaluates existing content. New practice-area content follows the ordinary curve of several months. Legal generally shows movement faster than national SEO, and the early movement is profile-driven.',
+      ],
+      [
+        'Will AI assistants recommend law firms?',
+        'They already produce shortlists when asked, and being named depends on consistent firm facts across every source plus corroborating third-party coverage. It is worth tracking a set of prospective-client prompts monthly, because there is no analytics event when an assistant names a competitor instead of you.',
+      ],
+      [
+        'Do you have law firm case studies?',
+        'No. Our one measured, cross-checkable result is sendr.ai in B2B SaaS, and we will not present it as though it were legal. The architecture, credibility and local craft transfers; legal results do not exist until we have produced them. If a sector reference is a requirement, that is reasonable and we would not meet it today.',
+      ],
+    ],
+
+    related: ['local-seo-agency', 'healthcare-seo-agency'],
+  },
+  {
+    slug: 'home-services-seo-agency',
+    nav: 'Home services',
+    navDesc: 'Emergency intent, service-area architecture and Local Services Ads',
+    title: 'Home Services SEO Agency: Urgency and Radius',
+    description:
+      'Home services SEO agency: emergency intent, service-area versus city architecture, Local Services Ads and the Google Guarantee, and review velocity that holds.',
+    eyebrow: 'WHO WE HELP · HOME SERVICES',
+    h1: 'A home services SEO agency that works the radius, not the keyword list.',
+    audienceName: 'Home services businesses and trade contractors',
+    problemsEyebrow: 'WHY TRADE SEO IS ITS OWN GAME',
+    approachH2: 'The home services playbook, in the order it pays.',
+    engagementH2: 'What happens after you send a domain.',
+    faqH: 'Home services SEO, asked and answered.',
+    ctaSub:
+      'Drop your domain and your service area. The founder runs the review personally and comes back within 48 hours on how far your visibility really reaches, even when the answer is that your radius will not stretch where you want it to.',
+
+    answer:
+      'A home services SEO agency works three surfaces at once: the Map Pack, where most emergency calls are won; Local Services Ads, which sit above it and require background checks; and a website architecture organised by service and realistic travel radius rather than by a list of nearby towns.',
+
+    intro: [
+      'Home services is the vertical where the buyer is least patient. A boiler has failed, a drain is backing up, or a roof is leaking, and the search that follows resolves to a phone call within minutes. That compresses everything: the decision is made from a profile, a star rating and a distance estimate, usually before anyone visits a website.',
+      'It also means the ceiling on your visibility is geographic rather than editorial. You can be the best-regarded firm in your trade and still be invisible four towns away, because distance is a ranking factor nobody can optimise. The work is figuring out where you genuinely can win and then dominating that, rather than spreading thin across a county.',
+    ],
+
+    keyFacts: [
+      {
+        stat: 'Relevance, distance, popularity',
+        label: 'the three factors Google names for local results — and distance is the one you cannot change',
+        source: 'googleLocalRanking',
+      },
+      {
+        stat: 'All owners',
+        label: 'must complete a criminal background check to carry the Google Guarantee on Local Services Ads',
+        source: 'googleLocalServicesChecks',
+      },
+      {
+        stat: 'No charge',
+        label: 'Google states businesses are not charged for the Local Services background check',
+        source: 'googleLocalServicesChecks',
+      },
+      {
+        stat: '93%',
+        label: 'of consumers expect a business to respond to their review, which for a trade is an operational commitment',
+        source: 'brightlocal2025',
+      },
+      {
+        stat: '42%',
+        label: 'now trust reviews as much as a personal recommendation, down from 79% in 2020 — recency beats volume',
+        source: 'brightlocal2025',
+      },
+    ],
+
+    quote: {
+      text: 'Businesses aren’t charged for the background check.',
+      who: 'Google',
+      role: 'Google Ads Help, on background checks for Local Services ads',
+      source: 'googleLocalServicesChecks',
+    },
+
+    comparisonTable: {
+      caption: 'The three surfaces a trade competes on, and what wins each',
+      columns: ['', 'Local Services Ads', 'Map Pack', 'Organic'],
+      rows: [
+        ['Where it sits', 'Above everything', 'Above the organic results', 'Below both'],
+        ['What qualifies you', 'Background checks, licence and insurance verification', 'Profile, reviews, proximity', 'Website quality and relevance'],
+        ['What the searcher does', 'Calls from the ad', 'Calls from the profile', 'Reads, then calls'],
+        ['Cost model', 'Paid per lead', 'Free, earned', 'Free, earned'],
+        ['Best for', 'Emergency and high-intent jobs', 'Everything local', 'Research-stage and non-urgent work'],
+        ['Radius limit', 'Set by your service area', 'Hard — distance is a ranking factor', 'Soft — can reach further'],
+        ['Time to first result', 'Days, once verified', 'Days to weeks', 'Weeks to months'],
+        ['Who it suits', 'Trades in eligible categories', 'Every local trade', 'Trades with non-urgent services too'],
+      ],
+    },
+
+    problems: [
+      {
+        h: 'The job is won before anyone reaches your website',
+        p: 'For an urgent call-out, the sequence is a search, a glance at the three local results, a star rating and a phone number. Your website is frequently never opened. A trade that invests entirely in its site while neglecting its profile is optimising the last step of a journey most customers never reach.',
+        evidence: { source: 'googleLocalRanking', note: 'Google states local results are based mainly on relevance, distance and popularity — all profile-side signals.' },
+      },
+      {
+        h: 'Your radius is a hard limit and nobody tells you where it ends',
+        p: 'Distance is a ranking factor you cannot optimise, so beyond a certain range the Map Pack is simply unavailable to you regardless of how good your profile is. Most trades do not know where that line falls, because standard reporting gives one position measured near the office rather than a picture across the area.',
+        evidence: { source: 'googleLocalRanking', note: 'Google defines distance as how far each business is from the searcher, which makes a single reported rank meaningless.' },
+      },
+      {
+        h: 'Local Services Ads sit above you and you are not in them',
+        p: 'In eligible categories, Local Services Ads occupy the space above the Map Pack, and they are gated on verification rather than budget. Owners must complete criminal background checks, and licence and insurance details are checked. Google does not charge for the check. Many trades skip it because the paperwork looks burdensome, which cedes the top of the results.',
+        evidence: { source: 'googleLocalServicesChecks', note: 'Google states all business owners must complete a criminal background check, and that businesses are not charged for it.' },
+      },
+      {
+        h: 'Reviews arrive in bursts, then stop',
+        p: 'A trade finishes a job, the customer is delighted, nobody asks, and the moment passes. The profile ends up with a decent total accumulated years ago and nothing recent, which reads as a business that has gone quiet. Recency now matters more than volume, and the fix is a process rather than a campaign.',
+        evidence: { source: 'brightlocal2025', note: 'BrightLocal found trust in reviews has fallen from 79% in 2020 to 42%, and that 93% of consumers expect a response.' },
+      },
+      {
+        h: 'Your site is organised by service when customers search by problem and place',
+        p: 'The page says "drainage solutions"; the search says "blocked drain" and a town name. Trades consistently publish in their own vocabulary rather than the customer’s, and structure by service line rather than by the combination of job and area that people actually type.',
+      },
+      {
+        h: 'Seasonality makes month-on-month reporting meaningless',
+        p: 'Boiler work peaks in the cold, roofing after storms, air conditioning in heat. Comparing November against August tells you about the weather, not about your marketing. Without year-on-year comparison, seasonal businesses routinely cancel work that was succeeding or celebrate work that was not.',
+      },
+    ],
+
+    approach: [
+      {
+        h: 'The Business Profile, worked as the main asset',
+        p: 'Primary and secondary categories, services, service areas, hours, photos and booking links, all chosen against the jobs you actually want. It lives outside your website, which is exactly why it gets missed by ordinary',
+        to: '/what-we-do/seo',
+        label: 'full-stack SEO',
+        when: 'Weeks 1–3',
+        who: 'Senior strategist, on your Google account with us as a manager',
+        deliverable: 'A corrected profile mapped to named job queries, with services and service areas set deliberately rather than by default',
+      },
+      {
+        h: 'Find the real edge of your radius',
+        p: 'Positions sampled across a geographic grid covering the whole area you are willing to travel to, so the line where your visibility fades becomes visible. Everything downstream is prioritised from that map, which is the measurement discipline behind',
+        to: '/what-we-do/ai-seo',
+        label: 'AI SEO reporting',
+        when: 'Baseline week 1, then monthly',
+        who: 'Strategist',
+        deliverable: 'A rank grid across your service area showing where you hold the Map Pack, where you fade, and which towns are realistically winnable',
+      },
+      {
+        h: 'Local Services Ads verification, done rather than deferred',
+        p: 'Background checks, licence and insurance verification completed so you are eligible for the slot above the Map Pack in categories where it exists. The checks cost nothing; the delay is administrative. Getting this done early changes what the rest of the',
+        to: '/what-we-do/technical-seo',
+        label: 'technical and profile work',
+        when: 'Started week 1, cleared when the checks return',
+        who: 'Your team supplies documents; we project-manage the process',
+        deliverable: 'Completed verification and a configured Local Services profile, where your category and area are eligible',
+      },
+      {
+        h: 'Job-and-place pages, only where they are defensible',
+        p: 'A page per job type, and a page per town only where you can describe actual work there. Thin town pages are a liability rather than coverage, which makes this a judgement call inside',
+        to: '/what-we-do/content-marketing',
+        label: 'the content engine',
+        when: 'Month 2 onwards',
+        who: 'Strategist decides the shape, senior editor writes',
+        deliverable: 'Service pages in customer language, plus location pages only for areas with genuine substance behind them',
+      },
+      {
+        h: 'A review engine wired into job completion',
+        p: 'The ask built into the moment the job finishes, when the customer is most willing, with owner responses that read like a person wrote them. Review text also feeds the summaries buyers now read first, which connects this to',
+        to: '/what-we-do/answer-engine-optimization',
+        label: 'answer engine optimisation',
+        when: 'Live by week 4, compounding after',
+        who: 'Designed by us, run by your engineers or office team',
+        deliverable: 'A repeatable request at job completion, response templates, and steady weekly velocity rather than bursts',
+      },
+    ],
+
+    proof: false,
+
+    timeline: [
+      ['Week 1', 'Founder review of the site, the profile and your service area together. Rank grid baseline across the whole radius. Local Services verification started.', 'You see where your visibility actually ends, which is usually closer to home than you assumed.'],
+      ['Month 1', 'Profile corrected and categories mapped to real jobs, review request live at job completion, verification progressing.', 'Map Pack movement commonly appears here, because the profile is re-evaluated much faster than a website.'],
+      ['Month 3', 'Service pages rebuilt in customer language, defensible town pages built, citations reconciled, Local Services live where eligible.', 'The grid starts to widen rather than one number moving. Review velocity becomes steady.'],
+      ['Month 6', 'Pushing the radius where it is winnable, holding what you have, planning content around the next season rather than the last one.', 'A measurably larger area of coverage, with enquiries attributable by job type and town.'],
+    ],
+
+    notFor: [
+      'Trades wanting a page for every town within fifty miles. Distance caps what the Map Pack will do for you, and thin town pages make the site weaker. We will say so rather than build them.',
+      'Businesses that cannot build a review ask into job completion. Velocity is most of prominence, and no agency can generate genuine reviews for you.',
+      'Anyone whose growth depends on a lead-generation marketplace rather than their own visibility. That is a different problem and we are not the right people for it.',
+      'Buyers who need a trade sector case study before signing. Our one measured result is B2B SaaS, and that is a fair requirement we do not meet today.',
+    ],
+
+    engagement: [
+      [
+        'The free founder review',
+        'You send a domain, your business name and the area you cover. The founder reviews the site and the Business Profile together, checks how your details reconcile across directories, samples where you currently rank across the area, and establishes whether you are eligible for Local Services Ads. A verdict within 48 hours.',
+      ],
+      [
+        'Establish the real radius before planning anything',
+        'A grid baseline across the whole area you are willing to travel to, so the plan is built on where you can actually win rather than on a list of towns. This single piece of information changes most trade SEO plans substantially.',
+      ],
+      [
+        'Scope and price, after the review',
+        'No rate card. A single-van operation covering three towns and a twelve-engineer firm covering a county are different jobs, and the architecture work differs more than the content does.',
+      ],
+      [
+        'Profile and verification first, pages last',
+        'The profile, the review process and Local Services verification come before new pages, because they decide the surface where most calls are won. Service and town pages follow, for the areas the grid says are winnable.',
+      ],
+      [
+        'You keep the keys, throughout',
+        'The Business Profile and Local Services account stay yours with us added as managers, never the reverse. They are your most valuable local assets and no agency should be able to leave with them, including us.',
+      ],
+    ],
+
+    objections: [
+      [
+        'How will I know it is working when rankings differ street by street?',
+        'With the grid rather than a number. We sample across your whole service area before anything changes and repeat it monthly, so you can see the covered area growing or not. Alongside it: calls attributed by job type and town, profile interactions from Google’s own reporting, and review velocity. Seasonal comparisons are year-on-year, never month-on-month.',
+      ],
+      [
+        'We are busy in season. Is this the wrong time to start?',
+        'In season is usually the right time to start the review process and the wrong time to expect your team’s attention on content. The practical approach is to use the busy period for what it is good for, which is generating reviews at job completion, and do the architecture and page work in the quieter months so you enter the next season already visible.',
+      ],
+      [
+        'What if you are busy with other clients?',
+        'Four founder reviews a month is the cap, and you work with the senior people who did your audit. The trade is that we take fewer clients. If your area needs more attention than we can give, you get that answer within 48 hours of applying rather than in month three.',
+      ],
+      [
+        'Why not just spend the money on Local Services Ads?',
+        'Often you should spend some of it there, and we will tell you to. Paid-per-lead sits above everything and converts urgent demand immediately. What it does not do is compound, and it stops the day you pause it. The sensible split is usually paid for emergency demand while the earned surfaces, profile and radius, are built underneath it.',
+      ],
+    ],
+
+    relatedReading: {
+      capabilities: ['/what-we-do/technical-seo', '/what-we-do/content-marketing', '/what-we-do/answer-engine-optimization'],
+      posts: [
+        ['/blog/steady-stream-of-customers', 'Building a steady stream of customers'],
+        ['/blog/why-business-invisible-online', 'Why your business is invisible online'],
+      ],
+      tool: ['/page-speed-checker', 'Page Speed Checker'],
+    },
+
+    faqs: [
+      [
+        'What does a home services SEO agency do?',
+        'It works the three surfaces a trade competes on: Local Services Ads at the top, which are gated on verification rather than budget; the Map Pack, where most urgent calls are won from a profile rather than a website; and organic pages for non-urgent work. The architecture is organised by job type and realistic travel radius rather than by a list of towns.',
+      ],
+      [
+        'How do I get the Google Guarantee for my business?',
+        'Through Local Services Ads verification, where your category and area are eligible. Google states that all owners of the business must complete a criminal background check, and that workers who visit customer locations are screened too, while office and clerical staff are exempt. Google also states businesses are not charged for the background check. The barrier is administrative time, not cost.',
+      ],
+      [
+        'How far from my base can I realistically rank?',
+        'Further organically than in the Map Pack, and the exact line is specific to you. Distance is one of the three factors Google names for local results and it is the one you cannot influence, so beyond a certain radius the local pack becomes unavailable regardless of your profile. The only way to find the line is to sample positions across a grid covering your area.',
+      ],
+      [
+        'Should we build a page for every town we cover?',
+        'Only where you can write something true about working there: jobs completed, travel times, local requirements, named references. Pages identical but for a place name are the oldest tactic in local SEO and the most reliably ignored. For everywhere else, one well-built service page covering the area outperforms a dozen hollow ones.',
+      ],
+      [
+        'How important are reviews for a trade business?',
+        'They are central, because prominence is one of the three local ranking factors and reviews are the most visible input to it. Recency now carries more weight than total count: BrightLocal found trust in reviews has fallen from 79% in 2020 to 42%, and 93% of consumers expect a response. A steady weekly trickle beats a large pile that stopped two years ago.',
+      ],
+      [
+        'How do we handle seasonality in reporting?',
+        'Compare year on year, never month on month. Boiler work peaks in the cold and roofing after storms, so a November-to-August comparison measures the weather rather than your marketing. Seasonal trades regularly cancel campaigns that were working because the reporting period flattered the previous quarter.',
+      ],
+      [
+        'Is SEO worth it when we already get work from word of mouth?',
+        'It depends on whether word of mouth covers the jobs you want rather than just the jobs you get. Referrals tend to be strong for familiar work in familiar areas and weak for new services or a widened radius. Local search is also where emergency demand goes, and that demand has no relationship with who knows you.',
+      ],
+      [
+        'How long does home services SEO take?',
+        'Profile and category corrections can move Map Pack position within weeks, because the profile is re-evaluated quickly. Local Services verification is gated on how fast checks return. Citation cleanup is slower. Review velocity compounds over months. Local generally shows movement faster than national SEO, and the early movement is profile-driven.',
+      ],
+      [
+        'Should we use Local Services Ads or focus on organic?',
+        'Both, in that order of urgency. Local Services sits above everything and converts emergency demand immediately, but it is rented and stops when you pause it. The earned surfaces compound and survive a budget cut. The usual split is paid for urgent demand while the profile, reviews and radius are built underneath it.',
+      ],
+      [
+        'Do you have home services case studies?',
+        'No, and we will not borrow one from another sector. Our single measured result is sendr.ai in B2B SaaS. The local, profile and architecture craft transfers directly; trade results do not exist until we have produced them. If a sector reference is a requirement before signing, that is fair and we would not meet it today.',
+      ],
+    ],
+
+    related: ['local-seo-agency', 'law-firm-seo-agency'],
+  },
+  {
     slug: 'local-seo-agency',
     keyFacts: [
       {
@@ -907,9 +1715,9 @@ export const VERTICALS = [
 ];
 
 export const WHO_WE_HELP_META = {
-  title: 'Who We Help: SaaS, Ecommerce and Local SEO',
+  title: 'Who We Help: Six Verticals, Six Playbooks',
   description:
-    'RankedTag works three verticals: B2B SaaS, ecommerce, and local or service-area businesses. Each gets its own playbook, because the problems are not the same.',
+    'RankedTag works six verticals: B2B SaaS, ecommerce, local and service-area, healthcare, law firms and home services. Each gets its own playbook.',
   canonical: `${SITE}/who-we-help`,
 };
 

@@ -9,10 +9,10 @@
     "legacy_redirects": 15,
     "endpoints": 8,
     "app_noindex": 1,
-    "total": 88,
-    "indexable_in_sitemap": 64,
+    "total": 91,
+    "indexable_in_sitemap": 67,
     "what_we_do_pages": 7,
-    "vertical_pages": 3,
+    "vertical_pages": 6,
     "vertical_hub": 1,
     "comparison_pages": 3
   },
@@ -725,6 +725,30 @@
       "indexable": true,
       "expected_status": 200,
       "note": "phase 4"
+    },
+    {
+      "url": "/healthcare-seo-agency",
+      "kind": "vertical-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 5"
+    },
+    {
+      "url": "/law-firm-seo-agency",
+      "kind": "vertical-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 5"
+    },
+    {
+      "url": "/home-services-seo-agency",
+      "kind": "vertical-page",
+      "in_sitemap": true,
+      "indexable": true,
+      "expected_status": 200,
+      "note": "phase 5"
     }
   ],
   "phases": {

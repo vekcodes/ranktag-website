@@ -383,18 +383,18 @@ export default function Home() {
       <section className="home-verticals ruled" id="who-we-help" data-reveal>
         <div className="container">
           <div className="section-head">
-            <span className="eyebrow" data-num="004">WHO WE HELP · THREE VERTICALS</span>
+            <span className="eyebrow" data-num="004">WHO WE HELP · SIX VERTICALS</span>
             <div>
               <h2 className="h-2" data-reveal-lines>
                 The craft is shared.<br /><span className="accent">The playbook is not.</span>
               </h2>
               <p className="lead">
                 A SaaS company fighting for a category that has no name yet, a catalogue generating more
-                filter URLs than it has products, and a service-area business trying to hold three slots on
-                a map are three different problems. We run them as three different programmes.
+                filter URLs than it has products, a clinic judged against expert consensus, and a trade
+                capped by travel radius are not one problem with six labels. Each gets its own playbook.
               </p>
               <Link to="/who-we-help" className="case-readmore link-wipe ar-parent">
-                Compare the three playbooks <span className="ar">→</span>
+                Compare the six playbooks <span className="ar">→</span>
               </Link>
             </div>
           </div>
