@@ -13,6 +13,11 @@
 //   node scripts/gsc.mjs queries --days 28 --limit 50
 //   node scripts/gsc.mjs pages --days 7 --json > pages.json
 //   node scripts/gsc.mjs sitemaps
+//   node scripts/gsc.mjs submit-sitemaps --key ~/keys/gsc.json
+//   node scripts/gsc.mjs submit-sitemaps --sitemap https://rankedtag.com/sitemap.xml
+//
+// `submit-sitemaps` is the only command here that writes. It needs the service
+// account to hold "Full" permission on the property, not "Restricted".
 //
 // `--json` prints the raw payload, for piping into anything that wants to do
 // its own analysis. Without it you get a readable table.
@@ -47,6 +52,16 @@ if (typeof keyPath === 'string') {
 if (typeof flag('site', null) === 'string') process.env.GSC_SITE_URL = flag('site');
 
 const gsc = await import('../api/_lib/gsc.js');
+
+// The index first: Google refetches children it lists anyway, but each child
+// is submitted too so its own lastDownloaded moves and a stuck one is visible
+// in `sitemaps` instead of hiding behind a healthy index.
+const SITEMAPS = [
+  'https://rankedtag.com/sitemap.xml',
+  'https://rankedtag.com/sitemap-services.xml',
+  'https://rankedtag.com/sitemap-pages.xml',
+  'https://rankedtag.com/sitemap-posts.xml',
+];
 
 function pct(n) {
   return `${(n * 100).toFixed(2)}%`;
@@ -96,6 +111,29 @@ try {
       console.log(`\nSet GSC_SITE_URL to the one you want as the default.`);
     }
     process.exit(0);
+  }
+
+  // Resubmit: tells Google to refetch the file now rather than on its own
+  // schedule, which is what you want straight after a release that changed
+  // <lastmod>. It asks for a recrawl of the file, not of the URLs inside it.
+  if (command === 'submit-sitemaps') {
+    const one = flag('sitemap', null);
+    const targets = typeof one === 'string' ? [one] : SITEMAPS;
+    let failed = 0;
+    for (const url of targets) {
+      try {
+        await gsc.submitSitemap(url);
+        console.log(`  submitted  ${url}`);
+      } catch (e) {
+        failed += 1;
+        console.error(`  FAILED     ${url}\n             ${e.message}`);
+      }
+    }
+    console.log(
+      `\n${targets.length - failed}/${targets.length} submitted. ` +
+        `Run \`sitemaps\` in a few minutes to see lastDownloaded move.`
+    );
+    process.exit(failed ? 1 : 0);
   }
 
   if (command === 'sitemaps') {

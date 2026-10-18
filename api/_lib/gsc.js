@@ -18,9 +18,12 @@ import { httpError } from './http.js';
 
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
 const API_BASE = 'https://searchconsole.googleapis.com/webmasters/v3';
-// Read-only is all we ever need: this dashboard reports, it never submits
-// sitemaps or changes settings. Narrowest scope that does the job.
-const SCOPE = 'https://www.googleapis.com/auth/webmasters.readonly';
+// Two scopes, and every call asks for the narrower one unless it genuinely
+// writes. The dashboard and the whole reporting path stay read-only; only
+// `submitSitemap` reaches for the write scope. Keeping them apart means a bug
+// in a reporting handler cannot change anything on the property.
+const READ_SCOPE = 'https://www.googleapis.com/auth/webmasters.readonly';
+const WRITE_SCOPE = 'https://www.googleapis.com/auth/webmasters';
 
 // Search Console finalises a day's data a couple of days late. Ending every
 // window here keeps totals stable instead of having "yesterday" creep upward
@@ -95,14 +98,15 @@ function normalizeKey(pem) {
   return pem.includes('\\n') ? pem.replace(/\\n/g, '\n') : pem;
 }
 
-// Warm lambdas reuse this, so a burst of dashboard calls mints one token, not
-// one per request. Tokens last an hour; we refresh a minute early.
-let cachedToken = null;
+// Warm lambdas reuse these, so a burst of dashboard calls mints one token, not
+// one per request. Tokens last an hour; we refresh a minute early. Keyed by
+// scope: a read token cannot be reused for a write, and caching them together
+// would hand whichever call came first the wrong one.
+const tokenCache = new Map();
 
-async function getAccessToken() {
-  if (cachedToken && cachedToken.expiresAt > Date.now() + 60_000) {
-    return cachedToken.value;
-  }
+async function getAccessToken(scope = READ_SCOPE) {
+  const hit = tokenCache.get(scope);
+  if (hit && hit.expiresAt > Date.now() + 60_000) return hit.value;
   const { email, privateKey } = readCredentials();
 
   let key;
@@ -113,7 +117,7 @@ async function getAccessToken() {
   }
 
   const now = Math.floor(Date.now() / 1000);
-  const assertion = await new SignJWT({ scope: SCOPE })
+  const assertion = await new SignJWT({ scope })
     .setProtectedHeader({ alg: 'RS256', typ: 'JWT' })
     .setIssuer(email)
     .setAudience(TOKEN_URL)
@@ -141,15 +145,16 @@ async function getAccessToken() {
     );
   }
 
-  cachedToken = {
+  const token = {
     value: body.access_token,
     expiresAt: Date.now() + (body.expires_in || 3600) * 1000,
   };
-  return cachedToken.value;
+  tokenCache.set(scope, token);
+  return token.value;
 }
 
-async function gscFetch(path, { method = 'GET', body } = {}) {
-  const token = await getAccessToken();
+async function gscFetch(path, { method = 'GET', body, scope = READ_SCOPE } = {}) {
+  const token = await getAccessToken(scope);
   const resp = await fetch(`${API_BASE}${path}`, {
     method,
     headers: {
@@ -248,6 +253,29 @@ export async function listSitemaps(siteUrl) {
     submitted: Number(s.contents?.[0]?.submitted || 0),
     indexed: Number(s.contents?.[0]?.indexed || 0),
   }));
+}
+
+/**
+ * Resubmit a sitemap, the API equivalent of the "Submit" button in Search
+ * Console. `feedpath` is the sitemap's full URL, which must sit under the
+ * property. Google answers 204 with no body on success.
+ *
+ * This is a nudge to refetch, not a request to index: Google re-reads the file
+ * and notices the changed <lastmod> values, then schedules crawls on its own
+ * terms. There is no API anywhere that forces a URL into the index -- the
+ * Indexing API covers JobPosting and BroadcastEvent only, which is why
+ * _lib/indexnow.js exists for the engines that do accept a direct ping.
+ *
+ * Needs the write scope, and the service account must hold "Full" permission
+ * on the property: "Restricted" can read the sitemap list but not submit.
+ */
+export async function submitSitemap(feedpath, siteUrl) {
+  const site = encodeURIComponent(siteUrl || defaultSiteUrl());
+  await gscFetch(`/sites/${site}/sitemaps/${encodeURIComponent(feedpath)}`, {
+    method: 'PUT',
+    scope: WRITE_SCOPE,
+  });
+  return { feedpath, submitted: true };
 }
 
 const EMPTY_TOTALS = { clicks: 0, impressions: 0, ctr: 0, position: 0 };
