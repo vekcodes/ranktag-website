@@ -313,7 +313,7 @@ function nav() {
   return `<nav><div class="nav-in">
 <a class="logo" href="/" aria-label="RankedTag home"><img src="/rankedtag-logo-light.svg" alt="RankedTag" width="106" height="28"/></a>
 <div class="nav-links">
-<a href="/services">Services</a>
+<a href="/what-we-do">What we do</a>
 <a href="/#how-it-works">How it works</a>
 <a href="/case-study/sendr">Sendr.ai story</a>
 <a href="/blog" aria-current="page">Blog</a>
@@ -323,11 +323,11 @@ function nav() {
 }
 
 
-// Keep the services list in sync with src/components/SiteFooter.jsx — the SSR
+// Keep the capability list in sync with src/components/SiteFooter.jsx — the SSR
 // blog shell is the only footer not rendered from that component.
 function footer() {
   const services = [
-    ['b2b-saas-seo', 'B2B SaaS SEO'], ['ai-seo', 'AI SEO'],
+    ['saas-seo', 'Full-stack SEO'], ['ai-seo', 'AI SEO'],
     ['generative-engine-optimization', 'Generative Engine Optimization'],
     ['answer-engine-optimization', 'Answer Engine Optimization'],
     ['technical-seo', 'Technical SEO'], ['saas-content-marketing', 'SEO Content Engine'],
@@ -338,9 +338,9 @@ function footer() {
 <a href="/" aria-label="RankedTag home"><img src="/rankedtag-logo-light.svg" alt="RankedTag" width="121" height="32"/></a>
 <p class="footer-blurb">The Inbound Engine for SaaS founders who would rather build product than babysit an agency. Built with senior humans, Claude, and N8N.</p>
 </div>
-<div class="footer-col"><h4><span>001</span>Services</h4>
-${services.map(([slug, label]) => `<a href="/services/${slug}">${label}</a>`).join('')}
-<a href="/services">All services →</a></div>
+<div class="footer-col"><h4><span>001</span>What we do</h4>
+${services.map(([slug, label]) => `<a href="/what-we-do/${slug}">${label}</a>`).join('')}
+<a href="/what-we-do">All capabilities →</a></div>
 <div class="footer-col"><h4><span>002</span>Free tools</h4>
 <a href="/keyword-density-checker">Keyword Density Checker</a>
 <a href="/domain-authority-checker">Domain Authority Checker</a>

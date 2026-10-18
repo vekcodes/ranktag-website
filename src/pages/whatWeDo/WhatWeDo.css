@@ -1,5 +1,5 @@
 /* =====================================================================
-   SERVICES — hub (/services) + service pages (/services/<slug>)
+   SERVICES — hub (/what-we-do) + service pages (/what-we-do/<slug>)
    Reuses the Home.css primitives (.problem-*, .faq-*, .final-cta) and the
    brand.css grid/label system; this file adds only the svc-* layer.
    ===================================================================== */

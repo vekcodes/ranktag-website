@@ -22,13 +22,13 @@ const STATIC_LASTMOD = '2026-07-11';
 // back into the constant when the whole set moves at once.
 const PAGE_LASTMOD = {
   '/': '2026-10-18',
-  '/services': '2026-10-18',
-  '/services/b2b-saas-seo': '2026-10-18',
-  '/services/ai-seo': '2026-10-18',
-  '/services/generative-engine-optimization': '2026-10-18',
-  '/services/answer-engine-optimization': '2026-10-18',
-  '/services/technical-seo': '2026-10-18',
-  '/services/saas-content-marketing': '2026-10-18',
+  '/what-we-do': '2026-10-18',
+  '/what-we-do/saas-seo': '2026-10-18',
+  '/what-we-do/ai-seo': '2026-10-18',
+  '/what-we-do/generative-engine-optimization': '2026-10-18',
+  '/what-we-do/answer-engine-optimization': '2026-10-18',
+  '/what-we-do/technical-seo': '2026-10-18',
+  '/what-we-do/saas-content-marketing': '2026-10-18',
   '/case-study/sendr': '2026-10-18',
   '/competitor-analysis': '2026-10-18',
   '/keyword-density-checker': '2026-10-18',
@@ -44,14 +44,14 @@ const newest = (dates) => dates.slice().sort().pop();
 // Marketing pages, split by kind so each lands in the right child sitemap.
 // No <priority> or <changefreq>: Google has stated publicly it ignores both,
 // and a signal nobody reads is just weight in the file.
-const SERVICES = [
-  '/services',
-  '/services/b2b-saas-seo',
-  '/services/ai-seo',
-  '/services/generative-engine-optimization',
-  '/services/answer-engine-optimization',
-  '/services/technical-seo',
-  '/services/saas-content-marketing',
+const CAPABILITIES = [
+  '/what-we-do',
+  '/what-we-do/saas-seo',
+  '/what-we-do/ai-seo',
+  '/what-we-do/generative-engine-optimization',
+  '/what-we-do/answer-engine-optimization',
+  '/what-we-do/technical-seo',
+  '/what-we-do/saas-content-marketing',
 ];
 
 const PAGES = [
@@ -82,7 +82,7 @@ function send(res, xml, cache = 's-maxage=300, stale-while-revalidate=86400') {
  * Serves the sitemap index and its three children:
  *   /sitemap.xml          -> index, referencing the three below
  *   /sitemap-posts.xml    -> blog posts, lastmod from the database
- *   /sitemap-services.xml -> the six service pages + /services
+ *   /sitemap-services.xml -> the six service pages + /what-we-do
  *   /sitemap-pages.xml    -> home, apply, case study, tools, /blog
  *
  * lastmod is never the build or request time. Posts carry their own
@@ -112,7 +112,7 @@ export default async function handler(req, res) {
   const which = new URL(req.url, 'http://x').pathname.replace(/^\/|\.xml$/g, '');
 
   if (which === 'sitemap-services') {
-    return send(res, urlset(SERVICES.map((loc) => ({ loc: SITE_URL + loc, lastmod: lastmodFor(loc) }))));
+    return send(res, urlset(CAPABILITIES.map((loc) => ({ loc: SITE_URL + loc, lastmod: lastmodFor(loc) }))));
   }
 
   if (which === 'sitemap-posts') {
@@ -142,7 +142,7 @@ export default async function handler(req, res) {
     : STATIC_LASTMOD;
   const children = [
     { loc: `${SITE_URL}/sitemap-posts.xml`, lastmod: postsLastmod },
-    { loc: `${SITE_URL}/sitemap-services.xml`, lastmod: newest(SERVICES.map(lastmodFor)) },
+    { loc: `${SITE_URL}/sitemap-services.xml`, lastmod: newest(CAPABILITIES.map(lastmodFor)) },
     { loc: `${SITE_URL}/sitemap-pages.xml`, lastmod: newest([blogLastmod, ...PAGES.map(lastmodFor)]) },
   ];
   send(

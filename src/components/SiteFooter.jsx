@@ -1,9 +1,9 @@
-import { SERVICES } from '../pages/services/servicesData.js';
+import { SERVICES } from '../pages/whatWeDo/capabilitiesData.js';
 
 /**
  * Shared site footer. One definition replaces the copy-pasted <footer> blocks
  * that used to live in Home/PageSpeed/BacklinkChecker/Blog/BlogPost — so the
- * Services column (and any future link) only ever needs adding here. The SSR
+ * What-we-do column (and any future link) only ever needs adding here. The SSR
  * blog shell keeps its own lightweight footer in api/_lib/render.js; keep the
  * two link sets in sync when editing.
  *
@@ -23,11 +23,11 @@ export default function SiteFooter() {
             <p className="footer-blurb">The Inbound Engine for SaaS founders who would rather build product than babysit an agency. Built with senior humans, Claude, and N8N.</p>
           </div>
           <div className="footer-col">
-            <h4><span className="idx plain">001</span>Services</h4>
+            <h4><span className="idx plain">001</span>What we do</h4>
             {SERVICES.map((s) => (
-              <a key={s.slug} href={`/services/${s.slug}`} className="link-wipe">{s.nav}</a>
+              <a key={s.slug} href={`/what-we-do/${s.slug}`} className="link-wipe">{s.nav}</a>
             ))}
-            <a href="/services" className="link-wipe">All services →</a>
+            <a href="/what-we-do" className="link-wipe">All capabilities →</a>
           </div>
           <div className="footer-col">
             <h4><span className="idx plain">002</span>Free tools</h4>

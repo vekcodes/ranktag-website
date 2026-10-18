@@ -252,7 +252,7 @@ export default function DensityGuide() {
               a direct answer. So use this tool to make sure your topic is obvious and your phrasing is
               clean — then optimize for <em>being quoted</em>, not for hitting a percentage. That shift
               from ranking to being cited is exactly what{' '}
-              <Link to="/services/generative-engine-optimization">generative engine optimization</Link> is about.
+              <Link to="/what-we-do/generative-engine-optimization">generative engine optimization</Link> is about.
             </p>
           </div>
         </section>
@@ -291,7 +291,7 @@ export default function DensityGuide() {
             decide whether the page is readable at all by a crawler or a model: a crawlable URL, a clean
             heading outline, valid schema and the internal links that give the page context. That
             foundation is what our{' '}
-            <Link to="/services/technical-seo">technical SEO service</Link> covers, and it is the reason a
+            <Link to="/what-we-do/technical-seo">technical SEO service</Link> covers, and it is the reason a
             well-written page can sit at a perfect density and still never be indexed.
           </p>
         </section>

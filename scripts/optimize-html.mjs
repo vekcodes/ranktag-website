@@ -9,7 +9,7 @@
 //    (~14 KB gzipped) that carrying it inside each page is the faster trade.
 //
 // 2. Inline the ROUTE's own CSS chunk (resolved via dist/.vite/manifest.json).
-//    Lazy routes (case study, tools, services) get their CSS only when their
+//    Lazy routes (case study, tools, capabilities) get their CSS only when their
 //    JS chunk loads, so the page would first paint unstyled and then shift
 //    once hydration pulls the chunk in (measured CLS 0.37 on the case study).
 //    Baking the route CSS into the page makes the first paint final.
@@ -30,8 +30,8 @@ const dist = path.resolve(process.cwd(), 'dist');
 const ROUTE_MODULES = [
   [/^apply$/, 'src/pages/Apply.jsx'],
   [/^case-study\/sendr$/, 'src/pages/CaseStudySendr.jsx'],
-  [/^services$/, 'src/pages/services/Services.jsx'],
-  [/^services\/.+$/, 'src/pages/services/ServicePage.jsx'],
+  [/^what-we-do$/, 'src/pages/whatWeDo/WhatWeDo.jsx'],
+  [/^what-we-do\/.+$/, 'src/pages/whatWeDo/CapabilityPage.jsx'],
   [/^domain-authority-checker$/, 'src/pages/BacklinkChecker.jsx'],
   [/^keyword-density-checker$/, 'src/pages/DensityDashboard.jsx'],
   [/^competitor-analysis$/, 'src/pages/CompetitorAnalysis.jsx'],

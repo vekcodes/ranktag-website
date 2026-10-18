@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { TOOL_META } from './src/seo/routeMeta.js';
 import { ORG_WEBSITE_JSONLD } from './src/seo/orgGraph.js';
-import { SERVICES } from './src/pages/services/servicesData.js';
+import { SERVICES } from './src/pages/whatWeDo/capabilitiesData.js';
 
 // Inject the site-wide Organization + WebSite JSON-LD into index.html at build
 // time from the single shared source (src/seo/orgGraph.js). vite-react-ssg builds
@@ -94,8 +94,8 @@ export default defineConfig(({ isSsrBuild }) => ({
         '/',
         '/apply',
         '/case-study/sendr',
-        '/services',
-        ...SERVICES.map((s) => `/services/${s.slug}`),
+        '/what-we-do',
+        ...SERVICES.map((s) => `/what-we-do/${s.slug}`),
         '/keyword-density-checker',
         '/domain-authority-checker',
         '/page-speed-checker',

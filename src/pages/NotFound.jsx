@@ -46,6 +46,9 @@ export default function NotFound() {
           <Link to="/" className="btn btn-primary btn-lg ar-parent">
             Back home <span className="ar-ne">↗</span>
           </Link>
+          <Link to="/what-we-do" className="btn btn-outline btn-lg ar-parent">
+            What we do <span className="ar-ne">↗</span>
+          </Link>
           <a href="/blog" className="btn btn-outline btn-lg ar-parent">
             Read the blog <span className="ar-ne">↗</span>
           </a>

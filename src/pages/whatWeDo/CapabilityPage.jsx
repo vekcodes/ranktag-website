@@ -7,16 +7,16 @@ import usePageMeta from '../../hooks/usePageMeta.js';
 import useScrollReveal from '../../hooks/useScrollReveal.js';
 import JsonLd from '../../components/JsonLd.jsx';
 import { breadcrumb, faqPage, ORG_ID, SITE } from '../../lib/schema.js';
-import { SERVICE_BY_SLUG, SERVICES } from './servicesData.js';
+import { SERVICE_BY_SLUG, SERVICES } from './capabilitiesData.js';
 import '../Home.css';
-import './Services.css';
+import './WhatWeDo.css';
 
-// One template renders all /services/<slug> pages from servicesData.js. Each
+// One template renders all /what-we-do/<slug> pages from capabilitiesData.js. Each
 // page ships its own Service + WebPage + BreadcrumbList + FAQPage JSON-LD and
 // is pre-rendered at build time (vite.config.js includedRoutes), so crawlers
 // get complete static HTML with per-route meta.
 function serviceJsonLd(svc) {
-  const url = `${SITE}/services/${svc.slug}`;
+  const url = `${SITE}/what-we-do/${svc.slug}`;
   return [
     {
       '@context': 'https://schema.org',
@@ -34,7 +34,7 @@ function serviceJsonLd(svc) {
     },
     breadcrumb([
       { name: 'Home', item: `${SITE}/` },
-      { name: 'Services', item: `${SITE}/services` },
+      { name: 'What we do', item: `${SITE}/what-we-do` },
       { name: svc.nav, item: url },
     ]),
     faqPage(svc.faqs, { id: `${url}#faq` }),
@@ -48,14 +48,14 @@ const TOOL_LABELS = {
   '/competitor-analysis': 'Competitor Analysis',
 };
 
-export default function ServicePage() {
+export default function CapabilityPage() {
   const { slug } = useParams();
   const svc = SERVICE_BY_SLUG[slug];
 
   useScrollReveal();
   usePageMeta(
     svc
-      ? { title: svc.title, description: svc.description, canonical: `${SITE}/services/${svc.slug}` }
+      ? { title: svc.title, description: svc.description, canonical: `${SITE}/what-we-do/${svc.slug}` }
       : undefined
   );
 
@@ -98,7 +98,7 @@ export default function ServicePage() {
               <nav className="svc-crumb" aria-label="Breadcrumb">
                 <Link to="/" className="link-wipe">Home</Link>
                 <span aria-hidden="true">/</span>
-                <Link to="/services" className="link-wipe">Services</Link>
+                <Link to="/what-we-do" className="link-wipe">What we do</Link>
                 <span aria-hidden="true">/</span>
                 <span aria-current="page">{svc.nav}</span>
               </nav>
@@ -280,14 +280,14 @@ export default function ServicePage() {
           </div>
         </section>
 
-        {/* ── Related services ─────────────────────────────────────────── */}
+        {/* ── Related capabilities ─────────────────────────────────────── */}
         <section className="svc-related ruled" data-reveal>
           <div className="container">
             <span className="eyebrow bracket">PAIRS WITH</span>
             <ol className="svc-rows svc-rows-compact" data-reveal-children>
               {related.map((r, i) => (
                 <li key={r.slug}>
-                  <Link to={`/services/${r.slug}`} className="svc-row ar-parent">
+                  <Link to={`/what-we-do/${r.slug}`} className="svc-row ar-parent">
                     <span className="svc-row-num" aria-hidden="true">{String(i + 1).padStart(3, '0')}</span>
                     <span className="svc-row-h">{r.nav}</span>
                     <p className="svc-row-desc">{r.navDesc}</p>

@@ -270,7 +270,7 @@ export default function PageSpeed() {
 
             <div className="report-foot">
               <div className="report-foot-btns">
-                <a href="/audit" className="btn btn-primary btn-lg">Get a founder review <span className="ar">↗</span></a>
+                <a href="/apply" className="btn btn-primary btn-lg">Get a founder review <span className="ar">↗</span></a>
                 <a href="/domain-authority-checker" className="btn btn-outline btn-lg">Try the domain authority checker <span className="ar">↗</span></a>
               </div>
             </div>

@@ -7,14 +7,14 @@
 //
 // Pure data only — this module is imported by the Vite config at build time, so
 // it must not pull in React, CSS, or any browser globals.
-import { SERVICES, SERVICES_HUB_META, serviceUrl } from '../pages/services/servicesData.js';
+import { SERVICES, SERVICES_HUB_META, serviceUrl } from '../pages/whatWeDo/capabilitiesData.js';
 
 // One head entry per service page, derived from the same data that renders the
 // pages — the SSG head rewrite and the hydrated SPA can never drift apart.
 const SERVICE_META = Object.fromEntries([
-  ['/services', SERVICES_HUB_META],
+  ['/what-we-do', SERVICES_HUB_META],
   ...SERVICES.map((s) => [
-    `/services/${s.slug}`,
+    `/what-we-do/${s.slug}`,
     { title: s.title, description: s.description, canonical: serviceUrl(s.slug) },
   ]),
 ]);

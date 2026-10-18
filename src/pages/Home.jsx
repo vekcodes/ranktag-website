@@ -16,9 +16,9 @@ import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
 import JsonLd from '../components/JsonLd.jsx';
 import { faqPage } from '../lib/schema.js';
-import { SERVICES } from './services/servicesData.js';
+import { SERVICES } from './whatWeDo/capabilitiesData.js';
 import './Home.css';
-import './services/Services.css';
+import './whatWeDo/WhatWeDo.css';
 
 // Mirrors the on-page FAQ section below — keep the two in sync.
 const HOME_FAQ = [
@@ -330,15 +330,15 @@ export default function Home() {
         <span className="drift drift-b drift-svc" data-loop aria-hidden="true" />
         <div className="container">
           <div className="section-head">
-            <span className="eyebrow" data-num="003">SERVICES · ONE ENGINE, SIX DISCIPLINES</span>
+            <span className="eyebrow" data-num="003">WHAT WE DO · ONE ENGINE, SIX DISCIPLINES</span>
             <div>
               <h2 className="h-2" data-reveal-lines>Every layer of modern search,<br /><span className="accent">under one roof.</span></h2>
               <p className="lead">Google rankings, AI Overviews, ChatGPT citations, answer boxes — they are not separate channels, they are one surface with six disciplines. Buy them separately or as the full engine. Either way, the same proof stands behind all of them.</p>
               {/* The hub needs an in-body link from the page with the most
                   authority, not just a nav entry: nav links repeat on every
-                  page and carry little context, and /services had none. */}
-              <Link to="/services" className="case-readmore link-wipe ar-parent">
-                Compare all six services <span className="ar">→</span>
+                  page and carry little context, and /what-we-do had none. */}
+              <Link to="/what-we-do" className="case-readmore link-wipe ar-parent">
+                Compare all six capabilities <span className="ar">→</span>
               </Link>
             </div>
           </div>
@@ -359,7 +359,7 @@ export default function Home() {
           {SERVICES.map((s, i) => (
             <Link
               key={s.slug}
-              to={`/services/${s.slug}`}
+              to={`/what-we-do/${s.slug}`}
               className="svc-stack-card ar-parent"
               data-sticky-item
               style={{ '--i': i, '--n': SERVICES.length }}
@@ -367,7 +367,7 @@ export default function Home() {
               <span className="svc-stack-num" aria-hidden="true">{String(i + 1).padStart(3, '0')}</span>
               <h3 className="svc-stack-h">{s.nav}</h3>
               <p className="svc-stack-desc">{s.navDesc}</p>
-              <span className="svc-stack-go">Explore the service <span className="ar">→</span></span>
+              <span className="svc-stack-go">Explore the capability <span className="ar">→</span></span>
             </Link>
           ))}
           </div>

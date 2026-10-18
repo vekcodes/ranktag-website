@@ -35,10 +35,12 @@ export const routes = [
       // Standalone, indexable case study (pre-rendered).
       { path: 'case-study/sendr', lazy: lazyRoute(() => import('./pages/CaseStudySendr.jsx')) },
 
-      // Services — hub + one template-driven page per service (all pre-rendered;
-      // the concrete slugs live in src/pages/services/servicesData.js).
-      { path: 'services', lazy: lazyRoute(() => import('./pages/services/Services.jsx')) },
-      { path: 'services/:slug', lazy: lazyRoute(() => import('./pages/services/ServicePage.jsx')) },
+      // What we do — capability hub + one template-driven page per capability
+      // (all pre-rendered; the concrete slugs live in
+      // src/pages/whatWeDo/capabilitiesData.js). Moved from /services in the
+      // multi-vertical restructure; the old URLs 301 in vercel.json.
+      { path: 'what-we-do', lazy: lazyRoute(() => import('./pages/whatWeDo/WhatWeDo.jsx')) },
+      { path: 'what-we-do/:slug', lazy: lazyRoute(() => import('./pages/whatWeDo/CapabilityPage.jsx')) },
 
       // NOTE: /llm-info is served as raw Markdown by api/llm-info.js (see the
       // vercel.json rewrite), so it is intentionally NOT a React route.
