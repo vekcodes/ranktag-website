@@ -1,0 +1,122 @@
+/* =====================================================================
+   RESEARCH KNOWLEDGE BASE
+   The hero, prose shell and CTA come from the service-page and guide
+   stylesheets. Only the answer block, the key-facts list, the numbered
+   steps and the hub index live here.
+   ===================================================================== */
+
+/* ── The direct answer, first thing on the page ─────────────────────── */
+.rs-answer {
+  margin: 0 0 var(--s-5);
+  font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--text-1);
+  padding-left: var(--s-5);
+  border-left: 2px solid var(--peri);
+}
+
+/* ── Key facts: a definition list, not a stat grid ──────────────────── */
+.rs-facts { padding-block: clamp(2.5rem, 5vw, 4rem); }
+.rs-facts-h { display: block; margin: 0 0 var(--s-5); }
+
+.rs-fact-grid {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 0;
+  border: 1px solid var(--rule);
+}
+.rs-fact {
+  padding: var(--s-5) var(--s-6);
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.rs-fact dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  /* Uppercased here rather than in the data, so a key written in sentence
+     case in one page and shouted in another still renders identically. */
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-3);
+  margin-bottom: var(--s-2);
+}
+.rs-fact dd {
+  margin: 0;
+  font-size: .9375rem;
+  line-height: 1.6;
+  color: var(--text-1);
+}
+
+/* ── Numbered steps inside a section ────────────────────────────────── */
+.rs-steps {
+  list-style: none;
+  counter-reset: rs;
+  margin: var(--s-5) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-5);
+}
+.rs-steps > li {
+  counter-increment: rs;
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: var(--s-4);
+}
+.rs-steps > li::before {
+  content: counter(rs, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  color: var(--text-3);
+  padding-top: .35rem;
+}
+.rs-step-h {
+  margin: 0 0 var(--s-2);
+  font-size: 1.0625rem;
+  line-height: 1.35;
+  color: var(--text-1);
+}
+.rs-steps p { margin: 0; }
+
+.rs-list { margin: var(--s-4) 0 0; padding-left: 1.15rem; display: grid; gap: var(--s-3); }
+.rs-list li { line-height: 1.65; }
+
+.rs-table { margin-top: var(--s-5); }
+
+.rs-faq { margin-top: var(--s-5); }
+.rs-faq h3 { margin: 0 0 var(--s-2); font-size: 1.0625rem; line-height: 1.35; }
+.rs-faq p { margin: 0; }
+
+/* ── Hub index ──────────────────────────────────────────────────────── */
+.rh-group { padding-block: clamp(2.5rem, 5vw, 4rem); }
+.rh-group-h { display: block; margin: 0 0 var(--s-5); }
+
+.rh-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 0;
+  border: 1px solid var(--rule);
+}
+.rh-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-6);
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.rh-card h3 { margin: 0; font-size: 1.0625rem; line-height: 1.35; }
+.rh-card h3 a { color: var(--text-1); }
+.rh-card p { margin: 0; font-size: .9375rem; line-height: 1.6; color: var(--text-2); }
+.rh-card-q {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: .06em;
+  color: var(--text-3);
+  line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+  .rs-fact, .rh-card { border-right: 0; }
+  .rs-answer { padding-left: var(--s-4); }
+}

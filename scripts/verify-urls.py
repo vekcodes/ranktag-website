@@ -89,6 +89,20 @@ OWNERS = {
     "co-card-grid": "pages/company/company.css",
     "co-case-card": "pages/company/company.css",
 }
+# .best-table carries a min-width wide enough to push the page sideways on a
+# phone, so it is only safe inside .best-table-scroll. A table without the
+# wrapper is a horizontal-scroll bug that only shows up at 375px.
+for dirpath, _, names in os.walk(os.path.join(SRC, "pages")):
+    for n in names:
+        if not n.endswith(".jsx"):
+            continue
+        src = open(os.path.join(dirpath, n), encoding="utf-8").read()
+        if "best-table" in src and "best-table-scroll" not in src:
+            fails.append(
+                f"[css] {os.path.relpath(os.path.join(dirpath, n), SRC)} uses .best-table "
+                f"outside .best-table-scroll (horizontal page scroll at 375px)"
+            )
+
 for dirpath, _, names in os.walk(os.path.join(SRC, "pages")):
     for n in names:
         if not n.endswith(".jsx"):

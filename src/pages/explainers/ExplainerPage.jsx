@@ -62,6 +62,10 @@ function explainerJsonLd(e) {
       headline: e.title,
       description: e.description,
       url,
+      // Google treats `image` as recommended on Article. Same derivation as
+      // the route's OG card, so the schema and the social preview cannot
+      // point at two different files.
+      image: `${SITE}/og/${e.slug}.png`,
       mainEntityOfPage: { '@type': 'WebPage', '@id': url },
       datePublished: e.updated,
       dateModified: e.updated,

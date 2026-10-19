@@ -14,6 +14,8 @@ import { EXPLAINERS, explainerUrl } from '../pages/explainers/explainersData.js'
 import { GLOSSARY_META } from '../pages/glossary/glossaryData.js';
 import { ABOUT_META } from '../pages/about/aboutData.js';
 import { CONTACT_META, PRIVACY_META, TERMS_META, CASE_STUDIES_META } from '../pages/company/companyData.js';
+import { PAGES as RESEARCH_PAGES, pagePath, pageMeta, ogImageFor, RESEARCH_HUB_META } from '../pages/research/researchData.js';
+import { STUDY_META } from '../pages/research/studyData.js';
 
 // One head entry per service page, derived from the same data that renders the
 // pages — the SSG head rewrite and the hydrated SPA can never drift apart.
@@ -75,6 +77,21 @@ export const TOOL_META = {
     ogImageAlt: 'RankedTag privacy policy' },
   '/terms': { ...TERMS_META, ogImage: `${SITE}/og/terms.png`,
     ogImageAlt: 'RankedTag terms of use' },
+  '/research': { ...RESEARCH_HUB_META, ogImage: `${SITE}/og/research.png`,
+    ogImageAlt: 'The RankedTag research and knowledge base' },
+  '/research/results/ai-assistant-signup-attribution': { ...STUDY_META,
+    ogImage: `${SITE}/og/research-signup-attribution.png`,
+    ogImageAlt: 'First-party signup attribution dataset' },
+  ...Object.fromEntries(
+    RESEARCH_PAGES.map((p) => [
+      pagePath(p),
+      {
+        ...pageMeta(p),
+        ogImage: ogImageFor(p),
+        ogImageAlt: p.parent ? `RankedTag research: ${p.nav}` : p.nav,
+      },
+    ])
+  ),
   '/glossary': { ...GLOSSARY_META, ogImage: `${SITE}/og/glossary.png`,
     ogImageAlt: 'SEO and AI search glossary from RankedTag' },
   '/best': { ...BEST_HUB_META, ogImage: `${SITE}/og/best.png`,

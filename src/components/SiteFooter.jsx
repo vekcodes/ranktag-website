@@ -46,9 +46,18 @@ export default function SiteFooter() {
               <a key={e.slug} href={`/${e.slug}`} className="link-wipe">{e.nav}</a>
             ))}
             <a href="/glossary" className="link-wipe">Glossary</a>
+            <a href="/research" className="link-wipe">Research and data →</a>
           </div>
           <div className="footer-col">
-            <h4><span className="idx plain">004</span>Free tools</h4>
+            <h4><span className="idx plain">004</span>Definitions</h4>
+            <a href="/what-is-geo" className="link-wipe">What is GEO</a>
+            <a href="/what-is-aeo" className="link-wipe">What is AEO</a>
+            <a href="/what-is-ai-seo" className="link-wipe">What is AI SEO</a>
+            <a href="/ai-overview-optimization" className="link-wipe">AI Overview optimisation</a>
+            <a href="/llms-txt" className="link-wipe">What is llms.txt</a>
+          </div>
+          <div className="footer-col">
+            <h4><span className="idx plain">005</span>Free tools</h4>
             <a href="/schema-generator" className="link-wipe">Schema Generator</a>
             <a href="/serp-preview-tool" className="link-wipe">SERP Preview Tool</a>
             <a href="/llms-txt-generator" className="link-wipe">llms.txt Generator</a>
@@ -59,14 +68,14 @@ export default function SiteFooter() {
             <a href="/apply" className="link-wipe">Site Audit (Founder Review)</a>
           </div>
           <div className="footer-col">
-            <h4><span className="idx plain">005</span>The product</h4>
+            <h4><span className="idx plain">006</span>The product</h4>
             <a href="/#how-it-works" className="link-wipe">How it works</a>
             <a href="/case-study/sendr" className="link-wipe">Sendr.ai case study</a>
             <a href="/blog" className="link-wipe">Blog</a>
             <a href="/apply" className="link-wipe">Apply</a>
           </div>
           <div className="footer-col">
-            <h4><span className="idx plain">006</span>Company</h4>
+            <h4><span className="idx plain">007</span>Company</h4>
             <a href="/about" className="link-wipe">About the founder</a>
             <a href="/contact" className="link-wipe">Contact</a>
             <a href="/case-studies" className="link-wipe">Case studies</a>

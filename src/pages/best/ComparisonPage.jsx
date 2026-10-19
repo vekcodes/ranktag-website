@@ -30,6 +30,9 @@ function comparisonJsonLd(c) {
       headline: c.title,
       description: c.description,
       url,
+      // `image` is recommended on Article, and this is the same card the
+      // route's OG tags use.
+      image: `${SITE}/og/best-${c.slug}.png`,
       mainEntityOfPage: { '@type': 'WebPage', '@id': url },
       datePublished: c.updated,
       dateModified: c.updated,

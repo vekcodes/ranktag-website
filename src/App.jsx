@@ -4,6 +4,7 @@ import Home from './pages/Home.jsx';
 import { VERTICALS } from './pages/verticals/verticalsData.js';
 import { COMPARISONS } from './pages/best/comparisonsData.js';
 import { EXPLAINERS } from './pages/explainers/explainersData.js';
+import { PAGES as RESEARCH_PAGES, pagePath } from './pages/research/researchData.js';
 
 // react-router's `lazy` expects a module exposing a named `Component`. Our pages
 // default-export their component, so this adapter wraps a dynamic import into the
@@ -50,6 +51,22 @@ export const routes = [
       { path: 'privacy', lazy: lazyRoute(() => import('./pages/company/Privacy.jsx')) },
       { path: 'terms', lazy: lazyRoute(() => import('./pages/company/Terms.jsx')) },
       { path: 'glossary', lazy: lazyRoute(() => import('./pages/glossary/Glossary.jsx')) },
+
+      // Research knowledge base: one hub, one template-driven page per entry,
+      // plus the first-party dataset, which has its own component because its
+      // numbers are computed from the evidence rather than authored.
+      { path: 'research', lazy: lazyRoute(() => import('./pages/research/ResearchHub.jsx')) },
+      {
+        path: 'research/results/ai-assistant-signup-attribution',
+        lazy: lazyRoute(() => import('./pages/research/SignupStudy.jsx')),
+      },
+      // Research entries, plus the root-level definitional pages that use the
+      // same renderer (what-is-geo and friends live at root because the query
+      // is "what is GEO", not "what does RankedTag think GEO is").
+      ...RESEARCH_PAGES.map((p) => ({
+        path: pagePath(p).slice(1),
+        lazy: lazyRoute(() => import('./pages/research/ResearchPage.jsx')),
+      })),
       { path: 'best', lazy: lazyRoute(() => import('./pages/best/BestHub.jsx')) },
       ...COMPARISONS.map((c) => ({
         path: `best/${c.slug}`,

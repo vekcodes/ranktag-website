@@ -5,6 +5,7 @@ import { ORG_WEBSITE_JSONLD } from './src/seo/orgGraph.js';
 import { SERVICES } from './src/pages/whatWeDo/capabilitiesData.js';
 import { VERTICALS } from './src/pages/verticals/verticalsData.js';
 import { COMPARISONS } from './src/pages/best/comparisonsData.js';
+import { PAGES as RESEARCH_PAGES, pagePath } from './src/pages/research/researchData.js';
 import { EXPLAINERS } from './src/pages/explainers/explainersData.js';
 
 // Inject the site-wide Organization + WebSite JSON-LD into index.html at build
@@ -97,6 +98,9 @@ export default defineConfig(({ isSsrBuild }) => ({
         '/',
         '/apply',
         '/about',
+        '/research',
+        '/research/results/ai-assistant-signup-attribution',
+        ...RESEARCH_PAGES.map(pagePath),
         '/contact',
         '/case-studies',
         '/privacy',
