@@ -17,8 +17,15 @@ const ARM_DELAY_MS = 3000;
 const DWELL_MS = 7000;
 const SCROLL_RATIO = 0.35;
 
-// /apply already IS this form, only longer; /admin is the CMS.
-const SKIP_PATHS = /^\/(apply|admin)(\/|$)/;
+// Routes the popup never opens on:
+//   /apply   already IS this form, only longer
+//   /admin   the CMS
+//   /privacy, /terms  legal text a visitor is reading for a reason; a sales
+//            popup over a privacy policy is the wrong answer to "what do you
+//            collect", and on a page that discusses consent it reads badly
+//   /research  the knowledge base, published to be read and cited rather than
+//            to convert. The CTA at the foot of each page is the ask there.
+const SKIP_PATHS = /^\/(apply|admin|privacy|terms|research)(\/|$)/;
 
 // On the free tools a scan takes 5-10 seconds, so a dwell timer would open the
 // popup straight over the result the visitor is waiting for. Those routes keep
