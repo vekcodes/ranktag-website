@@ -48,8 +48,10 @@ export function fromRow(r) {
     slug: r.slug,
     name: r.name,
     id: personId(r),
-    // No author has a page on this site, so no Person carries a `url`. An @id
-    // identifies the entity without claiming a page exists for it.
+    // Only the founder has a page on this site (/about), so only the founder
+    // carries a `url`. For everyone else the @id identifies the entity
+    // without claiming a page exists for it.
+    url: r.name === AUTHOR.name ? AUTHOR.url : '',
     jobTitle: r.job_title || '',
     initials: r.initials || initialsFor(r.name),
     avatarUrl: r.avatar_url || '',
@@ -69,6 +71,7 @@ export function codeAuthors() {
       slug: AUTHOR.slug,
       name: AUTHOR.name,
       job_title: AUTHOR.jobTitle,
+      avatar_url: AUTHOR.avatar,
       linkedin: AUTHOR.linkedin,
     }),
   ];

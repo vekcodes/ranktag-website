@@ -12,6 +12,7 @@ import { VERTICALS, verticalUrl, WHO_WE_HELP_META } from '../pages/verticals/ver
 import { COMPARISONS, comparisonUrl, BEST_HUB_META } from '../pages/best/comparisonsData.js';
 import { EXPLAINERS, explainerUrl } from '../pages/explainers/explainersData.js';
 import { GLOSSARY_META } from '../pages/glossary/glossaryData.js';
+import { ABOUT_META } from '../pages/about/aboutData.js';
 
 // One head entry per service page, derived from the same data that renders the
 // pages — the SSG head rewrite and the hydrated SPA can never drift apart.
@@ -63,6 +64,8 @@ export const TOOL_META = {
       },
     ])
   ),
+  '/about': { ...ABOUT_META, ogImage: `${SITE}/og/about.png`,
+    ogImageAlt: 'Bhushan Raj Shakya, founder of RankedTag' },
   '/glossary': { ...GLOSSARY_META, ogImage: `${SITE}/og/glossary.png`,
     ogImageAlt: 'SEO and AI search glossary from RankedTag' },
   '/best': { ...BEST_HUB_META, ogImage: `${SITE}/og/best.png`,

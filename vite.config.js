@@ -96,6 +96,7 @@ export default defineConfig(({ isSsrBuild }) => ({
       return [
         '/',
         '/apply',
+        '/about',
         '/case-study/sendr',
         '/who-we-help',
         ...EXPLAINERS.map((e) => `/${e.slug}`),

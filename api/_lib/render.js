@@ -136,14 +136,16 @@ text-decoration:none;line-height:1.35;display:block}
 .related-list a:hover{text-decoration:underline}
 .related-x{display:block;margin-top:.35rem;color:var(--text-3);font-size:.95rem;line-height:1.5}
 @media(max-width:640px){.related-list a{font-size:1.05rem}}
-/* Plain text. The byline is not a link: the author's profiles live on the
-   card at the foot of the post, not in a meta line a reader skims on the way
-   into the article. */
+/* The byline links to the author's page where one exists (the founder's
+   /about), and is plain text where it does not. A byline that resolves to a
+   real page about a real person is the point of E-E-A-T; a byline linking to
+   a 404 is worse than plain text. */
 .byline{color:inherit}
+a.byline{color:inherit;text-decoration:underline;text-underline-offset:2px}
 /* Author card ---------------------------------------------------------- */
-/* Who wrote this, what they do, where to find them. The name is deliberately
-   not a link — only the profile icons are clickable, and each goes off-site
-   to a profile the Person's sameAs also claims. */
+/* Who wrote this, what they do, where to find them. The name links to the
+   author's page where one exists; the profile icons go off-site to profiles
+   the Person's sameAs also claims. */
 .author-card{margin:4.5rem 0 0;padding:1.5rem 1.65rem;
 border:1px solid var(--line-strong);border-radius:var(--r-xl);background:var(--surface-1)}
 .ac-title{font-size:1.0625rem;font-weight:700;line-height:1.3;margin:0 0 1rem;
@@ -154,6 +156,7 @@ overflow:hidden;border:1px solid var(--line-strong);background:var(--surface-2);
 font-family:var(--font-mono);font-weight:600;font-size:.9375rem;letter-spacing:.02em}
 .ac-avatar img{width:100%;height:100%;object-fit:cover;display:block}
 .ac-id{min-width:0;flex:1 1 auto}
+.ac-name a{color:inherit}
 .ac-name{font-size:1.0625rem;font-weight:600;line-height:1.3;color:var(--text-1);margin:0}
 .ac-role{color:var(--text-3);font-size:.875rem;line-height:1.4;margin:.2rem 0 0}
 .ac-bio{color:var(--text-2);font-size:.9375rem;line-height:1.65;margin:1rem 0 0;max-width:62ch}
@@ -359,8 +362,9 @@ ${services.map(([slug, label]) => `<a href="/what-we-do/${slug}">${label}</a>`).
 <a href="/blog">Blog</a>
 <a href="/apply">Apply</a></div>
 <div class="footer-col"><h4><span>006</span>Company</h4>
+<a href="/about">About the founder</a>
 <a href="mailto:hello@rankedtag.com">hello@rankedtag.com</a>
-<a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a></div>
+<a href="https://www.linkedin.com/in/bhushan-raj-shakya-9835a025b/" target="_blank" rel="noreferrer me">LinkedIn</a></div>
 </div>
 <div class="footer-wordmark" aria-hidden="true">RANKEDTAG</div>
 <div class="footer-bottom">
@@ -617,16 +621,26 @@ const SOCIAL_ICON = {
 /**
  * The author card that closes a post.
  *
- * Name, role and an optional short bio, as a plain identification block. The
- * name is deliberately not a link: the site publishes no author pages, so
- * there is nowhere for it to go, and a byline linking to a 404 is worse than
- * plain text. Only the profile icons are clickable, and each one leaves the
- * site for a profile the Person's `sameAs` also claims.
+ * Name, role and an optional short bio. The name links to the author's page
+ * where the site has one (only the founder, at /about) and is plain text
+ * where it does not, because a name linking to a 404 is worse than plain
+ * text. The profile icons leave the site for profiles the Person's `sameAs`
+ * also claims.
  *
  * A byline that is not in the registry gets no card: the site holds no role or
  * profiles for that person, and borrowing someone else's would be a
  * misattribution. The byline itself still renders either way.
  */
+/**
+ * The byline, linked to the author's page when the registry holds one.
+ */
+function bylineLink(name, authors) {
+  const a = pickAuthor(authors, name);
+  return a && a.url
+    ? `<a class="byline" href="${escapeHtml(a.url)}">${escapeHtml(name)}</a>`
+    : `<span class="byline">${escapeHtml(name)}</span>`;
+}
+
 function authorCard(name, authors) {
   const a = pickAuthor(authors, name);
   if (!a) return '';
@@ -639,7 +653,9 @@ function authorCard(name, authors) {
 <div class="ac-row">
 <div class="ac-avatar" aria-hidden="true">${avatar}</div>
 <div class="ac-id">
-<p class="ac-name">${escapeHtml(a.name)}</p>
+<p class="ac-name">${a.url
+  ? `<a href="${escapeHtml(a.url)}">${escapeHtml(a.name)}</a>`
+  : escapeHtml(a.name)}</p>
 ${a.jobTitle ? `<p class="ac-role">${escapeHtml(a.jobTitle)}</p>` : ''}
 </div>
 ${links.length ? `<ul class="ac-social">
@@ -680,7 +696,7 @@ Preview — ${post.status === 'scheduled' && post.publish_at
 <span class="kicker">${escapeHtml((post.tags && post.tags[0]) || 'Article')}</span>
 <h1 class="title">${escapeHtml(post.title)}</h1>
 <div class="meta">
-<span>By <span class="byline">${escapeHtml(bylineName(post.author))}</span></span>
+<span>By ${bylineLink(bylineName(post.author), opts.authors)}</span>
 <span>${fmtDate(post.published_at)}</span>
 <span>${post.reading_minutes} min read</span>
 </div></header>

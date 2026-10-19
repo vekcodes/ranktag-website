@@ -8,6 +8,9 @@
 // Pure data only (imported by the Vite config and a serverless function): no
 // React, CSS, or browser globals. The homepage-specific nodes (WebPage,
 // #casestudy-sendr, FAQPage) stay per-route in the page body, not here.
+import { COMPANY_DESCRIPTION } from './companyDescription.js';
+import { AUTHOR, AUTHOR_ID } from './author.js';
+
 export const ORG_WEBSITE_JSONLD = {
   "@context": "https://schema.org",
   "@graph": [
@@ -27,10 +30,14 @@ export const ORG_WEBSITE_JSONLD = {
         "height": 1000
       },
       "image": { "@id": "https://rankedtag.com/#logo" },
-      "description": "RankedTag is an SEO, AI SEO, AEO and GEO agency working with B2B SaaS, ecommerce and local businesses. Senior strategists plus AI build inbound engines that get ranked on Google and cited by ChatGPT, Perplexity, Gemini and Claude — feeding qualified pipeline inside 90 days.",
+      "description": COMPANY_DESCRIPTION,
       "slogan": "Ranked on Google. Cited by AI.",
       "foundingDate": "2026",
-      "email": "bhushan@rankedtag.com",
+      "email": "hello@rankedtag.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "NP"
+      },
       "priceRange": "$$",
       "areaServed": { "@type": "Place", "name": "Worldwide" },
       "knowsLanguage": "en",
@@ -52,19 +59,30 @@ export const ORG_WEBSITE_JSONLD = {
       "keywords": "SEO agency, SaaS SEO agency, ecommerce SEO agency, local SEO agency, AI SEO agency, GEO agency, generative engine optimization, answer engine optimization, LLM SEO, AI search optimization",
       "founder": {
         "@type": "Person",
-        "@id": "https://rankedtag.com/#founder",
-        "name": "Bhushan Raj Shakya",
-        "jobTitle": "Founder",
+        "@id": AUTHOR_ID,
+        "name": AUTHOR.name,
+        "jobTitle": AUTHOR.jobTitle,
+        "url": AUTHOR.url,
+        "image": AUTHOR.image,
         "worksFor": { "@id": "https://rankedtag.com/#org" },
-        "sameAs": ["https://www.linkedin.com/in/bhushan-raj-shakya-9835a025b/"]
+        "sameAs": [AUTHOR.linkedin]
       },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "sales",
-        "email": "bhushan@rankedtag.com",
-        "url": "https://rankedtag.com/",
-        "availableLanguage": "en"
-      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@rankedtag.com",
+          "url": "https://rankedtag.com/about",
+          "availableLanguage": "en"
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "bhushan@rankedtag.com",
+          "url": "https://rankedtag.com/apply",
+          "availableLanguage": "en"
+        }
+      ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "RankedTag Services",

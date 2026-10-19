@@ -379,15 +379,16 @@ export function authorNode(name, authors) {
       '@type': 'Person',
       '@id': a.id,
       name: a.name,
-      // No `url`: authors have no pages. The @id identifies the entity
-      // without claiming a page exists for it.
+      // `url` only where a page genuinely exists (the founder's /about). The
+      // @id identifies the entity either way.
+      ...(a.url ? { url: a.url } : {}),
       ...(a.jobTitle ? { jobTitle: a.jobTitle } : {}),
       ...(a.sameAs && a.sameAs.length ? { sameAs: a.sameAs } : {}),
       worksFor: { '@id': `${SITE_URL}/#org` },
     };
   }
   if (n === AUTHOR.name) {
-    return { '@type': 'Person', '@id': AUTHOR_ID, name: AUTHOR.name };
+    return { '@type': 'Person', '@id': AUTHOR_ID, name: AUTHOR.name, url: AUTHOR.url };
   }
   return { '@type': 'Person', name: n };
 }

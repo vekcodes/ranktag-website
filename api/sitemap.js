@@ -33,6 +33,7 @@ const PAGE_LASTMOD = {
   '/in-house-vs-seo-agency': '2026-10-19',
   '/how-to-choose-an-seo-agency': '2026-10-19',
   '/best': '2026-10-18',
+  '/about': '2026-10-19',
   '/glossary': '2026-10-19',
   '/best/seo-agencies-for-saas': '2026-10-18',
   '/best/seo-agencies-for-ecommerce': '2026-10-18',
@@ -83,6 +84,7 @@ const CAPABILITIES = [
 const PAGES = [
   '/',
   '/apply',
+  '/about',
   // Vertical pages. Added one at a time, each only once its page is finished
   // and live — a sitemap entry for an unfinished page is a soft 404 invitation.
   '/who-we-help',

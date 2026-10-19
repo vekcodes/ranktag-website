@@ -16,6 +16,7 @@ import useScrollReveal from '../hooks/useScrollReveal.js';
 import usePageMeta from '../hooks/usePageMeta.js';
 import JsonLd from '../components/JsonLd.jsx';
 import { faqPage } from '../lib/schema.js';
+import { COMPANY_DESCRIPTION } from '../seo/companyDescription.js';
 import { SERVICES } from './whatWeDo/capabilitiesData.js';
 import { VERTICALS } from './verticals/verticalsData.js';
 import './Home.css';
@@ -162,9 +163,13 @@ export default function Home() {
             </h1>
 
             <div className="col-5 hero-say fade-up delay-2">
+              {/* The canonical company description, imported rather than
+                  retyped: this exact sentence also appears on /about, in
+                  /llm-info, in llms.txt and in the Organization JSON-LD, so an
+                  assistant reconciling those five surfaces finds one answer. */}
               <p className="hero-sub">
-                Full-stack SEO, AEO and GEO for B2B SaaS, ecommerce and local businesses. Senior strategy, shipped
-                weekly, measured on revenue rather than rankings.
+                {COMPANY_DESCRIPTION} Senior strategy, shipped weekly, measured on revenue rather than
+                rankings.
               </p>
               <ul className="hero-stat-strip">
                 <li>
@@ -205,6 +210,10 @@ export default function Home() {
                 <li><span className="b-check">✓</span> reply on LinkedIn within 48 hours</li>
                 <li><span className="b-check">✓</span> only four reviews taken per month</li>
               </ul>
+
+              <p className="hero-byline">
+                Run by <a href="/about" className="link-wipe">Bhushan Raj Shakya</a>, founder, five years in SEO.
+              </p>
 
               <div className="hero-secondary">
                 <span className="hero-rule" />
@@ -290,7 +299,7 @@ export default function Home() {
               <div className="stack-body">
                 <span className="stack-label">01 / Strategy</span>
                 <h3 className="stack-h">Senior Humans</h3>
-                <p className="stack-desc">Real strategists run the SWOT. They pick the keywords, the angles, the positioning. Every brief is approved by a human before a single word is written.</p>
+                <p className="stack-desc">A senior human runs the SWOT, picks the keywords, the angles and the positioning. Every brief is approved by a person before a single word is written.</p>
               </div>
             </li>
             <li className="stack-step">

@@ -188,6 +188,19 @@ h1.hero-title .line{display:block}
   color:var(--text-3);
 }
 .hero-benefits li{display:flex;align-items:center;gap:.5rem}
+/* Who is behind this, in the hero rather than three scrolls down. The entity
+   the page claims (Organization with a named founder) should be visible to a
+   reader in the same place a crawler finds it. */
+.hero-byline{
+  margin:calc(var(--s-8) * -1 + .9rem) 0 var(--s-8);
+  padding-top:.9rem;
+  border-top:1px solid var(--rule);
+  font-family:var(--font-mono);
+  font-size:var(--fs-micro);
+  letter-spacing:.08em;
+  color:var(--text-3);
+}
+.hero-byline a{color:var(--text-2)}
 .hero-benefits .b-check{color:var(--success)}
 
 .hero-secondary{

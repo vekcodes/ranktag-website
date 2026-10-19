@@ -1,0 +1,64 @@
+/* =====================================================================
+   ABOUT — the founder portrait and its grain fade.
+   Everything else on this page reuses the service-page hero (.svc-*) and
+   the guide prose shell (.dg-*), so only the portrait lives here.
+   ===================================================================== */
+
+.about-portrait-wrap {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.about-portrait {
+  margin: 0;
+  position: relative;
+  width: 100%;
+  max-width: 22rem;
+}
+
+/* The image sits in a stacking context so the grain layer and the fade can
+   both sit over it without a wrapper div per effect. */
+.about-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.06);
+  /* Bottom edge dissolves into the page rather than ending on a hard line.
+     mask works in every browser this site supports; where it does not, the
+     photo simply has a square bottom edge, which is a fine fallback. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 56%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 56%, transparent 100%);
+}
+
+/* Grain. An inline feTurbulence rather than a texture file: ~400 bytes, no
+   extra request, and no image to keep in sync with the theme. */
+.about-portrait::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .22;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  -webkit-mask-image: linear-gradient(to bottom, #000 56%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 56%, transparent 100%);
+}
+
+.about-portrait figcaption {
+  margin-top: var(--s-3);
+  font-size: .8125rem;
+  line-height: 1.5;
+  color: var(--text-3);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .about-portrait img { transition: filter .4s ease; }
+  .about-portrait:hover img { filter: grayscale(.25) contrast(1.02); }
+}
+
+@media (max-width: 900px) {
+  .about-portrait-wrap { justify-content: flex-start; margin-top: var(--s-6); }
+  .about-portrait { max-width: 18rem; }
+}

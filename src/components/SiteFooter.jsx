@@ -1,6 +1,7 @@
 import { SERVICES } from '../pages/whatWeDo/capabilitiesData.js';
 import { VERTICALS } from '../pages/verticals/verticalsData.js';
 import { EXPLAINERS } from '../pages/explainers/explainersData.js';
+import { AUTHOR } from '../seo/author.js';
 
 /**
  * Shared site footer. One definition replaces the copy-pasted <footer> blocks
@@ -66,8 +67,9 @@ export default function SiteFooter() {
           </div>
           <div className="footer-col">
             <h4><span className="idx plain">006</span>Company</h4>
+            <a href="/about" className="link-wipe">About the founder</a>
             <a href="mailto:hello@rankedtag.com" className="link-wipe">hello@rankedtag.com</a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="link-wipe">LinkedIn</a>
+            <a href={AUTHOR.linkedin} target="_blank" rel="noreferrer me" className="link-wipe">LinkedIn</a>
           </div>
         </div>
 
