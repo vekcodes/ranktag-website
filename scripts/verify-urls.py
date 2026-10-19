@@ -89,6 +89,25 @@ OWNERS = {
     "co-card-grid": "pages/company/company.css",
     "co-case-card": "pages/company/company.css",
 }
+# The entry-offer popup is suppressed per route by a literal regex in
+# EntryOffer.jsx, because importing the research data there would drag the
+# whole knowledge base into the bundle every page loads. A literal can drift:
+# add a definitional page to researchData.js, forget this regex, and the popup
+# quietly returns to a reference page. Fail the build instead.
+offer = os.path.join(SRC, "components", "offer", "EntryOffer.jsx")
+if os.path.exists(offer):
+    skip_src = open(offer, encoding="utf-8").read()
+    m = re.search(r"const SKIP_PATHS\s*=\s*\n?\s*/\^\\/\(([^)]*)\)", skip_src)
+    listed = set(m.group(1).split("|")) if m else set()
+    data = open(os.path.join(SRC, "pages", "research", "researchData.js"), encoding="utf-8").read()
+    # Entries with `parent: null` are the root-level definitional pages.
+    for block in re.findall(r"slug: '([^']+)',\s*\n\s*parent: null", data):
+        if block not in listed:
+            fails.append(
+                f"[offer] /{block} is a root-level research page but is not in "
+                f"SKIP_PATHS in EntryOffer.jsx (the popup would open on it)"
+            )
+
 # .best-table carries a min-width wide enough to push the page sideways on a
 # phone, so it is only safe inside .best-table-scroll. A table without the
 # wrapper is a horizontal-scroll bug that only shows up at 375px.

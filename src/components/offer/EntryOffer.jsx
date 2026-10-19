@@ -25,7 +25,16 @@ const SCROLL_RATIO = 0.35;
 //            collect", and on a page that discusses consent it reads badly
 //   /research  the knowledge base, published to be read and cited rather than
 //            to convert. The CTA at the foot of each page is the ask there.
-const SKIP_PATHS = /^\/(apply|admin|privacy|terms|research)(\/|$)/;
+//   the definitional pages  same job as /research, just at root because the
+//            query is "what is GEO" rather than "what does RankedTag think
+//            GEO is". Their slugs are the parent-less entries in
+//            src/pages/research/researchData.js; verify-urls.py fails the
+//            build if one is added there and not added here.
+//
+// Deliberately a literal rather than an import: pulling researchData.js in
+// here would drag the whole knowledge base into the bundle every page loads.
+const SKIP_PATHS =
+  /^\/(apply|admin|privacy|terms|research|what-is-geo|what-is-aeo|what-is-ai-seo|llms-txt|ai-overview-optimization)(\/|$)/;
 
 // On the free tools a scan takes 5-10 seconds, so a dwell timer would open the
 // popup straight over the result the visitor is waiting for. Those routes keep
