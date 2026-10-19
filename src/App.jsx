@@ -45,6 +45,10 @@ export const routes = [
       // Comparison pages — shortlist intent, a different job from the
       // vertical sales pages. One route per researched list.
       { path: 'about', lazy: lazyRoute(() => import('./pages/about/About.jsx')) },
+      { path: 'contact', lazy: lazyRoute(() => import('./pages/company/Contact.jsx')) },
+      { path: 'case-studies', lazy: lazyRoute(() => import('./pages/company/CaseStudies.jsx')) },
+      { path: 'privacy', lazy: lazyRoute(() => import('./pages/company/Privacy.jsx')) },
+      { path: 'terms', lazy: lazyRoute(() => import('./pages/company/Terms.jsx')) },
       { path: 'glossary', lazy: lazyRoute(() => import('./pages/glossary/Glossary.jsx')) },
       { path: 'best', lazy: lazyRoute(() => import('./pages/best/BestHub.jsx')) },
       ...COMPARISONS.map((c) => ({

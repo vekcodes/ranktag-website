@@ -363,8 +363,12 @@ ${services.map(([slug, label]) => `<a href="/what-we-do/${slug}">${label}</a>`).
 <a href="/apply">Apply</a></div>
 <div class="footer-col"><h4><span>006</span>Company</h4>
 <a href="/about">About the founder</a>
+<a href="/contact">Contact</a>
+<a href="/case-studies">Case studies</a>
 <a href="mailto:hello@rankedtag.com">hello@rankedtag.com</a>
-<a href="https://www.linkedin.com/in/bhushan-raj-shakya-9835a025b/" target="_blank" rel="noreferrer me">LinkedIn</a></div>
+<a href="https://www.linkedin.com/in/bhushan-raj-shakya-9835a025b/" target="_blank" rel="noreferrer me">LinkedIn</a>
+<a href="/privacy">Privacy</a>
+<a href="/terms">Terms</a></div>
 </div>
 <div class="footer-wordmark" aria-hidden="true">RANKEDTAG</div>
 <div class="footer-bottom">

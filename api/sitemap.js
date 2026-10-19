@@ -34,6 +34,10 @@ const PAGE_LASTMOD = {
   '/how-to-choose-an-seo-agency': '2026-10-19',
   '/best': '2026-10-18',
   '/about': '2026-10-19',
+  '/contact': '2026-10-19',
+  '/case-studies': '2026-10-19',
+  '/privacy': '2026-10-19',
+  '/terms': '2026-10-19',
   '/glossary': '2026-10-19',
   '/best/seo-agencies-for-saas': '2026-10-18',
   '/best/seo-agencies-for-ecommerce': '2026-10-18',
@@ -85,6 +89,10 @@ const PAGES = [
   '/',
   '/apply',
   '/about',
+  '/contact',
+  '/case-studies',
+  '/privacy',
+  '/terms',
   // Vertical pages. Added one at a time, each only once its page is finished
   // and live — a sitemap entry for an unfinished page is a soft 404 invitation.
   '/who-we-help',

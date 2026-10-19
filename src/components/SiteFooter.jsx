@@ -68,8 +68,12 @@ export default function SiteFooter() {
           <div className="footer-col">
             <h4><span className="idx plain">006</span>Company</h4>
             <a href="/about" className="link-wipe">About the founder</a>
+            <a href="/contact" className="link-wipe">Contact</a>
+            <a href="/case-studies" className="link-wipe">Case studies</a>
             <a href="mailto:hello@rankedtag.com" className="link-wipe">hello@rankedtag.com</a>
             <a href={AUTHOR.linkedin} target="_blank" rel="noreferrer me" className="link-wipe">LinkedIn</a>
+            <a href="/privacy" className="link-wipe">Privacy</a>
+            <a href="/terms" className="link-wipe">Terms</a>
           </div>
         </div>
 

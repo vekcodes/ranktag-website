@@ -13,6 +13,7 @@ import { COMPARISONS, comparisonUrl, BEST_HUB_META } from '../pages/best/compari
 import { EXPLAINERS, explainerUrl } from '../pages/explainers/explainersData.js';
 import { GLOSSARY_META } from '../pages/glossary/glossaryData.js';
 import { ABOUT_META } from '../pages/about/aboutData.js';
+import { CONTACT_META, PRIVACY_META, TERMS_META, CASE_STUDIES_META } from '../pages/company/companyData.js';
 
 // One head entry per service page, derived from the same data that renders the
 // pages — the SSG head rewrite and the hydrated SPA can never drift apart.
@@ -66,6 +67,14 @@ export const TOOL_META = {
   ),
   '/about': { ...ABOUT_META, ogImage: `${SITE}/og/about.png`,
     ogImageAlt: 'Bhushan Raj Shakya, founder of RankedTag' },
+  '/contact': { ...CONTACT_META, ogImage: `${SITE}/og/contact.png`,
+    ogImageAlt: 'How to contact RankedTag' },
+  '/case-studies': { ...CASE_STUDIES_META, ogImage: `${SITE}/og/case-studies.png`,
+    ogImageAlt: 'RankedTag case studies' },
+  '/privacy': { ...PRIVACY_META, ogImage: `${SITE}/og/privacy.png`,
+    ogImageAlt: 'RankedTag privacy policy' },
+  '/terms': { ...TERMS_META, ogImage: `${SITE}/og/terms.png`,
+    ogImageAlt: 'RankedTag terms of use' },
   '/glossary': { ...GLOSSARY_META, ogImage: `${SITE}/og/glossary.png`,
     ogImageAlt: 'SEO and AI search glossary from RankedTag' },
   '/best': { ...BEST_HUB_META, ogImage: `${SITE}/og/best.png`,

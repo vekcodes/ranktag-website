@@ -84,7 +84,10 @@ SRC = os.path.join(os.path.dirname(DIST), "src")
 OWNERS = {
     "dg-article": "components/seo/toolGuide.css",
     "best-table": "pages/best/Best.css",
+    "best-updated": "pages/best/Best.css",
     "vp-fact-grid": "pages/verticals/verticals.css",
+    "co-card-grid": "pages/company/company.css",
+    "co-case-card": "pages/company/company.css",
 }
 for dirpath, _, names in os.walk(os.path.join(SRC, "pages")):
     for n in names:

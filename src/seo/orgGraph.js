@@ -72,7 +72,7 @@ export const ORG_WEBSITE_JSONLD = {
           "@type": "ContactPoint",
           "contactType": "customer support",
           "email": "hello@rankedtag.com",
-          "url": "https://rankedtag.com/about",
+          "url": "https://rankedtag.com/contact",
           "availableLanguage": "en"
         },
         {

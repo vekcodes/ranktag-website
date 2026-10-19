@@ -1,0 +1,72 @@
+/* =====================================================================
+   COMPANY PAGES — contact, privacy, terms, case-study index.
+   The hero, prose and CTA all come from the service-page and guide
+   stylesheets. Only the contact cards and the single case-study card
+   are unique to this group.
+   ===================================================================== */
+
+/* ── Contact: the addresses, as a grid of cards ─────────────────────── */
+.co-cards { padding-block: clamp(3rem, 6vw, 5rem); }
+
+.co-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 0;
+  border: 1px solid var(--rule);
+}
+.co-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-6);
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.co-card:last-child { border-right: 0; }
+.co-card p {
+  margin: 0;
+  font-size: .9375rem;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+.co-card-k {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: .08em;
+  color: var(--text-3);
+}
+.co-card-a {
+  font-size: 1.0625rem;
+  line-height: 1.35;
+  color: var(--text-1);
+  word-break: break-word;
+}
+.co-card-cta .co-card-a { color: var(--accent-text, var(--text-1)); }
+
+/* ── Case-study index: one card, deliberately ───────────────────────── */
+.co-case { padding-block: clamp(3rem, 6vw, 5rem); }
+
+.co-case-card { border: 1px solid var(--rule); padding: var(--s-6); }
+.co-case-head { display: grid; gap: var(--s-3); margin-bottom: var(--s-6); }
+.co-case-h {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+}
+.co-case-h a { color: inherit; }
+/* The fact grid is the vertical pages' own component; it only needs its
+   outer border removed here, since the card already draws one. */
+.co-case-facts { border-left: 0; border-right: 0; }
+.co-case-p {
+  margin: var(--s-5) 0 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-2);
+  max-width: 68ch;
+}
+
+@media (max-width: 700px) {
+  .co-card { border-right: 0; }
+  .co-case-card { padding: var(--s-5); }
+}

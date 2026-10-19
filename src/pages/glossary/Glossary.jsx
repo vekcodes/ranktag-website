@@ -9,6 +9,7 @@ import { TERMS, SOURCES, GLOSSARY_META } from './glossaryData.js';
 import '../Home.css';
 import '../whatWeDo/WhatWeDo.css';
 import '../verticals/verticals.css';
+import '../best/Best.css';
 import './glossary.css';
 
 // One page, fifteen entries, each with its own anchor and DefinedTerm node.
