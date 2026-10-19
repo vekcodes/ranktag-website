@@ -15,6 +15,15 @@
   border-left: 2px solid var(--peri);
 }
 
+/* Citations here are authored inside sentences, not appended under a
+   paragraph the way the vertical pages do it, so they flow inline instead of
+   sitting on their own line with a top margin. */
+.rs-article .cite,
+.rs-table .cite {
+  display: inline;
+  margin-top: 0;
+}
+
 /* ── Key facts: a definition list, not a stat grid ──────────────────── */
 .rs-facts { padding-block: clamp(2.5rem, 5vw, 4rem); }
 .rs-facts-h { display: block; margin: 0 0 var(--s-5); }
@@ -69,6 +78,16 @@
   font-size: var(--fs-micro);
   color: var(--text-3);
   padding-top: .35rem;
+  grid-column: 1;
+  grid-row: 1;
+}
+/* Every real child belongs in column two. Without this the ::before counter
+   takes the first cell, the heading takes the second, and the paragraph wraps
+   onto the next row INTO the 2.5rem counter column, which renders it one word
+   per line. Same bug, same fix, as .vp-step-meta on the vertical pages. */
+.rs-steps > li > * {
+  grid-column: 2;
+  min-width: 0;
 }
 .rs-step-h {
   margin: 0 0 var(--s-2);

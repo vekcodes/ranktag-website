@@ -224,7 +224,7 @@ export default function ResearchPage() {
 
         <section className="svc-prose ruled" data-reveal>
           <div className="container">
-            <article className="dg-article">
+            <article className="dg-article rs-article">
               {page.sections.map((s) => <Section s={s} key={s.id} />)}
 
               {page.faqs && page.faqs.length > 0 && (

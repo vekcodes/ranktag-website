@@ -165,7 +165,10 @@ export default function useScrollReveal() {
           const duration = Number(el.dataset.countup) || 1400;
           const start = performance.now();
           const tick = (now) => {
-            const p = Math.min(1, (now - start) / duration);
+            // Clamped at BOTH ends: rAF passes the frame's start time, which
+            // can predate `start` by a fraction of a frame, and an unclamped
+            // negative p renders "-0.00M" on the first tick.
+            const p = Math.min(1, Math.max(0, (now - start) / duration));
             const eased = 1 - Math.pow(1 - p, 3);
             el.textContent = format(target.value * eased, target);
             if (p < 1) running.push(requestAnimationFrame(tick));
